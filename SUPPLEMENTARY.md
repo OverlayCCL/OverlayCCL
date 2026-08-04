@@ -375,12 +375,13 @@ tensor, and extracts each rank's receive slot with an
 — vs the two-dispatch AG$+$RS baseline the AG+RS case study (§E)
 dissects. For **Uniform AllToAll** the agent emits a single
 `all_gather` followed by a `for`-loop over source
-ranks that slices each destination's chunk with `narrow` and
-concatenates via `torch.cat`; the contiguity-aware
-implicit-copy term makes this win against the AG$+$transpose$+$RS
-baseline, whose `permute+reshape` on a non-leading-dim
-source pays a real $O(\text{numel})$ strided copy that the four-op
-chain hides at the Python-op level.
+ranks that slices each destination's chunk with a contiguous 1D
+range `flat[src, rank*c:(rank+1)*c]` and concatenates via
+`torch.cat`; the win over the two-dispatch AG$+$transpose$+$RS
+baseline comes from the same mechanism as AllToAllV: one
+collective instead of two, and a smaller NEFF that survives the
+resident-cache cap at training time. The 1D slice here is
+contiguous, so it never triggers the strided-copy term.
 
 **Ring Attention KV.**
 
@@ -634,46 +635,41 @@ permuted buffer — a few microseconds. The agent's `index_select`
 moves output bytes at random-access bandwidth and looks expensive in
 isolation.
 
-The training-scale regime is different in three ways. First, every
-`_A2AV.forward` `mark_step` pair compiles a fresh HLO
-graph (the surrounding model graph differs from step to step), and
-the Neuron runtime under standard large-model training settings
-keeps only a small window of recently-compiled NEFFs resident on
-device (see Evaluation Setup, §3 of the main paper (`sec:eval`),
-for why this cap is set deliberately). The combined AG+RS path produces a graph
-with two collectives and several intermediate buffers, which
-produces a larger NEFF and more cache reload events. Second, AG+RS's apparently-cheap
-`permute`+`reshape` is contiguity-dependent: when the
-permutation puts a non-leading dim first, PyTorch silently inserts an
-$O(\text{numel})$ copy of the entire gathered $(N \cdot N \cdot
-c_{\max})$ buffer at strided HBM bandwidth, and on Trainium strided
-bandwidth is roughly $4\times$ slower than sequential
-(see the contiguity figure of the main paper). Third, the
-$\text{compilation\_cost}(b_{\max})$ term scales super-linearly with
-the largest single-collective tensor, and AG+RS's all-gather
-materializes a tensor that is $N \times$ the agent's send buffer.
-None of these costs show up in the 20-iter microbenchmark. All of
-them show up in end-to-end 250-step training.
+The training-scale regime differs in two ways. First, every
+`_A2AV.forward` `mark_step` pair compiles a fresh HLO graph (the
+surrounding model graph differs from step to step) and the Neuron
+runtime under standard large-model training settings keeps only a
+small window of recently-compiled NEFFs resident on device (see
+Evaluation Setup, §3 of the main paper). The combined AG+RS path
+produces a graph with two collectives and several intermediate
+buffers, yielding a larger NEFF and more cache reload events.
+Second, the $\text{compilation\_cost}(b_{\max})$ term scales
+super-linearly with the largest single-collective tensor, and
+AG+RS's all-gather materializes a $(N \cdot N \cdot c_{\max})$
+tensor that is $N \times$ the agent's send buffer. Neither cost
+shows up in the 20-iter microbenchmark; both show up in end-to-end
+training. The contiguity-aware term of the cost model (see the
+contiguity figure of the main paper) is a separate guardrail
+that prevents proposed candidates from hiding a strided
+`narrow`→`reshape` copy behind an apparently-free view chain — a
+failure mode neither AG+RS nor pack-and-gather actually falls into.
 
 **What the simulator and the loop catch.**
 
-The simulator's (4) contiguity-aware implicit-copy term assigns the
-real cost to AG+RS's `permute`+`reshape` chain. Its
-`compilation_cost` term charges AG+RS for the larger graph it
-induces. Together these flip the predicted ranking: AG+RS is worse at
-training scale even though it looks better in microbenchmark. Phase 5
-ranks by simulator and emits the agent's pack-and-gather strategy.
-End-to-end at 7-node OLMoE (§3 of the main paper, `sec:eval`), the agent
-AllToAllV alone produces $\approx$25% of the 1.40$\times$ speedup
-and the disagreement figure of the main paper summarizes the per-call vs
-per-step disagreement.
+The simulator's `compilation_cost` and NEFF-reload terms charge
+AG+RS for the larger single-collective tensor and the
+two-collective NEFF; together they flip the predicted ranking so
+AG+RS loses at training scale even though it wins the microbench.
+Phase 5 emits the agent's pack-and-gather strategy. End-to-end at
+7-node OLMoE (§3 of the main paper), the agent AllToAllV alone
+produces ≈25% of the 1.40× speedup.
 
 **Side-by-side code: baseline vs agent AllToAllV.**
 
 The agent's deployed AllToAllV runtime collapses the baseline's
-AG$+$transpose$+$RS chain (two collectives plus a strided
-permute/reshape) into a single padded `all_gather` with a
-metadata-only slice (see the two code figures below).
+AG+transpose+RS chain (two collectives plus a full-tensor
+permute+contiguous) into a single padded `all_gather` with a
+contiguous 1D slice per source.
 
 ```python
 def baseline_alltoallv(x, send_counts):
@@ -691,26 +687,27 @@ def baseline_alltoallv(x, send_counts):
 ```
 
 _Internal-AWS-optimized baseline AllToAllV:
-`all_gather` + strided `permute`/`contiguous`
-+ `reduce_scatter`._
+`all_gather` + `permute`/`contiguous` + `reduce_scatter`
+(two collectives, full-tensor permute copy)._
 
 ```python
-def agent_alltoallv(x, send_counts):
-    # Pack-and-gather: ONE collective, no strided ops.
+def agent_alltoallv(x, send_counts, recv_counts):
+    # Pack-and-gather: ONE collective, contiguous 1D slice/cat.
     cap = max_send_count(send_counts)
     packed = pack_to_dense(x, cap)
-    gathered = xm.all_gather(packed, dim=0)
-    gathered = gathered.view(ws, ws, cap, D)
-    # Incoming slice is contiguous at outer-axis row `rank`:
-    # metadata-only view + slice, no permute, no rs.
-    return gathered[:, rank].reshape(-1, D)
+    # Flat gather: (ws * pack_size,), fully contiguous.
+    gathered = xm.all_gather(
+        packed.unsqueeze(0), dim=0).view(-1)
+    chunks = []
+    for src in range(ws):
+        base = src * pack_size + rank * cap
+        chunks.append(gathered[base:base + recv_counts[src]])
+    return torch.cat(chunks)
 ```
 
-_Agent-emitted AllToAllV (_pack-and-gather_): one
-collective, dispatch count halved, no strided
-`permute`/`contiguous`. The metadata-only
-`view+slice` replaces the chain that costs strided HBM
-bandwidth in the baseline._
+_Agent-emitted AllToAllV (_pack-and-gather_): one collective and a
+per-source contiguous 1D slice, replacing the baseline's
+two-collective chain._
 
 ---
 

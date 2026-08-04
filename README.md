@@ -4,12 +4,17 @@ Anonymous artifact for the PPoPP '27 submission
 **_OverlayCCL: Composing Collectives Above a Vendor Library via a
 Closed-Stack Search Loop_**.
 
-The paper (double-blind PDF) is `paper.pdf`. The extended technical
-appendix (loss-match evidence, methodology details, per-problem
-ablation tables, deployed strategies, extended AG+RS case study,
-cost-model implementation details, profiling tool details,
-search-style prompt scaffolds, per-phase code snippets, and
-compositions discovered) is `SUPPLEMENTARY.md`.
+The paper (double-blind PDF, 10 pages of main text + references) is
+`paper.pdf`. The appendix (loss-match evidence, methodology
+details, per-problem ablation tables, deployed strategies,
+extended AG+RS case study, cost-model implementation details,
+profiling tool details, search-style prompt scaffolds, per-phase
+code snippets) is available in two forms:
+
+- **`appendix.pdf`** — typeset supplementary material as a
+  standalone PDF (submitted alongside the paper).
+- **`SUPPLEMENTARY.md`** — the same appendix content as Markdown
+  for easy browsing in the repo.
 
 ---
 
@@ -49,7 +54,8 @@ walks through this.
 
 ```
 paper.pdf                — the submitted paper (double-blind, PPoPP '27)
-SUPPLEMENTARY.md         — the extended appendix (converted from LaTeX)
+appendix.pdf             — typeset supplementary material
+SUPPLEMENTARY.md         — Markdown mirror of appendix.pdf
 references.bib           — bibliography
 
 runtime/                 — deployed strategies (the paper's artifact)
