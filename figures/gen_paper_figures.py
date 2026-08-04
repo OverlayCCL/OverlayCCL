@@ -446,8 +446,11 @@ def fig_contiguity():
 
 
 if __name__ == "__main__":
-    fig_workflow()
+    # NOTE: The paper's Figure 1 (workflow diagram) is a hand-drawn
+    # image (`workflow.png`), not the matplotlib placeholder this
+    # module generates. Do not regenerate it here or the checked-in
+    # image will be overwritten. `fig_contiguity` and `fig_speedup`
+    # are legacy figures from earlier drafts and are not in the
+    # current paper.
     fig_disagreement()
-    fig_speedup()
-    fig_contiguity()
     print("ok")

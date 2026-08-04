@@ -209,22 +209,24 @@ platform-agnostic once those are set.
 
 | Paper artifact | Reproduction |
 |---|---|
-| **Table 1** (Phase-1 probe tools) | Descriptive — see `simulator/` and `search/profiling.py` for the tool implementations. |
-| **Table 2** (cost calculus) | Derived from strategy-enumerate wall/cost lines printed by any full 7-node search. |
-| **Table 3** (harness setup) | Descriptive — matches the training scripts in `training/` and `experiments/model_extension/`. |
-| **Table 4** (`tab:perproblem`) | Loop the agent over all 8 problems (see full 7-node run above), then run `experiments/bench_<problem>.py` for 1-node bench columns and read the `steady_median_ms` from each per-problem training log for the 7-node training column. |
-| **Table 5** (Llama-block amp1–amp4 sweep) | `experiments/model_extension/train_llama_e2e_amp{1,2,3,4}.py per_mb 300` then re-run each with `bundled 300`. |
-| **Table 6** (end-to-end speedups) | See "Training with the deployed strategies" above. |
-| **Table 7** (per-style search cost) | Read the wall-time and Anthropic-cost lines printed at end of each `--phase3-style {strategy-enumerate,cc-react,multi-island}` run. |
-| **Table 8** (no-simulator ablation) | Same as full 7-node search with `--no-simulator` added. |
-| **Table 9** (cluster-size generalization) | Repeat the training runs at 3-node ($96, 48, 3$) and 5-node ($160, 80, 5$) topology constants — set with `--num-nodes 3` or `5`. |
-| **Figure 1** (workflow diagram) | Static — `figures/workflow.pdf`. |
-| **Figure 2** (cross-scope inversion bars) | `python figures/plot_disagreement.py` (bars sourced from Table 4 numbers). |
-| **Figure 3** (OLMoE loss curves) | Any 2500-step OLMoE run above emits per-50-step loss checkpoints; `python figures/plot_loss_curve.py` renders them. |
+| **Table 1** — the eight collective problems | Descriptive; no reproduction needed. |
+| **Table 2** — Phase-1 probe tools | Descriptive; the tool implementations live in `simulator/` and `search/profiling.py`. |
+| **Table 3** — cost calculus (loop vs. e2e trials) | Numbers are derived; the underlying strategy-enumerate wall/cost lines print at the end of any full 7-node `experiments/run_search.py --phase3-style strategy-enumerate` run over all 8 problems. |
+| **Table 4** — evaluation harnesses (setup) | Descriptive; the three harnesses are the training scripts in `training/` (per-problem microbench and OLMoE-10B) and `experiments/model_extension/train_llama_e2e_7b.py` (Llama-7B). |
+| **Table 5** — per-primitive latency at three scopes | For 1-node bench columns: run each `experiments/h7_bench/bench_<primitive>.py` (`bench_a2av.py`, `bench_dxe.py`, `bench_pp_send_recv.py`, `bench_tp_mlp.py`, `bench_fsdp_prefetch.py`, `bench_llama_block_ar.py`, `bench_grad_ar.py`, `bench_ring_kv_v6.py`). For 7-node bench and 7-node training columns: run each `training/train_<primitive>_7node.py` with the two backends and read `steady_median_ms` from the emitted JSON. |
+| **Table 6** — end-to-end speedups (headline) | See "Training with the deployed strategies" above: `training/train_olmoe10b.py --realtok --steps 2500` (OLMoE row) and `experiments/model_extension/train_llama_e2e_7b.py {per_mb,bundled} 300` (Llama-7B row). |
+| **Table 7** — configuration-knob sweep (OLMoE SEQLEN/DM/LAYERS + Llama-block amp1–amp4) | OLMoE knob rows: `training/olmoe_sweep_s128.py` (SEQLEN=128), `training/olmoe_sweep_d1024_s512.py` (SEQLEN=512, DM=1024), `training/olmoe_sweep_l4.py` (LAYERS=4), and the SEQLEN=256 default from `training/train_olmoe10b.py`, each with both `--backend baseline` and `--backend agent`. Llama-block amp rows: `experiments/model_extension/train_llama_e2e_amp{1,2,3,4}.py {per_mb,bundled} 300`. |
+| **Table 8** — multi-seed retest | Same as Table 5 (per-primitive) and Table 7 (Llama-block amp3 e2e) but with 5+ seeds; set `PYTHONHASHSEED` per run. Aggregation is a plain per-cell mean±stdev of the emitted `steady_median_ms`. |
+| **Table 9** — cluster-size generalization (7n → 5n → 3n) | For OLMoE at 3-nodes: `training/train_olmoe10b_3node.py`. For Llama-7B at 3-nodes: `experiments/model_extension/train_llama_e2e_7b_3node.py`. 5-nodes uses the same scripts with `--num-nodes 5` and the corresponding topology constants noted in the paper. |
+| **Table 10** — per-style search cost | Wall-time and Anthropic-cost lines print at the end of each `experiments/run_search.py --phase3-style {strategy-enumerate,cc-react,multi-island}` run. |
+| **Table 11** — no-simulator ablation | Same as the full 7-node search with `--no-simulator` added: `experiments/run_search.py --problem <p> --phase3-style strategy-enumerate --no-simulator` over all 8 problems, then run the deployed strategies through the same end-to-end harnesses as Table 6. |
+| **Figure 1** — workflow diagram | Static image at `figures/workflow.png`; no reproduction script (a hand-authored diagram, not generated from measurements). |
+| **Figure 2** — cross-scope inversion bars | `python figures/gen_paper_figures.py` regenerates `figures/disagreement.pdf`; the bars are sourced from the Table 5 numbers in-tree. |
 
 For per-run measurement details and multi-seed numbers, see
-`SUPPLEMENTARY.md` sections B (methodology details) and C
-(per-problem ablation tables).
+`appendix.pdf` sections B (methodology details) and C
+(per-problem ablation tables); the same content is browsable as
+`SUPPLEMENTARY.md`.
 
 ---
 
