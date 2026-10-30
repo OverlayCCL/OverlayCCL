@@ -1,0 +1,10 @@
+{
+ "problem": "pp_send_recv",
+ "cand": "harness_baseline",
+ "ws": 32,
+ "desc": "M=4 S=512 DM=2048",
+ "status": "RuntimeError: Could not resolve the process group registered under the name ",
+ "med_ms": null,
+ "mean_ms": null,
+ "all": []
+}

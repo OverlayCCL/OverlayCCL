@@ -1,0 +1,25 @@
+=== [19:47:39] hunt4 start
+=== [19:47:41] ag_bund_pt_native
+[bench] bundled steady_mean=22.95ms steady_median=22.82ms final_loss=3.466
+=== [19:51:31] ag_bund_pt_pinned
+[bench] bundled steady_mean=22.47ms steady_median=22.17ms final_loss=3.466
+=== [19:52:51] ag_base_native
+[bench] per_mb steady_mean=75.35ms steady_median=74.21ms final_loss=13.863
+=== [19:56:29] ag_bund_pt_dim0t
+[bench] bundled steady_mean=24.06ms steady_median=24.02ms final_loss=3.466
+HUNT4_E2E_DONE
+--- [20:00:28] bench tp_ar_decomp
+[bench2] tp_ar_decomp ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 3.1812191009521484, 'mean_ms': 4.312872886657715, 'status': 'ok'}
+[bench2] tp_ar_decomp ar_native: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 3.0797719955444336, 'mean_ms': 4.440625508626302, 'status': 'ok'}
+[bench2] tp_ar_decomp rs_ag: {'max_abs_diff': 0.005859375, 'ok': True, 'med_ms': 3.5676956176757812, 'mean_ms': 4.480989774068196, 'status': 'ok'}
+[bench2] tp_ar_decomp rs_ag_native: {'max_abs_diff': 0.005859375, 'ok': True, 'med_ms': 3.0400753021240234, 'mean_ms': 3.919553756713867, 'status': 'ok'}
+--- [20:01:44] train tp_ar_decomp ar
+   median_ms 55.71 effective True
+--- [20:03:21] train tp_ar_decomp ar_native
+   median_ms 55.63 effective True
+--- [20:04:42] train tp_ar_decomp rs_ag
+   median_ms 58.05 effective True
+--- [20:05:46] train tp_ar_decomp rs_ag_native
+   median_ms 56.1 effective True
+=== newprobs done 20:07:21 ===
+HUNT4_DONE

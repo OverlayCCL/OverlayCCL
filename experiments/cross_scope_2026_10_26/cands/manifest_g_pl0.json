@@ -1,0 +1,56 @@
+[
+ {
+  "problem": "uniform_a2a",
+  "cand": "ag_slice_pl0",
+  "kind": "code",
+  "code": "/home/ubuntu/g2/cands_g/uniform_a2a__ag_slice_pl0.py"
+ },
+ {
+  "problem": "uniform_a2a",
+  "cand": "ag_t_rs_pl0",
+  "kind": "code",
+  "code": "/home/ubuntu/g2/cands_g/uniform_a2a__ag_t_rs_pl0.py"
+ },
+ {
+  "problem": "ring_kv",
+  "cand": "per_slot_pl0",
+  "kind": "code",
+  "code": "/home/ubuntu/g2/cands_g/ring_kv__per_slot_pl0.py"
+ },
+ {
+  "problem": "fsdp_prefetch",
+  "cand": "per_mb_pl0",
+  "kind": "code",
+  "code": "/home/ubuntu/g2/cands_g/fsdp_prefetch__per_mb_pl0.py"
+ },
+ {
+  "problem": "fsdp_prefetch",
+  "cand": "ag_all_pl0",
+  "kind": "code",
+  "code": "/home/ubuntu/g2/cands_g/fsdp_prefetch__ag_all_pl0.py"
+ },
+ {
+  "problem": "dxe",
+  "cand": "full_vocab_ag_pl0",
+  "kind": "code",
+  "code": "/home/ubuntu/g2/cands_g/dxe__full_vocab_ag_pl0.py"
+ },
+ {
+  "problem": "pp_send_recv",
+  "cand": "ag_gather_per_mb_pl0",
+  "kind": "code",
+  "code": "/home/ubuntu/g2/cands_g/pp_send_recv__ag_gather_per_mb_pl0.py"
+ },
+ {
+  "problem": "pp_send_recv",
+  "cand": "ag_gather_all_mb_pl0",
+  "kind": "code",
+  "code": "/home/ubuntu/g2/cands_g/pp_send_recv__ag_gather_all_mb_pl0.py"
+ },
+ {
+  "problem": "alltoallv",
+  "cand": "ag_slice_pl0",
+  "kind": "file",
+  "path": "/home/ubuntu/g2/cands_g/alltoallv__ag_slice_pl0_runtime.py"
+ }
+]

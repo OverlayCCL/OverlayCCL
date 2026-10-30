@@ -1,0 +1,40 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of 48 mixed-size 1-D tensors (small sizes)
+======================================================================
+  per_tensor_ar: 88278.3 us, 48 local ops, 0 ag, 48 ar, 0 cp
+  flat_cat_ar: 109583.4 us, 147 local ops, 0 ag, 1 ar, 0 cp
+  bucketed_ar: 109583.4 us, 147 local ops, 0 ag, 1 ar, 0 cp
+
+  Best baseline: baseline:per_tensor_ar (88278.3 us)
+
+======================================================================
+[Phase 3 / Strategy-Enumerate] DP gradient all-reduce of 48 mixed-size 1-D tensors (small sizes)
+======================================================================
+  K=5 strategies, R=2 refinement rounds per top-2 (budget ~10 LLM calls)
+  Enumerated 5 strategies:
+    1. Per-tensor all-reduce baseline: Issues 48 separate all-reduce calls, one per gradient tensor, with no preprocess...
+    2. Single flat concatenation all-reduce: Concatenates all 48 tensors into one flat buffer, performs a single all-reduce, ...
+    3. Fixed-byte bucketed all-reduce: Groups tensors in input order into fixed-size buckets (e.g., 4 MB), concatenates...
+    4. Size-binned bucketed all-reduce: Bins tensors by size (e.g., <1K, 1K-64K, >64K), concatenates within each bin, is...
+    5. Recursive halving manual reduce-scatter + all-gather: Manually implements all-reduce as a reduce-scatter phase (each rank reduces a sh...
+  Strategy 1 (Per-tensor all-reduce baseline): sim=88278.3 us
+  Strategy 2 (Single flat concatenation all-reduce): sim=109583.4 us
+  Strategy 3 (Fixed-byte bucketed all-reduce): sim=109583.4 us
+  Strategy 4 (Size-binned bucketed all-reduce): sim=109583.4 us
+  Strategy 5 (Recursive halving manual reduce-scatter + all-gather): sim=62397.5 us
+
+  Top after enumeration:
+    Recursive halving manual reduce-scatter + all-gather: 62397.5 us
+    Per-tensor all-reduce baseline: 88278.3 us
+    top 1 round 1: NEW BEST 60751.6 us (2.6% improvement)
+
+  Strategy-Enumerate complete. 7 total candidates.
+  Best: refined-from-Recursive halving manual reduce-scatter + all-gather (sim=60751.6 us)
+
+=== Phase 3 result for probe_het_48_small (wall 75s): 4 candidates, sim ranking ===
+           1e+18  strat:refined-from-Recursive halving  code=no
+           1e+18  baseline:per_tensor_ar  code=no
+           1e+18  baseline:flat_cat_ar  code=no
+           1e+18  baseline:bucketed_ar  code=no

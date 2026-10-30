@@ -1,0 +1,69 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: ZeRO-2 reduce-scatter of 6 heterogeneous 1-D gradients (each rank keeps its shard)
+======================================================================
+  per_tensor_rs: 124099.6 us, 6 local ops, 0 ag, 0 ar, 0 cp
+  cat_dim1_rs: 124427.7 us, 16 local ops, 0 ag, 0 ar, 0 cp
+  flat_ar_then_slice: 247322.0 us, 15 local ops, 0 ag, 1 ar, 0 cp
+
+  Best baseline: baseline:per_tensor_rs (124099.6 us)
+
+======================================================================
+[Phase 3 / CC-ReAct] Single-trajectory: ZeRO-2 reduce-scatter of 6 heterogeneous 1-D gradients (each rank keeps its shard)
+======================================================================
+  CC-ReAct total turn budget: 12 (== multi-island 3 islands x 4 rounds)
+  Starting from baseline: per_tensor_rs
+  Starting template: per_tensor_rs (XLA)
+  Baseline: 340.0 us, 0 permutes, 0 gathers, 6 local ops
+
+  --- Evolution round 1 ---
+  INCORRECT: world=4 pattern=uniform rank=0[1]: max_diff=0.084121
+
+  --- Evolution round 2 ---
+  INCORRECT: CRASH in collect pass 0: world=4 pattern=uniform rank=0: RuntimeError: stack expects each tensor to be equal size, but got [4, 3072] at entry 0 and [4, 1024] at entry 1
+
+  --- Evolution round 3 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 414.0 us (0 permutes, 0 gathers, 18 local ops)
+
+  --- Evolution round 4 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 340.0 us (0 permutes, 0 gathers, 6 local ops)
+
+  --- Evolution round 5 ---
+  INCORRECT: world=4 pattern=uniform rank=0[1]: max_diff=0.084121
+
+  --- Evolution round 6 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 340.0 us (0 permutes, 0 gathers, 6 local ops)
+
+  --- Evolution round 7 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 466.0 us (0 permutes, 0 gathers, 14 local ops)
+
+  --- Evolution round 8 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 615.0 us (0 permutes, 0 gathers, 21 local ops)
+
+  --- Evolution round 9 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 414.0 us (0 permutes, 0 gathers, 18 local ops)
+
+  --- Evolution round 10 ---
+  INCORRECT: world=4 pattern=uniform rank=0[1]: max_diff=0.084121
+
+  --- Evolution round 11 ---
+  INCORRECT: world=4 pattern=uniform rank=0[1]: max_diff=0.084121
+
+  --- Evolution round 12 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 340.0 us (0 permutes, 0 gathers, 6 local ops)
+
+  CC-ReAct complete. 4 total candidates.
+
+=== Phase 3 result for zero2_hetero_rs (wall 307s): 4 candidates, sim ranking ===
+           1e+18  cc:final  code=no
+           1e+18  baseline:per_tensor_rs  code=no
+           1e+18  baseline:cat_dim1_rs  code=no
+           1e+18  baseline:flat_ar_then_slice  code=no

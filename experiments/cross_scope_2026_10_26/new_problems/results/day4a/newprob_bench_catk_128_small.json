@@ -1,0 +1,27 @@
+{
+ "problem": "catk_128_small",
+ "ws": 32,
+ "results": {
+  "per_tensor_ar": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 13.450860977172852,
+   "mean_ms": 173.0750560760498,
+   "status": "ok"
+  },
+  "flat_cat_ar": {
+   "max_abs_diff": 0.0048828125,
+   "ok": true,
+   "med_ms": 21.883487701416016,
+   "mean_ms": 24.277853965759277,
+   "status": "ok"
+  },
+  "bucket8": {
+   "max_abs_diff": 0.0068359375,
+   "ok": true,
+   "med_ms": 21.207690238952637,
+   "mean_ms": 22.733267148335774,
+   "status": "ok"
+  }
+ }
+}

@@ -1,0 +1,34 @@
+% ---- tab:perproblem new block (microbench 224r / 1n training / 7n training, ms/step)
+\midrule
+\multicolumn{7}{l}{\textit{Gradient-sync and prefetch problems} --- \textbf{7n microbench} / \textbf{1n train} / \textbf{7n train} (ms/step)} \\
+FSDP AG lowering             & 37.4 & \textbf{24.8} & 22.1 & \textbf{19.8} & 102.1 & \textbf{89.7} \\
+Layer grads (6)              & \textbf{37.9} & 59.0 & 28.8 & \textbf{27.5} & 36.3 & \textbf{34.6} \\
+Mixed-dtype grads            & \textbf{37.8} & 59.0 & 28.7 & \textbf{27.7} & 36.1 & \textbf{34.6} \\
+Model grads (24)             & \textbf{111.8} & 155.5 & 102.2 & \textbf{98.7} & \textbf{118.4} & 118.5 \\
+hs\_a ($64\times$64K--512K)  & \textbf{70.1} & 101.9 & 120.0 & \textbf{67.2} & 125.4 & \textbf{81.7} \\
+hs\_c ($32\times$256K--2M)   & \textbf{87.3} & 104.2 & 42.8 & \textbf{38.6} & 48.7 & \textbf{46.9} \\
+48$\times$64--512K           & \textbf{31.6} & 50.4 & 55.7 & \textbf{51.9} & 62.1 & \textbf{61.8} \\
+24$\times$1--8M              & \textbf{265.1} & 307.6 & 46.7 & \textbf{38.5} & 57.6 & \textbf{51.1} \\
+48$\times$1--8M              & \textbf{528.6} & 594.8 & 93.7 & \textbf{71.6} & 115.2 & \textbf{93.9} \\
+
+% ---- tab:multiseed new block
+\midrule
+\multicolumn{5}{l}{\textit{Gradient-sync and prefetch problems (224-rank training, ms/step)}} \\
+FSDP AG lowering             & 5 & 102.1 $\pm$ 1.4 & 89.7 $\pm$ 1.2 & $\mathbf{1.14\times}$ \\
+Layer grads (6)              & 5 & 36.3 $\pm$ 0.7 & 34.6 $\pm$ 0.8 & $\mathbf{1.05\times}$ \\
+Mixed-dtype grads            & 5 & 36.1 $\pm$ 0.7 & 34.6 $\pm$ 0.6 & $\mathbf{1.04\times}$ \\
+Model grads (24)             & 5 & 118.4 $\pm$ 0.2 & 118.5 $\pm$ 0.8 & $1.00\times$ \\
+hs\_a ($64\times$64K--512K)  & 5 & 125.4 $\pm$ 0.9 & 81.7 $\pm$ 1.1 & $\mathbf{1.54\times}$ \\
+hs\_c ($32\times$256K--2M)   & 5 & 48.7 $\pm$ 0.3 & 46.9 $\pm$ 0.6 & $\mathbf{1.04\times}$ \\
+48$\times$64--512K           & 5 & 62.1 $\pm$ 0.6 & 61.8 $\pm$ 1.0 & $1.01\times$ \\
+24$\times$1--8M              & 5 & 57.6 $\pm$ 0.4 & 51.1 $\pm$ 0.5 & $\mathbf{1.13\times}$ \\
+48$\times$1--8M              & 5 & 115.2 $\pm$ 0.6 & 93.9 $\pm$ 0.3 & $\mathbf{1.23\times}$ \\
+
+% ---- Llama-7B shell seeds (224 ranks)
+% base: [('amp7_per_mb_base_per_mb_microbench_isolated_L2_M4_S1024_sites5_ws224_seed0', 595.3884124755859), ('amp7_per_mb_base_per_mb_microbench_isolated_L2_M4_S1024_sites5_ws224_seed1', 605.6429147720337), ('amp7_per_mb_base_per_mb_microbench_isolated_L2_M4_S1024_sites5_ws224_seed2', 602.4715900421143), ('amp7_per_mb_base_per_mb_microbench_isolated_L2_M4_S1024_sites5_ws224_seed3', 606.8506240844727), ('amp7_per_mb_base_per_mb_microbench_isolated_L2_M4_S1024_sites5_ws224_seed4', 603.9245128631592)]
+% tool: [('amp7_bundled_per_tensor_isolated_L2_M4_S1024_sites5_agdim0_t_native_ws224_seed0', 72.3026990890503), ('amp7_bundled_per_tensor_isolated_L2_M4_S1024_sites5_agdim0_t_native_ws224_seed1', 70.40834426879883), ('amp7_bundled_per_tensor_isolated_L2_M4_S1024_sites5_agdim0_t_native_ws224_seed2', 69.07248497009277), ('amp7_bundled_per_tensor_isolated_L2_M4_S1024_sites5_agdim0_t_native_ws224_seed3', 68.9692497253418), ('amp7_bundled_per_tensor_isolated_L2_M4_S1024_sites5_agdim0_t_native_ws224_seed4', 69.5796012878418)]
+Llama-7B shell (224r) & 5 & 602.9 $\pm$ 4.5 & 70.1 $\pm$ 1.4 & $\mathbf{8.60\times}$ \\
+
+% ---- tab:ablation-nonllm: row for the gradient-sync and prefetch problems (original constants, 400 evals x 4 searches x 2 seeds,
+% starts = the microbench-winning bundle AND per-tensor; results/nonllm_orig). No search changed the start score on any problem.
+gradient-sync and prefetch (nine) & none from either start: the bundle is never de-bundled, the gather never relaid out & $1.00\times$ & --- & see Table~\ref{tab:perproblem} \\

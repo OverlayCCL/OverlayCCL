@@ -1,0 +1,30 @@
+{
+ "hs_a_64x64k_512k": [
+  "strat:refined-from-Tensor-count buck",
+  75270.0396034734
+ ],
+ "probe_het_48_small": [
+  "strat:refined-from-Recursive halving",
+  60751.60520000005
+ ],
+ "probe_het_48_mid": [
+  "strat:refined-from-Size-binned bucke",
+  948989.0823170845
+ ],
+ "hetero_grad_ar_many": [
+  "strat:Two-phase bucketed by shape-cl",
+  579985.0469579676
+ ],
+ "layer_grads_hetero_ar": [
+  "strat:Single flat concatenation all-",
+  16957.7252
+ ],
+ "model_grads_4layers": [
+  "strat:refined-from-Pipelined reduce-",
+  63395.20520000001
+ ],
+ "layer_grads_mixed_dtype": [
+  "strat:refined-from-Parallel bf16-buc",
+  9268.410148569501
+ ]
+}

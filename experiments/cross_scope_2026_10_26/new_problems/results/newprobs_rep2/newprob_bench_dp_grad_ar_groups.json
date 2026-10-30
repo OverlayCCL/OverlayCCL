@@ -1,0 +1,41 @@
+{
+ "problem": "dp_grad_ar_groups",
+ "ws": 32,
+ "results": {
+  "per_tensor_grouped_ar": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 5.13148307800293,
+   "mean_ms": 5.480861663818359,
+   "status": "ok"
+  },
+  "flat_grouped_ar": {
+   "max_abs_diff": 0.0009765625,
+   "ok": true,
+   "med_ms": 5.846500396728516,
+   "mean_ms": 5.781165758768718,
+   "status": "ok"
+  },
+  "bucketed_grouped_ar": {
+   "max_abs_diff": 0.0009765625,
+   "ok": true,
+   "med_ms": 6.082773208618164,
+   "mean_ms": 5.9893449147542315,
+   "status": "ok"
+  },
+  "grouped_rs_ag": {
+   "max_abs_diff": 0.0009765625,
+   "ok": true,
+   "med_ms": 5.989193916320801,
+   "mean_ms": 6.151239077250163,
+   "status": "ok"
+  },
+  "masked_world_ar": {
+   "max_abs_diff": 0.0009765625,
+   "ok": true,
+   "med_ms": 9.64343547821045,
+   "mean_ms": 10.98783016204834,
+   "status": "ok"
+  }
+ }
+}

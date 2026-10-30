@@ -1,0 +1,41 @@
+{
+ "hw_problem": "hs_c_32x256k_2m",
+ "search_problem": "hs_c_32mixed",
+ "phase3_tag": "v11",
+ "gate_candidates": [
+  [
+   "gate_1",
+   "strat:refined-from-Reduce-scatter pl",
+   124101.84520000003
+  ],
+  [
+   "gate_2",
+   "baseline:flat_cat_ar",
+   124575.12519999982
+  ],
+  [
+   "gate_3",
+   "baseline:bucketed_ar",
+   125533.09527139078
+  ]
+ ],
+ "measured_ms": {
+  "gate_1": 101.0746955871582,
+  "per_tensor_ar": 104.63738441467285,
+  "flat_cat_ar": 98.39439392089844,
+  "gate_3": 94.5444107055664,
+  "bucket_4mb": 88.53793144226074,
+  "gate_2": 98.80566596984863
+ },
+ "effective": {
+  "gate_1": true,
+  "per_tensor_ar": true,
+  "flat_cat_ar": true,
+  "gate_3": true,
+  "bucket_4mb": true,
+  "gate_2": true
+ },
+ "gate_choice": "gate_3",
+ "best_overall": "bucket_4mb",
+ "independent_pieces": false
+}

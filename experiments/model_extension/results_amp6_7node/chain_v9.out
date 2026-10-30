@@ -1,0 +1,15 @@
+=== [15:39:33] chain_final: v9 contiguous-buffer diagnostic
+--- [15:39:34] train hs_a_64x64k_512k per_tensor_ar
+   NO RESULT
+--- [15:40:26] train hs_a_64x64k_512k gate_1
+   NO RESULT
+--- [15:41:05] train probe_het_48_small per_tensor_ar
+   NO RESULT
+--- [15:41:55] train probe_het_48_small gate_2
+   NO RESULT
+--- [15:42:31] train layer_grads_mixed_dtype per_tensor_ar
+   median_ms 80.05 effective True
+--- [15:46:49] train layer_grads_mixed_dtype gate_1
+   median_ms 81.35 effective True
+=== newprobs done 15:48:43 ===
+V9_DIAG_DONE

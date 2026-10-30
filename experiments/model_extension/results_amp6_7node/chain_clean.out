@@ -1,0 +1,30 @@
+=== [20:15:46] clean shell start
+=== [20:15:48] c7_base_pinned
+[bench] per_mb steady_mean=20.50ms steady_median=20.41ms final_loss=13.863
+=== [20:17:16] c7_bund_pinned
+[bench] bundled steady_mean=5.96ms steady_median=5.93ms final_loss=3.466
+=== [20:20:10] c7_bund_native
+[bench] bundled steady_mean=4.94ms steady_median=4.95ms final_loss=3.466
+=== [20:23:07] c7_base_native
+[bench] per_mb steady_mean=19.51ms steady_median=19.36ms final_loss=13.863
+CLEAN7_DONE
+=== [20:24:59] c5_base_pinned
+[bench] per_mb steady_mean=18.41ms steady_median=18.36ms final_loss=13.863
+=== [20:26:42] c5_bund_pinned
+[bench] bundled steady_mean=5.04ms steady_median=5.00ms final_loss=3.466
+=== [20:29:43] c5_bund_native
+[bench] bundled steady_mean=5.63ms steady_median=5.04ms final_loss=3.466
+=== [20:32:27] c3_base_pinned
+[bench] per_mb steady_mean=14.85ms steady_median=14.76ms final_loss=13.863
+=== [20:33:51] c3_bund_pinned
+[bench] bundled steady_mean=5.33ms steady_median=5.34ms final_loss=3.466
+=== [20:36:25] c3_bund_native
+[bench] bundled steady_mean=4.60ms steady_median=4.52ms final_loss=3.466
+CLEAN_SUBSETS_DONE
+=== [20:39:04] c7_base_pinned_s1
+[bench] per_mb steady_mean=21.41ms steady_median=21.26ms final_loss=13.863
+=== [20:40:28] c7_bund_pinned_s1
+[bench] bundled steady_mean=5.43ms steady_median=5.50ms final_loss=3.466
+=== [20:41:44] c7_bund_native_s1
+[bench] bundled steady_mean=4.20ms steady_median=4.10ms final_loss=3.466
+CLEAN_ALL_DONE

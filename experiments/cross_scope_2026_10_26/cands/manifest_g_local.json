@@ -1,0 +1,223 @@
+[
+ {
+  "problem": "uniform_a2a",
+  "cand": "rs_masked",
+  "kind": "code",
+  "code": "/private/tmp/g2/cands_g/uniform_a2a__rs_masked.py"
+ },
+ {
+  "problem": "uniform_a2a",
+  "cand": "hier_ag",
+  "kind": "code",
+  "code": "/private/tmp/g2/cands_g/uniform_a2a__hier_ag.py"
+ },
+ {
+  "problem": "uniform_a2a",
+  "cand": "chunked_ag_2",
+  "kind": "code",
+  "code": "/private/tmp/g2/cands_g/uniform_a2a__chunked_ag_2.py"
+ },
+ {
+  "problem": "uniform_a2a",
+  "cand": "chunked_ag_4",
+  "kind": "code",
+  "code": "/private/tmp/g2/cands_g/uniform_a2a__chunked_ag_4.py"
+ },
+ {
+  "problem": "ring_kv",
+  "cand": "hier_ag",
+  "kind": "code",
+  "code": "/private/tmp/g2/cands_g/ring_kv__hier_ag.py"
+ },
+ {
+  "problem": "ring_kv",
+  "cand": "ar_masked",
+  "kind": "code",
+  "code": "/private/tmp/g2/cands_g/ring_kv__ar_masked.py"
+ },
+ {
+  "problem": "ring_kv",
+  "cand": "chunked_ag_4",
+  "kind": "code",
+  "code": "/private/tmp/g2/cands_g/ring_kv__chunked_ag_4.py"
+ },
+ {
+  "problem": "dxe",
+  "cand": "hier_ar_stacked",
+  "kind": "code",
+  "code": "/private/tmp/g2/cands_g/dxe__hier_ar_stacked.py"
+ },
+ {
+  "problem": "dxe",
+  "cand": "ag_chunked_4",
+  "kind": "code",
+  "code": "/private/tmp/g2/cands_g/dxe__ag_chunked_4.py"
+ },
+ {
+  "problem": "pp_send_recv",
+  "cand": "rs_masked_per_mb",
+  "kind": "code",
+  "code": "/private/tmp/g2/cands_g/pp_send_recv__rs_masked_per_mb.py"
+ },
+ {
+  "problem": "pp_send_recv",
+  "cand": "rs_masked_all_mb",
+  "kind": "code",
+  "code": "/private/tmp/g2/cands_g/pp_send_recv__rs_masked_all_mb.py"
+ },
+ {
+  "problem": "pp_send_recv",
+  "cand": "ag_gather_per_mb",
+  "kind": "code",
+  "code": "/private/tmp/g2/cands_g/pp_send_recv__ag_gather_per_mb.py"
+ },
+ {
+  "problem": "pp_send_recv",
+  "cand": "ag_gather_all_mb",
+  "kind": "code",
+  "code": "/private/tmp/g2/cands_g/pp_send_recv__ag_gather_all_mb.py"
+ },
+ {
+  "problem": "tp_mlp",
+  "cand": "rs_ag_bundled",
+  "kind": "code",
+  "code": "/private/tmp/g2/cands_g/tp_mlp__rs_ag_bundled.py"
+ },
+ {
+  "problem": "tp_mlp",
+  "cand": "hier_ar_bundled",
+  "kind": "code",
+  "code": "/private/tmp/g2/cands_g/tp_mlp__hier_ar_bundled.py"
+ },
+ {
+  "problem": "tp_mlp",
+  "cand": "chunked_ar_bundled_4",
+  "kind": "code",
+  "code": "/private/tmp/g2/cands_g/tp_mlp__chunked_ar_bundled_4.py"
+ },
+ {
+  "problem": "fsdp_prefetch",
+  "cand": "ag_dim0_permute_per_mb",
+  "kind": "code",
+  "code": "/private/tmp/g2/cands_g/fsdp_prefetch__ag_dim0_permute_per_mb.py"
+ },
+ {
+  "problem": "fsdp_prefetch",
+  "cand": "hier_ag_per_mb",
+  "kind": "code",
+  "code": "/private/tmp/g2/cands_g/fsdp_prefetch__hier_ag_per_mb.py"
+ },
+ {
+  "problem": "fsdp_prefetch",
+  "cand": "chunked_ag_2_per_mb",
+  "kind": "code",
+  "code": "/private/tmp/g2/cands_g/fsdp_prefetch__chunked_ag_2_per_mb.py"
+ },
+ {
+  "problem": "llama_block_ar",
+  "cand": "rs_ag_stack",
+  "kind": "code",
+  "code": "/private/tmp/g2/cands_g/llama_block_ar__rs_ag_stack.py"
+ },
+ {
+  "problem": "llama_block_ar",
+  "cand": "hier_ar_stack",
+  "kind": "code",
+  "code": "/private/tmp/g2/cands_g/llama_block_ar__hier_ar_stack.py"
+ },
+ {
+  "problem": "uniform_a2a",
+  "cand": "paper",
+  "kind": "code",
+  "code": "/private/tmp/g2/cands_g/uniform_a2a__paper.py"
+ },
+ {
+  "problem": "ring_kv",
+  "cand": "paper",
+  "kind": "code",
+  "code": "/private/tmp/g2/cands_g/ring_kv__paper.py"
+ },
+ {
+  "problem": "dxe",
+  "cand": "paper",
+  "kind": "code",
+  "code": "/private/tmp/g2/cands_g/dxe__paper.py"
+ },
+ {
+  "problem": "pp_send_recv",
+  "cand": "paper",
+  "kind": "code",
+  "code": "/private/tmp/g2/cands_g/pp_send_recv__paper.py"
+ },
+ {
+  "problem": "tp_mlp",
+  "cand": "paper",
+  "kind": "code",
+  "code": "/private/tmp/g2/cands_g/tp_mlp__paper.py"
+ },
+ {
+  "problem": "fsdp_prefetch",
+  "cand": "paper",
+  "kind": "code",
+  "code": "/private/tmp/g2/cands_g/fsdp_prefetch__paper.py"
+ },
+ {
+  "problem": "llama_block_ar",
+  "cand": "paper",
+  "kind": "code",
+  "code": "/private/tmp/g2/cands_g/llama_block_ar__paper.py"
+ },
+ {
+  "problem": "pp_send_recv",
+  "cand": "ar_masked_per_mb",
+  "kind": "code",
+  "code": "/private/tmp/g2/cands_g/pp_send_recv__ar_masked_per_mb.py"
+ },
+ {
+  "problem": "tp_mlp",
+  "cand": "ar_per_mb",
+  "kind": "code",
+  "code": "/private/tmp/g2/cands_g/tp_mlp__ar_per_mb.py"
+ },
+ {
+  "problem": "fsdp_prefetch",
+  "cand": "ag_all",
+  "kind": "code",
+  "code": "/private/tmp/g2/cands_g/fsdp_prefetch__ag_all.py"
+ },
+ {
+  "problem": "uniform_a2a",
+  "cand": "harness_baseline",
+  "kind": "baseline"
+ },
+ {
+  "problem": "ring_kv",
+  "cand": "harness_baseline",
+  "kind": "baseline"
+ },
+ {
+  "problem": "dxe",
+  "cand": "harness_baseline",
+  "kind": "baseline"
+ },
+ {
+  "problem": "pp_send_recv",
+  "cand": "harness_baseline",
+  "kind": "baseline"
+ },
+ {
+  "problem": "tp_mlp",
+  "cand": "harness_baseline",
+  "kind": "baseline"
+ },
+ {
+  "problem": "fsdp_prefetch",
+  "cand": "harness_baseline",
+  "kind": "baseline"
+ },
+ {
+  "problem": "llama_block_ar",
+  "cand": "harness_baseline",
+  "kind": "baseline"
+ }
+]

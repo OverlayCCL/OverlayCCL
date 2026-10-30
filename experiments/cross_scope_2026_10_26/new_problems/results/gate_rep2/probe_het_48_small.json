@@ -1,0 +1,39 @@
+{
+ "hw_problem": "probe_het_48_small",
+ "search_problem": "probe_het_48_small",
+ "phase3_tag": "v11",
+ "gate_candidates": [
+  [
+   "gate_1",
+   "strat:refined-from-Fixed in-order bu",
+   62778.05681290324
+  ],
+  [
+   "gate_2",
+   "baseline:bucketed_ar",
+   63143.5377133522
+  ],
+  [
+   "gate_3",
+   "baseline:per_tensor_ar",
+   88278.31340249565
+  ]
+ ],
+ "measured_ms": {
+  "per_tensor_ar": 50.013065338134766,
+  "gate_3": 50.08363723754883,
+  "flat_cat_ar": 53.244829177856445,
+  "gate_2": 32.140254974365234,
+  "bucket6": 31.91542625427246
+ },
+ "effective": {
+  "per_tensor_ar": true,
+  "gate_3": true,
+  "flat_cat_ar": true,
+  "gate_2": true,
+  "bucket6": true
+ },
+ "gate_choice": "gate_2",
+ "best_overall": "bucket6",
+ "independent_pieces": false
+}

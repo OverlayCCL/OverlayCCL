@@ -1,0 +1,41 @@
+{
+ "problem": "probe_eq8_4m",
+ "ws": 32,
+ "results": {
+  "ar_each": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 8.104324340820312,
+   "mean_ms": 169.83137925465903,
+   "status": "ok"
+  },
+  "ar_stack": {
+   "max_abs_diff": 0.0068359375,
+   "ok": true,
+   "med_ms": 7.722139358520508,
+   "mean_ms": 9.976681073506674,
+   "status": "ok"
+  },
+  "rs_each": {
+   "max_abs_diff": null,
+   "ok": false,
+   "med_ms": 7.219076156616211,
+   "mean_ms": 340.38067658742267,
+   "status": "ok"
+  },
+  "ag_each": {
+   "max_abs_diff": null,
+   "ok": false,
+   "med_ms": 82.18598365783691,
+   "mean_ms": 207.6998551686605,
+   "status": "ok"
+  },
+  "ag_each_native": {
+   "max_abs_diff": null,
+   "ok": false,
+   "med_ms": 55.62162399291992,
+   "mean_ms": 208.7911287943522,
+   "status": "ok"
+  }
+ }
+}

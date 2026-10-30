@@ -1,0 +1,30 @@
+[
+ {
+  "raw": [
+   "strat:refined-from-Two-phase reducti",
+   "{'template': 'strategy_enumerate_final', 'cost_score': 5792.292771610413, 'sim_time_us': 579229.2771610413, 'local_ops': 152, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 3, '_params': {'evolved_code': 'def evolved_hetero_grad_ar_many(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"Two-phase reduction by size class with minimal local ops.\"\"\"\\n    \\n    # Pre-compute metadata without creating intermediate tensors\\n    n = len(grads)\\n    grad_metadata = []\\n    \\n    for i in range(n):\\n        t = grads[i]\\n        num_cols = t.shape[1] if t.dim() > 1 else 1\\n        num_elems = t.numel()\\n        grad_metadata.append((i, num_cols, num_elems, t.shape))\\n    \\n    # Define size classes using tertiles on column counts\\n    col_counts = sorted([meta[1] for meta in grad_metadata])\\n    \\n    if n >= 3:\\n        small_thresh = col_counts[n // 3]\\n        large_thresh = col_counts[2 * n // 3]\\n    else:\\n        small_thresh = col_counts[0] if n > 0 else 0\\n        large_thresh = col_counts[-1] if n > 0 else float(\\'inf\\')\\n    \\n    # Partition indices into size classes (metadata only)\\n    small_indices = []\\n    medium_indices = []\\n    large_indices = []\\n    \\n    for idx, num_cols, num_elems, shape in grad_metadata:\\n        if num_cols <= small_thresh:\\n            small_indices.append(idx)\\n        elif num_cols <= large_thresh:\\n            medium_indices.append(idx)\\n        else:\\n            large_indices.append(idx)\\n    \\n    # Process each size class\\n    def process_class(indices):\\n        if not indices:\\n            return []\\n        \\n        # Build single flat tensor by concatenating views\\n        flat_parts = [grads[i].view(-1) for i in indices]\\n        flat = torch.cat(flat_parts)\\n        \\n        # Single all_reduce\\n        reduced = xm.all_reduce(xm.REDUCE_SUM, flat)\\n        \\n        # Split using narrow (metadata-only view operation)\\n        results = []\\n        offset = 0\\n        for i in indices:\\n            size = grad_metadata[i][2]\\n            # Use narrow for zero-copy slicing, then reshape to original\\n            results.append((i, reduced.narrow(0, offset, size).reshape(grad_metadata[i][3])))\\n            offset += size\\n        \\n        return results\\n    \\n    # Process all classes\\n    small_results = process_class(small_indices)\\n    medium_results = process_class(medium_indices)\\n    large_results = process_class(large_indices)\\n    \\n    # Recombine in original order - use a pre-allocated list\\n    output = [None] * n\\n    for idx, tensor in small_results + medium_results + large_results:\\n        output[idx] = tensor\\n    \\n    return output'}}"
+  ],
+  "name": "strat:refined-from-Two-phase reducti"
+ },
+ {
+  "raw": [
+   "baseline:flat_cat_ar",
+   "{'template': 'flat_cat_ar', 'cost_score': 10427.710292000005, 'sim_time_us': 1042771.0292000006, 'local_ops': 147, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'builtin_code': 'def evolved_hetero_grad_ar_many(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    flat = torch.cat([t.reshape(-1) for t in grads]); r = xm.all_reduce(xm.REDUCE_SUM, flat)\\n    outs = []; off = 0\\n    for t in grads: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:flat_cat_ar"
+ },
+ {
+  "raw": [
+   "baseline:bucketed_ar",
+   "{'template': 'bucketed_ar', 'cost_score': 10427.710292000005, 'sim_time_us': 1042771.0292000006, 'local_ops': 147, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'builtin_code': 'def evolved_hetero_grad_ar_many(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"fixed-size buckets in order (exact bytes, a few dispatches)\"\"\"\\n    outs = []; chunk = []; acc = 0; lim = 4 * 1024 * 1024\\n    def flush(chunk):\\n        flat = torch.cat([t.reshape(-1) for t in chunk]); r = xm.all_reduce(xm.REDUCE_SUM, flat); off = 0\\n        for t in chunk: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    for t in grads:\\n        chunk.append(t); acc += t.numel()\\n        if acc >= lim: flush(chunk); chunk = []; acc = 0\\n    if chunk: flush(chunk)\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:bucketed_ar"
+ },
+ {
+  "raw": [
+   "baseline:per_tensor_ar",
+   "{'template': 'per_tensor_ar', 'cost_score': 13773.510055816172, 'sim_time_us': 1377351.0055816171, 'local_ops': 48, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 48, '_params': {'builtin_code': 'def evolved_hetero_grad_ar_many(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"developer baseline: one all_reduce per gradient tensor (DDP hook per parameter)\"\"\"\\n    return [xm.all_reduce(xm.REDUCE_SUM, t) for t in grads]\\n'}}"
+  ],
+  "name": "baseline:per_tensor_ar"
+ }
+]

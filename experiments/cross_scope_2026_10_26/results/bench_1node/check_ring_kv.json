@@ -1,0 +1,8 @@
+{
+ "per_slot_pl0": {
+  "max_abs_diff": 0.0621337890625,
+  "ref_scale": 0.033203125,
+  "ok": false,
+  "status": "ok"
+ }
+}

@@ -1,0 +1,34 @@
+{
+ "problem": "hetero_grad_ar",
+ "ws": 32,
+ "results": {
+  "per_tensor_ar": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 21.450400352478027,
+   "mean_ms": 24.3163267771403,
+   "status": "ok"
+  },
+  "flat_cat_ar": {
+   "max_abs_diff": 0.0078125,
+   "ok": true,
+   "med_ms": 28.15389633178711,
+   "mean_ms": 42.17535654703776,
+   "status": "ok"
+  },
+  "pad_stack_ar": {
+   "max_abs_diff": 0.0078125,
+   "ok": true,
+   "med_ms": 85.20984649658203,
+   "mean_ms": 123.13902378082275,
+   "status": "ok"
+  },
+  "bucket_by_size_ar": {
+   "max_abs_diff": 0.0078125,
+   "ok": true,
+   "med_ms": 24.630427360534668,
+   "mean_ms": 62.547882397969566,
+   "status": "ok"
+  }
+ }
+}

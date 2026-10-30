@@ -1,0 +1,47 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of a 4-layer transformer (24 heterogeneous tensors)
+======================================================================
+  per_tensor_ar: 63213.8 us, 24 local ops, 0 ag, 24 ar, 0 cp
+  flat_cat_ar: 64218.2 us, 75 local ops, 0 ag, 1 ar, 0 cp
+  bucketed_ar: 64218.2 us, 81 local ops, 0 ag, 3 ar, 0 cp
+  bucketed_ar_4: 64218.2 us, 90 local ops, 0 ag, 6 ar, 0 cp
+  bucketed_ar_16: 64218.2 us, 78 local ops, 0 ag, 2 ar, 0 cp
+  per_layer_bucket: 64218.2 us, 84 local ops, 0 ag, 4 ar, 0 cp
+
+  Best baseline: baseline:per_tensor_ar (63213.8 us)
+
+======================================================================
+[Phase 3 / Strategy-Enumerate] DP gradient all-reduce of a 4-layer transformer (24 heterogeneous tensors)
+======================================================================
+  K=5 strategies, R=2 refinement rounds per top-2 (budget ~10 LLM calls)
+  Enumerated 5 strategies:
+    1. Two-Phase Hierarchical Bucketing: First all-reduce small tensors (bottom half by size) in one bundle, then large t...
+    2. Reduce-Scatter then All-Gather: Decompose the all-reduce into reduce-scatter (each rank gets 1/world_size shard ...
+    3. Interleaved Micro-Batching by Parameter Type: Group the 24 tensors by parameter type across layers (4 weight matrices together...
+    4. Adaptive Three-Bucket by Cumulative Size: Divide the 24 tensors in-order into exactly 3 buckets where each bucket contains...
+    5. Per-Tensor with Explicit Async Pipelining: Issue all 24 all-reduce calls back-to-back without intermediate synchronization,...
+  Strategy 1 (Two-Phase Hierarchical Bucketing): sim=64218.2 us
+  Strategy 2 (Reduce-Scatter then All-Gather): sim=65631.3 us
+  Strategy 3 (Interleaved Micro-Batching by Parameter Type): sim=70752.5 us
+  Strategy 4 (Adaptive Three-Bucket by Cumulative Size): sim=64218.2 us
+  Strategy 5 (Per-Tensor with Explicit Async Pipelining): sim=63213.8 us
+
+  Top after enumeration:
+    Per-Tensor with Explicit Async Pipelining: 63213.8 us
+    Adaptive Three-Bucket by Cumulative Size: 64218.2 us
+    top 1 round 1: NEW BEST 62731.7 us (0.8% improvement)
+    top 2 round 2: NEW BEST 64031.9 us (0.3% improvement)
+
+  Strategy-Enumerate complete. 7 total candidates.
+  Best: refined-from-Per-Tensor with Explicit Async Pipelining (sim=62731.7 us)
+
+=== Phase 3 result for model_grads_4layers (wall 105s): 7 candidates, sim ranking ===
+           1e+18  strat:refined-from-Per-Tensor with E  code=no
+           1e+18  baseline:per_tensor_ar  code=no
+           1e+18  baseline:bucketed_ar  code=no
+           1e+18  baseline:bucketed_ar_4  code=no
+           1e+18  baseline:per_layer_bucket  code=no
+           1e+18  baseline:flat_cat_ar  code=no
+           1e+18  baseline:bucketed_ar_16  code=no

@@ -1,0 +1,143 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of 24 mixed-size 1-D tensors (mid sizes)
+======================================================================
+  per_tensor_ar: 497190.5 us, 24 local ops, 0 ag, 24 ar, 0 cp
+  flat_cat_ar: 467256.9 us, 75 local ops, 0 ag, 1 ar, 0 cp
+  bucketed_ar: 469854.7 us, 81 local ops, 0 ag, 3 ar, 0 cp
+  bucketed_ar_4: 473225.0 us, 89 local ops, 0 ag, 6 ar, 0 cp
+  bucketed_ar_16: 468853.8 us, 78 local ops, 0 ag, 2 ar, 0 cp
+
+  Best baseline: baseline:flat_cat_ar (467256.9 us)
+
+======================================================================
+[Phase 3] Multi-island Template Evolution: DP gradient all-reduce of 24 mixed-size 1-D tensors (mid sizes)
+======================================================================
+  Islands (5): ['per_tensor_ar', 'flat_cat_ar', 'bucketed_ar', 'bucketed_ar_4', 'bucketed_ar_16']
+
+  --- Island 1/5: per_tensor_ar ---
+  Starting template: per_tensor_ar (XLA)
+  Baseline: 444.0 us, 0 permutes, 0 gathers, 24 local ops
+
+  --- Evolution round 1 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 1224.0 us (0 permutes, 0 gathers, 36 local ops)
+
+  --- Evolution round 2 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 1272.0 us (0 permutes, 0 gathers, 84 local ops)
+
+  --- Evolution round 3 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 1272.0 us (0 permutes, 0 gathers, 84 local ops)
+
+  --- Evolution round 4 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 1422.0 us (0 permutes, 0 gathers, 66 local ops)
+
+  --- Island 2/5: flat_cat_ar ---
+  Starting template: flat_cat_ar (XLA)
+  Baseline: 272.0 us, 0 permutes, 0 gathers, 74 local ops
+
+  --- Evolution round 1 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 229.0 us (0 permutes, 0 gathers, 3 local ops)
+  NEW BEST: 229.0 us (15.8% improvement)
+
+  --- Evolution round 2 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 224.0 us (0 permutes, 0 gathers, 26 local ops)
+  NEW BEST: 224.0 us (2.2% improvement)
+
+  --- Evolution round 3 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 229.0 us (0 permutes, 0 gathers, 3 local ops)
+
+  --- Evolution round 4 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 229.0 us (0 permutes, 0 gathers, 3 local ops)
+
+  --- Island 3/5: bucketed_ar ---
+  Starting template: bucketed_ar (XLA)
+  Baseline: 672.0 us, 0 permutes, 0 gathers, 78 local ops
+
+  --- Evolution round 1 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 472.0 us (0 permutes, 0 gathers, 76 local ops)
+  NEW BEST: 472.0 us (29.8% improvement)
+
+  --- Evolution round 2 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 458.0 us (0 permutes, 0 gathers, 6 local ops)
+  NEW BEST: 458.0 us (3.0% improvement)
+
+  --- Evolution round 3 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 229.0 us (0 permutes, 0 gathers, 3 local ops)
+  NEW BEST: 229.0 us (50.0% improvement)
+
+  --- Evolution round 4 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 224.0 us (0 permutes, 0 gathers, 26 local ops)
+  NEW BEST: 224.0 us (2.2% improvement)
+
+  --- Island 4/5: bucketed_ar_4 ---
+  Starting template: bucketed_ar_4 (XLA)
+  Baseline: 1272.0 us, 0 permutes, 0 gathers, 84 local ops
+
+  --- Evolution round 1 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 1272.0 us (0 permutes, 0 gathers, 84 local ops)
+
+  --- Evolution round 2 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 472.0 us (0 permutes, 0 gathers, 76 local ops)
+  NEW BEST: 472.0 us (62.9% improvement)
+
+  --- Evolution round 3 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 272.0 us (0 permutes, 0 gathers, 74 local ops)
+  NEW BEST: 272.0 us (42.4% improvement)
+
+  --- Evolution round 4 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 277.0 us (0 permutes, 0 gathers, 51 local ops)
+
+  --- Island 5/5: bucketed_ar_16 ---
+  Starting template: bucketed_ar_16 (XLA)
+  Baseline: 472.0 us, 0 permutes, 0 gathers, 76 local ops
+
+  --- Evolution round 1 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 472.0 us (0 permutes, 0 gathers, 76 local ops)
+
+  --- Evolution round 2 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 424.0 us (0 permutes, 0 gathers, 28 local ops)
+  NEW BEST: 424.0 us (10.2% improvement)
+
+  --- Evolution round 3 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 229.0 us (0 permutes, 0 gathers, 3 local ops)
+  NEW BEST: 229.0 us (46.0% improvement)
+
+  --- Evolution round 4 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 224.0 us (0 permutes, 0 gathers, 26 local ops)
+  NEW BEST: 224.0 us (2.2% improvement)
+
+  Evolution complete. 10 total candidates.
+  Best: evo:flat_cat_ar_1 (224.0 us, 26 local ops)
+
+=== Phase 3 result for probe_het_24_mid (wall 391s): 10 candidates, sim ranking ===
+           1e+18  evo:flat_cat_ar_1  code=no
+           1e+18  evo:bucketed_ar_2  code=no
+           1e+18  evo:bucketed_ar_16_4  code=no
+           1e+18  evo:bucketed_ar_4_3  code=no
+           1e+18  evo:per_tensor_ar_0  code=no
+           1e+18  baseline:flat_cat_ar  code=no
+           1e+18  baseline:bucketed_ar_16  code=no
+           1e+18  baseline:bucketed_ar  code=no
+           1e+18  baseline:bucketed_ar_4  code=no
+           1e+18  baseline:per_tensor_ar  code=no

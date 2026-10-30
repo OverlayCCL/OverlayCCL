@@ -1,0 +1,91 @@
+--- [01:27:04] bench hs_a_64x64k_512k
+[bench2] hs_a_64x64k_512k per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 7.035255432128906, 'mean_ms': 8.079099655151367, 'status': 'ok'}
+[bench2] hs_a_64x64k_512k bucket_4mb: {'max_abs_diff': 0.005859375, 'ok': True, 'med_ms': 55.770277976989746, 'mean_ms': 56.09187285105387, 'status': 'ok'}
+[bench2] hs_a_64x64k_512k gate_1: {'max_abs_diff': 0.0048828125, 'ok': True, 'med_ms': 9.369611740112305, 'mean_ms': 9.6542755762736, 'status': 'ok'}
+--- [01:28:50] bench probe_het_48_small
+[bench2] probe_het_48_small per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 6.159305572509766, 'mean_ms': 504.84533309936523, 'status': 'ok'}
+[bench2] probe_het_48_small bucket6: {'max_abs_diff': 0.0048828125, 'ok': True, 'med_ms': 8.576512336730957, 'mean_ms': 8.66551399230957, 'status': 'ok'}
+[bench2] probe_het_48_small gate_2: {'max_abs_diff': 0.005859375, 'ok': True, 'med_ms': 8.72337818145752, 'mean_ms': 9.968217213948568, 'status': 'ok'}
+--- [01:30:34] bench layer_grads_hetero_ar
+[bench2] layer_grads_hetero_ar per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 8.25202465057373, 'mean_ms': 839.1018390655518, 'status': 'ok'}
+[bench2] layer_grads_hetero_ar flat_cat_ar: {'max_abs_diff': 0.0078125, 'ok': True, 'med_ms': 10.145068168640137, 'mean_ms': 16.151094436645508, 'status': 'ok'}
+[bench2] layer_grads_hetero_ar gate_3: {'max_abs_diff': 0.0078125, 'ok': True, 'med_ms': 10.298848152160645, 'mean_ms': 17.971372604370117, 'status': 'ok'}
+--- [01:32:20] bench probe_het_24_mid
+[bench2] probe_het_24_mid per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 14.286041259765625, 'mean_ms': 494.2944526672363, 'status': 'ok'}
+[bench2] probe_het_24_mid bucket6: {'max_abs_diff': 0.0068359375, 'ok': True, 'med_ms': 17.71712303161621, 'mean_ms': 20.946749051411945, 'status': 'ok'}
+[bench2] probe_het_24_mid gate_2: {'max_abs_diff': 0.0068359375, 'ok': True, 'med_ms': 15.478014945983887, 'mean_ms': 30.52068551381429, 'status': 'ok'}
+--- [01:34:23] bench hs_c_32x256k_2m
+[bench2] hs_c_32x256k_2m per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 7.450342178344727, 'mean_ms': 173.7570603688558, 'status': 'ok'}
+[bench2] hs_c_32x256k_2m bucket_4mb: {'max_abs_diff': 0.005859375, 'ok': True, 'med_ms': 9.813427925109863, 'mean_ms': 12.114651997884115, 'status': 'ok'}
+[bench2] hs_c_32x256k_2m gate_3: {'max_abs_diff': 0.005859375, 'ok': True, 'med_ms': 8.33284854888916, 'mean_ms': 12.937657038370768, 'status': 'ok'}
+--- [01:36:08] bench hetero_grad_ar_many
+[bench2] hetero_grad_ar_many per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 19.690871238708496, 'mean_ms': 170.77452341715494, 'status': 'ok'}
+[bench2] hetero_grad_ar_many p3_pick3: {'max_abs_diff': 0.0068359375, 'ok': True, 'med_ms': 16.64257049560547, 'mean_ms': 18.964179356892902, 'status': 'ok'}
+[bench2] hetero_grad_ar_many gate_2: {'max_abs_diff': 0.0068359375, 'ok': True, 'med_ms': 16.597986221313477, 'mean_ms': 35.83869934082031, 'status': 'ok'}
+--- [01:37:46] bench model_grads_4layers
+[bench2] model_grads_4layers per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 23.898839950561523, 'mean_ms': 23.9688237508138, 'status': 'ok'}
+[bench2] model_grads_4layers flat_cat_ar: {'max_abs_diff': 0.0078125, 'ok': True, 'med_ms': 27.14991569519043, 'mean_ms': 56.89678986867269, 'status': 'ok'}
+[bench2] model_grads_4layers gate_3: {'max_abs_diff': 0.0078125, 'ok': True, 'med_ms': 27.02939510345459, 'mean_ms': 38.67963155110677, 'status': 'ok'}
+--- [01:39:31] bench probe_het_48_mid
+[bench2] probe_het_48_mid per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 25.34794807434082, 'mean_ms': 503.78116766611737, 'status': 'ok'}
+[bench2] probe_het_48_mid bucket6: {'max_abs_diff': 0.009765625, 'ok': True, 'med_ms': 33.97989273071289, 'mean_ms': 53.75545024871826, 'status': 'ok'}
+[bench2] probe_het_48_mid gate_4: {'max_abs_diff': 0.009765625, 'ok': True, 'med_ms': 37.561893463134766, 'mean_ms': 50.09296735127767, 'status': 'ok'}
+--- [01:42:43] bench zero2_hetero_rs
+[bench2] zero2_hetero_rs per_tensor_rs: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 5.192995071411133, 'mean_ms': 505.1093816757202, 'status': 'ok'}
+[bench2] zero2_hetero_rs bucket_dim1_rs: {'max_abs_diff': 0.005859375, 'ok': True, 'med_ms': 6.423592567443848, 'mean_ms': 6.552433967590332, 'status': 'ok'}
+[bench2] zero2_hetero_rs gate_1: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 5.115985870361328, 'mean_ms': 5.2759091059366865, 'status': 'ok'}
+--- [01:43:54] train hs_a_64x64k_512k per_tensor_ar
+   median_ms 101.84 effective True
+--- [01:46:26] train hs_a_64x64k_512k bucket_4mb
+   median_ms 70.09 effective True
+--- [01:48:26] train hs_a_64x64k_512k gate_1
+   median_ms 70.73 effective True
+--- [01:50:43] train probe_het_48_small per_tensor_ar
+   median_ms 49.94 effective True
+--- [01:52:59] train probe_het_48_small bucket6
+   median_ms 31.57 effective True
+--- [01:55:02] train probe_het_48_small gate_2
+   median_ms 30.56 effective True
+--- [01:56:46] train layer_grads_hetero_ar per_tensor_ar
+   median_ms 59.06 effective True
+--- [01:59:30] train layer_grads_hetero_ar flat_cat_ar
+   median_ms 37.94 effective True
+--- [02:00:51] train layer_grads_hetero_ar gate_3
+   median_ms 37.31 effective True
+--- [02:01:46] train probe_het_24_mid per_tensor_ar
+   median_ms 307.57 effective True
+--- [02:07:16] train probe_het_24_mid bucket6
+   median_ms 265.08 effective True
+--- [02:19:06] train probe_het_24_mid gate_2
+   median_ms 286.61 effective True
+--- [02:33:02] train hs_c_32x256k_2m per_tensor_ar
+   median_ms 104.2 effective True
+--- [02:35:48] train hs_c_32x256k_2m bucket_4mb
+   median_ms 87.26 effective True
+--- [02:38:59] train hs_c_32x256k_2m gate_3
+   median_ms 97.58 effective True
+--- [02:42:30] train hetero_grad_ar_many per_tensor_ar
+   median_ms 76.61 effective True
+--- [02:44:46] train hetero_grad_ar_many p3_pick3
+   median_ms 66.21 effective True
+--- [02:46:47] train hetero_grad_ar_many gate_2
+   median_ms 66.56 effective True
+--- [02:47:59] train model_grads_4layers per_tensor_ar
+   median_ms 155.36 effective True
+--- [02:58:35] train model_grads_4layers flat_cat_ar
+   median_ms 111.82 effective True
+--- [03:00:40] train model_grads_4layers gate_3
+   median_ms 111.81 effective True
+--- [03:02:12] train probe_het_48_mid per_tensor_ar
+   median_ms 594.76 effective True
+--- [03:13:49] train probe_het_48_mid bucket6
+   NO RESULT
+--- [03:38:52] train probe_het_48_mid gate_4
+   NO RESULT
+--- [04:04:03] train zero2_hetero_rs per_tensor_rs
+   NO RESULT
+--- [04:04:40] train zero2_hetero_rs bucket_dim1_rs
+   NO RESULT
+--- [04:05:22] train zero2_hetero_rs gate_1
+   NO RESULT
+=== newprobs done 04:06:18 ===

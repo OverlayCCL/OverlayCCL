@@ -1,0 +1,122 @@
+{
+ "hetero_grad_ar_many": {
+  "pick": "gate_1",
+  "pick_name": "baseline:bucketed_ar_16",
+  "sim_us": 577203,
+  "ms64": 215.94977378845215,
+  "base64": 74.34678077697754,
+  "best64": 65.17457962036133,
+  "best_name": "gate_2",
+  "speedup64": 0.3442781137145753,
+  "speedup224": "\u2014",
+  "gate_choice": "gate_2"
+ },
+ "hs_a_64x64k_512k": {
+  "pick": "gate_1",
+  "pick_name": "strat:refined-from-Alternating bucke",
+  "sim_us": 73227,
+  "ms64": 72.6616382598877,
+  "base64": 98.91939163208008,
+  "best64": 71.66051864624023,
+  "best_name": "bucket_4mb",
+  "speedup64": 1.3613702360835398,
+  "speedup224": "1.44x (n=2)",
+  "gate_choice": "gate_1"
+ },
+ "hs_c_32x256k_2m": {
+  "pick": "gate_1",
+  "pick_name": "strat:refined-from-Reduce-Scatter th",
+  "sim_us": 123478,
+  "ms64": 101.00769996643066,
+  "base64": 104.63738441467285,
+  "best64": 88.53793144226074,
+  "best_name": "bucket_4mb",
+  "speedup64": 1.0359347302180772,
+  "speedup224": "\u2014",
+  "gate_choice": "gate_3"
+ },
+ "layer_grads_hetero_ar": {
+  "pick": "gate_1",
+  "pick_name": "baseline:flat_cat_ar",
+  "sim_us": 16958,
+  "ms64": 36.6513729095459,
+  "base64": 61.09738349914551,
+  "best64": 36.5605354309082,
+  "best_name": "flat_cat_ar",
+  "speedup64": 1.6669875818821678,
+  "speedup224": "\u2014",
+  "gate_choice": "gate_3"
+ },
+ "layer_grads_mixed_dtype": {
+  "pick": "gate_1",
+  "pick_name": "baseline:cast_flat_bf16",
+  "sim_us": 9281,
+  "ms64": 36.51857376098633,
+  "base64": 60.991764068603516,
+  "best64": 36.51857376098633,
+  "best_name": "gate_1",
+  "speedup64": 1.6701573415159627,
+  "speedup224": "1.57x (n=2)",
+  "gate_choice": "gate_1"
+ },
+ "model_grads_4layers": {
+  "pick": "gate_1",
+  "pick_name": "strat:Two-bucket layer-pair bundling",
+  "sim_us": 64218,
+  "ms64": 97.23329544067383,
+  "base64": 431.4088821411133,
+  "best64": 96.78816795349121,
+  "best_name": "flat_cat_ar",
+  "speedup64": 4.436843163506005,
+  "speedup224": "\u2014",
+  "gate_choice": "gate_3"
+ },
+ "probe_het_24_mid": {
+  "pick": "gate_1",
+  "pick_name": "strat:refined-from-Reduce-scatter th",
+  "sim_us": 466668,
+  "ms64": 274.9812602996826,
+  "base64": 304.0280342102051,
+  "best64": 266.63661003112793,
+  "best_name": "bucket6",
+  "speedup64": 1.1056318306158988,
+  "speedup224": "\u2014",
+  "gate_choice": "gate_2"
+ },
+ "probe_het_48_mid": {
+  "pick": "gate_1",
+  "pick_name": "strat:refined-from-Two-phase size-st",
+  "sim_us": 936503,
+  "ms64": 1173.6819744110107,
+  "base64": 596.3668823242188,
+  "best64": 492.82026290893555,
+  "best_name": "gate_4",
+  "speedup64": 0.5081162489723792,
+  "speedup224": "\u2014",
+  "gate_choice": "gate_4"
+ },
+ "probe_het_48_small": {
+  "pick": "gate_2",
+  "pick_name": "baseline:bucketed_ar",
+  "sim_us": 63144,
+  "ms64": 32.140254974365234,
+  "base64": 50.013065338134766,
+  "best64": 31.91542625427246,
+  "best_name": "bucket6",
+  "speedup64": 1.5560880079521684,
+  "speedup224": "1.64x (n=2)",
+  "gate_choice": "gate_2"
+ },
+ "zero2_hetero_rs": {
+  "pick": "gate_1",
+  "pick_name": "baseline:per_tensor_rs",
+  "sim_us": 124100,
+  "ms64": 24.067401885986328,
+  "base64": 24.09076690673828,
+  "best64": 24.067401885986328,
+  "best_name": "gate_1",
+  "speedup64": 1.0009708160798843,
+  "speedup224": "\u2014",
+  "gate_choice": "gate_1"
+ }
+}

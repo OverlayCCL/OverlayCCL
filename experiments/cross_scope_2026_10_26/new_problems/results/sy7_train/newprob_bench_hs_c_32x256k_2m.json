@@ -1,0 +1,27 @@
+{
+ "problem": "hs_c_32x256k_2m",
+ "ws": 32,
+ "results": {
+  "per_tensor_ar": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 7.450342178344727,
+   "mean_ms": 173.7570603688558,
+   "status": "ok"
+  },
+  "bucket_4mb": {
+   "max_abs_diff": 0.005859375,
+   "ok": true,
+   "med_ms": 9.813427925109863,
+   "mean_ms": 12.114651997884115,
+   "status": "ok"
+  },
+  "gate_3": {
+   "max_abs_diff": 0.005859375,
+   "ok": true,
+   "med_ms": 8.33284854888916,
+   "mean_ms": 12.937657038370768,
+   "status": "ok"
+  }
+ }
+}

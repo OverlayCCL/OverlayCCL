@@ -1,0 +1,30 @@
+[
+ {
+  "raw": [
+   "strat:refined-from-Adaptive dual-buc",
+   "{'template': 'strategy_enumerate_final', 'cost_score': 9325.996051999986, 'sim_time_us': 932599.6051999986, 'local_ops': 150, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 2, '_params': {'evolved_code': 'def evolved_probe_het_48_mid(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"Adaptive dual-bucket by cumulative size: split 48 tensors into 2 in-order buckets with balanced element counts\"\"\"\\n    \\n    # Compute total element count across all tensors\\n    total_elements = sum(t.numel() for t in grads)\\n    target_per_bucket = total_elements // 2\\n    \\n    # Scan in-order to find the split point that creates two roughly equal-sized buckets\\n    cumulative = 0\\n    split_idx = len(grads)  # default: all in first bucket\\n    \\n    for i, t in enumerate(grads):\\n        cumulative += t.numel()\\n        if cumulative >= target_per_bucket:\\n            split_idx = i + 1\\n            break\\n    \\n    # Create two buckets by splitting at the computed index\\n    bucket1 = grads[:split_idx]\\n    bucket2 = grads[split_idx:]\\n    \\n    outs = [None] * len(grads)\\n    \\n    # Process bucket 1\\n    if bucket1:\\n        # Pre-compute sizes to avoid repeated numel() calls\\n        sizes1 = [t.numel() for t in bucket1]\\n        shapes1 = [t.shape for t in bucket1]\\n        \\n        # Single flatten operation\\n        flat1 = torch.cat([t.view(-1) for t in bucket1])\\n        reduced1 = xm.all_reduce(xm.REDUCE_SUM, flat1)\\n        \\n        # Reconstruct using narrow (metadata-only view)\\n        off = 0\\n        for i, (sz, shp) in enumerate(zip(sizes1, shapes1)):\\n            outs[i] = reduced1.narrow(0, off, sz).view(shp)\\n            off += sz\\n    \\n    # Process bucket 2\\n    if bucket2:\\n        # Pre-compute sizes to avoid repeated numel() calls\\n        sizes2 = [t.numel() for t in bucket2]\\n        shapes2 = [t.shape for t in bucket2]\\n        \\n        # Single flatten operation\\n        flat2 = torch.cat([t.view(-1) for t in bucket2])\\n        reduced2 = xm.all_reduce(xm.REDUCE_SUM, flat2)\\n        \\n        # Reconstruct using narrow (metadata-only view)\\n        off = 0\\n        for i, (sz, shp) in enumerate(zip(sizes2, shapes2)):\\n            outs[split_idx + i] = reduced2.narrow(0, off, sz).view(shp)\\n            off += sz\\n    \\n    return outs'}}"
+  ],
+  "name": "strat:refined-from-Adaptive dual-buc"
+ },
+ {
+  "raw": [
+   "baseline:bucketed_ar",
+   "{'template': 'bucketed_ar', 'cost_score': 9452.457254136352, 'sim_time_us': 945245.7254136351, 'local_ops': 162, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 6, '_params': {'builtin_code': '\\\\\\ndef evolved_probe_het_48_mid(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"in-order buckets of 8 tensors each (size-independent; a few dispatches, exact bytes)\"\"\"\\n    outs = []\\n    for b in range(0, len(grads), 8):\\n        chunk = grads[b:b + 8]; flat = torch.cat([t.reshape(-1) for t in chunk]); r = xm.all_reduce(xm.REDUCE_SUM, flat); off = 0\\n        for t in chunk: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:bucketed_ar"
+ },
+ {
+  "raw": [
+   "baseline:per_tensor_ar",
+   "{'template': 'per_tensor_ar', 'cost_score': 10941.12216439931, 'sim_time_us': 1094112.216439931, 'local_ops': 48, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 48, '_params': {'builtin_code': 'def evolved_probe_het_48_mid(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"developer baseline: one all_reduce per gradient tensor (DDP hook per parameter)\"\"\"\\n    return [xm.all_reduce(xm.REDUCE_SUM, t) for t in grads]\\n'}}"
+  ],
+  "name": "baseline:per_tensor_ar"
+ },
+ {
+  "raw": [
+   "baseline:flat_cat_ar",
+   "{'template': 'flat_cat_ar', 'cost_score': 16882.842452000004, 'sim_time_us': 1688284.2452000005, 'local_ops': 147, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'builtin_code': 'def evolved_probe_het_48_mid(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    flat = torch.cat([t.reshape(-1) for t in grads]); r = xm.all_reduce(xm.REDUCE_SUM, flat)\\n    outs = []; off = 0\\n    for t in grads: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:flat_cat_ar"
+ }
+]

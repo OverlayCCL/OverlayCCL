@@ -1,0 +1,38 @@
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of 64 mixed-size tensors (bucketing sweep instance)
+======================================================================
+  per_tensor_ar: 275049.5 us, 64 local ops, 0 ag, 64 ar, 0 cp
+  flat_cat_ar: 76344.1 us, 195 local ops, 0 ag, 1 ar, 0 cp
+  bucketed_ar: 76344.1 us, 195 local ops, 0 ag, 1 ar, 0 cp
+
+  Best baseline: baseline:flat_cat_ar (76344.1 us)
+
+======================================================================
+[Phase 3 / Strategy-Enumerate] DP gradient all-reduce of 64 mixed-size tensors (bucketing sweep instance)
+======================================================================
+  K=5 strategies, R=2 refinement rounds per top-2 (budget ~10 LLM calls)
+  Enumerated 5 strategies:
+    1. Per-tensor all-reduce baseline: Issues 64 separate all_reduce calls, one per gradient tensor, with no concatenat...
+    2. Single flat concatenation all-reduce: Concatenates all 64 tensors into one flat buffer, performs a single all_reduce, ...
+    3. Fixed-size bucketed all-reduce: Groups tensors into buckets of ~4MB each by accumulating sizes in order, concate...
+    4. Equal-count bucketed all-reduce: Partitions the 64 tensors into K equal-sized groups (e.g., 8 groups of 8 tensors...
+    5. Two-phase hierarchical reduce-scatter + all-gather: First phase: reduce-scatter splits the concatenated payload across ranks (each r...
+  Strategy 1 (Per-tensor all-reduce baseline): sim=275049.5 us
+  Strategy 2 (Single flat concatenation all-reduce): sim=76344.1 us
+  Strategy 3 (Fixed-size bucketed all-reduce): sim=76344.1 us
+  Strategy 4 (Equal-count bucketed all-reduce): sim=183963.2 us
+  Strategy 5 (Two-phase hierarchical reduce-scatter + all-gather): sim=76344.1 us
+
+  Top after enumeration:
+    Single flat concatenation all-reduce: 76344.1 us
+    Fixed-size bucketed all-reduce: 76344.1 us
+
+  Strategy-Enumerate complete. 7 total candidates.
+  Best: Single flat concatenation all-reduce (sim=76344.1 us)
+
+=== Phase 3 result for dp_grad_bucketing_64 (wall 74s): 4 candidates, sim ranking ===
+           1e+18  baseline:flat_cat_ar  code=no
+           1e+18  baseline:bucketed_ar  code=no
+           1e+18  strat:Single flat concatenation all-  code=no
+           1e+18  baseline:per_tensor_ar  code=no

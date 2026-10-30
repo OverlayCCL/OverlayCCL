@@ -1,0 +1,37 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of one layer with fp32 norm parameters (mixed dtypes)
+======================================================================
+  per_tensor_ar: 11344.2 us, 6 local ops, 0 ag, 6 ar, 0 cp
+  cast_flat_fp32: 17108.4 us, 29 local ops, 0 ag, 1 ar, 0 cp
+
+  Best baseline: baseline:per_tensor_ar (11344.2 us)
+
+======================================================================
+[Phase 3 / Strategy-Enumerate] DP gradient all-reduce of one layer with fp32 norm parameters (mixed dtypes)
+======================================================================
+  K=5 strategies, R=2 refinement rounds per top-2 (budget ~10 LLM calls)
+  Enumerated 5 strategies:
+    1. Per-tensor all-reduce (baseline): Issues 6 separate all_reduce calls, one per gradient tensor in its native dtype ...
+    2. Two dtype-homogeneous bundles: Concatenates the 4 bf16 tensors into one flat buffer and the 2 fp32 tensors into...
+    3. Single fp32 upcast bundle: Upcasts all 6 tensors to fp32, concatenates into one flat buffer, performs a sin...
+    4. Parallel dtype-preserving reduce-scatter + all-gather: For each dtype group, performs reduce-scatter to distribute chunks across ranks,...
+    5. Three in-order buckets by size: Groups the 6 tensors into 3 buckets based on their relative sizes in deployment ...
+  Strategy 1 (Per-tensor all-reduce (baseline)): sim=11344.2 us
+  Strategy 2 (Two dtype-homogeneous bundles): sim=12841.5 us
+  Strategy 3 (Single fp32 upcast bundle): sim=17108.4 us
+  Strategy 4 (Parallel dtype-preserving reduce-scatter + all-gather): sim=12641.2 us
+  Strategy 5 (Three in-order buckets by size): sim=13414.6 us
+
+  Top after enumeration:
+    Per-tensor all-reduce (baseline): 11344.2 us
+    Parallel dtype-preserving reduce-scatter + all-gather: 12641.2 us
+
+  Strategy-Enumerate complete. 7 total candidates.
+  Best: Per-tensor all-reduce (baseline) (sim=11344.2 us)
+
+=== Phase 3 result for layer_grads_mixed_dtype (wall 84s): 3 candidates, sim ranking ===
+           1e+18  baseline:per_tensor_ar  code=no
+           1e+18  strat:Per-tensor all-reduce (baselin  code=no
+           1e+18  baseline:cast_flat_fp32  code=no

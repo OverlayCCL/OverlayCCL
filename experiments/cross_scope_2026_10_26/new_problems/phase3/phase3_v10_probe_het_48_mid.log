@@ -1,0 +1,39 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of 48 mixed-size 1-D tensors (mid sizes)
+======================================================================
+  per_tensor_ar: 1094112.2 us, 48 local ops, 0 ag, 48 ar, 0 cp
+  flat_cat_ar: 1688284.2 us, 147 local ops, 0 ag, 1 ar, 0 cp
+  bucketed_ar: 945245.7 us, 162 local ops, 0 ag, 6 ar, 0 cp
+
+  Best baseline: baseline:bucketed_ar (945245.7 us)
+
+======================================================================
+[Phase 3 / Strategy-Enumerate] DP gradient all-reduce of 48 mixed-size 1-D tensors (mid sizes)
+======================================================================
+  K=5 strategies, R=2 refinement rounds per top-2 (budget ~10 LLM calls)
+  Enumerated 5 strategies:
+    1. Single flat concatenation all-reduce: Concatenate all 48 tensors into one flat buffer and issue a single all_reduce, t...
+    2. Few fixed-count in-order buckets: Partition the 48 tensors into 4-8 fixed-count buckets (e.g., 6 buckets of 8 tens...
+    3. Per-tensor individual all-reduce: Issue 48 separate all_reduce calls, one per gradient tensor, in original order. ...
+    4. Two-phase size-stratified buckets: Split tensors into two groups (small-half and large-half by element count), conc...
+    5. Reduce-scatter then all-gather decomposition: Concatenate all 48 tensors, perform reduce-scatter across ranks to distribute pa...
+  Strategy 1 (Single flat concatenation all-reduce): sim=1688284.2 us
+  Strategy 2 (Few fixed-count in-order buckets): sim=945245.7 us
+  Strategy 3 (Per-tensor individual all-reduce): sim=1094112.2 us
+  Strategy 4 (Two-phase size-stratified buckets): sim=936503.4 us
+  Strategy 5 (Reduce-scatter then all-gather decomposition): sim=933309.5 us
+
+  Top after enumeration:
+    Reduce-scatter then all-gather decomposition: 933309.5 us
+    Two-phase size-stratified buckets: 936503.4 us
+
+  Strategy-Enumerate complete. 7 total candidates.
+  Best: Reduce-scatter then all-gather decomposition (sim=933309.5 us)
+
+=== Phase 3 result for probe_het_48_mid (wall 86s): 4 candidates, sim ranking ===
+           1e+18  strat:Reduce-scatter then all-gather  code=no
+           1e+18  baseline:bucketed_ar  code=no
+           1e+18  baseline:per_tensor_ar  code=no
+           1e+18  baseline:flat_cat_ar  code=no

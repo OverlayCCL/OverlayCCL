@@ -1,0 +1,41 @@
+{
+ "hw_problem": "layer_grads_mixed_dtype",
+ "search_problem": "layer_grads_mixed_dtype",
+ "phase3_tag": "v11",
+ "gate_candidates": [
+  [
+   "gate_1",
+   "baseline:cast_flat_bf16",
+   9280.765200000002
+  ],
+  [
+   "gate_2",
+   "baseline:per_tensor_ar",
+   11344.156259605717
+  ],
+  [
+   "gate_3",
+   "strat:Per-tensor native dtype collec",
+   11344.156259605717
+  ]
+ ],
+ "measured_ms": {
+  "gate_1": 36.54289245605469,
+  "cast_flat_bf16": 36.63468360900879,
+  "two_dtype_groups": 51.076412200927734,
+  "gate_2": 61.04755401611328,
+  "per_tensor_ar": 60.991764068603516,
+  "gate_3": 61.21993064880371
+ },
+ "effective": {
+  "gate_1": true,
+  "cast_flat_bf16": true,
+  "two_dtype_groups": true,
+  "gate_2": true,
+  "per_tensor_ar": true,
+  "gate_3": true
+ },
+ "gate_choice": "gate_1",
+ "best_overall": "gate_1",
+ "independent_pieces": false
+}

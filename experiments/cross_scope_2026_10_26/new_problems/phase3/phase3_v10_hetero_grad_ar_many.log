@@ -1,0 +1,40 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of 48 heterogeneous 2-D gradients (flat concat pathology instance)
+======================================================================
+  per_tensor_ar: 682524.2 us, 48 local ops, 0 ag, 48 ar, 0 cp
+  flat_cat_ar: 1042771.0 us, 147 local ops, 0 ag, 1 ar, 0 cp
+  bucketed_ar: 584563.9 us, 162 local ops, 0 ag, 6 ar, 0 cp
+
+  Best baseline: baseline:bucketed_ar (584563.9 us)
+
+======================================================================
+[Phase 3 / Strategy-Enumerate] DP gradient all-reduce of 48 heterogeneous 2-D gradients (flat concat pathology instance)
+======================================================================
+  K=5 strategies, R=2 refinement rounds per top-2 (budget ~10 LLM calls)
+  Enumerated 5 strategies:
+    1. Per-tensor all-reduce baseline: Issue 48 separate all_reduce calls, one per gradient tensor. 48 dispatches total...
+    2. Single flat concatenation all-reduce: Flatten and concatenate all 48 tensors into one 1-D buffer, single all_reduce, t...
+    3. Fixed in-order bucket all-reduce: Partition 48 tensors into K fixed-size buckets (e.g., 6 buckets of 8 tensors eac...
+    4. Reduce-scatter then all-gather decomposition: Decompose all-reduce into reduce-scatter (each rank owns 1/64th of result) follo...
+    5. Hierarchical two-level bucketing: First bucket the 48 tensors into coarse groups (e.g., 4 groups of 12), then sub-...
+  Strategy 1 (Per-tensor all-reduce baseline): sim=682524.2 us
+  Strategy 2 (Single flat concatenation all-reduce): sim=1042771.0 us
+  Strategy 3 (Fixed in-order bucket all-reduce): sim=584563.9 us
+  Strategy 4 (Reduce-scatter then all-gather decomposition) INCORRECT: CRASH in collect pass 0: world=4 pattern=uniform rank=0: RuntimeError: shape '[32, 32]' is invalid f
+  Strategy 5 (Hierarchical two-level bucketing): sim=594113.6 us
+
+  Top after enumeration:
+    Fixed in-order bucket all-reduce: 584563.9 us
+    Hierarchical two-level bucketing: 594113.6 us
+    top 2 round 1: NEW BEST 11899.4 us (98.0% improvement)
+
+  Strategy-Enumerate complete. 6 total candidates.
+  Best: refined-from-Hierarchical two-level bucketing (sim=11899.4 us)
+
+=== Phase 3 result for hetero_grad_ar_many (wall 92s): 4 candidates, sim ranking ===
+           1e+18  strat:refined-from-Hierarchical two-  code=no
+           1e+18  baseline:bucketed_ar  code=no
+           1e+18  baseline:per_tensor_ar  code=no
+           1e+18  baseline:flat_cat_ar  code=no

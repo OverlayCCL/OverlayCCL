@@ -1,0 +1,39 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of 24 mixed-size 1-D tensors (mid sizes)
+======================================================================
+  per_tensor_ar: 497190.5 us, 24 local ops, 0 ag, 24 ar, 0 cp
+  flat_cat_ar: 467256.9 us, 75 local ops, 0 ag, 1 ar, 0 cp
+  bucketed_ar: 467256.9 us, 75 local ops, 0 ag, 1 ar, 0 cp
+
+  Best baseline: baseline:flat_cat_ar (467256.9 us)
+
+======================================================================
+[Phase 3 / Strategy-Enumerate] DP gradient all-reduce of 24 mixed-size 1-D tensors (mid sizes)
+======================================================================
+  K=5 strategies, R=2 refinement rounds per top-2 (budget ~10 LLM calls)
+  Enumerated 5 strategies:
+    1. Per-tensor all-reduce baseline: Issues 24 separate all_reduce calls, one per gradient tensor. Results in 24 coll...
+    2. Single flat concatenation all-reduce: Concatenates all 24 tensors into one flat buffer, performs single all_reduce, th...
+    3. Fixed-size bucketing all-reduce: Groups tensors sequentially into buckets of ~4MB each, concatenating within each...
+    4. Size-based sorted bucketing all-reduce: Sorts tensors by size before bucketing, placing similarly-sized tensors together...
+    5. Hierarchical two-phase reduce-scatter + all-gather: First performs reduce-scatter to partition gradient sums across ranks (each rank...
+  Strategy 1 (Per-tensor all-reduce baseline): sim=497190.5 us
+  Strategy 2 (Single flat concatenation all-reduce): sim=467256.9 us
+  Strategy 3 (Fixed-size bucketing all-reduce): sim=467256.9 us
+  Strategy 4 (Size-based sorted bucketing all-reduce): sim=467256.9 us
+  Strategy 5 (Hierarchical two-phase reduce-scatter + all-gather): sim=467256.9 us
+
+  Top after enumeration:
+    Single flat concatenation all-reduce: 467256.9 us
+    Fixed-size bucketing all-reduce: 467256.9 us
+
+  Strategy-Enumerate complete. 7 total candidates.
+  Best: Single flat concatenation all-reduce (sim=467256.9 us)
+
+=== Phase 3 result for probe_het_24_mid (wall 83s): 4 candidates, sim ranking ===
+           1e+18  baseline:flat_cat_ar  code=no
+           1e+18  baseline:bucketed_ar  code=no
+           1e+18  strat:Single flat concatenation all-  code=no
+           1e+18  baseline:per_tensor_ar  code=no

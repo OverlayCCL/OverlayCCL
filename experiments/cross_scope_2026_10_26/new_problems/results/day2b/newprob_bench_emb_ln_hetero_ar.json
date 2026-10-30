@@ -1,0 +1,48 @@
+{
+ "problem": "emb_ln_hetero_ar",
+ "ws": 32,
+ "results": {
+  "per_tensor_ar": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 6.692767143249512,
+   "mean_ms": 171.7890421549479,
+   "status": "ok"
+  },
+  "flat_cat_ar": {
+   "max_abs_diff": 0.0048828125,
+   "ok": true,
+   "med_ms": 7.263422012329102,
+   "mean_ms": 8.874821662902832,
+   "status": "ok"
+  },
+  "bucket_32mb": {
+   "max_abs_diff": 0.0048828125,
+   "ok": true,
+   "med_ms": 7.326006889343262,
+   "mean_ms": 7.860509554545085,
+   "status": "ok"
+  },
+  "equal_group_stacks": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 7.550239562988281,
+   "mean_ms": 9.218160311381022,
+   "status": "ok"
+  },
+  "flat_cat_clone": {
+   "max_abs_diff": 0.0048828125,
+   "ok": true,
+   "med_ms": 7.198452949523926,
+   "mean_ms": 7.509867350260417,
+   "status": "ok"
+  },
+  "flat_cat_2d": {
+   "max_abs_diff": 0.0048828125,
+   "ok": true,
+   "med_ms": 7.680177688598633,
+   "mean_ms": 9.708094596862793,
+   "status": "ok"
+  }
+ }
+}

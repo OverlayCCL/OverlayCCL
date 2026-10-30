@@ -1,0 +1,40 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of 48 mixed-size 1-D tensors (small sizes)
+======================================================================
+  per_tensor_ar: 88278.3 us, 48 local ops, 0 ag, 48 ar, 0 cp
+  flat_cat_ar: 109583.4 us, 147 local ops, 0 ag, 1 ar, 0 cp
+  bucketed_ar: 63143.5 us, 162 local ops, 0 ag, 6 ar, 0 cp
+
+  Best baseline: baseline:bucketed_ar (63143.5 us)
+
+======================================================================
+[Phase 3 / Strategy-Enumerate] DP gradient all-reduce of 48 mixed-size 1-D tensors (small sizes)
+======================================================================
+  K=5 strategies, R=2 refinement rounds per top-2 (budget ~10 LLM calls)
+  Enumerated 5 strategies:
+    1. Per-tensor all-reduce baseline: Issue 48 separate all_reduce calls, one per gradient tensor in original order. D...
+    2. Single flat concatenation all-reduce: Concatenate all 48 tensors into one flat buffer, single all_reduce, then slice b...
+    3. Fixed in-order bucketing (6 buckets): Partition 48 tensors into 6 sequential buckets of 8 consecutive tensors each, co...
+    4. Fixed in-order bucketing (4 buckets): Partition 48 tensors into 4 sequential buckets of 12 consecutive tensors each, c...
+    5. Two-tier bucketing strategy: Split 48 tensors into first-half and second-half (24 each), then sub-bucket each...
+  Strategy 1 (Per-tensor all-reduce baseline): sim=88278.3 us
+  Strategy 2 (Single flat concatenation all-reduce): sim=109583.4 us
+  Strategy 3 (Fixed in-order bucketing (6 buckets)): sim=63143.5 us
+  Strategy 4 (Fixed in-order bucketing (4 buckets)): sim=62856.1 us
+  Strategy 5 (Two-tier bucketing strategy): sim=63451.1 us
+
+  Top after enumeration:
+    Fixed in-order bucketing (4 buckets): 62856.1 us
+    Fixed in-order bucketing (6 buckets): 63143.5 us
+    top 1 round 2: NEW BEST 62778.1 us (0.1% improvement)
+
+  Strategy-Enumerate complete. 7 total candidates.
+  Best: refined-from-Fixed in-order bucketing (4 buckets) (sim=62778.1 us)
+
+=== Phase 3 result for probe_het_48_small (wall 72s): 4 candidates, sim ranking ===
+           1e+18  strat:refined-from-Fixed in-order bu  code=no
+           1e+18  baseline:bucketed_ar  code=no
+           1e+18  baseline:per_tensor_ar  code=no
+           1e+18  baseline:flat_cat_ar  code=no

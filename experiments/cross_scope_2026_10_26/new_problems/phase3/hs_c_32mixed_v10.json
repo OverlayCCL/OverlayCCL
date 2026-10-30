@@ -1,0 +1,30 @@
+[
+ {
+  "raw": [
+   "baseline:flat_cat_ar",
+   "{'template': 'flat_cat_ar', 'cost_score': 1245.7512519999982, 'sim_time_us': 124575.12519999982, 'local_ops': 99, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'builtin_code': 'def evolved_hs_c_32mixed(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    flat = torch.cat([t.reshape(-1) for t in grads]); r = xm.all_reduce(xm.REDUCE_SUM, flat)\\n    outs = []; off = 0\\n    for t in grads: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:flat_cat_ar"
+ },
+ {
+  "raw": [
+   "strat:Single flat concatenation all-",
+   "{'template': 'strategy_enumerate_final', 'cost_score': 1245.7512519999982, 'sim_time_us': 124575.12519999982, 'local_ops': 99, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'evolved_code': 'def evolved_hs_c_32mixed(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"Single flat concatenation all-reduce: concatenate all 32 tensors, perform one all_reduce, then slice back.\"\"\"\\n    # Concatenate all gradients into a single flat buffer\\n    flat = torch.cat([t.reshape(-1) for t in grads])\\n    \\n    # Perform single all_reduce operation\\n    reduced = xm.all_reduce(xm.REDUCE_SUM, flat)\\n    \\n    # Slice the reduced tensor back into original shapes\\n    outs = []\\n    offset = 0\\n    for t in grads:\\n        n = t.numel()\\n        outs.append(reduced[offset:offset + n].view(t.shape))\\n        offset += n\\n    \\n    return outs'}}"
+  ],
+  "name": "strat:Single flat concatenation all-"
+ },
+ {
+  "raw": [
+   "baseline:bucketed_ar",
+   "{'template': 'bucketed_ar', 'cost_score': 1255.3309527139077, 'sim_time_us': 125533.09527139078, 'local_ops': 108, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 4, '_params': {'builtin_code': '\\\\\\ndef evolved_hs_c_32mixed(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"in-order buckets of 8 tensors each (size-independent; a few dispatches, exact bytes)\"\"\"\\n    outs = []\\n    for b in range(0, len(grads), 8):\\n        chunk = grads[b:b + 8]; flat = torch.cat([t.reshape(-1) for t in chunk]); r = xm.all_reduce(xm.REDUCE_SUM, flat); off = 0\\n        for t in chunk: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:bucketed_ar"
+ },
+ {
+  "raw": [
+   "baseline:per_tensor_ar",
+   "{'template': 'per_tensor_ar', 'cost_score': 1341.028940594263, 'sim_time_us': 134102.8940594263, 'local_ops': 32, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 32, '_params': {'builtin_code': 'def evolved_hs_c_32mixed(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"developer baseline: one all_reduce per gradient tensor (DDP hook per parameter)\"\"\"\\n    return [xm.all_reduce(xm.REDUCE_SUM, t) for t in grads]\\n'}}"
+  ],
+  "name": "baseline:per_tensor_ar"
+ }
+]

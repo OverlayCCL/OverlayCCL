@@ -1,0 +1,27 @@
+{
+ "problem": "hs_a_64x64k_512k",
+ "ws": 32,
+ "results": {
+  "per_tensor_ar": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 7.035255432128906,
+   "mean_ms": 8.079099655151367,
+   "status": "ok"
+  },
+  "bucket_4mb": {
+   "max_abs_diff": 0.005859375,
+   "ok": true,
+   "med_ms": 55.770277976989746,
+   "mean_ms": 56.09187285105387,
+   "status": "ok"
+  },
+  "gate_1": {
+   "max_abs_diff": 0.0048828125,
+   "ok": true,
+   "med_ms": 9.369611740112305,
+   "mean_ms": 9.6542755762736,
+   "status": "ok"
+  }
+ }
+}

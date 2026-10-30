@@ -1,0 +1,23 @@
+[
+ {
+  "raw": [
+   "strat:refined-from-Parallel bf16-buc",
+   "{'template': 'strategy_enumerate_final', 'cost_score': 92.68410148569501, 'sim_time_us': 9268.410148569501, 'local_ops': 23, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 2, '_params': {'evolved_code': 'def evolved_layer_grads_mixed_dtype(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"\\n    Optimized parallel bf16-bucket and fp32-bucket strategy:\\n    Minimize local ops by using views and avoiding explicit unpacking loops.\\n    \"\"\"\\n    # Separate gradients by dtype\\n    bf16_grads = grads[:4]\\n    fp32_grads = grads[4:]\\n    \\n    # Store shapes for later reconstruction\\n    bf16_shapes = [t.shape for t in bf16_grads]\\n    fp32_shapes = [t.shape for t in fp32_grads]\\n    \\n    # Compute offsets once\\n    bf16_sizes = [t.numel() for t in bf16_grads]\\n    fp32_sizes = [t.numel() for t in fp32_grads]\\n    \\n    # Concatenate using views (reshape(-1) is metadata-only on contiguous tensors)\\n    bf16_flat = torch.cat([t.reshape(-1) for t in bf16_grads])\\n    fp32_flat = torch.cat([t.reshape(-1) for t in fp32_grads])\\n    \\n    # Launch both all_reduce operations\\n    bf16_reduced = xm.all_reduce(xm.REDUCE_SUM, bf16_flat)\\n    fp32_reduced = xm.all_reduce(xm.REDUCE_SUM, fp32_flat)\\n    \\n    # Unpack using narrow (metadata-only view) instead of slicing\\n    bf16_results = []\\n    offset = 0\\n    for size, shape in zip(bf16_sizes, bf16_shapes):\\n        bf16_results.append(bf16_reduced.narrow(0, offset, size).view(shape))\\n        offset += size\\n    \\n    # Unpack fp32 using narrow\\n    fp32_results = []\\n    offset = 0\\n    for size, shape in zip(fp32_sizes, fp32_shapes):\\n        fp32_results.append(fp32_reduced.narrow(0, offset, size).view(shape))\\n        offset += size\\n    \\n    # Return in original order\\n    return bf16_results + fp32_results'}}"
+  ],
+  "name": "strat:refined-from-Parallel bf16-buc"
+ },
+ {
+  "raw": [
+   "baseline:per_tensor_ar",
+   "{'template': 'per_tensor_ar', 'cost_score': 105.5669860662286, 'sim_time_us': 10556.69860662286, 'local_ops': 6, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 6, '_params': {'builtin_code': 'def evolved_layer_grads_mixed_dtype(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"developer baseline: one all_reduce per tensor in its native dtype\"\"\"\\n    return [xm.all_reduce(xm.REDUCE_SUM, t) for t in grads]\\n'}}"
+  ],
+  "name": "baseline:per_tensor_ar"
+ },
+ {
+  "raw": [
+   "baseline:cast_flat_fp32",
+   "{'template': 'cast_flat_fp32', 'cost_score': 171.083522967742, 'sim_time_us': 17108.3522967742, 'local_ops': 29, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'builtin_code': 'def evolved_layer_grads_mixed_dtype(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    flat = torch.cat([t.reshape(-1).float() for t in grads]); r = xm.all_reduce(xm.REDUCE_SUM, flat); outs = []; off = 0\\n    for t in grads: n = t.numel(); outs.append(r[off:off + n].view(t.shape).to(t.dtype)); off += n\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:cast_flat_fp32"
+ }
+]

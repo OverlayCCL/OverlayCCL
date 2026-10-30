@@ -1,0 +1,37 @@
+--- [09:23:58] bench hs_a_64x64k_512k
+[bench2] hs_a_64x64k_512k per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 8.727550506591797, 'mean_ms': 9.104998906453451, 'status': 'ok'}
+[bench2] hs_a_64x64k_512k flat_cat_ar: {'max_abs_diff': 0.0048828125, 'ok': True, 'med_ms': 15.684366226196289, 'mean_ms': 16.678675015767414, 'status': 'ok'}
+[bench2] hs_a_64x64k_512k bucket_4mb: {'max_abs_diff': 0.005859375, 'ok': True, 'med_ms': 12.401103973388672, 'mean_ms': 12.990427017211914, 'status': 'ok'}
+[bench2] hs_a_64x64k_512k p3_pick2: {'max_abs_diff': 0.005859375, 'ok': True, 'med_ms': 11.747241020202637, 'mean_ms': 12.917455037434896, 'status': 'ok'}
+[bench2] hs_a_64x64k_512k p3_pick3: {'max_abs_diff': 0.005859375, 'ok': True, 'med_ms': 11.355042457580566, 'mean_ms': 11.739126841227213, 'status': 'ok'}
+--- [09:24:30] bench hetero_grad_ar_many
+[bench2] hetero_grad_ar_many per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 20.544767379760742, 'mean_ms': 29.564889272054035, 'status': 'ok'}
+[bench2] hetero_grad_ar_many flat_cat_ar: {'max_abs_diff': 0.0078125, 'ok': True, 'med_ms': 20.82359790802002, 'mean_ms': 26.816614468892414, 'status': 'ok'}
+[bench2] hetero_grad_ar_many p3_pick3: {'max_abs_diff': 0.0078125, 'ok': True, 'med_ms': 17.830967903137207, 'mean_ms': 48.674956957499184, 'status': 'ok'}
+--- [09:25:13] bench probe_het_48_mid
+[bench2] probe_het_48_mid per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 26.6648530960083, 'mean_ms': 45.48461437225342, 'status': 'ok'}
+[bench2] probe_het_48_mid bucket6: {'max_abs_diff': 0.009765625, 'ok': True, 'med_ms': 35.18247604370117, 'mean_ms': 53.51769129435221, 'status': 'ok'}
+[bench2] probe_het_48_mid p3_pick3: {'max_abs_diff': 0.0078125, 'ok': True, 'med_ms': 34.917473793029785, 'mean_ms': 72.05278078715007, 'status': 'ok'}
+--- [09:26:09] train hs_a_64x64k_512k per_tensor_ar
+   median_ms 100.53 effective True
+--- [09:27:39] train hs_a_64x64k_512k flat_cat_ar
+   median_ms 112.41 effective True
+--- [09:29:09] train hs_a_64x64k_512k bucket_4mb
+   median_ms 72.31 effective True
+--- [09:30:06] train hs_a_64x64k_512k p3_pick2
+   median_ms 175.64 effective True
+--- [09:31:45] train hs_a_64x64k_512k p3_pick3
+   median_ms 72.58 effective True
+--- [09:32:45] train hetero_grad_ar_many per_tensor_ar
+   median_ms 74.45 effective True
+--- [09:33:51] train hetero_grad_ar_many flat_cat_ar
+   median_ms 486.09 effective True
+--- [09:38:14] train hetero_grad_ar_many p3_pick3
+   median_ms 65.4 effective True
+--- [09:39:18] train probe_het_48_mid per_tensor_ar
+   median_ms 603.24 effective True
+--- [09:44:34] train probe_het_48_mid bucket6
+   median_ms 516.1 effective True
+--- [09:49:37] train probe_het_48_mid p3_pick3
+   median_ms 806.17 effective True
+=== newprobs done 09:56:54 ===

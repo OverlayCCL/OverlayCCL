@@ -1,0 +1,10 @@
+{
+ "problem": "fsdp_prefetch",
+ "cand": "per_mb_pl0",
+ "ws": 32,
+ "desc": "M=4 L=1 DM=2048 shard=168",
+ "status": "ValueError: RunNeuronCCImpl: error condition error != 0: <class 'subprocess.CalledProcessError'>: Command '' died with <Signals.SIGHUP: 1>.",
+ "med_ms": null,
+ "mean_ms": null,
+ "all": []
+}

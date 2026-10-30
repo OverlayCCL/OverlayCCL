@@ -1,0 +1,41 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of a 4-layer transformer (24 heterogeneous tensors)
+======================================================================
+  per_tensor_ar: 89536.5 us, 24 local ops, 0 ag, 24 ar, 0 cp
+  flat_cat_ar: 64218.2 us, 75 local ops, 0 ag, 1 ar, 0 cp
+  bucketed_ar: 64218.2 us, 75 local ops, 0 ag, 1 ar, 0 cp
+  per_layer_bucket: 64218.2 us, 84 local ops, 0 ag, 4 ar, 0 cp
+
+  Best baseline: baseline:per_layer_bucket (64218.2 us)
+
+======================================================================
+[Phase 3 / Strategy-Enumerate] DP gradient all-reduce of a 4-layer transformer (24 heterogeneous tensors)
+======================================================================
+  K=5 strategies, R=2 refinement rounds per top-2 (budget ~10 LLM calls)
+  Enumerated 5 strategies:
+    1. Per-tensor all-reduce baseline: Issues 24 separate all_reduce calls, one per gradient tensor, with no concatenat...
+    2. Single flat concatenation all-reduce: Concatenates all 24 heterogeneous tensors into one contiguous 1-D buffer, perfor...
+    3. Per-layer bucketing (4 dispatches): Groups gradients by transformer layer (6 tensors per layer), concatenates each g...
+    4. Reverse-order per-tensor all-reduce: Issues 24 separate all_reduce calls in backward pass order (last layer to first)...
+    5. Two-phase hierarchical bucketing: First concatenates and all_reduces the 12 smallest tensors (by element count) in...
+  Strategy 1 (Per-tensor all-reduce baseline): sim=89536.5 us
+  Strategy 2 (Single flat concatenation all-reduce): sim=64218.2 us
+  Strategy 3 (Per-layer bucketing (4 dispatches)): sim=64218.2 us
+  Strategy 4 (Reverse-order per-tensor all-reduce): sim=92740.4 us
+  Strategy 5 (Two-phase hierarchical bucketing): sim=65168.1 us
+
+  Top after enumeration:
+    Per-layer bucketing (4 dispatches): 64218.2 us
+    Single flat concatenation all-reduce: 64218.2 us
+
+  Strategy-Enumerate complete. 7 total candidates.
+  Best: Per-layer bucketing (4 dispatches) (sim=64218.2 us)
+
+=== Phase 3 result for model_grads_4layers (wall 90s): 5 candidates, sim ranking ===
+           1e+18  baseline:per_layer_bucket  code=no
+           1e+18  strat:Per-layer bucketing (4 dispatc  code=no
+           1e+18  baseline:flat_cat_ar  code=no
+           1e+18  baseline:bucketed_ar  code=no
+           1e+18  baseline:per_tensor_ar  code=no

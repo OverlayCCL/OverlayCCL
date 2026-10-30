@@ -1,0 +1,81 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of one layer with fp32 norm parameters (mixed dtypes)
+======================================================================
+  per_tensor_ar: 11344.2 us, 6 local ops, 0 ag, 6 ar, 0 cp
+  cast_flat_fp32: 17108.4 us, 29 local ops, 0 ag, 1 ar, 0 cp
+  cast_flat_bf16: 9280.8 us, 25 local ops, 0 ag, 1 ar, 0 cp
+  two_dtype_groups: 12841.5 us, 23 local ops, 0 ag, 2 ar, 0 cp
+
+  Best baseline: baseline:cast_flat_bf16 (9280.8 us)
+
+======================================================================
+[Phase 3 / CC-ReAct] Single-trajectory: DP gradient all-reduce of one layer with fp32 norm parameters (mixed dtypes)
+======================================================================
+  CC-ReAct total turn budget: 16 (== multi-island 4 islands x 4 rounds)
+  Starting from baseline: per_tensor_ar
+  Starting template: per_tensor_ar (XLA)
+  Baseline: 340.0 us, 0 permutes, 0 gathers, 6 local ops
+
+  --- Evolution round 1 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 412.0 us (0 permutes, 0 gathers, 16 local ops)
+
+  --- Evolution round 2 ---
+  INCORRECT: CRASH in collect pass 0: world=4 pattern=uniform rank=0: AttributeError: 'MockTorch' object has no attribute 'bfloat16'
+
+  --- Evolution round 3 ---
+  INCORRECT: CRASH in collect pass 0: world=4 pattern=uniform rank=0: AttributeError: 'MockTorch' object has no attribute 'bfloat16'
+
+  --- Evolution round 4 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 418.0 us (0 permutes, 0 gathers, 22 local ops)
+
+  --- Evolution round 5 ---
+  INCORRECT: CRASH in collect pass 0: world=4 pattern=uniform rank=0: AttributeError: 'MockTorch' object has no attribute 'bfloat16'
+
+  --- Evolution round 6 ---
+  INCORRECT: CRASH in collect pass 0: world=4 pattern=uniform rank=0: AttributeError: 'MockTorch' object has no attribute 'bfloat16'
+
+  --- Evolution round 7 ---
+  INCORRECT: CRASH in collect pass 0: world=4 pattern=uniform rank=0: AttributeError: 'MockTorch' object has no attribute 'bfloat16'
+
+  --- Evolution round 8 ---
+  INCORRECT: CRASH in collect pass 0: world=4 pattern=uniform rank=0: AttributeError: 'MockTorch' object has no attribute 'bfloat16'
+
+  --- Evolution round 9 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 340.0 us (0 permutes, 0 gathers, 6 local ops)
+
+  --- Evolution round 10 ---
+  INCORRECT: CRASH in collect pass 0: world=4 pattern=uniform rank=0: AttributeError: 'MockTorch' object has no attribute 'bfloat16'
+
+  --- Evolution round 11 ---
+  INCORRECT: CRASH in collect pass 0: world=4 pattern=uniform rank=0: AttributeError: 'MockTorch' object has no attribute 'bfloat16'
+
+  --- Evolution round 12 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 470.0 us (0 permutes, 0 gathers, 18 local ops)
+
+  --- Evolution round 13 ---
+  INCORRECT: CRASH in collect pass 0: world=4 pattern=uniform rank=0: AttributeError: 'MockTorch' object has no attribute 'bfloat16'
+
+  --- Evolution round 14 ---
+  INCORRECT: CRASH in collect pass 0: world=4 pattern=uniform rank=0: AttributeError: 'MockTorch' object has no attribute 'bfloat16'
+
+  --- Evolution round 15 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 418.0 us (0 permutes, 0 gathers, 22 local ops)
+
+  --- Evolution round 16 ---
+  INCORRECT: CRASH in collect pass 0: world=4 pattern=uniform rank=0: AttributeError: 'MockTorch' object has no attribute 'bfloat16'
+
+  CC-ReAct complete. 5 total candidates.
+
+=== Phase 3 result for layer_grads_mixed_dtype (wall 318s): 5 candidates, sim ranking ===
+           1e+18  cc:final  code=no
+           1e+18  baseline:cast_flat_bf16  code=no
+           1e+18  baseline:per_tensor_ar  code=no
+           1e+18  baseline:two_dtype_groups  code=no
+           1e+18  baseline:cast_flat_fp32  code=no

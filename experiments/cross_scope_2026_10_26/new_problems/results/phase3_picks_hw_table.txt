@@ -1,0 +1,13 @@
+problem                candidate                 bench32  b32 x  bench64  b64 x  train64  t64 x  note
+hs_a_64x64k_512k       per_tensor_ar                8.90   1.00    13.14   1.00    59.29   1.00  n=3/3 
+hs_a_64x64k_512k       bucket_4mb                  11.99   0.74    14.69   0.89    29.09   2.04  n=3/3 INVERSION(b32) INVERSION(b64)
+hs_a_64x64k_512k       flat_cat_ar                 15.96   0.56    18.48   0.71    68.78   0.86  n=3/3 
+hs_a_64x64k_512k       p3_pick                     16.69   0.53        —      —    69.01   0.86  n=1/1 
+layer_grads_hetero_ar  per_tensor_ar                9.54   1.00    13.97   1.00    55.83   1.00  n=3/3 
+layer_grads_hetero_ar  flat_cat_ar                 10.48   0.91    12.91   1.08    31.71   1.76  n=3/3 
+layer_grads_hetero_ar  p3_pick                     10.48   0.91        —      —    31.73   1.76  n=1/1 
+model_grads_4layers    per_tensor_ar               25.08   1.00    38.15   1.00   420.28   1.00  n=3/3 
+model_grads_4layers    flat_cat_ar                 28.24   0.89    35.64   1.07    85.41   4.92  n=3/3 INVERSION(b32)
+model_grads_4layers    p3_pick                     29.79   0.84        —      —    88.78   4.73  n=1/1 INVERSION(b32)
+model_grads_4layers    per_layer_bucket            29.41   0.85    37.95   1.01    89.32   4.71  n=3/3 INVERSION(b32)
+

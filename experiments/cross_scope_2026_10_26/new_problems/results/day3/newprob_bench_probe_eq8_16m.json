@@ -1,0 +1,35 @@
+{
+ "problem": "probe_eq8_16m",
+ "ws": 32,
+ "results": {
+  "ar_each": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 18.394827842712402,
+   "mean_ms": 20.722460746765137,
+   "status": "ok"
+  },
+  "ar_stack": {
+   "max_abs_diff": 0.0078125,
+   "ok": true,
+   "med_ms": 14.795303344726562,
+   "mean_ms": 16.83374245961507,
+   "status": "ok"
+  },
+  "rs_each": {
+   "max_abs_diff": null,
+   "ok": false,
+   "med_ms": 9.640216827392578,
+   "mean_ms": 9.847195943196615,
+   "status": "ok"
+  },
+  "ag_each": {
+   "status": "ValueError: LoadCollectives: error condition NRT_RESOURCE == rt_status: ",
+   "med_ms": null
+  },
+  "ag_each_native": {
+   "status": "ValueError: RunNeuronCCImpl: error condition error != 0: [ERROR] [NCC_EOOM001] Maximum peak HBM usage of 16.25GB (at instruction I-727-63) exceeds HBM limit of 16.00GB for Trn1. This consists of 8.25GB I/O tensor",
+   "med_ms": null
+  }
+ }
+}

@@ -1,0 +1,48 @@
+{
+ "hw_problem": "hetero_grad_ar_many",
+ "search_problem": "hetero_grad_ar_many",
+ "phase3_tag": "v11",
+ "gate_candidates": [
+  [
+   "gate_1",
+   "baseline:bucketed_ar",
+   584563.9419984084
+  ],
+  [
+   "gate_2",
+   "strat:Fixed in-order bucketing (6-8 ",
+   584563.9419984084
+  ],
+  [
+   "gate_3",
+   "baseline:per_tensor_ar",
+   682524.160797957
+  ],
+  [
+   "gate_4",
+   "baseline:flat_cat_ar",
+   1042771.0292000006
+  ]
+ ],
+ "measured_ms": {
+  "gate_4": 479.10261154174805,
+  "gate_2": 237.23101615905762,
+  "gate_3": 74.64122772216797,
+  "p3_pick3": 65.23585319519043,
+  "per_tensor_ar": 74.34678077697754,
+  "gate_1": 236.8791103363037,
+  "flat_cat_ar": 478.81293296813965
+ },
+ "effective": {
+  "gate_4": true,
+  "gate_2": true,
+  "gate_3": true,
+  "p3_pick3": true,
+  "per_tensor_ar": true,
+  "gate_1": true,
+  "flat_cat_ar": true
+ },
+ "gate_choice": "per_tensor_ar",
+ "best_overall": "p3_pick3",
+ "independent_pieces": false
+}

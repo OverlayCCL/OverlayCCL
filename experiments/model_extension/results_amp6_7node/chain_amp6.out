@@ -1,0 +1,48 @@
+=== [09:19:56] amp6 start
+=== [09:19:56] smoke_base
+....[bench] per_mb steady_mean=91.46ms steady_median=91.50ms final_loss=13.863
+[init] DM=2048 HID=5376 VOCAB=7168 B=1 S=1024 backend=per_mb steps=60 grad_sync=per_tensor base_sync=per_mb sync_graph=isolated sync_repeat=1 rep_params=62 (emb 2, siteA 12, siteB 48) rep_elems=126164992
+=== [09:24:12] smoke_sites
+[bench] bundled steady_mean=50.34ms steady_median=50.50ms final_loss=3.466
+[init] DM=2048 HID=5376 VOCAB=7168 B=1 S=1024 backend=bundled steps=60 grad_sync=sites base_sync=per_mb sync_graph=isolated sync_repeat=1 rep_params=62 (emb 2, siteA 12, siteB 48) rep_elems=126164992
+AMP6_SMOKE_DONE
+=== [09:29:58] iso_base_permb
+[bench] per_mb steady_mean=97.09ms steady_median=95.99ms final_loss=13.863
+[init] DM=2048 HID=5376 VOCAB=7168 B=1 S=1024 backend=per_mb steps=300 grad_sync=per_tensor base_sync=per_mb sync_graph=isolated sync_repeat=1 rep_params=62 (emb 2, siteA 12, siteB 48) rep_elems=126164992
+=== [09:31:33] iso_bund_sites
+[bench] bundled steady_mean=50.01ms steady_median=50.75ms final_loss=3.466
+[init] DM=2048 HID=5376 VOCAB=7168 B=1 S=1024 backend=bundled steps=300 grad_sync=sites base_sync=per_mb sync_graph=isolated sync_repeat=1 rep_params=62 (emb 2, siteA 12, siteB 48) rep_elems=126164992
+=== [09:33:16] iso_bund_per_tensor
+[bench] bundled steady_mean=23.96ms steady_median=23.41ms final_loss=3.466
+[init] DM=2048 HID=5376 VOCAB=7168 B=1 S=1024 backend=bundled steps=300 grad_sync=per_tensor base_sync=per_mb sync_graph=isolated sync_repeat=1 rep_params=62 (emb 2, siteA 12, siteB 48) rep_elems=126164992
+=== [09:34:43] iso_base_once
+1
+=== [09:35:32] chain_amp6b: v8 DDP-placement diagnostic
+--- [09:35:34] train hs_a_64x64k_512k per_tensor_ar
+   median_ms 22.05 effective True
+--- [09:37:55] train hs_a_64x64k_512k gate_1
+   median_ms 24.05 effective True
+--- [09:40:43] train probe_het_48_small per_tensor_ar
+   median_ms 17.11 effective True
+--- [09:43:11] train probe_het_48_small gate_2
+   median_ms 18.42 effective True
+--- [09:45:58] train layer_grads_mixed_dtype per_tensor_ar
+   median_ms 13.77 effective True
+--- [09:49:11] train layer_grads_mixed_dtype gate_1
+   median_ms 14.91 effective True
+=== newprobs done 09:51:39 ===
+V8_DIAG_DONE
+=== [09:51:39] iso_base_once
+=== [10:31:39] iso_bund_per_tensor_rep2
+=== [11:11:39] iso_bund_sites_rep2
+=== [11:51:39] iso_bund_nosim
+=== [12:31:39] iso_bund_flat
+AMP6_ISO_DONE
+=== [13:11:42] fused_base_permb
+=== [13:51:42] fused_bund_sites
+=== [14:31:42] fused_bund_per_tensor
+=== [15:11:42] iso2_base_permb
+=== [15:49:00] chain_final: amp6 flat-buffer arms
+=== [15:49:00] fb_iso_bund_per_tensor
+=== [15:51:07] fb_iso_bund_sites
+=== [15:53:08] fb_iso_base_permb

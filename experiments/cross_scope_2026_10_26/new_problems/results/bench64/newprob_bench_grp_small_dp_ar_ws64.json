@@ -1,0 +1,25 @@
+{
+ "problem": "grp_small_dp_ar",
+ "ws": 64,
+ "results": {
+  "per_tensor_grouped_ar": {
+   "status": "RuntimeError: Execute: error condition (((rt_status) != NRT_SUCCESS)):  [General]: [NRT_FAILURE] status_code=1. Operation failed due to an unspecified error condition in the runtime system. For more details check s",
+   "med_ms": null
+  },
+  "flat_grouped_ar": {
+   "status": "RuntimeError: Execute: error condition (((rt_status) != NRT_SUCCESS)):  [General]: [NRT_FAILURE] status_code=1. Operation failed due to an unspecified error condition in the runtime system. For more details check s",
+   "med_ms": null
+  },
+  "masked_world_ar": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 8.306741714477539,
+   "mean_ms": 9.773834546407064,
+   "status": "ok"
+  },
+  "grouped_rs_ag": {
+   "status": "RuntimeError: Execute: error condition (((rt_status) != NRT_SUCCESS)):  [General]: [NRT_FAILURE] status_code=1. Operation failed due to an unspecified error condition in the runtime system. For more details check s",
+   "med_ms": null
+  }
+ }
+}

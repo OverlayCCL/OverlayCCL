@@ -1,0 +1,27 @@
+{
+ "problem": "fsdp_hetero_ag",
+ "ws": 64,
+ "results": {
+  "per_tensor_ag": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 13.98921012878418,
+   "mean_ms": 338.64883581797284,
+   "status": "ok"
+  },
+  "flat_cat_ag": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 16.767501831054688,
+   "mean_ms": 17.61459509531657,
+   "status": "ok"
+  },
+  "flat_cat_ag_native": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 14.922022819519043,
+   "mean_ms": 18.49532127380371,
+   "status": "ok"
+  }
+ }
+}

@@ -1,0 +1,30 @@
+[
+ {
+  "raw": [
+   "strat:Reduce-scatter then all-gather",
+   "{'template': 'strategy_enumerate_final', 'cost_score': 9333.095252000005, 'sim_time_us': 933309.5252000004, 'local_ops': 148, 'num_collective_permute': 0, 'num_all_gather': 1, 'num_all_reduce': 0, '_params': {'evolved_code': 'def evolved_probe_het_48_mid(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"Reduce-scatter then all-gather decomposition: concatenate all tensors, RS then AG, slice back.\"\"\"\\n    if world_size == 1:\\n        return grads\\n    \\n    # Concatenate all 48 tensors into one flat buffer\\n    flat = torch.cat([t.reshape(-1) for t in grads])\\n    total_size = flat.numel()\\n    dtype = flat.dtype\\n    \\n    # Reduce-scatter: each rank gets a partition of the reduced result\\n    # XLA reduce_scatter divides the input into world_size chunks and each rank gets one reduced chunk\\n    reduced_chunk = xm.reduce_scatter(xm.REDUCE_SUM, flat, scale=1.0, scatter_dim=0, shard_count=world_size, groups=None)\\n    \\n    # All-gather: collect all reduced chunks to reconstitute the full result on all ranks\\n    full_result = xm.all_gather(reduced_chunk, dim=0)\\n    \\n    # Slice back into the original tensor shapes\\n    outs = []\\n    off = 0\\n    for t in grads:\\n        n = t.numel()\\n        outs.append(full_result[off:off + n].view(t.shape))\\n        off += n\\n    \\n    return outs'}}"
+  ],
+  "name": "strat:Reduce-scatter then all-gather"
+ },
+ {
+  "raw": [
+   "baseline:bucketed_ar",
+   "{'template': 'bucketed_ar', 'cost_score': 9452.457254136352, 'sim_time_us': 945245.7254136351, 'local_ops': 162, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 6, '_params': {'builtin_code': '\\\\\\ndef evolved_probe_het_48_mid(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"in-order buckets of 8 tensors each (size-independent; a few dispatches, exact bytes)\"\"\"\\n    outs = []\\n    for b in range(0, len(grads), 8):\\n        chunk = grads[b:b + 8]; flat = torch.cat([t.reshape(-1) for t in chunk]); r = xm.all_reduce(xm.REDUCE_SUM, flat); off = 0\\n        for t in chunk: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:bucketed_ar"
+ },
+ {
+  "raw": [
+   "baseline:per_tensor_ar",
+   "{'template': 'per_tensor_ar', 'cost_score': 10941.12216439931, 'sim_time_us': 1094112.216439931, 'local_ops': 48, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 48, '_params': {'builtin_code': 'def evolved_probe_het_48_mid(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"developer baseline: one all_reduce per gradient tensor (DDP hook per parameter)\"\"\"\\n    return [xm.all_reduce(xm.REDUCE_SUM, t) for t in grads]\\n'}}"
+  ],
+  "name": "baseline:per_tensor_ar"
+ },
+ {
+  "raw": [
+   "baseline:flat_cat_ar",
+   "{'template': 'flat_cat_ar', 'cost_score': 16882.842452000004, 'sim_time_us': 1688284.2452000005, 'local_ops': 147, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'builtin_code': 'def evolved_probe_het_48_mid(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    flat = torch.cat([t.reshape(-1) for t in grads]); r = xm.all_reduce(xm.REDUCE_SUM, flat)\\n    outs = []; off = 0\\n    for t in grads: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:flat_cat_ar"
+ }
+]

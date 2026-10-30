@@ -1,0 +1,48 @@
+{
+ "problem": "hetero_grad_ar_many",
+ "ws": 64,
+ "results": {
+  "per_tensor_ar": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 29.453158378601074,
+   "mean_ms": 198.84799321492514,
+   "status": "ok"
+  },
+  "p3_pick3": {
+   "max_abs_diff": 0.0078125,
+   "ok": true,
+   "med_ms": 25.861740112304688,
+   "mean_ms": 28.60398292541504,
+   "status": "ok"
+  },
+  "gate_1": {
+   "max_abs_diff": 0.0078125,
+   "ok": true,
+   "med_ms": 30.73251247406006,
+   "mean_ms": 45.529794692993164,
+   "status": "ok"
+  },
+  "gate_2": {
+   "max_abs_diff": 0.0078125,
+   "ok": true,
+   "med_ms": 25.892138481140137,
+   "mean_ms": 31.415891647338867,
+   "status": "ok"
+  },
+  "gate_3": {
+   "max_abs_diff": 0.005859375,
+   "ok": true,
+   "med_ms": 37.108540534973145,
+   "mean_ms": 45.812694231669106,
+   "status": "ok"
+  },
+  "gate_4": {
+   "max_abs_diff": 0.005859375,
+   "ok": true,
+   "med_ms": 36.51547431945801,
+   "mean_ms": 50.61225891113281,
+   "status": "ok"
+  }
+ }
+}

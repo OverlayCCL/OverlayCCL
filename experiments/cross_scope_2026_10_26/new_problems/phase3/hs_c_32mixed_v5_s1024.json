@@ -1,0 +1,30 @@
+[
+ {
+  "raw": [
+   "strat:refined-from-Hierarchical two-",
+   "{'template': 'strategy_enumerate_final', 'cost_score': 1241.0184520000003, 'sim_time_us': 124101.84520000003, 'local_ops': 99, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'evolved_code': 'def evolved_hs_c_32mixed(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"Optimized hierarchical all-reduce: minimize local ops by reducing cat/reshape overhead\"\"\"\\n    THRESHOLD = 512 * 1024  # 512K elements\\n    \\n    # Categorize tensors by size\\n    small_group = []\\n    large_group = []\\n    \\n    for i, t in enumerate(grads):\\n        if t.numel() < THRESHOLD:\\n            small_group.append((i, t))\\n        else:\\n            large_group.append((i, t))\\n    \\n    # Initialize output list\\n    outs = [None] * len(grads)\\n    \\n    # Process small tensors\\n    if small_group:\\n        # Single cat operation with list comprehension\\n        flat_small = torch.cat([t.view(-1) for _, t in small_group])\\n        reduced_small = xm.all_reduce(xm.REDUCE_SUM, flat_small)\\n        \\n        # Split using narrow (metadata-only view)\\n        offset = 0\\n        for idx, t in small_group:\\n            n = t.numel()\\n            outs[idx] = reduced_small.narrow(0, offset, n).view(t.shape)\\n            offset += n\\n    \\n    # Process large tensors\\n    if large_group:\\n        # Single cat operation with list comprehension\\n        flat_large = torch.cat([t.view(-1) for _, t in large_group])\\n        reduced_large = xm.all_reduce(xm.REDUCE_SUM, flat_large)\\n        \\n        # Split using narrow (metadata-only view)\\n        offset = 0\\n        for idx, t in large_group:\\n            n = t.numel()\\n            outs[idx] = reduced_large.narrow(0, offset, n).view(t.shape)\\n            offset += n\\n    \\n    return outs'}}"
+  ],
+  "name": "strat:refined-from-Hierarchical two-"
+ },
+ {
+  "raw": [
+   "baseline:flat_cat_ar",
+   "{'template': 'flat_cat_ar', 'cost_score': 1245.7512519999982, 'sim_time_us': 124575.12519999982, 'local_ops': 99, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'builtin_code': 'def evolved_hs_c_32mixed(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    flat = torch.cat([t.reshape(-1) for t in grads]); r = xm.all_reduce(xm.REDUCE_SUM, flat)\\n    outs = []; off = 0\\n    for t in grads: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:flat_cat_ar"
+ },
+ {
+  "raw": [
+   "baseline:bucketed_ar",
+   "{'template': 'bucketed_ar', 'cost_score': 1245.7512519999982, 'sim_time_us': 124575.12519999982, 'local_ops': 99, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'builtin_code': 'def evolved_hs_c_32mixed(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"fixed-size buckets in order (exact bytes, a few dispatches)\"\"\"\\n    outs = []; chunk = []; acc = 0; lim = 4 * 1024 * 1024\\n    def flush(chunk):\\n        flat = torch.cat([t.reshape(-1) for t in chunk]); r = xm.all_reduce(xm.REDUCE_SUM, flat); off = 0\\n        for t in chunk: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    for t in grads:\\n        chunk.append(t); acc += t.numel()\\n        if acc >= lim: flush(chunk); chunk = []; acc = 0\\n    if chunk: flush(chunk)\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:bucketed_ar"
+ },
+ {
+  "raw": [
+   "baseline:per_tensor_ar",
+   "{'template': 'per_tensor_ar', 'cost_score': 4012.7396047123875, 'sim_time_us': 401273.96047123877, 'local_ops': 32, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 32, '_params': {'builtin_code': 'def evolved_hs_c_32mixed(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"developer baseline: one all_reduce per gradient tensor (DDP hook per parameter)\"\"\"\\n    return [xm.all_reduce(xm.REDUCE_SUM, t) for t in grads]\\n'}}"
+  ],
+  "name": "baseline:per_tensor_ar"
+ }
+]

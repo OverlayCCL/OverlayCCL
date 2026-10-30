@@ -1,0 +1,41 @@
+{
+ "problem": "pp_small_transfer",
+ "ws": 32,
+ "results": {
+  "per_mb_masked_ar": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 6.360173225402832,
+   "mean_ms": 6.790924072265625,
+   "status": "ok"
+  },
+  "stacked_masked_ar": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 6.200432777404785,
+   "mean_ms": 6.285524368286133,
+   "status": "ok"
+  },
+  "stacked_ag": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 6.217718124389648,
+   "mean_ms": 6.33846918741862,
+   "status": "ok"
+  },
+  "stacked_ag_native": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 6.176471710205078,
+   "mean_ms": 6.078052520751953,
+   "status": "ok"
+  },
+  "stacked_masked_rs": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 6.128072738647461,
+   "mean_ms": 6.149482727050781,
+   "status": "ok"
+  }
+ }
+}

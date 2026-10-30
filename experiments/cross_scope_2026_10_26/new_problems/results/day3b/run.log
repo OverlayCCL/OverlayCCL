@@ -1,0 +1,82 @@
+--- [07:07:57] bench probe_het_6_small
+[bench2] probe_het_6_small per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 5.668997764587402, 'mean_ms': 172.64962991078696, 'status': 'ok'}
+[bench2] probe_het_6_small bucket6: {'max_abs_diff': 0.0048828125, 'ok': True, 'med_ms': 5.853414535522461, 'mean_ms': 6.28203550974528, 'status': 'ok'}
+[bench2] probe_het_6_small flat_cat_ar: {'max_abs_diff': 0.0048828125, 'ok': True, 'med_ms': 5.982875823974609, 'mean_ms': 6.329949696858724, 'status': 'ok'}
+--- [07:09:04] bench probe_het_6_mid
+[bench2] probe_het_6_mid per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 8.653998374938965, 'mean_ms': 336.0030174255371, 'status': 'ok'}
+[bench2] probe_het_6_mid bucket6: {'max_abs_diff': 0.005859375, 'ok': True, 'med_ms': 9.367585182189941, 'mean_ms': 10.065841674804688, 'status': 'ok'}
+[bench2] probe_het_6_mid flat_cat_ar: {'max_abs_diff': 0.005859375, 'ok': True, 'med_ms': 9.530186653137207, 'mean_ms': 10.281936327616373, 'status': 'ok'}
+--- [07:10:09] bench probe_het_6_big
+[bench2] probe_het_6_big per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 14.512181282043457, 'mean_ms': 50.053962071736656, 'status': 'ok'}
+[bench2] probe_het_6_big bucket6: {'max_abs_diff': 0.0078125, 'ok': True, 'med_ms': 80.30104637145996, 'mean_ms': 88.0782683690389, 'status': 'ok'}
+[bench2] probe_het_6_big flat_cat_ar: {'max_abs_diff': 0.0078125, 'ok': True, 'med_ms': 80.26289939880371, 'mean_ms': 82.40908781687419, 'status': 'ok'}
+--- [07:13:34] bench probe_het_24_small
+[bench2] probe_het_24_small per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 6.5135955810546875, 'mean_ms': 172.7675755818685, 'status': 'ok'}
+[bench2] probe_het_24_small bucket6: {'max_abs_diff': 0.0048828125, 'ok': True, 'med_ms': 7.659435272216797, 'mean_ms': 7.795866330464681, 'status': 'ok'}
+[bench2] probe_het_24_small flat_cat_ar: {'max_abs_diff': 0.0048828125, 'ok': True, 'med_ms': 7.1724653244018555, 'mean_ms': 7.317709922790527, 'status': 'ok'}
+--- [07:14:53] bench probe_het_24_mid
+[bench2] probe_het_24_mid per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 15.406489372253418, 'mean_ms': 333.6307843526204, 'status': 'ok'}
+[bench2] probe_het_24_mid bucket6: {'max_abs_diff': 0.0078125, 'ok': True, 'med_ms': 19.22786235809326, 'mean_ms': 19.629557927449543, 'status': 'ok'}
+[bench2] probe_het_24_mid flat_cat_ar: {'max_abs_diff': 0.0068359375, 'ok': True, 'med_ms': 16.672134399414062, 'mean_ms': 42.10588137308756, 'status': 'ok'}
+--- [07:16:36] bench probe_het_24_big
+[bench2] probe_het_24_big per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 33.052682876586914, 'mean_ms': 237.62223720550537, 'status': 'ok'}
+[bench2] probe_het_24_big bucket6: {'max_abs_diff': 0.0078125, 'ok': True, 'med_ms': 133.59785079956055, 'mean_ms': 167.05756982167563, 'status': 'ok'}
+[bench2] probe_het_24_big flat_cat_ar: {'max_abs_diff': 0.0078125, 'ok': True, 'med_ms': 155.14004230499268, 'mean_ms': 163.50109577178955, 'status': 'ok'}
+--- [07:22:31] bench probe_het_48_small
+[bench2] probe_het_48_small per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 8.017897605895996, 'mean_ms': 506.8584680557251, 'status': 'ok'}
+[bench2] probe_het_48_small bucket6: {'max_abs_diff': 0.0048828125, 'ok': True, 'med_ms': 10.447859764099121, 'mean_ms': 11.694995562235514, 'status': 'ok'}
+[bench2] probe_het_48_small flat_cat_ar: {'max_abs_diff': 0.0048828125, 'ok': True, 'med_ms': 10.451674461364746, 'mean_ms': 10.553081830342611, 'status': 'ok'}
+--- [07:24:26] bench probe_het_48_mid
+[bench2] probe_het_48_mid per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 26.500463485717773, 'mean_ms': 339.31065400441486, 'status': 'ok'}
+[bench2] probe_het_48_mid bucket6: {'max_abs_diff': 0.0068359375, 'ok': True, 'med_ms': 35.32063961029053, 'mean_ms': 61.58602237701416, 'status': 'ok'}
+[bench2] probe_het_48_mid flat_cat_ar: {'max_abs_diff': 0.0068359375, 'ok': True, 'med_ms': 75.70922374725342, 'mean_ms': 101.25513871510823, 'status': 'ok'}
+--- [07:28:30] bench probe_het_48_big
+--- [07:57:53] train probe_het_6_small per_tensor_ar
+   median_ms 19.09
+--- [07:59:14] train probe_het_6_small bucket6
+   median_ms 17.9
+--- [08:00:18] train probe_het_6_small flat_cat_ar
+   median_ms 17.66
+--- [08:00:58] train probe_het_6_mid per_tensor_ar
+   median_ms 137.31
+--- [08:03:31] train probe_het_6_mid bucket6
+   median_ms 151.05
+--- [08:06:24] train probe_het_6_mid flat_cat_ar
+   median_ms 151.05
+--- [08:08:04] train probe_het_6_big per_tensor_ar
+   median_ms 130.62
+--- [08:11:25] train probe_het_6_big bucket6
+   median_ms 135.84
+--- [08:17:09] train probe_het_6_big flat_cat_ar
+   median_ms 135.99
+--- [08:19:19] train probe_het_24_small per_tensor_ar
+   median_ms 18.61
+--- [08:20:50] train probe_het_24_small bucket6
+   median_ms 19.17
+--- [08:22:21] train probe_het_24_small flat_cat_ar
+   median_ms 17.71
+--- [08:24:01] train probe_het_24_mid per_tensor_ar
+   median_ms 301.94
+--- [08:28:33] train probe_het_24_mid bucket6
+   median_ms 266.51
+--- [08:35:25] train probe_het_24_mid flat_cat_ar
+   median_ms 266.77
+--- [08:41:17] train probe_het_24_big per_tensor_ar
+   median_ms 365.83
+--- [08:51:30] train probe_het_24_big bucket6
+   NO RESULT
+--- [09:06:30] train probe_het_24_big flat_cat_ar
+   NO RESULT
+--- [09:21:32] train probe_het_48_small per_tensor_ar
+   median_ms 46.07
+--- [09:22:59] train probe_het_48_small bucket6
+   median_ms 26.26
+--- [09:24:32] train probe_het_48_small flat_cat_ar
+   median_ms 48.36
+--- [09:26:24] train probe_het_48_mid per_tensor_ar
+   median_ms 596.19
+--- [09:35:23] train probe_het_48_mid bucket6
+   median_ms 508.61
+--- [09:48:56] train probe_het_48_mid flat_cat_ar
+   NO RESULT
+=== newprobs done 10:03:57 ===

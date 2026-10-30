@@ -1,0 +1,27 @@
+{
+ "problem": "grad_norm_clip_stat",
+ "ws": 32,
+ "results": {
+  "per_tensor_ar": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 7.588744163513184,
+   "mean_ms": 341.83134237925213,
+   "status": "ok"
+  },
+  "stack_ar": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 7.597446441650391,
+   "mean_ms": 7.65380064646403,
+   "status": "ok"
+  },
+  "local_sum_then_ar": {
+   "max_abs_diff": 588571.5,
+   "ok": false,
+   "med_ms": 7.543802261352539,
+   "mean_ms": 7.42029349009196,
+   "status": "ok"
+  }
+ }
+}

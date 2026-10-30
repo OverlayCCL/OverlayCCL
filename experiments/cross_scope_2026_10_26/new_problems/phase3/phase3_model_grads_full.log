@@ -1,0 +1,43 @@
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of a 4-layer transformer (24 heterogeneous tensors)
+======================================================================
+  per_tensor_ar: 192441.9 us, 24 local ops, 0 ag, 24 ar, 0 cp
+  flat_cat_ar: 64218.2 us, 75 local ops, 0 ag, 1 ar, 0 cp
+  bucketed_ar: 64218.2 us, 75 local ops, 0 ag, 1 ar, 0 cp
+  per_layer_bucket: 64218.2 us, 84 local ops, 0 ag, 4 ar, 0 cp
+
+  Best baseline: baseline:per_layer_bucket (64218.2 us)
+
+======================================================================
+[Phase 3 / Strategy-Enumerate] DP gradient all-reduce of a 4-layer transformer (24 heterogeneous tensors)
+======================================================================
+  K=5 strategies, R=2 refinement rounds per top-2 (budget ~10 LLM calls)
+  Enumerated 5 strategies:
+    1. Per-tensor all-reduce baseline: Issues 24 separate all_reduce calls, one per gradient tensor, with no local conc...
+    2. Single flat concatenation all-reduce: Concatenates all 24 heterogeneous tensors into one flat 1-D buffer, issues a sin...
+    3. Per-layer bucketed all-reduce: Groups the 24 tensors into 4 buckets (one per transformer layer, 6 parameters ea...
+    4. Reverse-order gradient accumulation: Processes gradients in reverse order (layer 4 → layer 1) with per-layer bucketin...
+    5. Two-phase hierarchical reduce-scatter + all-gather: Splits each gradient tensor across ranks via reduce-scatter (24 RS calls produci...
+  Strategy 1 (Per-tensor all-reduce baseline): sim=192441.9 us
+  Strategy 2 (Single flat concatenation all-reduce): sim=64218.2 us
+  Strategy 3 (Per-layer bucketed all-reduce): sim=64218.2 us
+  Strategy 4 (Reverse-order gradient accumulation): sim=64218.2 us
+  Strategy 5 (Two-phase hierarchical reduce-scatter + all-gather): sim=65631.3 us
+
+  Top after enumeration:
+    Per-layer bucketed all-reduce: 64218.2 us
+    Reverse-order gradient accumulation: 64218.2 us
+    top 1 round 1: NEW BEST 64031.9 us (0.3% improvement)
+    top 1 round 2: NEW BEST 63061.0 us (1.5% improvement)
+
+  Strategy-Enumerate complete. 7 total candidates.
+  Best: refined-from-Per-layer bucketed all-reduce (sim=63061.0 us)
+
+=== Phase 3 result for model_grads_4layers (wall 78s): 5 candidates, sim ranking ===
+           1e+18  strat:refined-from-Per-layer buckete  code=no
+           1e+18  baseline:per_layer_bucket  code=no
+           1e+18  baseline:flat_cat_ar  code=no
+           1e+18  baseline:bucketed_ar  code=no
+           1e+18  baseline:per_tensor_ar  code=no
+PHASE3_B_DONE

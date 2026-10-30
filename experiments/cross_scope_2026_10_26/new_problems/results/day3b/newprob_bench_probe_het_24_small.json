@@ -1,0 +1,27 @@
+{
+ "problem": "probe_het_24_small",
+ "ws": 32,
+ "results": {
+  "per_tensor_ar": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 6.5135955810546875,
+   "mean_ms": 172.7675755818685,
+   "status": "ok"
+  },
+  "bucket6": {
+   "max_abs_diff": 0.0048828125,
+   "ok": true,
+   "med_ms": 7.659435272216797,
+   "mean_ms": 7.795866330464681,
+   "status": "ok"
+  },
+  "flat_cat_ar": {
+   "max_abs_diff": 0.0048828125,
+   "ok": true,
+   "med_ms": 7.1724653244018555,
+   "mean_ms": 7.317709922790527,
+   "status": "ok"
+  }
+ }
+}

@@ -1,0 +1,41 @@
+{
+ "hw_problem": "zero2_hetero_rs",
+ "search_problem": "zero2_hetero_rs",
+ "phase3_tag": "v11",
+ "gate_candidates": [
+  [
+   "gate_1",
+   "baseline:per_tensor_rs",
+   124099.6052
+  ],
+  [
+   "gate_2",
+   "strat:Per-tensor reduce-scatter base",
+   124099.6052
+  ],
+  [
+   "gate_3",
+   "baseline:cat_dim1_rs",
+   124427.66519999996
+  ]
+ ],
+ "measured_ms": {
+  "gate_2": 24.379253387451172,
+  "gate_3": 236.2833023071289,
+  "per_tensor_rs": 24.09076690673828,
+  "bucket_dim1_rs": 26.279687881469727,
+  "gate_1": 24.067401885986328,
+  "cat_dim1_rs": 236.26470565795898
+ },
+ "effective": {
+  "gate_2": true,
+  "gate_3": true,
+  "per_tensor_rs": true,
+  "bucket_dim1_rs": true,
+  "gate_1": true,
+  "cat_dim1_rs": true
+ },
+ "gate_choice": "gate_1",
+ "best_overall": "gate_1",
+ "independent_pieces": false
+}

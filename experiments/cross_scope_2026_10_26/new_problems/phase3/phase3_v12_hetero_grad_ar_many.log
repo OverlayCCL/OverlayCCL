@@ -1,0 +1,44 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of 48 heterogeneous 2-D gradients (flat concat pathology instance)
+======================================================================
+  per_tensor_ar: 682524.2 us, 48 local ops, 0 ag, 48 ar, 0 cp
+  flat_cat_ar: 1042771.0 us, 147 local ops, 0 ag, 1 ar, 0 cp
+  bucketed_ar: 584563.9 us, 162 local ops, 0 ag, 6 ar, 0 cp
+  bucketed_ar_4: 594113.6 us, 180 local ops, 0 ag, 12 ar, 0 cp
+  bucketed_ar_16: 577203.3 us, 153 local ops, 0 ag, 3 ar, 0 cp
+
+  Best baseline: baseline:bucketed_ar_16 (577203.3 us)
+
+======================================================================
+[Phase 3 / Strategy-Enumerate] DP gradient all-reduce of 48 heterogeneous 2-D gradients (flat concat pathology instance)
+======================================================================
+  K=5 strategies, R=4 refinement rounds per top-2 (budget ~14 LLM calls)
+  Enumerated 5 strategies:
+    1. Single flat concatenation all-reduce: Concatenate all 48 tensors into one flat 1-D buffer, dispatch one all_reduce, sl...
+    2. Fixed in-order bucketing (6-8 buckets): Partition the 48 tensors into 6-8 fixed-size buckets in their original order (e....
+    3. Two-tier hierarchical bucketing: Group tensors into coarse buckets (e.g., 4 groups of 12), then within each coars...
+    4. Per-tensor with async launch: Issue 48 separate all_reduce calls (one per tensor) relying on XLA's ability to ...
+    5. Reduce-scatter then all-gather decomposition: Concatenate all 48 tensors, split payload into 64 chunks (one per rank), reduce-...
+  Strategy 1 (Single flat concatenation all-reduce): sim=1042771.0 us
+  Strategy 2 (Fixed in-order bucketing (6-8 buckets)): sim=584563.9 us
+  Strategy 3 (Two-tier hierarchical bucketing): sim=594113.6 us
+  Strategy 4 (Per-tensor with async launch): sim=682524.2 us
+  Strategy 5 (Reduce-scatter then all-gather decomposition): sim=1042836.3 us
+
+  Top after enumeration:
+    Fixed in-order bucketing (6-8 buckets): 584563.9 us
+    Two-tier hierarchical bucketing: 594113.6 us
+    top 1 round 3: NEW BEST 583386.0 us (0.2% improvement)
+
+  Strategy-Enumerate complete. 7 total candidates.
+  Best: refined-from-Fixed in-order bucketing (6-8 buckets) (sim=583386.0 us)
+
+=== Phase 3 result for hetero_grad_ar_many (wall 132s): 6 candidates, sim ranking ===
+           1e+18  baseline:bucketed_ar_16  code=no
+           1e+18  strat:refined-from-Fixed in-order bu  code=no
+           1e+18  baseline:bucketed_ar  code=no
+           1e+18  baseline:bucketed_ar_4  code=no
+           1e+18  baseline:per_tensor_ar  code=no
+           1e+18  baseline:flat_cat_ar  code=no

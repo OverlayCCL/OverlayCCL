@@ -1,0 +1,46 @@
+{
+ "hw_problem": "probe_het_48_mid",
+ "search_problem": "probe_het_48_mid",
+ "phase3_tag": "v12",
+ "gate_candidates": [
+  [
+   "gate_1",
+   "strat:refined-from-Two-phase size-st",
+   936503.4198669923
+  ],
+  [
+   "gate_2",
+   "baseline:bucketed_ar_16",
+   938505.0581097979
+  ],
+  [
+   "gate_3",
+   "baseline:bucketed_ar",
+   945245.7254136351
+  ],
+  [
+   "gate_4",
+   "baseline:bucketed_ar_4",
+   960731.7123006359
+  ]
+ ],
+ "measured_ms": {
+  "gate_1": 1173.6819744110107,
+  "gate_4": 492.82026290893555,
+  "per_tensor_ar": 596.3668823242188,
+  "bucket6": 507.22336769104004,
+  "gate_2": 543.2758331298828,
+  "gate_3": 587.8899097442627
+ },
+ "effective": {
+  "gate_1": true,
+  "gate_4": true,
+  "per_tensor_ar": true,
+  "bucket6": true,
+  "gate_2": true,
+  "gate_3": true
+ },
+ "gate_choice": "gate_4",
+ "best_overall": "gate_4",
+ "independent_pieces": false
+}

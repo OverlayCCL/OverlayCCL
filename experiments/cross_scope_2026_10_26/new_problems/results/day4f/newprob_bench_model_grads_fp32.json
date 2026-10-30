@@ -1,0 +1,27 @@
+{
+ "problem": "model_grads_fp32",
+ "ws": 32,
+ "results": {
+  "per_tensor_ar": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 37.070512771606445,
+   "mean_ms": 37.23325729370117,
+   "status": "ok"
+  },
+  "per_layer_bucket": {
+   "max_abs_diff": 1.4901161193847656e-07,
+   "ok": true,
+   "med_ms": 48.50804805755615,
+   "mean_ms": 69.33709780375163,
+   "status": "ok"
+  },
+  "flat_cat_ar": {
+   "max_abs_diff": 1.1920928955078125e-07,
+   "ok": true,
+   "med_ms": 48.5149621963501,
+   "mean_ms": 84.35182571411133,
+   "status": "ok"
+  }
+ }
+}

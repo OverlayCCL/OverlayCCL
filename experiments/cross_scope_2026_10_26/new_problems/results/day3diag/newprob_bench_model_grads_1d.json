@@ -1,0 +1,20 @@
+{
+ "problem": "model_grads_1d",
+ "ws": 32,
+ "results": {
+  "per_tensor_ar": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 24.9941349029541,
+   "mean_ms": 354.9720764160156,
+   "status": "ok"
+  },
+  "per_layer_bucket": {
+   "max_abs_diff": 0.0068359375,
+   "ok": true,
+   "med_ms": 29.211878776550293,
+   "mean_ms": 72.08542029062907,
+   "status": "ok"
+  }
+ }
+}

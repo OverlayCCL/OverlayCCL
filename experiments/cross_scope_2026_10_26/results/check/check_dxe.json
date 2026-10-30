@@ -1,0 +1,20 @@
+{
+ "hier_ar_stacked": {
+  "max_abs_diff": 0.0,
+  "ref_scale": 10.4375,
+  "ok": true,
+  "status": "ok"
+ },
+ "ag_chunked_4": {
+  "max_abs_diff": 0.0625,
+  "ref_scale": 10.4375,
+  "ok": true,
+  "status": "ok"
+ },
+ "paper": {
+  "max_abs_diff": 0.0,
+  "ref_scale": 10.4375,
+  "ok": true,
+  "status": "ok"
+ }
+}

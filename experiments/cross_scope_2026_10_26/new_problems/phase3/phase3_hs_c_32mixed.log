@@ -1,0 +1,40 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of 32 mixed-size tensors (256K-2M elements on hardware)
+======================================================================
+  per_tensor_ar: 401274.0 us, 32 local ops, 0 ag, 32 ar, 0 cp
+  flat_cat_ar: 124575.1 us, 99 local ops, 0 ag, 1 ar, 0 cp
+  bucketed_ar: 124575.1 us, 99 local ops, 0 ag, 1 ar, 0 cp
+
+  Best baseline: baseline:flat_cat_ar (124575.1 us)
+
+======================================================================
+[Phase 3 / Strategy-Enumerate] DP gradient all-reduce of 32 mixed-size tensors (256K-2M elements on hardware)
+======================================================================
+  K=5 strategies, R=2 refinement rounds per top-2 (budget ~10 LLM calls)
+  Enumerated 5 strategies:
+    1. Bucketed all-reduce with padding: Pad each bucket's tensors to a common multiple so concatenation produces equal-s...
+    2. Size-sorted bucketed all-reduce: Sort tensors by size, then bucket greedily to balance total elements per bucket;...
+    3. Hierarchical two-stage all-reduce: Split tensors into "small" (<512K) and "large" (≥512K) groups; all-reduce each g...
+    4. Overlapped pipelined per-tensor all-reduce: Issue all 32 per-tensor all-reduce calls in a single XLA graph region with expli...
+    5. Reduce-scatter plus all-gather chain: Concatenate all 32 tensors into one flat buffer, perform reduce-scatter (each ra...
+  Strategy 1 (Bucketed all-reduce with padding): sim=338200.4 us
+  Strategy 2 (Size-sorted bucketed all-reduce): sim=293297.7 us
+  Strategy 3 (Hierarchical two-stage all-reduce): sim=124575.1 us
+  Strategy 4 (Overlapped pipelined per-tensor all-reduce): sim=401274.0 us
+  Strategy 5 (Reduce-scatter plus all-gather chain): sim=124575.1 us
+
+  Top after enumeration:
+    Hierarchical two-stage all-reduce: 124575.1 us
+    Reduce-scatter plus all-gather chain: 124575.1 us
+    top 1 round 2: NEW BEST 124101.8 us (0.4% improvement)
+
+  Strategy-Enumerate complete. 7 total candidates.
+  Best: refined-from-Hierarchical two-stage all-reduce (sim=124101.8 us)
+
+=== Phase 3 result for hs_c_32mixed (wall 89s): 4 candidates, sim ranking ===
+           1e+18  strat:refined-from-Hierarchical two-  code=no
+           1e+18  baseline:flat_cat_ar  code=no
+           1e+18  baseline:bucketed_ar  code=no
+           1e+18  baseline:per_tensor_ar  code=no

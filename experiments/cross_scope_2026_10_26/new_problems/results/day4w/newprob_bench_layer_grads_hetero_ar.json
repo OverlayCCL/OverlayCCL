@@ -1,0 +1,69 @@
+{
+ "problem": "layer_grads_hetero_ar",
+ "ws": 32,
+ "results": {
+  "per_tensor_ar": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 9.697198867797852,
+   "mean_ms": 503.3666451772054,
+   "status": "ok"
+  },
+  "flat_cat_ar": {
+   "max_abs_diff": 0.0068359375,
+   "ok": true,
+   "med_ms": 10.425329208374023,
+   "mean_ms": 12.206363677978516,
+   "status": "ok"
+  },
+  "bucket_32mb": {
+   "max_abs_diff": 0.005859375,
+   "ok": true,
+   "med_ms": 11.138081550598145,
+   "mean_ms": 17.286451657613117,
+   "status": "ok"
+  },
+  "equal_group_stacks": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 11.323928833007812,
+   "mean_ms": 22.21236228942871,
+   "status": "ok"
+  },
+  "flat_cat_clone": {
+   "max_abs_diff": 0.0068359375,
+   "ok": true,
+   "med_ms": 10.46907901763916,
+   "mean_ms": 17.95984109242757,
+   "status": "ok"
+  },
+  "flat_cat_2d": {
+   "max_abs_diff": 0.0068359375,
+   "ok": true,
+   "med_ms": 11.032581329345703,
+   "mean_ms": 16.60909652709961,
+   "status": "ok"
+  },
+  "per_tensor_marked": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 24.63698387145996,
+   "mean_ms": 33.2747220993042,
+   "status": "ok"
+  },
+  "p3_pick": {
+   "max_abs_diff": 0.0068359375,
+   "ok": true,
+   "med_ms": 10.350823402404785,
+   "mean_ms": 15.842898686726889,
+   "status": "ok"
+  },
+  "p3_pick3": {
+   "max_abs_diff": 0.0068359375,
+   "ok": true,
+   "med_ms": 10.476350784301758,
+   "mean_ms": 10.601981480916342,
+   "status": "ok"
+  }
+ }
+}

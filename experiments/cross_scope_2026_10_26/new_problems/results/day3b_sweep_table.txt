@@ -1,0 +1,33 @@
+problem                candidate                 bench32  b32 x  bench64  b64 x  train64  t64 x  note
+probe_het_24_big       per_tensor_ar               33.05   1.00        —      —   365.83   1.00  n=1/1 
+probe_het_24_big       bucket6                    133.60   0.25        —      —        —      —  n=1/0 
+probe_het_24_big       flat_cat_ar                155.14   0.21        —      —        —      —  n=1/0 
+
+probe_het_24_mid       per_tensor_ar               15.41   1.00        —      —   301.94   1.00  n=1/1 
+probe_het_24_mid       bucket6                     19.23   0.80        —      —   266.51   1.13  n=1/1 INVERSION(b32)
+probe_het_24_mid       flat_cat_ar                 16.67   0.92        —      —   266.77   1.13  n=1/1 
+
+probe_het_24_small     per_tensor_ar                6.51   1.00        —      —    18.61   1.00  n=1/1 
+probe_het_24_small     bucket6                      7.66   0.85        —      —    19.17   0.97  n=1/1 
+probe_het_24_small     flat_cat_ar                  7.17   0.91        —      —    17.71   1.05  n=1/1 
+
+probe_het_48_mid       per_tensor_ar               26.50   1.00        —      —   596.19   1.00  n=1/1 
+probe_het_48_mid       bucket6                     35.32   0.75        —      —   508.61   1.17  n=1/1 INVERSION(b32)
+probe_het_48_mid       flat_cat_ar                 75.71   0.35        —      —        —      —  n=1/0 
+
+probe_het_48_small     per_tensor_ar                8.02   1.00        —      —    46.07   1.00  n=1/1 
+probe_het_48_small     bucket6                     10.45   0.77        —      —    26.26   1.75  n=1/1 INVERSION(b32)
+probe_het_48_small     flat_cat_ar                 10.45   0.77        —      —    48.36   0.95  n=1/1 
+
+probe_het_6_big        per_tensor_ar               14.51   1.00        —      —   130.62   1.00  n=1/1 
+probe_het_6_big        bucket6                     80.30   0.18        —      —   135.84   0.96  n=1/1 
+probe_het_6_big        flat_cat_ar                 80.26   0.18        —      —   135.99   0.96  n=1/1 
+
+probe_het_6_mid        per_tensor_ar                8.65   1.00        —      —   137.31   1.00  n=1/1 
+probe_het_6_mid        bucket6                      9.37   0.92        —      —   151.05   0.91  n=1/1 
+probe_het_6_mid        flat_cat_ar                  9.53   0.91        —      —   151.05   0.91  n=1/1 
+
+probe_het_6_small      per_tensor_ar                5.67   1.00        —      —    19.09   1.00  n=1/1 
+probe_het_6_small      bucket6                      5.85   0.97        —      —    17.90   1.07  n=1/1 
+probe_het_6_small      flat_cat_ar                  5.98   0.95        —      —    17.66   1.08  n=1/1 
+

@@ -1,0 +1,7 @@
+--- [09:15:17] train layer_grads_mixed_dtype per_tensor_ar
+   median_ms 58.77 effective True
+--- [09:16:46] train layer_grads_mixed_dtype gate_1
+   median_ms 37.42 effective True
+--- [09:18:00] train layer_grads_mixed_dtype nosim_1
+   median_ms 41.0 effective True
+=== newprobs done 09:19:47 ===

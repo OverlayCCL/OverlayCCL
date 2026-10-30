@@ -1,0 +1,44 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of 32 mixed-size tensors (256K-2M elements on hardware)
+======================================================================
+  per_tensor_ar: 122486.8 us, 32 local ops, 0 ag, 32 ar, 0 cp
+  flat_cat_ar: 124575.1 us, 99 local ops, 0 ag, 1 ar, 0 cp
+  bucketed_ar: 124575.1 us, 108 local ops, 0 ag, 4 ar, 0 cp
+  bucketed_ar_4: 124575.1 us, 120 local ops, 0 ag, 8 ar, 0 cp
+  bucketed_ar_16: 124575.1 us, 102 local ops, 0 ag, 2 ar, 0 cp
+
+  Best baseline: baseline:per_tensor_ar (122486.8 us)
+
+======================================================================
+[Phase 3 / Strategy-Enumerate] DP gradient all-reduce of 32 mixed-size tensors (256K-2M elements on hardware)
+======================================================================
+  K=5 strategies, R=2 refinement rounds per top-2 (budget ~10 LLM calls)
+  Enumerated 5 strategies:
+    1. Size-sorted equal-sized chunk buckets: Sort tensors by size, divide into 4-8 buckets where each bucket contains tensors...
+    2. Hierarchical two-level bucketing scheme: First concatenate smallest tensors (bottom quartile by size) into one all-reduce...
+    3. Reduce-scatter then all-gather decomposition: Concatenate all 32 tensors in order, perform reduce-scatter across world_size to...
+    4. Pipelined small-large interleaved buckets: Create buckets alternating between small tensors (3-4 per bucket) and large tens...
+    5. Fixed-size in-order buckets with remainder: Divide 32 tensors into exactly 8 buckets of 4 consecutive tensors each (or 4 buc...
+  Strategy 1 (Size-sorted equal-sized chunk buckets): sim=124575.1 us
+  Strategy 2 (Hierarchical two-level bucketing scheme): sim=124575.1 us
+  Strategy 3 (Reduce-scatter then all-gather decomposition): sim=124575.1 us
+  Strategy 4 (Pipelined small-large interleaved buckets): sim=126877.1 us
+  Strategy 5 (Fixed-size in-order buckets with remainder): sim=124575.1 us
+
+  Top after enumeration:
+    Reduce-scatter then all-gather decomposition: 124575.1 us
+    Size-sorted equal-sized chunk buckets: 124575.1 us
+    top 1 round 2: NEW BEST 123789.8 us (0.6% improvement)
+
+  Strategy-Enumerate complete. 7 total candidates.
+  Best: refined-from-Reduce-scatter then all-gather decomposition (sim=123789.8 us)
+
+=== Phase 3 result for hs_c_32mixed (wall 105s): 6 candidates, sim ranking ===
+           1e+18  baseline:per_tensor_ar  code=no
+           1e+18  strat:refined-from-Reduce-scatter th  code=no
+           1e+18  baseline:flat_cat_ar  code=no
+           1e+18  baseline:bucketed_ar  code=no
+           1e+18  baseline:bucketed_ar_4  code=no
+           1e+18  baseline:bucketed_ar_16  code=no

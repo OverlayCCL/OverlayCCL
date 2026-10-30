@@ -1,0 +1,11 @@
+--- [07:47:21] train llama10b_dp_grads per_tensor_ar
+   median_ms 331.89 effective True
+--- [07:54:05] train llama10b_dp_grads bucket_32mb
+   median_ms 327.54 effective True
+--- [07:58:57] train llama10b_dp_grads per_layer_bucket
+   median_ms 343.97 effective True
+--- [08:04:02] train llama10b_dp_grads bucketed_ar_16
+   median_ms 322.09 effective True
+--- [08:09:08] train llama10b_dp_grads bucket_128mb
+   median_ms 349.69 effective True
+=== newprobs done 08:14:13 ===

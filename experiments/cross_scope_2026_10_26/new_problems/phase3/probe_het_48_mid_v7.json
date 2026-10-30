@@ -1,0 +1,30 @@
+[
+ {
+  "raw": [
+   "strat:refined-from-Size-binned bucke",
+   "{'template': 'strategy_enumerate_final', 'cost_score': 9489.890823170845, 'sim_time_us': 948989.0823170845, 'local_ops': 163, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 8, '_params': {'evolved_code': 'def evolved_probe_het_48_mid(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"Optimized size-binned all-reduce with minimal local ops.\"\"\"\\n    \\n    # Pre-flatten all gradients once (unavoidable, but do it upfront)\\n    flat_grads = [g.reshape(-1) for g in grads]\\n    sizes = [fg.numel() for fg in flat_grads]\\n    \\n    # Sort indices by size (metadata-only operation)\\n    sorted_indices = sorted(range(len(grads)), key=lambda i: sizes[i])\\n    \\n    # Determine number of bins\\n    num_bins = min(8, max(4, len(grads) // 6))\\n    tensors_per_bin = len(grads) // num_bins\\n    remainder = len(grads) % num_bins\\n    \\n    # Allocate result list\\n    results = [None] * len(grads)\\n    \\n    # Process bins\\n    idx = 0\\n    for bin_idx in range(num_bins):\\n        bin_size = tensors_per_bin + (1 if bin_idx < remainder else 0)\\n        if bin_size == 0:\\n            continue\\n        \\n        # Get indices for this bin (metadata-only)\\n        bin_indices = sorted_indices[idx:idx + bin_size]\\n        idx += bin_size\\n        \\n        # Concatenate only the tensors in this bin\\n        bin_tensors = [flat_grads[i] for i in bin_indices]\\n        \\n        # Single concatenation per bin\\n        concatenated = torch.cat(bin_tensors)\\n        \\n        # Single all-reduce per bin\\n        reduced = xm.all_reduce(xm.REDUCE_SUM, concatenated)\\n        \\n        # Split using narrow (metadata-only view operation)\\n        offset = 0\\n        for i in bin_indices:\\n            size = sizes[i]\\n            # Use narrow for zero-copy slicing, then reshape to original shape\\n            results[i] = reduced.narrow(0, offset, size).view(grads[i].shape)\\n            offset += size\\n    \\n    return results'}}"
+  ],
+  "name": "strat:refined-from-Size-binned bucke"
+ },
+ {
+  "raw": [
+   "baseline:per_tensor_ar",
+   "{'template': 'per_tensor_ar', 'cost_score': 10941.12216439931, 'sim_time_us': 1094112.216439931, 'local_ops': 48, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 48, '_params': {'builtin_code': 'def evolved_probe_het_48_mid(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"developer baseline: one all_reduce per gradient tensor (DDP hook per parameter)\"\"\"\\n    return [xm.all_reduce(xm.REDUCE_SUM, t) for t in grads]\\n'}}"
+  ],
+  "name": "baseline:per_tensor_ar"
+ },
+ {
+  "raw": [
+   "baseline:flat_cat_ar",
+   "{'template': 'flat_cat_ar', 'cost_score': 16882.842452000004, 'sim_time_us': 1688284.2452000005, 'local_ops': 147, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'builtin_code': 'def evolved_probe_het_48_mid(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    flat = torch.cat([t.reshape(-1) for t in grads]); r = xm.all_reduce(xm.REDUCE_SUM, flat)\\n    outs = []; off = 0\\n    for t in grads: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:flat_cat_ar"
+ },
+ {
+  "raw": [
+   "baseline:bucketed_ar",
+   "{'template': 'bucketed_ar', 'cost_score': 16882.842452000004, 'sim_time_us': 1688284.2452000005, 'local_ops': 147, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'builtin_code': 'def evolved_probe_het_48_mid(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"fixed-size buckets in order (exact bytes, a few dispatches)\"\"\"\\n    outs = []; chunk = []; acc = 0; lim = 4 * 1024 * 1024\\n    def flush(chunk):\\n        flat = torch.cat([t.reshape(-1) for t in chunk]); r = xm.all_reduce(xm.REDUCE_SUM, flat); off = 0\\n        for t in chunk: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    for t in grads:\\n        chunk.append(t); acc += t.numel()\\n        if acc >= lim: flush(chunk); chunk = []; acc = 0\\n    if chunk: flush(chunk)\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:bucketed_ar"
+ }
+]

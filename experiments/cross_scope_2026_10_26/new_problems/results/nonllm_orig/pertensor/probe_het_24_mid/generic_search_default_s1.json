@@ -1,0 +1,57 @@
+{
+ "probe_het_24_mid": {
+  "random": {
+   "best_sim": 465690.6452000001,
+   "code": "def evolved_probe_het_24_mid(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\n    \"\"\"developer baseline: one all_reduce per gradient tensor (DDP hook per parameter)\"\"\"\n    return [xm.all_reduce(xm.REDUCE_SUM, t) for t in grads]",
+   "evals": 400,
+   "structure": {
+    "colls": {
+     "all_reduce": 1
+    },
+    "loops": 0
+   }
+  },
+  "ga": {
+   "best_sim": 465690.6452000001,
+   "code": "def evolved_probe_het_24_mid(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\n    \"\"\"developer baseline: one all_reduce per gradient tensor (DDP hook per parameter)\"\"\"\n    return [xm.all_reduce(xm.REDUCE_SUM, t) for t in grads]",
+   "evals": 400,
+   "structure": {
+    "colls": {
+     "all_reduce": 1
+    },
+    "loops": 0
+   }
+  },
+  "beam": {
+   "best_sim": 465690.6452000001,
+   "code": "def evolved_probe_het_24_mid(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\n    \"\"\"developer baseline: one all_reduce per gradient tensor (DDP hook per parameter)\"\"\"\n    return [xm.all_reduce(xm.REDUCE_SUM, t) for t in grads]",
+   "evals": 66,
+   "structure": {
+    "colls": {
+     "all_reduce": 1
+    },
+    "loops": 0
+   }
+  },
+  "rules": {
+   "best_sim": 465690.6452000001,
+   "code": "def evolved_probe_het_24_mid(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\n    \"\"\"developer baseline: one all_reduce per gradient tensor (DDP hook per parameter)\"\"\"\n    return [xm.all_reduce(xm.REDUCE_SUM, t) for t in grads]",
+   "passes": [],
+   "evals": 41,
+   "structure": {
+    "colls": {
+     "all_reduce": 1
+    },
+    "loops": 0
+   }
+  },
+  "start_sim": 465690.6452000001,
+  "start_structure": {
+   "colls": {
+    "all_reduce": 1
+   },
+   "loops": 0
+  },
+  "secs": 8.5
+ }
+}

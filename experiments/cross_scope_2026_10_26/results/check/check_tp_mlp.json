@@ -1,0 +1,32 @@
+{
+ "rs_ag_bundled": {
+  "max_abs_diff": 0.0048828125,
+  "ref_scale": 0.294921875,
+  "ok": true,
+  "status": "ok"
+ },
+ "hier_ar_bundled": {
+  "max_abs_diff": 0.005859375,
+  "ref_scale": 0.294921875,
+  "ok": true,
+  "status": "ok"
+ },
+ "chunked_ar_bundled_4": {
+  "max_abs_diff": 0.0,
+  "ref_scale": 0.294921875,
+  "ok": true,
+  "status": "ok"
+ },
+ "paper": {
+  "max_abs_diff": 0.005859375,
+  "ref_scale": 0.294921875,
+  "ok": true,
+  "status": "ok"
+ },
+ "ar_per_mb": {
+  "max_abs_diff": 0.0,
+  "ref_scale": 0.294921875,
+  "ok": true,
+  "status": "ok"
+ }
+}

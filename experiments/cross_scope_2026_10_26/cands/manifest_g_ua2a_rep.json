@@ -1,0 +1,25 @@
+[
+ {
+  "problem": "uniform_a2a",
+  "cand": "rs_masked",
+  "kind": "code",
+  "code": "/home/ubuntu/g2/cands_g/uniform_a2a__rs_masked.py"
+ },
+ {
+  "problem": "uniform_a2a",
+  "cand": "chunked_ag_2",
+  "kind": "code",
+  "code": "/home/ubuntu/g2/cands_g/uniform_a2a__chunked_ag_2.py"
+ },
+ {
+  "problem": "uniform_a2a",
+  "cand": "paper",
+  "kind": "code",
+  "code": "/home/ubuntu/g2/cands_g/uniform_a2a__paper.py"
+ },
+ {
+  "problem": "uniform_a2a",
+  "cand": "harness_baseline",
+  "kind": "baseline"
+ }
+]

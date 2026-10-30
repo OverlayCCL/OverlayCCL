@@ -1,0 +1,34 @@
+{
+ "problem": "pp_api_variants",
+ "ws": 32,
+ "results": {
+  "per_mb_masked_ar": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 6.259918212890625,
+   "mean_ms": 6.969141960144043,
+   "status": "ok"
+  },
+  "stacked_masked_ar": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 6.066083908081055,
+   "mean_ms": 6.270813941955566,
+   "status": "ok"
+  },
+  "permute_pairs": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 2.0619630813598633,
+   "mean_ms": 2.043485641479492,
+   "status": "ok"
+  },
+  "permute_stacked": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 2.128005027770996,
+   "mean_ms": 2.1225690841674805,
+   "status": "ok"
+  }
+ }
+}

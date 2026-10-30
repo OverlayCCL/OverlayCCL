@@ -1,0 +1,37 @@
+[
+ {
+  "raw": [
+   "baseline:per_layer_bucket",
+   "{'template': 'per_layer_bucket', 'cost_score': 642.1816520000001, 'sim_time_us': 64218.16520000001, 'local_ops': 84, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 4, '_params': {'builtin_code': 'def evolved_model_grads_4layers(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"one all_reduce per layer (6 tensors each), exact bytes\"\"\"\\n    outs = []\\n    for b in range(0, len(grads), 6):\\n        chunk = grads[b:b + 6]; flat = torch.cat([t.reshape(-1) for t in chunk]); r = xm.all_reduce(xm.REDUCE_SUM, flat); off = 0\\n        for t in chunk: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:per_layer_bucket"
+ },
+ {
+  "raw": [
+   "strat:Per-layer bucketed all-reduce",
+   "{'template': 'strategy_enumerate_final', 'cost_score': 642.1816520000001, 'sim_time_us': 64218.16520000001, 'local_ops': 84, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 4, '_params': {'evolved_code': 'def evolved_model_grads_4layers(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"Per-layer bucketed all-reduce: 4 buckets of 6 tensors each (one per transformer layer)\"\"\"\\n    outs = []\\n    # Process 4 layers, each with 6 parameter tensors\\n    for layer_idx in range(4):\\n        # Extract the 6 tensors for this layer\\n        start_idx = layer_idx * 6\\n        end_idx = start_idx + 6\\n        chunk = grads[start_idx:end_idx]\\n        \\n        # Concatenate all tensors in this layer bucket\\n        flat = torch.cat([t.reshape(-1) for t in chunk])\\n        \\n        # Single all-reduce for the entire layer\\n        reduced = xm.all_reduce(xm.REDUCE_SUM, flat)\\n        \\n        # Unpack the reduced tensor back into original shapes\\n        offset = 0\\n        for t in chunk:\\n            n = t.numel()\\n            outs.append(reduced[offset:offset + n].view(t.shape))\\n            offset += n\\n    \\n    return outs'}}"
+  ],
+  "name": "strat:Per-layer bucketed all-reduce"
+ },
+ {
+  "raw": [
+   "baseline:flat_cat_ar",
+   "{'template': 'flat_cat_ar', 'cost_score': 642.1816520000004, 'sim_time_us': 64218.16520000004, 'local_ops': 75, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'builtin_code': 'def evolved_model_grads_4layers(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    flat = torch.cat([t.reshape(-1) for t in grads]); r = xm.all_reduce(xm.REDUCE_SUM, flat)\\n    outs = []; off = 0\\n    for t in grads: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:flat_cat_ar"
+ },
+ {
+  "raw": [
+   "baseline:bucketed_ar",
+   "{'template': 'bucketed_ar', 'cost_score': 642.1816520000004, 'sim_time_us': 64218.16520000004, 'local_ops': 75, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'builtin_code': 'def evolved_model_grads_4layers(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"fixed-size buckets in order (exact bytes, a few dispatches)\"\"\"\\n    outs = []; chunk = []; acc = 0; lim = 4 * 1024 * 1024\\n    def flush(chunk):\\n        flat = torch.cat([t.reshape(-1) for t in chunk]); r = xm.all_reduce(xm.REDUCE_SUM, flat); off = 0\\n        for t in chunk: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    for t in grads:\\n        chunk.append(t); acc += t.numel()\\n        if acc >= lim: flush(chunk); chunk = []; acc = 0\\n    if chunk: flush(chunk)\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:bucketed_ar"
+ },
+ {
+  "raw": [
+   "baseline:per_tensor_ar",
+   "{'template': 'per_tensor_ar', 'cost_score': 673.6999641003815, 'sim_time_us': 67369.99641003815, 'local_ops': 24, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 24, '_params': {'builtin_code': 'def evolved_model_grads_4layers(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"developer baseline: one all_reduce per gradient tensor (DDP hook per parameter)\"\"\"\\n    return [xm.all_reduce(xm.REDUCE_SUM, t) for t in grads]\\n'}}"
+  ],
+  "name": "baseline:per_tensor_ar"
+ }
+]

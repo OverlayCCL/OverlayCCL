@@ -1,0 +1,45 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of one layer with fp32 norm parameters (mixed dtypes)
+======================================================================
+  per_tensor_ar: 10458.3 us, 6 local ops, 0 ag, 6 ar, 0 cp
+  cast_flat_fp32: 17108.4 us, 29 local ops, 0 ag, 1 ar, 0 cp
+  cast_flat_bf16: 9280.8 us, 25 local ops, 0 ag, 1 ar, 0 cp
+  two_dtype_groups: 12604.4 us, 23 local ops, 0 ag, 2 ar, 0 cp
+
+  Best baseline: baseline:cast_flat_bf16 (9280.8 us)
+
+======================================================================
+[Phase 3 / Strategy-Enumerate] DP gradient all-reduce of one layer with fp32 norm parameters (mixed dtypes)
+======================================================================
+  K=5 strategies, R=2 refinement rounds per top-2 (budget ~10 LLM calls)
+  Enumerated 5 strategies:
+    1. Per-dtype flat bundles: Two all-reduce calls: one flattened bf16 tensor from the first 4 gradients, one ...
+    2. Interleaved multi-bucket dtype-aware: Split each dtype group into 2-3 in-order buckets (e.g., bf16 tensors → buckets o...
+    3. Reduce-scatter then all-gather decomposition: One reduce-scatter on a single flattened buffer (mixed or uniform dtype), follow...
+    4. Hierarchical intra-node then inter-node: If num_nodes > 1, perform intra-node all-reduce (world_size = cores_per_device *...
+    5. Single unified fp32 flat bundle: Cast all 6 tensors to fp32, flatten and concatenate in original order, one all-r...
+  Strategy 1 (Per-dtype flat bundles): sim=12604.4 us
+  Strategy 2 (Interleaved multi-bucket dtype-aware): sim=13371.7 us
+  Strategy 3 (Reduce-scatter then all-gather decomposition) INCORRECT: CRASH in collect pass 0: world=4 pattern=uniform rank=0: AttributeError: 'MockTorch' object has no a
+  Strategy 4 (Hierarchical intra-node then inter-node) INCORRECT: CRASH in collect pass 0: world=4 pattern=uniform rank=0: AttributeError: 'MockTorch' object has no a
+  Strategy 5 (Single unified fp32 flat bundle): sim=17108.4 us
+
+  Top after enumeration:
+    Per-dtype flat bundles: 12604.4 us
+    Interleaved multi-bucket dtype-aware: 13371.7 us
+    top 1 round 1: NEW BEST 12536.4 us (0.5% improvement)
+    top 1 round 2: NEW BEST 12346.9 us (1.5% improvement)
+    top 2 round 1: NEW BEST 12604.4 us (5.7% improvement)
+    top 2 round 2: NEW BEST 12536.4 us (0.5% improvement)
+
+  Strategy-Enumerate complete. 5 total candidates.
+  Best: refined-from-Per-dtype flat bundles (sim=12346.9 us)
+
+=== Phase 3 result for layer_grads_mixed_dtype (wall 109s): 5 candidates, sim ranking ===
+           1e+18  baseline:cast_flat_bf16  code=no
+           1e+18  baseline:per_tensor_ar  code=no
+           1e+18  strat:refined-from-Per-dtype flat bu  code=no
+           1e+18  baseline:two_dtype_groups  code=no
+           1e+18  baseline:cast_flat_fp32  code=no

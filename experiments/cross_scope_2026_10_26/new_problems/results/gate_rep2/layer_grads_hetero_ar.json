@@ -1,0 +1,41 @@
+{
+ "hw_problem": "layer_grads_hetero_ar",
+ "search_problem": "layer_grads_hetero_ar",
+ "phase3_tag": "v11",
+ "gate_candidates": [
+  [
+   "gate_1",
+   "baseline:flat_cat_ar",
+   16957.7252
+  ],
+  [
+   "gate_2",
+   "baseline:bucketed_ar",
+   16957.7252
+  ],
+  [
+   "gate_3",
+   "strat:Single flat concatenation all-",
+   16957.7252
+  ]
+ ],
+ "measured_ms": {
+  "flat_cat_ar": 36.5605354309082,
+  "gate_3": 36.623239517211914,
+  "gate_2": 36.771535873413086,
+  "gate_1": 36.6513729095459,
+  "bucket_32mb": 43.930768966674805,
+  "per_tensor_ar": 61.09738349914551
+ },
+ "effective": {
+  "flat_cat_ar": true,
+  "gate_3": true,
+  "gate_2": true,
+  "gate_1": true,
+  "bucket_32mb": true,
+  "per_tensor_ar": true
+ },
+ "gate_choice": "gate_3",
+ "best_overall": "flat_cat_ar",
+ "independent_pieces": false
+}

@@ -1,0 +1,91 @@
+--- [16:37:09] bench catk_8_small
+[bench2] catk_8_small per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 5.955219268798828, 'mean_ms': 171.9147523244222, 'status': 'ok'}
+[bench2] catk_8_small flat_cat_ar: {'max_abs_diff': 0.0048828125, 'ok': True, 'med_ms': 6.168365478515625, 'mean_ms': 6.307498613993327, 'status': 'ok'}
+[bench2] catk_8_small bucket8: {'max_abs_diff': 0.0048828125, 'ok': True, 'med_ms': 6.1141252517700195, 'mean_ms': 6.628712018330892, 'status': 'ok'}
+--- [16:39:12] bench catk_16_small
+[bench2] catk_16_small per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 6.113290786743164, 'mean_ms': 172.4377155303955, 'status': 'ok'}
+[bench2] catk_16_small flat_cat_ar: {'max_abs_diff': 0.0048828125, 'ok': True, 'med_ms': 6.912708282470703, 'mean_ms': 7.635458310445149, 'status': 'ok'}
+[bench2] catk_16_small bucket8: {'max_abs_diff': 0.0048828125, 'ok': True, 'med_ms': 6.78706169128418, 'mean_ms': 7.524657249450684, 'status': 'ok'}
+--- [16:40:24] bench catk_32_small
+[bench2] catk_32_small per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 7.120728492736816, 'mean_ms': 7.373237609863281, 'status': 'ok'}
+[bench2] catk_32_small flat_cat_ar: {'max_abs_diff': 0.0048828125, 'ok': True, 'med_ms': 7.817387580871582, 'mean_ms': 8.082874615987143, 'status': 'ok'}
+[bench2] catk_32_small bucket8: {'max_abs_diff': 0.0048828125, 'ok': True, 'med_ms': 8.227348327636719, 'mean_ms': 8.809598286946615, 'status': 'ok'}
+--- [16:41:43] bench catk_64_small
+[bench2] catk_64_small per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 9.051918983459473, 'mean_ms': 174.21662012736002, 'status': 'ok'}
+[bench2] catk_64_small flat_cat_ar: {'max_abs_diff': 0.0048828125, 'ok': True, 'med_ms': 13.3744478225708, 'mean_ms': 13.87945810953776, 'status': 'ok'}
+[bench2] catk_64_small bucket8: {'max_abs_diff': 0.0048828125, 'ok': True, 'med_ms': 11.928200721740723, 'mean_ms': 12.492640813191732, 'status': 'ok'}
+--- [16:43:18] bench catk_128_small
+[bench2] catk_128_small per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 13.450860977172852, 'mean_ms': 173.0750560760498, 'status': 'ok'}
+[bench2] catk_128_small flat_cat_ar: {'max_abs_diff': 0.0048828125, 'ok': True, 'med_ms': 21.883487701416016, 'mean_ms': 24.277853965759277, 'status': 'ok'}
+[bench2] catk_128_small bucket8: {'max_abs_diff': 0.0068359375, 'ok': True, 'med_ms': 21.207690238952637, 'mean_ms': 22.733267148335774, 'status': 'ok'}
+--- [16:46:14] bench catk_8_mid
+[bench2] catk_8_mid per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 9.271383285522461, 'mean_ms': 335.2395216623942, 'status': 'ok'}
+[bench2] catk_8_mid flat_cat_ar: {'max_abs_diff': 0.0068359375, 'ok': True, 'med_ms': 10.233044624328613, 'mean_ms': 13.93569310506185, 'status': 'ok'}
+[bench2] catk_8_mid bucket8: {'max_abs_diff': 0.0068359375, 'ok': True, 'med_ms': 10.277390480041504, 'mean_ms': 12.92262077331543, 'status': 'ok'}
+--- [16:47:21] bench catk_16_mid
+[bench2] catk_16_mid per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 13.18979263305664, 'mean_ms': 493.53904724121094, 'status': 'ok'}
+[bench2] catk_16_mid flat_cat_ar: {'max_abs_diff': 0.0068359375, 'ok': True, 'med_ms': 14.036178588867188, 'mean_ms': 17.30216344197591, 'status': 'ok'}
+[bench2] catk_16_mid bucket8: {'max_abs_diff': 0.0068359375, 'ok': True, 'med_ms': 16.263604164123535, 'mean_ms': 35.45912901560465, 'status': 'ok'}
+--- [16:49:17] bench catk_32_mid
+[bench2] catk_32_mid per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 19.206523895263672, 'mean_ms': 668.7273740768433, 'status': 'ok'}
+[bench2] catk_32_mid flat_cat_ar: {'max_abs_diff': 0.0087890625, 'ok': True, 'med_ms': 20.501375198364258, 'mean_ms': 27.85665988922119, 'status': 'ok'}
+[bench2] catk_32_mid bucket8: {'max_abs_diff': 0.0068359375, 'ok': True, 'med_ms': 24.751901626586914, 'mean_ms': 40.157016118367515, 'status': 'ok'}
+--- [16:51:41] bench catk_48_mid
+[bench2] catk_48_mid per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 26.529908180236816, 'mean_ms': 160.54639021555582, 'status': 'ok'}
+[bench2] catk_48_mid flat_cat_ar: {'max_abs_diff': 0.0068359375, 'ok': True, 'med_ms': 76.08175277709961, 'mean_ms': 76.11142794291179, 'status': 'ok'}
+[bench2] catk_48_mid bucket8: {'max_abs_diff': 0.009765625, 'ok': True, 'med_ms': 34.42049026489258, 'mean_ms': 58.982507387797035, 'status': 'ok'}
+--- [16:55:53] train catk_8_small per_tensor_ar
+   median_ms 18.32 effective True
+--- [17:02:48] train catk_8_small flat_cat_ar
+   median_ms 17.86 effective True
+--- [17:03:56] train catk_8_small bucket8
+   median_ms 17.89 effective True
+--- [17:04:34] train catk_16_small per_tensor_ar
+   median_ms 20.35 effective True
+--- [17:05:58] train catk_16_small flat_cat_ar
+   median_ms 20.13 effective True
+--- [17:07:27] train catk_16_small bucket8
+   median_ms 20.41 effective True
+--- [17:09:01] train catk_32_small per_tensor_ar
+   median_ms 23.77 effective True
+--- [17:10:19] train catk_32_small flat_cat_ar
+   median_ms 23.94 effective True
+--- [17:11:30] train catk_32_small bucket8
+   median_ms 25.5 effective True
+--- [17:12:47] train catk_64_small per_tensor_ar
+   median_ms 67.38 effective True
+--- [17:14:32] train catk_64_small flat_cat_ar
+   median_ms 76.08 effective True
+--- [17:16:37] train catk_64_small bucket8
+   median_ms 41.92 effective True
+--- [17:18:05] train catk_128_small per_tensor_ar
+   median_ms 326.89 effective True
+--- [17:22:04] train catk_128_small flat_cat_ar
+   median_ms 337.26 effective True
+--- [17:27:17] train catk_128_small bucket8
+   median_ms 276.07 effective True
+--- [17:30:36] train catk_8_mid per_tensor_ar
+   median_ms 112.57 effective True
+--- [17:32:45] train catk_8_mid flat_cat_ar
+   median_ms 114.08 effective True
+--- [17:35:09] train catk_8_mid bucket8
+   median_ms 114.15 effective True
+--- [17:36:46] train catk_16_mid per_tensor_ar
+   median_ms 211.26 effective True
+--- [17:40:14] train catk_16_mid flat_cat_ar
+   median_ms 207.32 effective True
+--- [17:44:47] train catk_16_mid bucket8
+   median_ms 216.51 effective True
+--- [17:50:34] train catk_32_mid per_tensor_ar
+   median_ms 384.27 effective True
+--- [17:56:03] train catk_32_mid flat_cat_ar
+   median_ms 358.08 effective True
+--- [18:04:50] train catk_32_mid bucket8
+   median_ms 406.63 effective True
+--- [18:14:52] train catk_48_mid per_tensor_ar
+   median_ms 603.76 effective True
+--- [18:23:45] train catk_48_mid flat_cat_ar
+   NO RESULT
+--- [18:38:45] train catk_48_mid bucket8
+   median_ms 601.24 effective True
+=== newprobs done 18:53:31 ===

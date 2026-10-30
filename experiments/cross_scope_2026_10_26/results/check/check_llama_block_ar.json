@@ -1,0 +1,20 @@
+{
+ "rs_ag_stack": {
+  "max_abs_diff": 0.0,
+  "ref_scale": 0.294921875,
+  "ok": true,
+  "status": "ok"
+ },
+ "hier_ar_stack": {
+  "max_abs_diff": 0.005859375,
+  "ref_scale": 0.294921875,
+  "ok": true,
+  "status": "ok"
+ },
+ "paper": {
+  "max_abs_diff": 0.005859375,
+  "ref_scale": 0.294921875,
+  "ok": true,
+  "status": "ok"
+ }
+}

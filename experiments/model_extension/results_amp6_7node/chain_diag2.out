@@ -1,0 +1,16 @@
+=== [15:55:50] diag2 start
+=== [15:55:50] d_sites_direct
+[bench] bundled steady_mean=95.14ms steady_median=96.55ms final_loss=3.466
+=== [16:03:23] d_per_tensor_direct
+[bench] bundled steady_mean=23.80ms steady_median=23.06ms final_loss=3.466
+=== [16:05:07] d_sites_rep2
+[bench] bundled steady_mean=51.31ms steady_median=54.59ms final_loss=3.466
+=== [16:06:52] d_per_tensor_rep2
+[bench] bundled steady_mean=22.77ms steady_median=22.37ms final_loss=3.466
+DIAG2_E2E_DONE
+--- [16:08:24] train layer_grads_mixed_dtype per_tensor_ar
+   median_ms 13.49 effective True
+--- [16:09:46] train layer_grads_mixed_dtype gate_1
+   median_ms 14.64 effective True
+=== newprobs done 16:10:48 ===
+DIAG2_DONE

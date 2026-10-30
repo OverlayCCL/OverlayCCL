@@ -1,0 +1,162 @@
+problem                candidate                 bench32  b32 x  bench64  b64 x  train64  t64 x  note
+dp_grad_ar_buckets     bucket_32mb                 60.99   1.00        —      —   295.10   1.00  n=1/1 
+dp_grad_ar_buckets     bucket_128mb                46.83   1.30        —      —   228.40   1.29  n=1/1 
+dp_grad_ar_buckets     flat_ar                     44.91   1.36        —      —   185.90   1.59  n=1/1 
+dp_grad_ar_buckets     per_tensor_ar               47.39   1.29        —      —   204.27   1.44  n=1/1 
+dp_grad_ar_buckets     rs_ag_flat                  53.53   1.14        —      —   189.37   1.56  n=1/1 
+
+dp_grad_ar_groups      per_tensor_grouped_ar        4.95   1.00        —      —     4.99   1.00  n=1/1 
+dp_grad_ar_groups      bucketed_grouped_ar          5.38   0.92        —      —     5.38   0.93  n=1/1 
+dp_grad_ar_groups      flat_grouped_ar              4.69   1.05        —      —     5.37   0.93  n=1/1 
+dp_grad_ar_groups      grouped_rs_ag                5.37   0.92        —      —     5.52   0.90  n=1/1 
+dp_grad_ar_groups      masked_world_ar              9.62   0.51        —      —    49.29   0.10  n=1/1 
+
+emb_ln_hetero_ar       per_tensor_ar                6.69   1.00     8.99   1.00    20.54   1.00  n=2/2 
+emb_ln_hetero_ar       bucket_32mb                  7.33   0.91     9.50   0.95    20.99   0.98  n=2/2 
+emb_ln_hetero_ar       equal_group_stacks           7.57   0.88    10.22   0.88    22.15   0.93  n=2/2 
+emb_ln_hetero_ar       flat_cat_2d                  7.65   0.87    10.37   0.87    22.86   0.90  n=2/2 
+emb_ln_hetero_ar       flat_cat_ar                  7.27   0.92     9.38   0.96    20.90   0.98  n=2/2 
+emb_ln_hetero_ar       flat_cat_clone               7.28   0.92     9.64   0.93    20.97   0.98  n=2/2 
+
+ep_a2a_grouped         grouped_ag_slice             5.06   1.00        —      —     5.03   1.00  n=1/1 
+ep_a2a_grouped         grouped_ag_slice_native      4.95   1.02        —      —     5.24   0.96  n=1/1 
+ep_a2a_grouped         grouped_masked_rs            5.16   0.98        —      —     4.84   1.04  n=1/1 
+ep_a2a_grouped         world_ag_slice               5.99   0.84        —      —    14.47   0.35  n=1/1 
+ep_a2a_grouped         world_masked_rs              5.82   0.87        —      —    14.08   0.36  n=1/1 
+
+expert_grads_ep_groups per_tensor_grouped           5.08   1.00        —      —     5.05   1.00  n=3/3 
+expert_grads_ep_groups equal_stacks_grouped         5.32   0.95        —      —     5.05   1.00  n=3/3 
+expert_grads_ep_groups flat_grouped                 5.67   0.89        —      —     5.14   0.98  n=3/3 
+expert_grads_ep_groups per_layer_grouped            5.70   0.89        —      —     5.25   0.96  n=3/3 
+
+fsdp_hetero_ag         per_tensor_ag                7.86   1.00    13.99   1.00    49.55   1.00  n=2/2 
+fsdp_hetero_ag         flat_cat_ag                 10.06   0.78    16.77   0.83        —      —  n=2/0 
+fsdp_hetero_ag         flat_cat_ag_native           8.98   0.87    14.92   0.94        —      —  n=2/0 
+
+grad_norm_clip_stat    per_tensor_ar                7.50   1.00     9.30   1.00    40.67   1.00  n=3/3 
+grad_norm_clip_stat    local_sum_then_ar            7.29   1.03     7.72   1.20    38.98   1.04  n=3/3 CHECK-FAIL
+grad_norm_clip_stat    stack_ar                     7.56   0.99     8.41   1.11    39.60   1.03  n=3/3 
+
+grp_small_dp_ar        per_tensor_grouped_ar        5.30   1.00        —      —     5.00   1.00  n=2/2 
+grp_small_dp_ar        flat_grouped_ar              5.56   0.95        —      —     5.33   0.94  n=2/2 
+grp_small_dp_ar        grouped_rs_ag                5.34   0.99        —      —     5.26   0.95  n=2/2 
+grp_small_dp_ar        masked_world_ar              6.19   0.86     8.31      —    16.23   0.31  n=2/2 
+
+hetero_grad_ar         per_tensor_ar               21.35   1.00        —      —    77.36   1.00  n=1/1 
+hetero_grad_ar         bucket_by_size_ar           24.63   0.87        —      —   684.62   0.11  n=1/1 
+hetero_grad_ar         flat_cat_ar                 27.96   0.76        —      —   668.30   0.12  n=1/1 
+hetero_grad_ar         flat_cat_pad_16m            29.45   0.73        —      —        —      —  n=1/0 
+hetero_grad_ar         flat_cat_pad_pow2           35.81   0.60        —      —        —      —  n=1/0 
+hetero_grad_ar         flat_cat_split2             26.50   0.81        —      —        —      —  n=1/0 
+hetero_grad_ar         pad_stack_ar                85.20   0.25        —      —        —      —  n=1/0 
+
+hetero_grad_ar_many    per_tensor_ar               20.51   1.00    29.38   1.00    68.38   1.00  n=2/2 
+hetero_grad_ar_many    bucket_16mb                 31.51   0.65    40.88   0.72   393.30   0.17  n=2/2 
+hetero_grad_ar_many    bucket_16mb_pad             32.62   0.63    44.80   0.66   393.03   0.17  n=2/2 
+hetero_grad_ar_many    flat_cat_ar                 20.40   1.01    25.36   1.16   479.58   0.14  n=2/2 INVERSION(b64)
+hetero_grad_ar_many    flat_cat_pad_pow2           22.49   0.91    28.30   1.04   473.70   0.14  n=2/2 bench-tie, training loss
+hetero_grad_ar_many    flat_copy_into_buffer      351.63   0.06   353.47   0.08        —      —  n=2/0 
+hetero_grad_ar_many    pad_equal_cat              155.12   0.13   163.65   0.18        —      —  n=2/0 
+
+hs_a_64x64k_512k       per_tensor_ar                8.88   1.00    13.14   1.00    59.29   1.00  n=3/3 
+hs_a_64x64k_512k       bucket_4mb                  12.08   0.74    14.69   0.89    29.09   2.04  n=3/3 INVERSION(b32) INVERSION(b64)
+hs_a_64x64k_512k       equal_group_stacks          11.51   0.77    14.59   0.90   100.40   0.59  n=3/3 
+hs_a_64x64k_512k       flat_cat_2d                 17.49   0.51    20.49   0.64   189.77   0.31  n=2/2 
+hs_a_64x64k_512k       flat_cat_ar                 15.88   0.56    18.48   0.71    68.78   0.86  n=3/3 
+hs_a_64x64k_512k       flat_cat_clone              16.60   0.53    19.46   0.68    69.21   0.86  n=2/2 
+hs_a_64x64k_512k       pad_equal_stack             17.66   0.50    21.12   0.62   146.25   0.41  n=3/3 
+
+hs_b_128x16k_128k      per_tensor_ar               10.79   1.00    16.97   1.00    35.60   1.00  n=2/2 
+hs_b_128x16k_128k      bucket_4mb                  15.94   0.68    18.88   0.90    37.17   0.96  n=2/2 
+hs_b_128x16k_128k      equal_group_stacks          17.95   0.60    20.81   0.82    40.84   0.87  n=2/2 
+hs_b_128x16k_128k      flat_cat_ar                 15.58   0.69    17.34   0.98    35.63   1.00  n=2/2 
+hs_b_128x16k_128k      pad_equal_stack             26.40   0.41    27.79   0.61    52.25   0.68  n=2/2 
+
+hs_c_32x256k_2m        per_tensor_ar                9.05   1.00    12.56   1.00   101.44   1.00  n=3/3 
+hs_c_32x256k_2m        bucket_4mb                  11.76   0.77    14.52   0.87    85.56   1.19  n=3/3 INVERSION(b32) INVERSION(b64)
+hs_c_32x256k_2m        equal_group_stacks          10.10   0.90    13.17   0.95    97.95   1.04  n=3/3 
+hs_c_32x256k_2m        flat_cat_ar                  9.54   0.95    12.27   1.02    95.72   1.06  n=3/3 
+hs_c_32x256k_2m        pad_equal_stack             17.58   0.51    21.16   0.59   136.08   0.75  n=3/3 
+
+hs_d_64x256k_equal     per_tensor_ar                9.06   1.00    13.36   1.00    27.63   1.00  n=3/3 
+hs_d_64x256k_equal     flat_cat_ar                 10.41   0.87    13.25   1.01    25.38   1.09  n=3/3 
+hs_d_64x256k_equal     stack_ar                    11.09   0.82    13.89   0.96    26.30   1.05  n=3/3 
+
+hs_e_256x4k_32k        per_tensor_ar               18.13   1.00    28.57   1.00    60.67   1.00  n=2/2 
+hs_e_256x4k_32k        bucket_4mb                  30.50   0.59    32.53   0.88    62.73   0.97  n=2/2 
+hs_e_256x4k_32k        equal_group_stacks          31.26   0.58    35.47   0.81    71.18   0.85  n=2/2 
+hs_e_256x4k_32k        flat_cat_ar                 28.91   0.63    32.78   0.87    61.95   0.98  n=2/2 
+hs_e_256x4k_32k        pad_equal_stack             45.00   0.40    47.99   0.60    93.42   0.65  n=2/2 
+
+layer_grads_hetero_ar  per_tensor_ar                9.53   1.00    13.97   1.00    55.83   1.00  n=3/3 
+layer_grads_hetero_ar  bucket_32mb                 11.08   0.86    15.56   0.90    38.90   1.44  n=3/3 INVERSION(b32) INVERSION(b64)
+layer_grads_hetero_ar  equal_group_stacks          11.14   0.86    16.01   0.87    38.84   1.44  n=3/3 INVERSION(b32) INVERSION(b64)
+layer_grads_hetero_ar  flat_cat_2d                 11.07   0.86    13.59   1.03    34.62   1.61  n=3/3 INVERSION(b32)
+layer_grads_hetero_ar  flat_cat_ar                 10.43   0.91    12.91   1.08    31.71   1.76  n=3/3 
+layer_grads_hetero_ar  flat_cat_clone              10.47   0.91    12.97   1.08    31.65   1.76  n=3/3 
+layer_grads_hetero_ar  per_tensor_marked           24.46   0.39    35.67   0.39    77.78   0.72  n=3/3 
+
+layer_grads_mixed_dtype per_tensor_ar                9.50   1.00    13.72   1.00    55.96   1.00  n=3/3 
+layer_grads_mixed_dtype cast_flat_bf16              10.42   0.91    13.04   1.05    31.73   1.76  n=3/3 
+layer_grads_mixed_dtype cast_flat_fp32              13.74   0.69    17.22   0.80    36.11   1.55  n=3/3 INVERSION(b32) INVERSION(b64)
+layer_grads_mixed_dtype two_dtype_groups            18.85   0.50    21.78   0.63    31.66   1.77  n=3/3 INVERSION(b32) INVERSION(b64)
+
+model_grads_4layers    per_tensor_ar               25.08   1.00    38.15   1.00   420.28   1.00  n=3/3 
+model_grads_4layers    bucket_32mb                 35.89   0.70    49.02   0.78   157.47   2.67  n=3/3 INVERSION(b32) INVERSION(b64)
+model_grads_4layers    flat_cat_ar                 28.29   0.89    35.64   1.07    85.41   4.92  n=3/3 INVERSION(b32)
+model_grads_4layers    per_layer_bucket            29.35   0.85    37.95   1.01    89.32   4.71  n=3/3 INVERSION(b32)
+model_grads_4layers    per_tensor_marked           92.74   0.27   133.17   0.29   295.44   1.42  n=3/3 INVERSION(b32) INVERSION(b64)
+
+model_grads_bucket_sweep per_tensor_ar               24.90   1.00    37.68   1.00   420.07   1.00  n=2/2 
+model_grads_bucket_sweep bucket_16mb                 36.54   0.68    50.00   0.75   157.84   2.66  n=2/2 INVERSION(b32) INVERSION(b64)
+model_grads_bucket_sweep bucket_1mb                  32.72   0.76    46.03   0.82   116.37   3.61  n=2/2 INVERSION(b32) INVERSION(b64)
+model_grads_bucket_sweep bucket_256mb                31.08   0.80    40.15   0.94   101.53   4.14  n=2/2 INVERSION(b32)
+model_grads_bucket_sweep bucket_4mb                  32.80   0.76    45.97   0.82   116.65   3.60  n=2/2 INVERSION(b32) INVERSION(b64)
+model_grads_bucket_sweep bucket_64mb                 38.97   0.64    48.04   0.78    98.11   4.28  n=2/2 INVERSION(b32) INVERSION(b64)
+model_grads_bucket_sweep flat_cat_ar                 28.40   0.88    35.43   1.06    85.48   4.91  n=2/2 INVERSION(b32)
+
+pp_4stage_transfer     per_transfer                15.18   1.00    38.15   1.00    76.18   1.00  n=3/3 
+pp_4stage_transfer     all_stack                   16.60   0.91    32.87   1.16    64.91   1.17  n=3/3 
+pp_4stage_transfer     per_boundary_stack          12.61   1.20    25.01   1.53    51.28   1.49  n=3/3 
+
+pp_hetero_transfer     per_tensor                  11.77   1.00    23.39   1.00    46.94   1.00  n=2/2 
+pp_hetero_transfer     all_cat                      9.40   1.25    18.24   1.28    36.45   1.29  n=2/2 
+pp_hetero_transfer     per_kind_stack               9.18   1.28    18.17   1.29    38.04   1.23  n=2/2 
+pp_hetero_transfer     per_mb_cat                  12.87   0.91    23.16   1.01    44.27   1.06  n=2/2 
+
+pp_small_transfer      per_mb_masked_ar             6.28   1.00     9.07   1.00    17.68   1.00  n=2/2 
+pp_small_transfer      stacked_ag                   6.30   1.00     9.26   0.98    18.72   0.94  n=2/2 
+pp_small_transfer      stacked_ag_native            6.17   1.02     7.68   1.18    15.81   1.12  n=2/2 
+pp_small_transfer      stacked_masked_ar            6.12   1.03     7.87   1.15    16.42   1.08  n=2/2 
+pp_small_transfer      stacked_masked_rs            6.15   1.02     7.40   1.23    14.96   1.18  n=2/2 
+
+ulysses_seq_a2a        ag_transpose_rs              7.30   1.00        —      —    24.81   1.00  n=1/1 
+ulysses_seq_a2a        ag_full_then_transpose       6.62   1.10        —      —    20.80   1.19  n=1/1 
+ulysses_seq_a2a        ag_full_then_transpose_native     5.76   1.27        —      —    17.18   1.44  n=1/1 
+ulysses_seq_a2a        ag_slice                     7.01   1.04        —      —    22.34   1.11  n=1/1 bench-tie, training win
+ulysses_seq_a2a        ag_slice_native              5.97   1.22        —      —    18.04   1.38  n=1/1 
+ulysses_seq_a2a        masked_rs                    5.84   1.25        —      —    15.37   1.61  n=1/1 
+
+zero1_hetero_ag        per_tensor_ag                7.89   1.00    14.01   1.00    31.79   1.00  n=2/2 
+zero1_hetero_ag        flat_cat_ag                  8.20   0.96    12.93   1.08    33.78   0.94  n=2/2 
+zero1_hetero_ag        flat_cat_ag_native           6.91   1.14    10.76   1.30    29.10   1.09  n=2/2 
+zero1_hetero_ag        pad_equal_stack_ag          10.87   0.73    26.38   0.53    69.71   0.46  n=2/2 
+zero1_hetero_ag        per_tensor_ag_native         6.24   1.26     9.61   1.46    23.39   1.36  n=2/2 
+
+zero1_param_ag         per_tensor_ag                7.61   1.00        —      —    24.93   1.00  n=1/1 
+zero1_param_ag         bucketed_ag                  7.79   0.98        —      —    26.52   0.94  n=1/1 
+zero1_param_ag         flat_ag                      7.60   1.00        —      —    24.90   1.00  n=1/1 
+zero1_param_ag         flat_ag_native               6.54   1.16        —      —    21.76   1.15  n=1/1 
+zero1_param_ag         per_tensor_ag_native         6.92   1.10        —      —    19.97   1.25  n=1/1 
+
+zero2_grad_rs          per_tensor_rs                6.37   1.00        —      —    17.43   1.00  n=1/1 
+zero2_grad_rs          ar_then_slice                7.82   0.82        —      —    20.43   0.85  n=1/1 
+zero2_grad_rs          bucketed_rs                  6.82   0.93        —      —    17.08   1.02  n=1/1 
+zero2_grad_rs          flat_ar_then_slice           6.77   0.94        —      —    18.55   0.94  n=1/1 
+zero2_grad_rs          flat_rs                      5.98   1.07        —      —    14.89   1.17  n=1/1 
+
+zero2_hetero_rs        per_tensor_rs                6.92   1.00     9.37   1.00    21.05   1.00  n=3/3 
+zero2_hetero_rs        bucket_dim1_rs               7.71   0.90     9.50   0.99    23.34   0.90  n=3/3 
+zero2_hetero_rs        cat_dim1_rs                  8.83   0.78     8.19   1.14   242.01   0.09  n=3/3 INVERSION(b64)
+zero2_hetero_rs        flat_ar_then_slice           8.77   0.79    11.47   0.82    24.58   0.86  n=3/3 
+

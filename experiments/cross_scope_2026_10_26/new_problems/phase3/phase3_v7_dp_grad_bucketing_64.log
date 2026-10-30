@@ -1,0 +1,42 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of 64 mixed-size tensors (bucketing sweep instance)
+======================================================================
+  per_tensor_ar: 141039.6 us, 64 local ops, 0 ag, 64 ar, 0 cp
+  flat_cat_ar: 134015.8 us, 195 local ops, 0 ag, 1 ar, 0 cp
+  bucketed_ar: 134015.8 us, 195 local ops, 0 ag, 1 ar, 0 cp
+
+  Best baseline: baseline:flat_cat_ar (134015.8 us)
+
+======================================================================
+[Phase 3 / Strategy-Enumerate] DP gradient all-reduce of 64 mixed-size tensors (bucketing sweep instance)
+======================================================================
+  K=5 strategies, R=2 refinement rounds per top-2 (budget ~10 LLM calls)
+  Enumerated 5 strategies:
+    1. Per-tensor all-reduce baseline: Issues 64 separate all-reduce calls, one per gradient tensor. Dispatch count is ...
+    2. Single flat concatenation all-reduce: Concatenates all 64 mixed-size tensors into one flat buffer, performs one all-re...
+    3. Fixed-byte bucketed all-reduce: Groups tensors sequentially into buckets of approximately equal total byte count...
+    4. Tensor-count bucketed all-reduce: Partitions the 64 tensors into fixed-count groups (e.g., 8 buckets of 8 tensors ...
+    5. Hierarchical two-level reduce-scatter + all-gather: Splits tensors into chunks, performs reduce-scatter across world to sum disjoint...
+  Strategy 1 (Per-tensor all-reduce baseline): sim=141039.6 us
+  Strategy 2 (Single flat concatenation all-reduce): sim=134015.8 us
+  Strategy 3 (Fixed-byte bucketed all-reduce): sim=134015.8 us
+  Strategy 4 (Tensor-count bucketed all-reduce): sim=77631.8 us
+  Strategy 5 (Hierarchical two-level reduce-scatter + all-gather): sim=76397.6 us
+
+  Top after enumeration:
+    Hierarchical two-level reduce-scatter + all-gather: 76397.6 us
+    Tensor-count bucketed all-reduce: 77631.8 us
+    top 1 round 1: NEW BEST 76344.1 us (0.1% improvement)
+    top 2 round 1: NEW BEST 77369.7 us (0.3% improvement)
+    top 2 round 2: NEW BEST 75270.0 us (2.7% improvement)
+
+  Strategy-Enumerate complete. 7 total candidates.
+  Best: refined-from-Tensor-count bucketed all-reduce (sim=75270.0 us)
+
+=== Phase 3 result for dp_grad_bucketing_64 (wall 91s): 4 candidates, sim ranking ===
+           1e+18  strat:refined-from-Tensor-count buck  code=no
+           1e+18  baseline:flat_cat_ar  code=no
+           1e+18  baseline:bucketed_ar  code=no
+           1e+18  baseline:per_tensor_ar  code=no

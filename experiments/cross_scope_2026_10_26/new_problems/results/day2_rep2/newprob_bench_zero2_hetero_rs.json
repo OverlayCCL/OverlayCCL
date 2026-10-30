@@ -1,0 +1,34 @@
+{
+ "problem": "zero2_hetero_rs",
+ "ws": 32,
+ "results": {
+  "per_tensor_rs": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 6.863594055175781,
+   "mean_ms": 6.998602549235026,
+   "status": "ok"
+  },
+  "cat_dim1_rs": {
+   "max_abs_diff": 0.0048828125,
+   "ok": true,
+   "med_ms": 8.809566497802734,
+   "mean_ms": 9.076396624247232,
+   "status": "ok"
+  },
+  "bucket_dim1_rs": {
+   "max_abs_diff": 0.005859375,
+   "ok": true,
+   "med_ms": 7.783412933349609,
+   "mean_ms": 7.83843199412028,
+   "status": "ok"
+  },
+  "flat_ar_then_slice": {
+   "max_abs_diff": 0.005859375,
+   "ok": true,
+   "med_ms": 8.78894329071045,
+   "mean_ms": 8.872501055399576,
+   "status": "ok"
+  }
+ }
+}

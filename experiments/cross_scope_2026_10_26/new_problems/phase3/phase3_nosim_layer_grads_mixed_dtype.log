@@ -1,0 +1,191 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of one layer with fp32 norm parameters (mixed dtypes)
+======================================================================
+  per_tensor_ar: 11344.2 us, 6 local ops, 0 ag, 6 ar, 0 cp
+  cast_flat_fp32: 17108.4 us, 29 local ops, 0 ag, 1 ar, 0 cp
+  cast_flat_bf16: 9280.8 us, 25 local ops, 0 ag, 1 ar, 0 cp
+  two_dtype_groups: 12841.5 us, 23 local ops, 0 ag, 2 ar, 0 cp
+
+  Best baseline: baseline:cast_flat_bf16 (9280.8 us)
+
+======================================================================
+[Phase 3 / Strategy-Enumerate] DP gradient all-reduce of one layer with fp32 norm parameters (mixed dtypes) [NO-SIM ABLATION]
+======================================================================
+  K=5 strategies, R=2 refinement rounds per top-2 (budget ~10 LLM calls)
+  Enumerated 5 strategies:
+    1. Per-dtype bucket all-reduce: Group tensors by dtype (bf16 and fp32) into two flat concatenated buffers, dispa...
+    2. Split-point bucketing by position: Partition the 6-tensor sequence into 2-4 in-order buckets (e.g., [0:2], [2:4], [...
+    3. Overlapped bf16/fp32 dual-stream pipelining: Launch bf16 bucket (tensors 0-3) and fp32 bucket (tensors 4-5) all_reduce calls ...
+    4. Hierarchical bucketing with dtype preservation: Divide the 6 tensors into 3 in-order pairs ([0:2], [2:4], [4:6]), flatten each p...
+    5. Selective per-tensor with batched dispatch: Issue 6 individual all_reduce calls (one per tensor, native dtype), but wrap the...
+  Strategy 1 (Per-dtype bucket all-reduce) INCORRECT: CRASH in collect pass 0: world=4 pattern=uniform rank=0: AttributeError: 'MockTorch' object has no a
+  Strategy 2 (Split-point bucketing by position) INCORRECT: CRASH in collect pass 0: world=4 pattern=uniform rank=0: AttributeError: 'MockTorch' object has no a
+  Strategy 3 (Overlapped bf16/fp32 dual-stream pipelining) INCORRECT: CRASH in collect pass 0: world=4 pattern=uniform rank=0: AttributeError: 'MockTorch' object has no a
+  Strategy 4 (Hierarchical bucketing with dtype preservation): sim=13414.6 us
+  Strategy 5 (Selective per-tensor with batched dispatch): sim=11344.2 us
+
+  [NO-SIM ITERATIVE] Refining all 2 correct candidates (sim_us not shown to LLM in refinement)
+[AR-mixed] 382.6 us
+[AR-mixed] 126.5 us
+[AR-mixed] 107.0 us
+[AR-mixed] 94.7 us
+[AR-mixed] 96.3 us
+[AR-mixed] 104.3 us
+[AR-mixed] 191.3 us
+[AR-mixed] 102.6 us
+[AR-mixed] 84.9 us
+[AR-mixed] 107.7 us
+[AR-mixed] 82.4 us
+[AR-mixed] 69.5 us
+[AR-mixed] 68.5 us
+[AR-mixed] 69.1 us
+[AR-mixed] 70.9 us
+[AR-mixed] 60.8 us
+[AR-mixed] 60.8 us
+[AR-mixed] 54.9 us
+[AR-mixed] 60.1 us
+[AR-mixed] 70.4 us
+[AR-mixed] 50.2 us
+[AR-mixed] 49.8 us
+[AR-mixed] 49.5 us
+[AR-mixed] 49.5 us
+[AR-mixed] 49.4 us
+[AR-mixed] 49.5 us
+[AR-mixed] 45.2 us
+[AR-mixed] 37.8 us
+[AR-mixed] 31.6 us
+[AR-mixed] 31.5 us
+[AR-mixed] 29.5 us
+[AR-mixed] 31.3 us
+[AR-mixed] 29.2 us
+[AR-mixed] 29.3 us
+[AR-mixed] 29.3 us
+[AR-mixed] 26.4 us
+[AR-mixed] 84.5 us
+    top 1 round 1: SIMPLER (collective Δ=2)
+[AR-mixed] 463.3 us
+[AR-mixed] 159.0 us
+[AR-mixed] 144.0 us
+[AR-mixed] 146.3 us
+[AR-mixed] 150.5 us
+[AR-mixed] 129.4 us
+[AR-mixed] 128.0 us
+[AR-mixed] 427.9 us
+[AR-mixed] 116.5 us
+[AR-mixed] 198.7 us
+[AR-mixed] 99.7 us
+[AR-mixed] 83.3 us
+[AR-mixed] 80.8 us
+[AR-mixed] 81.0 us
+[AR-mixed] 71.4 us
+[AR-mixed] 70.8 us
+[AR-mixed] 81.2 us
+[AR-mixed] 68.5 us
+[AR-mixed] 81.6 us
+[AR-mixed] 66.4 us
+[AR-mixed] 58.2 us
+[AR-mixed] 58.0 us
+[AR-mixed] 57.6 us
+[AR-mixed] 58.0 us
+[AR-mixed] 57.7 us
+[AR-mixed] 57.5 us
+[AR-mixed] 52.7 us
+[AR-mixed] 58.7 us
+[AR-mixed] 39.9 us
+[AR-mixed] 39.8 us
+[AR-mixed] 39.1 us
+[AR-mixed] 36.8 us
+[AR-mixed] 36.7 us
+[AR-mixed] 36.6 us
+[AR-mixed] 36.5 us
+[AR-mixed] 34.0 us
+[AR-mixed] 80.0 us
+[pack-reduce-unpack] 309.2 us, 2 collectives
+[pack-reduce-unpack] 119.0 us, 2 collectives
+[pack-reduce-unpack] 94.2 us, 2 collectives
+[pack-reduce-unpack] 95.8 us, 2 collectives
+[pack-reduce-unpack] 274.9 us, 2 collectives
+[pack-reduce-unpack] 102.3 us, 2 collectives
+[pack-reduce-unpack] 94.9 us, 2 collectives
+[pack-reduce-unpack] 78.0 us, 2 collectives
+[pack-reduce-unpack] 73.9 us, 2 collectives
+[pack-reduce-unpack] 100.1 us, 2 collectives
+[pack-reduce-unpack] 93.0 us, 2 collectives
+[pack-reduce-unpack] 61.0 us, 2 collectives
+[pack-reduce-unpack] 58.9 us, 2 collectives
+[pack-reduce-unpack] 62.0 us, 2 collectives
+[pack-reduce-unpack] 63.9 us, 2 collectives
+[pack-reduce-unpack] 59.8 us, 2 collectives
+[pack-reduce-unpack] 59.1 us, 2 collectives
+[pack-reduce-unpack] 58.9 us, 2 collectives
+[pack-reduce-unpack] 58.2 us, 2 collectives
+[pack-reduce-unpack] 53.9 us, 2 collectives
+[pack-reduce-unpack] 48.9 us, 2 collectives
+[pack-reduce-unpack] 49.1 us, 2 collectives
+[pack-reduce-unpack] 49.1 us, 2 collectives
+[pack-reduce-unpack] 48.9 us, 2 collectives
+[pack-reduce-unpack] 48.9 us, 2 collectives
+[pack-reduce-unpack] 47.9 us, 2 collectives
+[pack-reduce-unpack] 47.2 us, 2 collectives
+[pack-reduce-unpack] 46.0 us, 1 collectives
+[pack-reduce-unpack] 39.8 us, 1 collectives
+[pack-reduce-unpack] 40.3 us, 1 collectives
+[pack-reduce-unpack] 40.1 us, 1 collectives
+[pack-reduce-unpack] 39.1 us, 1 collectives
+[pack-reduce-unpack] 37.0 us, 1 collectives
+[pack-reduce-unpack] 37.0 us, 1 collectives
+[pack-reduce-unpack] 36.0 us, 1 collectives
+[pack-reduce-unpack] 33.9 us, 1 collectives
+[pack-reduce-unpack] 67.7 us, 2 collectives
+    top 2 round 1: SIMPLER (collective Δ=4)
+[opt-pack] 209.3 us, 2 AR
+[opt-pack] 82.0 us, 2 AR
+[opt-pack] 78.2 us, 2 AR
+[opt-pack] 79.2 us, 2 AR
+[opt-pack] 77.2 us, 2 AR
+[opt-pack] 78.2 us, 2 AR
+[opt-pack] 77.0 us, 2 AR
+[opt-pack] 76.1 us, 2 AR
+[opt-pack] 69.9 us, 2 AR
+[opt-pack] 73.9 us, 2 AR
+[opt-pack] 72.0 us, 2 AR
+[opt-pack] 60.3 us, 2 AR
+[opt-pack] 59.1 us, 2 AR
+[opt-pack] 58.9 us, 2 AR
+[opt-pack] 59.8 us, 2 AR
+[opt-pack] 58.9 us, 2 AR
+[opt-pack] 52.9 us, 2 AR
+[opt-pack] 51.0 us, 2 AR
+[opt-pack] 55.1 us, 2 AR
+[opt-pack] 48.9 us, 2 AR
+[opt-pack] 48.9 us, 2 AR
+[opt-pack] 47.9 us, 2 AR
+[opt-pack] 47.9 us, 2 AR
+[opt-pack] 47.9 us, 2 AR
+[opt-pack] 48.2 us, 2 AR
+[opt-pack] 44.1 us, 2 AR
+[opt-pack] 40.8 us, 2 AR
+[opt-pack] 48.9 us, 1 AR
+[opt-pack] 39.1 us, 1 AR
+[opt-pack] 37.7 us, 1 AR
+[opt-pack] 36.7 us, 1 AR
+[opt-pack] 38.1 us, 1 AR
+[opt-pack] 37.2 us, 1 AR
+[opt-pack] 38.1 us, 1 AR
+[opt-pack] 37.7 us, 1 AR
+[opt-pack] 34.1 us, 1 AR
+[opt-pack] 87.0 us, 2 AR
+
+  [NO-SIM] Winner = Hierarchical bucketing with dtype preservation (first valid, sim_us NOT used)
+
+  Strategy-Enumerate complete. 4 total candidates.
+  Best: Hierarchical bucketing with dtype preservation (sim=13414.6 us)
+
+=== Phase 3 result for layer_grads_mixed_dtype (wall 88s): 5 candidates, sim ranking ===
+           1e+18  baseline:cast_flat_bf16  code=no
+           1e+18  baseline:per_tensor_ar  code=no
+           1e+18  baseline:two_dtype_groups  code=no
+           1e+18  strat:Hierarchical bucketing with dt  code=no
+           1e+18  baseline:cast_flat_fp32  code=no

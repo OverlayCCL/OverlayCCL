@@ -1,0 +1,34 @@
+{
+ "problem": "expert_grads_ep_groups",
+ "ws": 32,
+ "results": {
+  "per_tensor_grouped": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 4.587411880493164,
+   "mean_ms": 5.147274335225423,
+   "status": "ok"
+  },
+  "flat_grouped": {
+   "max_abs_diff": 0.0009765625,
+   "ok": true,
+   "med_ms": 5.353689193725586,
+   "mean_ms": 6.27291997273763,
+   "status": "ok"
+  },
+  "per_layer_grouped": {
+   "max_abs_diff": 0.00048828125,
+   "ok": true,
+   "med_ms": 5.305647850036621,
+   "mean_ms": 5.68994681040446,
+   "status": "ok"
+  },
+  "equal_stacks_grouped": {
+   "max_abs_diff": 0.0009765625,
+   "ok": true,
+   "med_ms": 4.3822526931762695,
+   "mean_ms": 4.43873405456543,
+   "status": "ok"
+  }
+ }
+}

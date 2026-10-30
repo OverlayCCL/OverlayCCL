@@ -1,0 +1,40 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of 32 mixed-size tensors (256K-2M elements on hardware)
+======================================================================
+  per_tensor_ar: 134102.9 us, 32 local ops, 0 ag, 32 ar, 0 cp
+  flat_cat_ar: 124575.1 us, 99 local ops, 0 ag, 1 ar, 0 cp
+  bucketed_ar: 124575.1 us, 99 local ops, 0 ag, 1 ar, 0 cp
+
+  Best baseline: baseline:flat_cat_ar (124575.1 us)
+
+======================================================================
+[Phase 3 / Strategy-Enumerate] DP gradient all-reduce of 32 mixed-size tensors (256K-2M elements on hardware)
+======================================================================
+  K=5 strategies, R=2 refinement rounds per top-2 (budget ~10 LLM calls)
+  Enumerated 5 strategies:
+    1. Per-tensor all-reduce baseline: Issues one all_reduce per gradient tensor (32 dispatches). Represents maximum di...
+    2. Single flat concatenation all-reduce: Concatenates all 32 tensors into one flat buffer and issues a single all_reduce ...
+    3. Fixed-count in-order buckets: Partitions the 32 tensors into 4-8 fixed-count buckets in their original order (...
+    4. Size-threshold adaptive bucketing: Groups tensors by relative size into small/medium/large bins (e.g., bottom 25%, ...
+    5. Reduce-scatter plus all-gather decomposition: Splits tensors across ranks via reduce-scatter (summing rank-specific chunks), t...
+  Strategy 1 (Per-tensor all-reduce baseline): sim=134102.9 us
+  Strategy 2 (Single flat concatenation all-reduce): sim=124575.1 us
+  Strategy 3 (Fixed-count in-order buckets): sim=126776.0 us
+  Strategy 4 (Size-threshold adaptive bucketing): sim=125253.4 us
+  Strategy 5 (Reduce-scatter plus all-gather decomposition): sim=125406.5 us
+
+  Top after enumeration:
+    Single flat concatenation all-reduce: 124575.1 us
+    Size-threshold adaptive bucketing: 125253.4 us
+    top 2 round 1: NEW BEST 123789.8 us (1.2% improvement)
+
+  Strategy-Enumerate complete. 7 total candidates.
+  Best: refined-from-Size-threshold adaptive bucketing (sim=123789.8 us)
+
+=== Phase 3 result for hs_c_32mixed (wall 93s): 4 candidates, sim ranking ===
+           1e+18  strat:refined-from-Size-threshold ad  code=no
+           1e+18  baseline:flat_cat_ar  code=no
+           1e+18  baseline:bucketed_ar  code=no
+           1e+18  baseline:per_tensor_ar  code=no

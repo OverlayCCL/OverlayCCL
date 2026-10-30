@@ -1,0 +1,197 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of a 4-layer transformer (24 heterogeneous tensors)
+======================================================================
+  per_tensor_ar: 63213.8 us, 24 local ops, 0 ag, 24 ar, 0 cp
+  flat_cat_ar: 64218.2 us, 75 local ops, 0 ag, 1 ar, 0 cp
+  bucketed_ar: 64218.2 us, 81 local ops, 0 ag, 3 ar, 0 cp
+  bucketed_ar_4: 64218.2 us, 90 local ops, 0 ag, 6 ar, 0 cp
+  bucketed_ar_16: 64218.2 us, 78 local ops, 0 ag, 2 ar, 0 cp
+  per_layer_bucket: 64218.2 us, 84 local ops, 0 ag, 4 ar, 0 cp
+
+  Best baseline: baseline:per_tensor_ar (63213.8 us)
+
+======================================================================
+[Phase 3 / Strategy-Enumerate] DP gradient all-reduce of a 4-layer transformer (24 heterogeneous tensors) [NO-SIM ABLATION]
+======================================================================
+  K=5 strategies, R=2 refinement rounds per top-2 (budget ~10 LLM calls)
+  Enumerated 5 strategies:
+    1. Hierarchical two-level bucketing: First bucket the 24 tensors into 4 per-layer groups (6 tensors each), then withi...
+    2. Pipelined dual-stream collectives: Split the 24 tensors into two interleaved streams (even/odd indices or first-hal...
+    3. Reduce-scatter then all-gather decomposition: Concatenate all 24 gradients, perform reduce-scatter across ranks (each rank get...
+    4. Per-device-group sub-bucketing with staged reduction: Partition 24 tensors into num_devices groups, perform hierarchical all-reduce fi...
+    5. Adaptive bucket-size gradient fusion: Bucket tensors by cumulative size targets rather than fixed counts—create bucket...
+  Strategy 1 (Hierarchical two-level bucketing): sim=72287.1 us
+  Strategy 2 (Pipelined dual-stream collectives): sim=64732.6 us
+  Strategy 3 (Reduce-scatter then all-gather decomposition): sim=64283.4 us
+  Strategy 4 (Per-device-group sub-bucketing with staged reduction) INCORRECT: world=4 pattern=uniform rank=0[0]: max_diff=0.226389
+  Strategy 5 (Adaptive bucket-size gradient fusion): sim=64218.2 us
+
+  [NO-SIM ITERATIVE] Refining all 4 correct candidates (sim_us not shown to LLM in refinement)
+[Profile] 2-bucket AR: 824.0 us, collectives=2
+[Profile] 2-bucket AR: 432.0 us, collectives=2
+[Profile] 2-bucket AR: 259.9 us, collectives=2
+[Profile] 2-bucket AR: 261.1 us, collectives=2
+[Profile] 2-bucket AR: 294.9 us, collectives=2
+[Profile] 2-bucket AR: 212.0 us, collectives=2
+[Profile] 2-bucket AR: 209.3 us, collectives=2
+[Profile] 2-bucket AR: 215.1 us, collectives=2
+[Profile] 2-bucket AR: 221.3 us, collectives=2
+[Profile] 2-bucket AR: 156.9 us, collectives=2
+[Profile] 2-bucket AR: 186.0 us, collectives=2
+[Profile] 2-bucket AR: 176.9 us, collectives=2
+[Profile] 2-bucket AR: 132.1 us, collectives=2
+[Profile] 2-bucket AR: 132.8 us, collectives=2
+[Profile] 2-bucket AR: 126.8 us, collectives=2
+[Profile] 2-bucket AR: 119.7 us, collectives=2
+[Profile] 2-bucket AR: 122.8 us, collectives=2
+[Profile] 2-bucket AR: 103.0 us, collectives=2
+[Profile] 2-bucket AR: 120.9 us, collectives=2
+[Profile] 2-bucket AR: 103.0 us, collectives=2
+[Profile] 2-bucket AR: 121.8 us, collectives=2
+[Profile] 2-bucket AR: 105.4 us, collectives=2
+[Profile] 2-bucket AR: 120.9 us, collectives=2
+[Profile] 2-bucket AR: 107.0 us, collectives=2
+[Profile] 2-bucket AR: 104.9 us, collectives=2
+[Profile] 2-bucket AR: 104.9 us, collectives=2
+[Profile] 2-bucket AR: 97.0 us, collectives=2
+[Profile] 2-bucket AR: 145.0 us, collectives=2
+[Profile] 2-bucket AR: 101.1 us, collectives=2
+[Profile] 2-bucket AR: 83.0 us, collectives=2
+[Profile] 2-bucket AR: 83.0 us, collectives=2
+[Profile] 2-bucket AR: 80.8 us, collectives=2
+[Profile] 2-bucket AR: 82.3 us, collectives=2
+[Profile] 2-bucket AR: 83.0 us, collectives=2
+[Profile] 2-bucket AR: 81.3 us, collectives=2
+[Profile] 2-bucket AR: 73.9 us, collectives=2
+[Profile] 2-bucket AR: 245.1 us, collectives=2
+    top 1 round 1: SIMPLER (collective Δ=6)
+[Profile] 1-bucket AR: 726.7 us, collectives=1
+[Profile] 1-bucket AR: 356.0 us, collectives=1
+[Profile] 1-bucket AR: 284.9 us, collectives=1
+[Profile] 1-bucket AR: 234.6 us, collectives=1
+[Profile] 1-bucket AR: 220.8 us, collectives=1
+[Profile] 1-bucket AR: 217.2 us, collectives=1
+[Profile] 1-bucket AR: 284.0 us, collectives=1
+[Profile] 1-bucket AR: 212.9 us, collectives=1
+[Profile] 1-bucket AR: 167.1 us, collectives=1
+[Profile] 1-bucket AR: 177.1 us, collectives=1
+[Profile] 1-bucket AR: 156.2 us, collectives=1
+[Profile] 1-bucket AR: 124.9 us, collectives=1
+[Profile] 1-bucket AR: 119.9 us, collectives=1
+[Profile] 1-bucket AR: 119.9 us, collectives=1
+[Profile] 1-bucket AR: 116.1 us, collectives=1
+[Profile] 1-bucket AR: 114.2 us, collectives=1
+[Profile] 1-bucket AR: 112.3 us, collectives=1
+[Profile] 1-bucket AR: 128.0 us, collectives=1
+[Profile] 1-bucket AR: 116.1 us, collectives=1
+[Profile] 1-bucket AR: 123.0 us, collectives=1
+[Profile] 1-bucket AR: 99.9 us, collectives=1
+[Profile] 1-bucket AR: 102.8 us, collectives=1
+[Profile] 1-bucket AR: 98.9 us, collectives=1
+[Profile] 1-bucket AR: 103.0 us, collectives=1
+[Profile] 1-bucket AR: 101.8 us, collectives=1
+[Profile] 1-bucket AR: 99.2 us, collectives=1
+[Profile] 1-bucket AR: 87.7 us, collectives=1
+[Profile] 1-bucket AR: 134.0 us, collectives=1
+[Profile] 1-bucket AR: 86.1 us, collectives=1
+[Profile] 1-bucket AR: 76.1 us, collectives=1
+[Profile] 1-bucket AR: 76.1 us, collectives=1
+[Profile] 1-bucket AR: 75.8 us, collectives=1
+[Profile] 1-bucket AR: 73.9 us, collectives=1
+[Profile] 1-bucket AR: 76.1 us, collectives=1
+[Profile] 1-bucket AR: 78.9 us, collectives=1
+[Profile] 1-bucket AR: 67.9 us, collectives=1
+[Profile] 1-bucket AR: 225.1 us, collectives=1
+    top 1 round 2: SIMPLER (collective Δ=1)
+[Profile] cat=0.27ms AR=0.36ms unpack=0.20ms total=0.84ms
+[Profile] cat=0.14ms AR=0.29ms unpack=0.11ms total=0.54ms
+[Profile] cat=0.15ms AR=0.18ms unpack=0.13ms total=0.46ms
+[Profile] cat=0.09ms AR=0.13ms unpack=0.09ms total=0.31ms
+[Profile] cat=0.09ms AR=0.07ms unpack=0.09ms total=0.24ms
+[Profile] cat=0.09ms AR=0.07ms unpack=0.09ms total=0.24ms
+[Profile] cat=0.08ms AR=0.06ms unpack=0.07ms total=0.21ms
+[Profile] cat=0.08ms AR=0.06ms unpack=0.07ms total=0.22ms
+[Profile] cat=0.07ms AR=0.03ms unpack=0.07ms total=0.18ms
+[Profile] cat=0.06ms AR=0.04ms unpack=0.05ms total=0.15ms
+[Profile] cat=0.05ms AR=0.07ms unpack=0.05ms total=0.16ms
+[Profile] cat=0.05ms AR=0.03ms unpack=0.05ms total=0.13ms
+[Profile] cat=0.04ms AR=0.03ms unpack=0.05ms total=0.13ms
+[Profile] cat=0.05ms AR=0.03ms unpack=0.04ms total=0.12ms
+[Profile] cat=0.04ms AR=0.07ms unpack=0.04ms total=0.15ms
+[Profile] cat=0.04ms AR=0.03ms unpack=0.04ms total=0.11ms
+[Profile] cat=0.04ms AR=0.03ms unpack=0.04ms total=0.11ms
+[Profile] cat=0.04ms AR=0.02ms unpack=0.04ms total=0.10ms
+[Profile] cat=0.04ms AR=0.06ms unpack=0.04ms total=0.14ms
+[Profile] cat=0.04ms AR=0.05ms unpack=0.03ms total=0.12ms
+[Profile] cat=0.03ms AR=0.03ms unpack=0.03ms total=0.10ms
+[Profile] cat=0.04ms AR=0.03ms unpack=0.04ms total=0.10ms
+[Profile] cat=0.04ms AR=0.03ms unpack=0.04ms total=0.10ms
+[Profile] cat=0.04ms AR=0.03ms unpack=0.03ms total=0.10ms
+[Profile] cat=0.04ms AR=0.06ms unpack=0.03ms total=0.13ms
+[Profile] cat=0.04ms AR=0.03ms unpack=0.03ms total=0.10ms
+[Profile] cat=0.04ms AR=0.02ms unpack=0.04ms total=0.10ms
+[Profile] cat=0.05ms AR=0.05ms unpack=0.04ms total=0.13ms
+[Profile] cat=0.03ms AR=0.03ms unpack=0.03ms total=0.09ms
+[Profile] cat=0.03ms AR=0.01ms unpack=0.03ms total=0.08ms
+[Profile] cat=0.03ms AR=0.01ms unpack=0.03ms total=0.08ms
+[Profile] cat=0.03ms AR=0.01ms unpack=0.03ms total=0.08ms
+[Profile] cat=0.03ms AR=0.01ms unpack=0.03ms total=0.08ms
+[Profile] cat=0.03ms AR=0.01ms unpack=0.04ms total=0.08ms
+[Profile] cat=0.03ms AR=0.01ms unpack=0.03ms total=0.08ms
+[Profile] cat=0.03ms AR=0.01ms unpack=0.03ms total=0.07ms
+[Profile] cat=0.09ms AR=0.10ms unpack=0.07ms total=0.27ms
+    top 2 round 1: SIMPLER (collective Δ=1)
+[Grad AR] 695.3 us, 1 collective, 24 tensors
+[Grad AR] 350.4 us, 1 collective, 24 tensors
+[Grad AR] 280.9 us, 1 collective, 24 tensors
+[Grad AR] 229.8 us, 1 collective, 24 tensors
+[Grad AR] 216.3 us, 1 collective, 24 tensors
+[Grad AR] 219.1 us, 1 collective, 24 tensors
+[Grad AR] 310.3 us, 1 collective, 24 tensors
+[Grad AR] 221.7 us, 1 collective, 24 tensors
+[Grad AR] 165.2 us, 1 collective, 24 tensors
+[Grad AR] 140.8 us, 1 collective, 24 tensors
+[Grad AR] 152.4 us, 1 collective, 24 tensors
+[Grad AR] 134.5 us, 1 collective, 24 tensors
+[Grad AR] 120.2 us, 1 collective, 24 tensors
+[Grad AR] 119.7 us, 1 collective, 24 tensors
+[Grad AR] 114.8 us, 1 collective, 24 tensors
+[Grad AR] 113.3 us, 1 collective, 24 tensors
+[Grad AR] 114.6 us, 1 collective, 24 tensors
+[Grad AR] 147.5 us, 1 collective, 24 tensors
+[Grad AR] 114.6 us, 1 collective, 24 tensors
+[Grad AR] 124.6 us, 1 collective, 24 tensors
+[Grad AR] 98.2 us, 1 collective, 24 tensors
+[Grad AR] 100.8 us, 1 collective, 24 tensors
+[Grad AR] 103.7 us, 1 collective, 24 tensors
+[Grad AR] 99.9 us, 1 collective, 24 tensors
+[Grad AR] 98.7 us, 1 collective, 24 tensors
+[Grad AR] 104.9 us, 1 collective, 24 tensors
+[Grad AR] 97.4 us, 1 collective, 24 tensors
+[Grad AR] 141.2 us, 1 collective, 24 tensors
+[Grad AR] 86.1 us, 1 collective, 24 tensors
+[Grad AR] 77.3 us, 1 collective, 24 tensors
+[Grad AR] 76.9 us, 1 collective, 24 tensors
+[Grad AR] 76.6 us, 1 collective, 24 tensors
+[Grad AR] 75.1 us, 1 collective, 24 tensors
+[Grad AR] 76.1 us, 1 collective, 24 tensors
+[Grad AR] 78.0 us, 1 collective, 24 tensors
+[Grad AR] 68.1 us, 1 collective, 24 tensors
+[Grad AR] 226.6 us, 1 collective, 24 tensors
+    top 4 round 1: SIMPLER (collective Δ=2)
+
+  [NO-SIM] Winner = Hierarchical two-level bucketing (first valid, sim_us NOT used)
+
+  Strategy-Enumerate complete. 8 total candidates.
+  Best: Hierarchical two-level bucketing (sim=72287.1 us)
+
+=== Phase 3 result for model_grads_4layers (wall 163s): 7 candidates, sim ranking ===
+           1e+18  baseline:per_tensor_ar  code=no
+           1e+18  baseline:bucketed_ar  code=no
+           1e+18  baseline:bucketed_ar_4  code=no
+           1e+18  baseline:per_layer_bucket  code=no
+           1e+18  baseline:flat_cat_ar  code=no
+           1e+18  baseline:bucketed_ar_16  code=no
+           1e+18  strat:Hierarchical two-level bucketi  code=no

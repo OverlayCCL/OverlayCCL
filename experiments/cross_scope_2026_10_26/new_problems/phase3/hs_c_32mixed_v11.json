@@ -1,0 +1,30 @@
+[
+ {
+  "raw": [
+   "strat:refined-from-Reduce-scatter pl",
+   "{'template': 'strategy_enumerate_final', 'cost_score': 1241.0184520000003, 'sim_time_us': 124101.84520000003, 'local_ops': 100, 'num_collective_permute': 0, 'num_all_gather': 1, 'num_all_reduce': 0, '_params': {'evolved_code': 'def evolved_hs_c_32mixed(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"Reduce-scatter + all-gather decomposition: concat all tensors, RS then AG, slice back.\"\"\"\\n    \\n    # Pre-calculate sizes and offsets to avoid redundant computation\\n    shapes = [t.shape for t in grads]\\n    numels = [t.numel() for t in grads]\\n    total_elements = sum(numels)\\n    \\n    # Build offsets once\\n    offsets = [0]\\n    for n in numels[:-1]:\\n        offsets.append(offsets[-1] + n)\\n    \\n    # Concatenate all gradients into one flat buffer (unavoidable for collective)\\n    flat = torch.cat([t.view(-1) for t in grads])\\n    \\n    # Reduce-scatter: each rank gets a disjoint chunk of the reduced result\\n    chunk_size = total_elements // world_size\\n    remainder = total_elements % world_size\\n    \\n    # Perform reduce-scatter\\n    reduced_chunk = xm.reduce_scatter(\\n        xm.REDUCE_SUM,\\n        flat,\\n        scale=1.0,\\n        scatter_dim=0,\\n        shard_count=world_size,\\n        groups=None\\n    )\\n    \\n    # All-gather: collect all chunks from all ranks to reconstruct the full reduced tensor\\n    full_reduced = xm.all_gather(reduced_chunk, dim=0)\\n    \\n    # Slice back into original tensor shapes using views where possible\\n    # Use narrow/slice on the contiguous full_reduced buffer\\n    outs = []\\n    for i, (shape, n) in enumerate(zip(shapes, numels)):\\n        offset = offsets[i]\\n        # Use narrow to create a view instead of slice which may copy\\n        outs.append(full_reduced.narrow(0, offset, n).view(shape))\\n    \\n    return outs'}}"
+  ],
+  "name": "strat:refined-from-Reduce-scatter pl"
+ },
+ {
+  "raw": [
+   "baseline:flat_cat_ar",
+   "{'template': 'flat_cat_ar', 'cost_score': 1245.7512519999982, 'sim_time_us': 124575.12519999982, 'local_ops': 99, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'builtin_code': 'def evolved_hs_c_32mixed(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    flat = torch.cat([t.reshape(-1) for t in grads]); r = xm.all_reduce(xm.REDUCE_SUM, flat)\\n    outs = []; off = 0\\n    for t in grads: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:flat_cat_ar"
+ },
+ {
+  "raw": [
+   "baseline:bucketed_ar",
+   "{'template': 'bucketed_ar', 'cost_score': 1255.3309527139077, 'sim_time_us': 125533.09527139078, 'local_ops': 108, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 4, '_params': {'builtin_code': '\\\\\\ndef evolved_hs_c_32mixed(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"in-order buckets of 8 tensors each (size-independent; a few dispatches, exact bytes)\"\"\"\\n    outs = []\\n    for b in range(0, len(grads), 8):\\n        chunk = grads[b:b + 8]; flat = torch.cat([t.reshape(-1) for t in chunk]); r = xm.all_reduce(xm.REDUCE_SUM, flat); off = 0\\n        for t in chunk: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:bucketed_ar"
+ },
+ {
+  "raw": [
+   "baseline:per_tensor_ar",
+   "{'template': 'per_tensor_ar', 'cost_score': 1341.028940594263, 'sim_time_us': 134102.8940594263, 'local_ops': 32, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 32, '_params': {'builtin_code': 'def evolved_hs_c_32mixed(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"developer baseline: one all_reduce per gradient tensor (DDP hook per parameter)\"\"\"\\n    return [xm.all_reduce(xm.REDUCE_SUM, t) for t in grads]\\n'}}"
+  ],
+  "name": "baseline:per_tensor_ar"
+ }
+]

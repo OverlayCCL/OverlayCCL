@@ -1,0 +1,44 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of one transformer layer (6 heterogeneous tensors)
+======================================================================
+  per_tensor_ar: 16706.6 us, 6 local ops, 0 ag, 6 ar, 0 cp
+  flat_cat_ar: 16957.7 us, 21 local ops, 0 ag, 1 ar, 0 cp
+  bucketed_ar: 16957.7 us, 21 local ops, 0 ag, 1 ar, 0 cp
+  bucketed_ar_4: 20265.2 us, 23 local ops, 0 ag, 2 ar, 0 cp
+  bucketed_ar_16: 16957.7 us, 21 local ops, 0 ag, 1 ar, 0 cp
+
+  Best baseline: baseline:per_tensor_ar (16706.6 us)
+
+======================================================================
+[Phase 3 / Strategy-Enumerate] DP gradient all-reduce of one transformer layer (6 heterogeneous tensors)
+======================================================================
+  K=5 strategies, R=2 refinement rounds per top-2 (budget ~10 LLM calls)
+  Enumerated 5 strategies:
+    1. Single flat all-reduce: Concatenate all 6 tensors into one flat buffer and issue a single all_reduce cal...
+    2. Two-bucket split by size: Sort tensors by size, split into 2 buckets (3 largest, 3 smallest), concatenate ...
+    3. Three in-order pair buckets: Bucket consecutive tensor pairs in original order (tensors 0-1, 2-3, 4-5), conca...
+    4. Reduce-scatter then all-gather decomposition: Concatenate all 6 tensors, perform reduce-scatter to distribute partial sums acr...
+    5. Per-tensor pipelined all-reduce: Issue 6 separate all_reduce calls (one per tensor) without intermediate synchron...
+  Strategy 1 (Single flat all-reduce): sim=16957.7 us
+  Strategy 2 (Two-bucket split by size): sim=18975.0 us
+  Strategy 3 (Three in-order pair buckets): sim=20265.2 us
+  Strategy 4 (Reduce-scatter then all-gather decomposition): sim=16957.7 us
+  Strategy 5 (Per-tensor pipelined all-reduce): sim=16706.6 us
+
+  Top after enumeration:
+    Per-tensor pipelined all-reduce: 16706.6 us
+    Single flat all-reduce: 16957.7 us
+    top 2 round 2: NEW BEST 16706.6 us (1.5% improvement)
+
+  Strategy-Enumerate complete. 7 total candidates.
+  Best: Per-tensor pipelined all-reduce (sim=16706.6 us)
+
+=== Phase 3 result for layer_grads_hetero_ar (wall 73s): 6 candidates, sim ranking ===
+           1e+18  baseline:per_tensor_ar  code=no
+           1e+18  strat:Per-tensor pipelined all-reduc  code=no
+           1e+18  baseline:flat_cat_ar  code=no
+           1e+18  baseline:bucketed_ar  code=no
+           1e+18  baseline:bucketed_ar_16  code=no
+           1e+18  baseline:bucketed_ar_4  code=no

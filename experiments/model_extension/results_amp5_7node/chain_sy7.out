@@ -1,0 +1,44 @@
+=== [23:54:37] e2e_base_per_tensor
+[bench] per_mb steady_mean=39.60ms steady_median=39.49ms final_loss=13.863
+=== [00:01:06] e2e_bund_per_tensor
+[bench] bundled steady_mean=14.97ms steady_median=14.98ms final_loss=3.466
+=== [00:05:02] e2e_bund_buckets_8
+[bench] bundled steady_mean=17.85ms steady_median=17.89ms final_loss=3.466
+=== [00:23:43] e2e_bund_flat
+=== [00:44:12] e2e_bund_per_layer
+[bench] bundled steady_mean=70.25ms steady_median=70.17ms final_loss=3.466
+=== [00:49:55] e2e_mixed_base
+[bench] per_mb steady_mean=40.08ms steady_median=39.42ms final_loss=13.863
+=== [00:52:56] e2e_mixed_bund_per_tensor
+[bench] bundled steady_mean=14.95ms steady_median=14.98ms final_loss=3.466
+=== [00:56:55] e2e_mixed_bund_bf16_flat
+SY7_A_DONE
+=== [01:17:06] e2e_iso_base
+[bench] per_mb steady_mean=38.50ms steady_median=38.55ms final_loss=13.863
+=== [01:18:12] e2e_iso_bund_per_tensor
+[bench] bundled steady_mean=12.77ms steady_median=12.76ms final_loss=3.466
+=== [01:20:43] e2e_iso_bund_buckets_8
+[bench] bundled steady_mean=15.26ms steady_median=15.16ms final_loss=3.466
+=== [01:22:01] e2e_iso_bund_per_layer
+[bench] bundled steady_mean=13.96ms steady_median=13.98ms final_loss=3.466
+=== [01:23:20] e2e_iso_bund_flat
+[bench] bundled steady_mean=16.23ms steady_median=16.29ms final_loss=3.466
+=== [01:24:47] e2e_iso_mixed_bund_bf16_flat
+[bench] bundled steady_mean=16.26ms steady_median=16.27ms final_loss=3.466
+SY7_A2_DONE
+SY7_B_DONE
+SY7_C_DONE
+=== [04:36:11] e2e_5n_base
+[bench] per_mb steady_mean=38.44ms steady_median=38.29ms final_loss=13.863
+=== [04:39:06] e2e_5n_bund
+[bench] bundled steady_mean=14.64ms steady_median=14.58ms final_loss=3.466
+=== [04:42:59] e2e_3n_base
+[bench] per_mb steady_mean=36.47ms steady_median=36.34ms final_loss=13.863
+=== [04:45:29] e2e_3n_bund
+[bench] bundled steady_mean=14.39ms steady_median=14.36ms final_loss=3.466
+SY7_D_DONE
+=== [04:49:01] e2e_base_per_tensor_s1
+[bench] per_mb steady_mean=39.86ms steady_median=39.89ms final_loss=13.863
+=== [04:50:00] e2e_bund_per_tensor_s1
+[bench] bundled steady_mean=15.06ms steady_median=15.11ms final_loss=3.466
+SY7_ALL_DONE

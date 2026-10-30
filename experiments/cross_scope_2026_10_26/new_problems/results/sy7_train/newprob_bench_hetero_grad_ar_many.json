@@ -1,0 +1,27 @@
+{
+ "problem": "hetero_grad_ar_many",
+ "ws": 32,
+ "results": {
+  "per_tensor_ar": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 19.690871238708496,
+   "mean_ms": 170.77452341715494,
+   "status": "ok"
+  },
+  "p3_pick3": {
+   "max_abs_diff": 0.0068359375,
+   "ok": true,
+   "med_ms": 16.64257049560547,
+   "mean_ms": 18.964179356892902,
+   "status": "ok"
+  },
+  "gate_2": {
+   "max_abs_diff": 0.0068359375,
+   "ok": true,
+   "med_ms": 16.597986221313477,
+   "mean_ms": 35.83869934082031,
+   "status": "ok"
+  }
+ }
+}

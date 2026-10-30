@@ -1,0 +1,100 @@
+--- [08:00:40] bench hs_a_64x64k_512k
+[bench2] hs_a_64x64k_512k per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 9.006261825561523, 'mean_ms': 10.89785893758138, 'status': 'ok'}
+[bench2] hs_a_64x64k_512k flat_cat_ar: {'max_abs_diff': 0.0048828125, 'ok': True, 'med_ms': 15.83409309387207, 'mean_ms': 16.886115074157715, 'status': 'ok'}
+[bench2] hs_a_64x64k_512k bucket_4mb: {'max_abs_diff': 0.0048828125, 'ok': True, 'med_ms': 12.18116283416748, 'mean_ms': 13.226095835367838, 'status': 'ok'}
+[bench2] hs_a_64x64k_512k pad_equal_stack: {'max_abs_diff': 0.0048828125, 'ok': True, 'med_ms': 17.07446575164795, 'mean_ms': 17.174522082010906, 'status': 'ok'}
+[bench2] hs_a_64x64k_512k equal_group_stacks: {'max_abs_diff': 0.0048828125, 'ok': True, 'med_ms': 11.673569679260254, 'mean_ms': 12.096420923868815, 'status': 'ok'}
+[bench2] hs_a_64x64k_512k flat_cat_clone: {'max_abs_diff': 0.0048828125, 'ok': True, 'med_ms': 16.788125038146973, 'mean_ms': 17.272257804870605, 'status': 'ok'}
+[bench2] hs_a_64x64k_512k flat_cat_2d: {'max_abs_diff': 0.0048828125, 'ok': True, 'med_ms': 17.522335052490234, 'mean_ms': 18.45424969991048, 'status': 'ok'}
+[bench2] hs_a_64x64k_512k p3_pick: {'max_abs_diff': 0.0048828125, 'ok': True, 'med_ms': 16.284584999084473, 'mean_ms': 16.851456960042317, 'status': 'ok'}
+[bench2] hs_a_64x64k_512k p3_pick2: {'max_abs_diff': 0.0048828125, 'ok': True, 'med_ms': 12.032747268676758, 'mean_ms': 12.228051821390787, 'status': 'ok'}
+[bench2] hs_a_64x64k_512k p3_pick3: {'max_abs_diff': 0.005859375, 'ok': True, 'med_ms': 12.2298002243042, 'mean_ms': 12.20837434132894, 'status': 'ok'}
+--- [08:01:39] bench probe_het_48_small
+[bench2] probe_het_48_small per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 8.029818534851074, 'mean_ms': 9.695204099019369, 'status': 'ok'}
+[bench2] probe_het_48_small bucket6: {'max_abs_diff': 0.00390625, 'ok': True, 'med_ms': 10.429143905639648, 'mean_ms': 12.360501289367676, 'status': 'ok'}
+[bench2] probe_het_48_small flat_cat_ar: {'max_abs_diff': 0.0048828125, 'ok': True, 'med_ms': 10.37585735321045, 'mean_ms': 13.467192649841309, 'status': 'ok'}
+[bench2] probe_het_48_small p3_pick: {'max_abs_diff': 0.0048828125, 'ok': True, 'med_ms': 45.2425479888916, 'mean_ms': 45.80988089243571, 'status': 'ok'}
+[bench2] probe_het_48_small p3_pick2: {'max_abs_diff': 0.0048828125, 'ok': True, 'med_ms': 10.717630386352539, 'mean_ms': 10.715913772583008, 'status': 'ok'}
+[bench2] probe_het_48_small p3_pick3: {'max_abs_diff': 0.0048828125, 'ok': True, 'med_ms': 10.561347007751465, 'mean_ms': 12.665367126464844, 'status': 'ok'}
+--- [08:02:31] bench hetero_grad_ar_many
+[bench2] hetero_grad_ar_many per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 20.760536193847656, 'mean_ms': 21.26149336496989, 'status': 'ok'}
+[bench2] hetero_grad_ar_many flat_cat_ar: {'max_abs_diff': 0.0078125, 'ok': True, 'med_ms': 20.75815200805664, 'mean_ms': 22.322241465250652, 'status': 'ok'}
+[bench2] hetero_grad_ar_many flat_cat_pad_pow2: {'max_abs_diff': 0.0078125, 'ok': True, 'med_ms': 22.615790367126465, 'mean_ms': 33.968774477640785, 'status': 'ok'}
+[bench2] hetero_grad_ar_many bucket_16mb: {'max_abs_diff': 0.0068359375, 'ok': True, 'med_ms': 31.676650047302246, 'mean_ms': 32.12796847025553, 'status': 'ok'}
+[bench2] hetero_grad_ar_many bucket_16mb_pad: {'max_abs_diff': 0.0068359375, 'ok': True, 'med_ms': 32.25290775299072, 'mean_ms': 34.49183305104574, 'status': 'ok'}
+[bench2] hetero_grad_ar_many flat_copy_into_buffer: {'max_abs_diff': 0.0078125, 'ok': True, 'med_ms': 351.72510147094727, 'mean_ms': 356.54276212056476, 'status': 'ok'}
+[bench2] hetero_grad_ar_many pad_equal_cat: {'max_abs_diff': 0.0078125, 'ok': True, 'med_ms': 155.3136110305786, 'mean_ms': 165.25327364603677, 'status': 'ok'}
+[bench2] hetero_grad_ar_many p3_pick2: {'max_abs_diff': 0.0068359375, 'ok': True, 'med_ms': 119.75908279418945, 'mean_ms': 124.84130064646403, 'status': 'ok'}
+[bench2] hetero_grad_ar_many p3_pick3: {'max_abs_diff': 0.0068359375, 'ok': True, 'med_ms': 18.952250480651855, 'mean_ms': 29.672614733378094, 'status': 'ok'}
+--- [08:05:34] bench probe_het_48_mid
+[bench2] probe_het_48_mid per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 26.56090259552002, 'mean_ms': 33.245293299357094, 'status': 'ok'}
+[bench2] probe_het_48_mid bucket6: {'max_abs_diff': 0.0078125, 'ok': True, 'med_ms': 35.646915435791016, 'mean_ms': 54.963390032450356, 'status': 'ok'}
+[bench2] probe_het_48_mid flat_cat_ar: {'max_abs_diff': 0.0078125, 'ok': True, 'med_ms': 76.07555389404297, 'mean_ms': 89.32977517445882, 'status': 'ok'}
+[bench2] probe_het_48_mid p3_pick: {'max_abs_diff': 0.0078125, 'ok': True, 'med_ms': 76.45547389984131, 'mean_ms': 110.78677177429199, 'status': 'ok'}
+[bench2] probe_het_48_mid p3_pick2: {'max_abs_diff': 0.0078125, 'ok': True, 'med_ms': 628.8074254989624, 'mean_ms': 635.8796914418539, 'status': 'ok'}
+[bench2] probe_het_48_mid p3_pick3: {'max_abs_diff': 0.0078125, 'ok': True, 'med_ms': 34.80863571166992, 'mean_ms': 42.16600259145101, 'status': 'ok'}
+--- [08:08:55] bench layer_grads_hetero_ar
+[bench2] layer_grads_hetero_ar per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 9.697198867797852, 'mean_ms': 503.3666451772054, 'status': 'ok'}
+[bench2] layer_grads_hetero_ar flat_cat_ar: {'max_abs_diff': 0.0068359375, 'ok': True, 'med_ms': 10.425329208374023, 'mean_ms': 12.206363677978516, 'status': 'ok'}
+[bench2] layer_grads_hetero_ar bucket_32mb: {'max_abs_diff': 0.005859375, 'ok': True, 'med_ms': 11.138081550598145, 'mean_ms': 17.286451657613117, 'status': 'ok'}
+[bench2] layer_grads_hetero_ar equal_group_stacks: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 11.323928833007812, 'mean_ms': 22.21236228942871, 'status': 'ok'}
+[bench2] layer_grads_hetero_ar flat_cat_clone: {'max_abs_diff': 0.0068359375, 'ok': True, 'med_ms': 10.46907901763916, 'mean_ms': 17.95984109242757, 'status': 'ok'}
+[bench2] layer_grads_hetero_ar flat_cat_2d: {'max_abs_diff': 0.0068359375, 'ok': True, 'med_ms': 11.032581329345703, 'mean_ms': 16.60909652709961, 'status': 'ok'}
+[bench2] layer_grads_hetero_ar per_tensor_marked: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 24.63698387145996, 'mean_ms': 33.2747220993042, 'status': 'ok'}
+[bench2] layer_grads_hetero_ar p3_pick: {'max_abs_diff': 0.0068359375, 'ok': True, 'med_ms': 10.350823402404785, 'mean_ms': 15.842898686726889, 'status': 'ok'}
+[bench2] layer_grads_hetero_ar p3_pick3: {'max_abs_diff': 0.0068359375, 'ok': True, 'med_ms': 10.476350784301758, 'mean_ms': 10.601981480916342, 'status': 'ok'}
+--- [08:11:31] bench model_grads_4layers
+[bench2] model_grads_4layers per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 24.979710578918457, 'mean_ms': 30.855902036031086, 'status': 'ok'}
+[bench2] model_grads_4layers per_layer_bucket: {'max_abs_diff': 0.0078125, 'ok': True, 'med_ms': 29.382944107055664, 'mean_ms': 35.26930014292399, 'status': 'ok'}
+[bench2] model_grads_4layers bucket_32mb: {'max_abs_diff': 0.0078125, 'ok': True, 'med_ms': 35.931944847106934, 'mean_ms': 86.37874126434326, 'status': 'ok'}
+[bench2] model_grads_4layers flat_cat_ar: {'max_abs_diff': 0.0078125, 'ok': True, 'med_ms': 28.495192527770996, 'mean_ms': 35.54781277974447, 'status': 'ok'}
+[bench2] model_grads_4layers per_tensor_marked: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 92.2842025756836, 'mean_ms': 97.35395908355713, 'status': 'ok'}
+[bench2] model_grads_4layers p3_pick: {'max_abs_diff': 0.0078125, 'ok': True, 'med_ms': 29.69992160797119, 'mean_ms': 38.29474449157715, 'status': 'ok'}
+[bench2] model_grads_4layers p3_pick3: {'max_abs_diff': 0.0068359375, 'ok': True, 'med_ms': 35.761117935180664, 'mean_ms': 35.89479923248291, 'status': 'ok'}
+--- [08:15:09] train hs_a_64x64k_512k p3_pick3
+   median_ms 71.6 effective True
+--- [08:16:47] train probe_het_48_small p3_pick
+   NO RESULT
+--- [08:17:16] train probe_het_48_small p3_pick3
+   median_ms 54.61 effective True
+--- [08:18:53] train hetero_grad_ar_many flat_copy_into_buffer
+   NO RESULT
+--- [08:19:26] train hetero_grad_ar_many p3_pick3
+   median_ms 65.15 effective True
+--- [08:21:09] train probe_het_48_mid p3_pick2
+   NO RESULT
+--- [08:21:48] train probe_het_48_mid p3_pick3
+   median_ms 806.33 effective True
+--- [08:44:13] train layer_grads_hetero_ar per_tensor_ar
+   median_ms 61.52 effective True
+--- [08:45:16] train layer_grads_hetero_ar flat_cat_ar
+   median_ms 36.62 effective True
+--- [08:46:00] train layer_grads_hetero_ar bucket_32mb
+   median_ms 44.03 effective True
+--- [08:47:11] train layer_grads_hetero_ar equal_group_stacks
+   median_ms 44.0 effective True
+--- [08:48:16] train layer_grads_hetero_ar flat_cat_clone
+   median_ms 36.95 effective True
+--- [08:49:02] train layer_grads_hetero_ar flat_cat_2d
+   median_ms 39.82 effective True
+--- [08:50:14] train layer_grads_hetero_ar per_tensor_marked
+   median_ms 82.64 effective True
+--- [08:52:22] train layer_grads_hetero_ar p3_pick
+   median_ms 36.76 effective True
+--- [08:53:07] train layer_grads_hetero_ar p3_pick3
+   median_ms 36.83 effective True
+--- [08:53:57] train model_grads_4layers per_tensor_ar
+   median_ms 433.12 effective True
+--- [08:57:38] train model_grads_4layers per_layer_bucket
+   median_ms 100.99 effective True
+--- [08:59:16] train model_grads_4layers bucket_32mb
+   median_ms 169.44 effective True
+--- [09:03:04] train model_grads_4layers flat_cat_ar
+   median_ms 96.84 effective True
+--- [09:04:22] train model_grads_4layers per_tensor_marked
+   median_ms 308.31 effective True
+--- [09:07:34] train model_grads_4layers p3_pick
+   median_ms 100.66 effective True
+--- [09:09:16] train model_grads_4layers p3_pick3
+   median_ms 123.89 effective True
+=== newprobs done 09:11:15 ===

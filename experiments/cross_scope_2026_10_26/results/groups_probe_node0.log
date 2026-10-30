@@ -1,0 +1,1316 @@
+W1026 03:02:14.260000 1824646 torch/distributed/run.py:803] 
+W1026 03:02:14.260000 1824646 torch/distributed/run.py:803] *****************************************
+W1026 03:02:14.260000 1824646 torch/distributed/run.py:803] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1026 03:02:14.260000 1824646 torch/distributed/run.py:803] *****************************************
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:9: DeprecationWarning: Use torch_xla.device instead
+  dev = xm.xla_device(); rank = xr.global_ordinal(); ws = int(os.environ["WORLD_SIZE"]); nn = ws // 32; rpn = 32
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:9: DeprecationWarning: Use torch_xla.device instead
+  dev = xm.xla_device(); rank = xr.global_ordinal(); ws = int(os.environ["WORLD_SIZE"]); nn = ws // 32; rpn = 32
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:9: DeprecationWarning: Use torch_xla.device instead
+  dev = xm.xla_device(); rank = xr.global_ordinal(); ws = int(os.environ["WORLD_SIZE"]); nn = ws // 32; rpn = 32
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:9: DeprecationWarning: Use torch_xla.device instead
+  dev = xm.xla_device(); rank = xr.global_ordinal(); ws = int(os.environ["WORLD_SIZE"]); nn = ws // 32; rpn = 32
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:9: DeprecationWarning: Use torch_xla.device instead
+  dev = xm.xla_device(); rank = xr.global_ordinal(); ws = int(os.environ["WORLD_SIZE"]); nn = ws // 32; rpn = 32
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:9: DeprecationWarning: Use torch_xla.device instead
+  dev = xm.xla_device(); rank = xr.global_ordinal(); ws = int(os.environ["WORLD_SIZE"]); nn = ws // 32; rpn = 32
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:9: DeprecationWarning: Use torch_xla.device instead
+  dev = xm.xla_device(); rank = xr.global_ordinal(); ws = int(os.environ["WORLD_SIZE"]); nn = ws // 32; rpn = 32
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:9: DeprecationWarning: Use torch_xla.device instead
+  dev = xm.xla_device(); rank = xr.global_ordinal(); ws = int(os.environ["WORLD_SIZE"]); nn = ws // 32; rpn = 32
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:9: DeprecationWarning: Use torch_xla.device instead
+  dev = xm.xla_device(); rank = xr.global_ordinal(); ws = int(os.environ["WORLD_SIZE"]); nn = ws // 32; rpn = 32
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:9: DeprecationWarning: Use torch_xla.device instead
+  dev = xm.xla_device(); rank = xr.global_ordinal(); ws = int(os.environ["WORLD_SIZE"]); nn = ws // 32; rpn = 32
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:9: DeprecationWarning: Use torch_xla.device instead
+  dev = xm.xla_device(); rank = xr.global_ordinal(); ws = int(os.environ["WORLD_SIZE"]); nn = ws // 32; rpn = 32
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:9: DeprecationWarning: Use torch_xla.device instead
+  dev = xm.xla_device(); rank = xr.global_ordinal(); ws = int(os.environ["WORLD_SIZE"]); nn = ws // 32; rpn = 32
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:9: DeprecationWarning: Use torch_xla.device instead
+  dev = xm.xla_device(); rank = xr.global_ordinal(); ws = int(os.environ["WORLD_SIZE"]); nn = ws // 32; rpn = 32
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:9: DeprecationWarning: Use torch_xla.device instead
+  dev = xm.xla_device(); rank = xr.global_ordinal(); ws = int(os.environ["WORLD_SIZE"]); nn = ws // 32; rpn = 32
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:9: DeprecationWarning: Use torch_xla.device instead
+  dev = xm.xla_device(); rank = xr.global_ordinal(); ws = int(os.environ["WORLD_SIZE"]); nn = ws // 32; rpn = 32
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:9: DeprecationWarning: Use torch_xla.device instead
+  dev = xm.xla_device(); rank = xr.global_ordinal(); ws = int(os.environ["WORLD_SIZE"]); nn = ws // 32; rpn = 32
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:9: DeprecationWarning: Use torch_xla.device instead
+  dev = xm.xla_device(); rank = xr.global_ordinal(); ws = int(os.environ["WORLD_SIZE"]); nn = ws // 32; rpn = 32
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:9: DeprecationWarning: Use torch_xla.device instead
+  dev = xm.xla_device(); rank = xr.global_ordinal(); ws = int(os.environ["WORLD_SIZE"]); nn = ws // 32; rpn = 32
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:9: DeprecationWarning: Use torch_xla.device instead
+  dev = xm.xla_device(); rank = xr.global_ordinal(); ws = int(os.environ["WORLD_SIZE"]); nn = ws // 32; rpn = 32
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:9: DeprecationWarning: Use torch_xla.device instead
+  dev = xm.xla_device(); rank = xr.global_ordinal(); ws = int(os.environ["WORLD_SIZE"]); nn = ws // 32; rpn = 32
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:9: DeprecationWarning: Use torch_xla.device instead
+  dev = xm.xla_device(); rank = xr.global_ordinal(); ws = int(os.environ["WORLD_SIZE"]); nn = ws // 32; rpn = 32
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:9: DeprecationWarning: Use torch_xla.device instead
+  dev = xm.xla_device(); rank = xr.global_ordinal(); ws = int(os.environ["WORLD_SIZE"]); nn = ws // 32; rpn = 32
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:9: DeprecationWarning: Use torch_xla.device instead
+  dev = xm.xla_device(); rank = xr.global_ordinal(); ws = int(os.environ["WORLD_SIZE"]); nn = ws // 32; rpn = 32
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:9: DeprecationWarning: Use torch_xla.device instead
+  dev = xm.xla_device(); rank = xr.global_ordinal(); ws = int(os.environ["WORLD_SIZE"]); nn = ws // 32; rpn = 32
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:9: DeprecationWarning: Use torch_xla.device instead
+  dev = xm.xla_device(); rank = xr.global_ordinal(); ws = int(os.environ["WORLD_SIZE"]); nn = ws // 32; rpn = 32
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:9: DeprecationWarning: Use torch_xla.device instead
+  dev = xm.xla_device(); rank = xr.global_ordinal(); ws = int(os.environ["WORLD_SIZE"]); nn = ws // 32; rpn = 32
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:9: DeprecationWarning: Use torch_xla.device instead
+  dev = xm.xla_device(); rank = xr.global_ordinal(); ws = int(os.environ["WORLD_SIZE"]); nn = ws // 32; rpn = 32
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:9: DeprecationWarning: Use torch_xla.device instead
+  dev = xm.xla_device(); rank = xr.global_ordinal(); ws = int(os.environ["WORLD_SIZE"]); nn = ws // 32; rpn = 32
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:9: DeprecationWarning: Use torch_xla.device instead
+  dev = xm.xla_device(); rank = xr.global_ordinal(); ws = int(os.environ["WORLD_SIZE"]); nn = ws // 32; rpn = 32
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:9: DeprecationWarning: Use torch_xla.device instead
+  dev = xm.xla_device(); rank = xr.global_ordinal(); ws = int(os.environ["WORLD_SIZE"]); nn = ws // 32; rpn = 32
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:9: DeprecationWarning: Use torch_xla.device instead
+  dev = xm.xla_device(); rank = xr.global_ordinal(); ws = int(os.environ["WORLD_SIZE"]); nn = ws // 32; rpn = 32
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:9: DeprecationWarning: Use torch_xla.device instead
+  dev = xm.xla_device(); rank = xr.global_ordinal(); ws = int(os.environ["WORLD_SIZE"]); nn = ws // 32; rpn = 32
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+................................
+Compiler status PASS
+
+
+
+Compiler status PASS
+Compiler status PASS
+Compiler status PASS
+
+Compiler status PASS
+
+Compiler status PASS
+
+
+Compiler status PASS
+Compiler status PASS
+
+Compiler status PASS
+
+Compiler status PASS
+
+Compiler status PASS
+
+
+
+Compiler status PASS
+Compiler status PASS
+Compiler status PASS
+
+
+Compiler status PASS
+Compiler status PASS
+
+2026-10-26 03:02:40.000017:  1824736  [INFO]: Compilation Successfully Completed for model.MODULE_2704194921630715412+e30acd3a.hlo_module.pb
+Compiler status PASS
+
+Compiler status PASS
+
+
+2026-10-26 03:02:40.000029:  1824738  [INFO]: Compilation Successfully Completed for model.MODULE_235146047659907638+e30acd3a.hlo_module.pb
+
+Compiler status PASS
+Compiler status PASS
+Compiler status PASS
+
+
+Compiler status PASS
+
+Compiler status PASS
+Compiler status PASS
+2026-10-26 03:02:40.000051:  1824735  [INFO]: Compilation Successfully Completed for model.MODULE_10498378566450851216+e30acd3a.hlo_module.pb
+2026-10-26 03:02:40.000052:  1824716  [INFO]: Compilation Successfully Completed for model.MODULE_1399970386419024353+e30acd3a.hlo_module.pb
+
+
+Compiler status PASS
+
+2026-10-26 03:02:40.000058:  1824737  [INFO]: Compilation Successfully Completed for model.MODULE_4439520447379135899+e30acd3a.hlo_module.pb
+Compiler status PASS
+Compiler status PASS
+
+Compiler status PASS
+2026-10-26 03:02:40.000065:  1824713  [INFO]: Compilation Successfully Completed for model.MODULE_13691258524541181742+e30acd3a.hlo_module.pb
+2026-10-26 03:02:40.000071:  1824723  [INFO]: Compilation Successfully Completed for model.MODULE_173665206766810008+e30acd3a.hlo_module.pb
+2026-10-26 03:02:40.000071:  1824728  [INFO]: Compilation Successfully Completed for model.MODULE_11419879008050516040+e30acd3a.hlo_module.pb
+2026-10-26 03:02:40.000072:  1824730  [INFO]: Compilation Successfully Completed for model.MODULE_275295665833437389+e30acd3a.hlo_module.pb
+
+Compiler status PASS
+2026-10-26 03:02:40.000073:  1824732  [INFO]: Compilation Successfully Completed for model.MODULE_17464365498069064609+e30acd3a.hlo_module.pb
+
+Compiler status PASS
+2026-10-26 03:02:40.000085:  1824724  [INFO]: Compilation Successfully Completed for model.MODULE_6734873624444554971+e30acd3a.hlo_module.pb
+2026-10-26 03:02:40.000086:  1824743  [INFO]: Compilation Successfully Completed for model.MODULE_18362429628689261863+e30acd3a.hlo_module.pb
+2026-10-26 03:02:40.000090:  1824712  [INFO]: Compilation Successfully Completed for model.MODULE_7277900455692915936+e30acd3a.hlo_module.pb
+2026-10-26 03:02:40.000095:  1824715  [INFO]: Compilation Successfully Completed for model.MODULE_2686721922167435772+e30acd3a.hlo_module.pb
+2026-10-26 03:02:40.000109:  1824725  [INFO]: Compilation Successfully Completed for model.MODULE_15335189630343519056+e30acd3a.hlo_module.pb
+2026-10-26 03:02:40.000113:  1824734  [INFO]: Compilation Successfully Completed for model.MODULE_4681122995412756525+e30acd3a.hlo_module.pb
+2026-10-26 03:02:40.000114:  1824717  [INFO]: Compilation Successfully Completed for model.MODULE_9267153159198772346+e30acd3a.hlo_module.pb
+2026-10-26 03:02:40.000115:  1824721  [INFO]: Compilation Successfully Completed for model.MODULE_9048412530795831121+e30acd3a.hlo_module.pb
+2026-10-26 03:02:40.000117:  1824742  [INFO]: Compilation Successfully Completed for model.MODULE_5842211642295955947+e30acd3a.hlo_module.pb
+2026-10-26 03:02:40.000118:  1824726  [INFO]: Compilation Successfully Completed for model.MODULE_3584533994512333468+e30acd3a.hlo_module.pb
+2026-10-26 03:02:40.000124:  1824741  [INFO]: Compilation Successfully Completed for model.MODULE_11984141242770006531+e30acd3a.hlo_module.pb
+2026-10-26 03:02:40.000130:  1824722  [INFO]: Compilation Successfully Completed for model.MODULE_605570272901349597+e30acd3a.hlo_module.pb
+2026-10-26 03:02:40.000131:  1824714  [INFO]: Compilation Successfully Completed for model.MODULE_6656155499736976626+e30acd3a.hlo_module.pb
+2026-10-26 03:02:40.000132:  1824727  [INFO]: Compilation Successfully Completed for model.MODULE_785625654521973187+e30acd3a.hlo_module.pb
+
+Compiler status PASS
+
+Compiler status PASS
+2026-10-26 03:02:40.000144:  1824719  [INFO]: Compilation Successfully Completed for model.MODULE_8022244364345714113+e30acd3a.hlo_module.pb
+2026-10-26 03:02:40.000157:  1824729  [INFO]: Compilation Successfully Completed for model.MODULE_14174427647834762223+e30acd3a.hlo_module.pb
+2026-10-26 03:02:40.000160:  1824733  [INFO]: Compilation Successfully Completed for model.MODULE_8637260198039464258+e30acd3a.hlo_module.pb
+2026-10-26 03:02:40.000161:  1824718  [INFO]: Compilation Successfully Completed for model.MODULE_17908590708738380389+e30acd3a.hlo_module.pb
+2026-10-26 03:02:40.000161:  1824731  [INFO]: Compilation Successfully Completed for model.MODULE_4708267100894465044+e30acd3a.hlo_module.pb
+2026-10-26 03:02:40.000163:  1824739  [INFO]: Compilation Successfully Completed for model.MODULE_8790323448287861637+e30acd3a.hlo_module.pb
+2026-10-26 03:02:40.000199:  1824740  [INFO]: Compilation Successfully Completed for model.MODULE_3056946251222793165+e30acd3a.hlo_module.pb
+2026-10-26 03:02:40.000209:  1824720  [INFO]: Compilation Successfully Completed for model.MODULE_1988140240349249563+e30acd3a.hlo_module.pb
+.
+Compiler status PASS
+2026-10-26 03:02:41.000518:  1824736  [INFO]: Compilation Successfully Completed for model.MODULE_14618577486563603049+e30acd3a.hlo_module.pb
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+2026-10-26 03:02:45.000083:  1824738  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14618577486563603049+e30acd3a/model.neff
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+2026-10-26 03:02:45.000101:  1824735  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14618577486563603049+e30acd3a/model.neff
+2026-10-26 03:02:45.000104:  1824716  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14618577486563603049+e30acd3a/model.neff
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+2026-10-26 03:02:45.000111:  1824713  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14618577486563603049+e30acd3a/model.neff
+2026-10-26 03:02:45.000112:  1824737  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14618577486563603049+e30acd3a/model.neff
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+2026-10-26 03:02:45.000118:  1824723  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14618577486563603049+e30acd3a/model.neff
+2026-10-26 03:02:45.000118:  1824728  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14618577486563603049+e30acd3a/model.neff
+2026-10-26 03:02:45.000119:  1824730  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14618577486563603049+e30acd3a/model.neff
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+2026-10-26 03:02:45.000124:  1824732  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14618577486563603049+e30acd3a/model.neff
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+2026-10-26 03:02:45.000129:  1824724  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14618577486563603049+e30acd3a/model.neff
+2026-10-26 03:02:45.000130:  1824743  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14618577486563603049+e30acd3a/model.neff
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+2026-10-26 03:02:45.000142:  1824712  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14618577486563603049+e30acd3a/model.neff
+2026-10-26 03:02:45.000143:  1824715  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14618577486563603049+e30acd3a/model.neff
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+2026-10-26 03:02:45.000157:  1824717  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14618577486563603049+e30acd3a/model.neff
+2026-10-26 03:02:45.000158:  1824734  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14618577486563603049+e30acd3a/model.neff
+2026-10-26 03:02:45.000159:  1824725  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14618577486563603049+e30acd3a/model.neff
+2026-10-26 03:02:45.000160:  1824742  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14618577486563603049+e30acd3a/model.neff
+2026-10-26 03:02:45.000161:  1824726  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14618577486563603049+e30acd3a/model.neff
+2026-10-26 03:02:45.000165:  1824741  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14618577486563603049+e30acd3a/model.neff
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+2026-10-26 03:02:45.000174:  1824722  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14618577486563603049+e30acd3a/model.neff
+2026-10-26 03:02:45.000175:  1824714  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14618577486563603049+e30acd3a/model.neff
+2026-10-26 03:02:45.000176:  1824727  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14618577486563603049+e30acd3a/model.neff
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+2026-10-26 03:02:45.000187:  1824719  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14618577486563603049+e30acd3a/model.neff
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+2026-10-26 03:02:45.000201:  1824718  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14618577486563603049+e30acd3a/model.neff
+2026-10-26 03:02:45.000203:  1824739  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14618577486563603049+e30acd3a/model.neff
+2026-10-26 03:02:45.000204:  1824729  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14618577486563603049+e30acd3a/model.neff
+2026-10-26 03:02:45.000206:  1824731  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14618577486563603049+e30acd3a/model.neff
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+2026-10-26 03:02:45.000241:  1824740  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14618577486563603049+e30acd3a/model.neff
+2026-10-26 03:02:45.000249:  1824720  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14618577486563603049+e30acd3a/model.neff
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+2026-10-26 03:02:50.000160:  1824721  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14618577486563603049+e30acd3a/model.neff
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+2026-10-26 03:02:50.000206:  1824733  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14618577486563603049+e30acd3a/model.neff
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+.
+Compiler status PASS
+2026-10-26 03:02:51.000721:  1824733  [INFO]: Compilation Successfully Completed for model.MODULE_17515862970918521405+e30acd3a.hlo_module.pb
+.
+Compiler status PASS
+2026-10-26 03:02:53.000169:  1824733  [INFO]: Compilation Successfully Completed for model.MODULE_14616279469233006455+e30acd3a.hlo_module.pb
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+2026-10-26 03:02:55.000303:  1824729  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_17515862970918521405+e30acd3a/model.neff
+2026-10-26 03:02:55.000305:  1824719  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_17515862970918521405+e30acd3a/model.neff
+2026-10-26 03:02:55.000305:  1824713  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_17515862970918521405+e30acd3a/model.neff
+2026-10-26 03:02:55.000306:  1824718  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_17515862970918521405+e30acd3a/model.neff
+2026-10-26 03:02:55.000306:  1824728  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_17515862970918521405+e30acd3a/model.neff
+2026-10-26 03:02:55.000308:  1824724  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_17515862970918521405+e30acd3a/model.neff
+2026-10-26 03:02:55.000309:  1824741  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_17515862970918521405+e30acd3a/model.neff
+2026-10-26 03:02:55.000311:  1824712  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_17515862970918521405+e30acd3a/model.neff
+2026-10-26 03:02:55.000312:  1824735  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_17515862970918521405+e30acd3a/model.neff
+2026-10-26 03:02:55.000314:  1824723  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_17515862970918521405+e30acd3a/model.neff
+2026-10-26 03:02:55.000315:  1824732  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_17515862970918521405+e30acd3a/model.neff
+2026-10-26 03:02:55.000315:  1824740  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_17515862970918521405+e30acd3a/model.neff
+2026-10-26 03:02:55.000315:  1824716  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_17515862970918521405+e30acd3a/model.neff
+2026-10-26 03:02:55.000317:  1824730  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_17515862970918521405+e30acd3a/model.neff
+2026-10-26 03:02:55.000318:  1824742  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_17515862970918521405+e30acd3a/model.neff
+2026-10-26 03:02:55.000319:  1824717  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_17515862970918521405+e30acd3a/model.neff
+2026-10-26 03:02:55.000320:  1824734  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_17515862970918521405+e30acd3a/model.neff
+2026-10-26 03:02:55.000321:  1824721  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_17515862970918521405+e30acd3a/model.neff
+2026-10-26 03:02:55.000323:  1824720  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_17515862970918521405+e30acd3a/model.neff
+2026-10-26 03:02:55.000323:  1824726  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_17515862970918521405+e30acd3a/model.neff
+2026-10-26 03:02:55.000325:  1824739  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_17515862970918521405+e30acd3a/model.neff
+2026-10-26 03:02:55.000325:  1824714  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_17515862970918521405+e30acd3a/model.neff
+2026-10-26 03:02:55.000327:  1824722  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_17515862970918521405+e30acd3a/model.neff
+2026-10-26 03:02:55.000327:  1824743  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_17515862970918521405+e30acd3a/model.neff
+2026-10-26 03:02:55.000328:  1824731  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_17515862970918521405+e30acd3a/model.neff
+2026-10-26 03:02:55.000330:  1824737  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_17515862970918521405+e30acd3a/model.neff
+2026-10-26 03:02:55.000331:  1824715  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_17515862970918521405+e30acd3a/model.neff
+2026-10-26 03:02:55.000332:  1824736  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_17515862970918521405+e30acd3a/model.neff
+2026-10-26 03:02:55.000332:  1824738  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_17515862970918521405+e30acd3a/model.neff
+2026-10-26 03:02:55.000338:  1824729  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14616279469233006455+e30acd3a/model.neff
+2026-10-26 03:02:55.000339:  1824713  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14616279469233006455+e30acd3a/model.neff
+2026-10-26 03:02:55.000341:  1824719  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14616279469233006455+e30acd3a/model.neff
+2026-10-26 03:02:55.000341:  1824728  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14616279469233006455+e30acd3a/model.neff
+2026-10-26 03:02:55.000344:  1824741  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14616279469233006455+e30acd3a/model.neff
+2026-10-26 03:02:55.000345:  1824724  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14616279469233006455+e30acd3a/model.neff
+2026-10-26 03:02:55.000345:  1824712  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14616279469233006455+e30acd3a/model.neff
+2026-10-26 03:02:55.000347:  1824718  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14616279469233006455+e30acd3a/model.neff
+2026-10-26 03:02:55.000348:  1824735  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14616279469233006455+e30acd3a/model.neff
+2026-10-26 03:02:55.000350:  1824732  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14616279469233006455+e30acd3a/model.neff
+2026-10-26 03:02:55.000351:  1824723  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14616279469233006455+e30acd3a/model.neff
+2026-10-26 03:02:55.000351:  1824730  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14616279469233006455+e30acd3a/model.neff
+2026-10-26 03:02:55.000353:  1824742  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14616279469233006455+e30acd3a/model.neff
+2026-10-26 03:02:55.000354:  1824740  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14616279469233006455+e30acd3a/model.neff
+2026-10-26 03:02:55.000355:  1824721  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14616279469233006455+e30acd3a/model.neff
+2026-10-26 03:02:55.000356:  1824716  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14616279469233006455+e30acd3a/model.neff
+2026-10-26 03:02:55.000357:  1824720  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14616279469233006455+e30acd3a/model.neff
+2026-10-26 03:02:55.000359:  1824734  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14616279469233006455+e30acd3a/model.neff
+2026-10-26 03:02:55.000360:  1824717  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14616279469233006455+e30acd3a/model.neff
+2026-10-26 03:02:55.000363:  1824726  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14616279469233006455+e30acd3a/model.neff
+2026-10-26 03:02:55.000363:  1824722  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14616279469233006455+e30acd3a/model.neff
+2026-10-26 03:02:55.000364:  1824731  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14616279469233006455+e30acd3a/model.neff
+2026-10-26 03:02:55.000364:  1824743  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14616279469233006455+e30acd3a/model.neff
+2026-10-26 03:02:55.000366:  1824714  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14616279469233006455+e30acd3a/model.neff
+2026-10-26 03:02:55.000367:  1824739  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14616279469233006455+e30acd3a/model.neff
+2026-10-26 03:02:55.000369:  1824737  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14616279469233006455+e30acd3a/model.neff
+2026-10-26 03:02:55.000369:  1824736  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14616279469233006455+e30acd3a/model.neff
+2026-10-26 03:02:55.000370:  1824738  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14616279469233006455+e30acd3a/model.neff
+2026-10-26 03:02:55.000376:  1824715  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14616279469233006455+e30acd3a/model.neff
+.
+Compiler status PASS
+2026-10-26 03:02:56.000708:  1824733  [INFO]: Compilation Successfully Completed for model.MODULE_1305418486658562585+e30acd3a.hlo_module.pb
+.
+Compiler status PASS
+2026-10-26 03:02:58.000130:  1824733  [INFO]: Compilation Successfully Completed for model.MODULE_221066407598282762+e30acd3a.hlo_module.pb
+2026-10-26 03:03:00.000293:  1824734  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_1305418486658562585+e30acd3a/model.neff
+2026-10-26 03:03:00.000303:  1824728  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_1305418486658562585+e30acd3a/model.neff
+2026-10-26 03:03:00.000317:  1824725  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_17515862970918521405+e30acd3a/model.neff
+2026-10-26 03:03:00.000321:  1824734  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_221066407598282762+e30acd3a/model.neff
+2026-10-26 03:03:00.000330:  1824727  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_17515862970918521405+e30acd3a/model.neff
+2026-10-26 03:03:00.000330:  1824728  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_221066407598282762+e30acd3a/model.neff
+2026-10-26 03:03:00.000349:  1824725  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14616279469233006455+e30acd3a/model.neff
+2026-10-26 03:03:00.000362:  1824727  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_14616279469233006455+e30acd3a/model.neff
+2026-10-26 03:03:00.000482:  1824725  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_1305418486658562585+e30acd3a/model.neff
+2026-10-26 03:03:00.000495:  1824713  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_1305418486658562585+e30acd3a/model.neff
+2026-10-26 03:03:00.000496:  1824727  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_1305418486658562585+e30acd3a/model.neff
+2026-10-26 03:03:00.000510:  1824725  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_221066407598282762+e30acd3a/model.neff
+2026-10-26 03:03:00.000512:  1824719  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_1305418486658562585+e30acd3a/model.neff
+2026-10-26 03:03:00.000514:  1824729  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_1305418486658562585+e30acd3a/model.neff
+2026-10-26 03:03:00.000522:  1824724  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_1305418486658562585+e30acd3a/model.neff
+2026-10-26 03:03:00.000523:  1824727  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_221066407598282762+e30acd3a/model.neff
+2026-10-26 03:03:00.000525:  1824713  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_221066407598282762+e30acd3a/model.neff
+2026-10-26 03:03:00.000526:  1824721  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_1305418486658562585+e30acd3a/model.neff
+2026-10-26 03:03:00.000528:  1824741  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_1305418486658562585+e30acd3a/model.neff
+2026-10-26 03:03:00.000529:  1824723  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_1305418486658562585+e30acd3a/model.neff
+2026-10-26 03:03:00.000531:  1824740  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_1305418486658562585+e30acd3a/model.neff
+2026-10-26 03:03:00.000531:  1824742  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_1305418486658562585+e30acd3a/model.neff
+2026-10-26 03:03:00.000532:  1824722  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_1305418486658562585+e30acd3a/model.neff
+2026-10-26 03:03:00.000533:  1824726  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_1305418486658562585+e30acd3a/model.neff
+2026-10-26 03:03:00.000533:  1824739  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_1305418486658562585+e30acd3a/model.neff
+2026-10-26 03:03:00.000534:  1824712  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_1305418486658562585+e30acd3a/model.neff
+2026-10-26 03:03:00.000536:  1824718  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_1305418486658562585+e30acd3a/model.neff
+2026-10-26 03:03:00.000538:  1824735  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_1305418486658562585+e30acd3a/model.neff
+2026-10-26 03:03:00.000540:  1824732  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_1305418486658562585+e30acd3a/model.neff
+2026-10-26 03:03:00.000541:  1824738  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_1305418486658562585+e30acd3a/model.neff
+2026-10-26 03:03:00.000542:  1824719  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_221066407598282762+e30acd3a/model.neff
+2026-10-26 03:03:00.000543:  1824729  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_221066407598282762+e30acd3a/model.neff
+2026-10-26 03:03:00.000547:  1824716  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_1305418486658562585+e30acd3a/model.neff
+2026-10-26 03:03:00.000548:  1824717  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_1305418486658562585+e30acd3a/model.neff
+2026-10-26 03:03:00.000549:  1824743  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_1305418486658562585+e30acd3a/model.neff
+2026-10-26 03:03:00.000551:  1824730  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_1305418486658562585+e30acd3a/model.neff
+2026-10-26 03:03:00.000552:  1824736  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_1305418486658562585+e30acd3a/model.neff
+2026-10-26 03:03:00.000553:  1824724  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_221066407598282762+e30acd3a/model.neff
+2026-10-26 03:03:00.000553:  1824731  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_1305418486658562585+e30acd3a/model.neff
+2026-10-26 03:03:00.000556:  1824721  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_221066407598282762+e30acd3a/model.neff
+2026-10-26 03:03:00.000558:  1824741  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_221066407598282762+e30acd3a/model.neff
+2026-10-26 03:03:00.000558:  1824720  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_1305418486658562585+e30acd3a/model.neff
+2026-10-26 03:03:00.000559:  1824723  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_221066407598282762+e30acd3a/model.neff
+2026-10-26 03:03:00.000560:  1824737  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_1305418486658562585+e30acd3a/model.neff
+2026-10-26 03:03:00.000561:  1824715  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_1305418486658562585+e30acd3a/model.neff
+2026-10-26 03:03:00.000562:  1824742  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_221066407598282762+e30acd3a/model.neff
+2026-10-26 03:03:00.000563:  1824726  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_221066407598282762+e30acd3a/model.neff
+2026-10-26 03:03:00.000563:  1824722  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_221066407598282762+e30acd3a/model.neff
+2026-10-26 03:03:00.000563:  1824740  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_221066407598282762+e30acd3a/model.neff
+2026-10-26 03:03:00.000564:  1824739  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_221066407598282762+e30acd3a/model.neff
+2026-10-26 03:03:00.000566:  1824712  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_221066407598282762+e30acd3a/model.neff
+2026-10-26 03:03:00.000566:  1824718  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_221066407598282762+e30acd3a/model.neff
+2026-10-26 03:03:00.000569:  1824735  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_221066407598282762+e30acd3a/model.neff
+2026-10-26 03:03:00.000572:  1824732  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_221066407598282762+e30acd3a/model.neff
+2026-10-26 03:03:00.000575:  1824738  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_221066407598282762+e30acd3a/model.neff
+2026-10-26 03:03:00.000578:  1824716  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_221066407598282762+e30acd3a/model.neff
+2026-10-26 03:03:00.000580:  1824743  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_221066407598282762+e30acd3a/model.neff
+2026-10-26 03:03:00.000581:  1824717  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_221066407598282762+e30acd3a/model.neff
+2026-10-26 03:03:00.000582:  1824730  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_221066407598282762+e30acd3a/model.neff
+2026-10-26 03:03:00.000583:  1824736  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_221066407598282762+e30acd3a/model.neff
+2026-10-26 03:03:00.000585:  1824731  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_221066407598282762+e30acd3a/model.neff
+2026-10-26 03:03:00.000588:  1824720  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_221066407598282762+e30acd3a/model.neff
+2026-10-26 03:03:00.000589:  1824737  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_221066407598282762+e30acd3a/model.neff
+2026-10-26 03:03:00.000590:  1824715  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_221066407598282762+e30acd3a/model.neff
+2026-10-26 03:03:05.000536:  1824714  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_1305418486658562585+e30acd3a/model.neff
+2026-10-26 03:03:05.000565:  1824714  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_221066407598282762+e30acd3a/model.neff
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+.
+Compiler status PASS
+2026-10-26 03:03:07.000055:  1824732  [INFO]: Compilation Successfully Completed for model.MODULE_13711002355171007454+e30acd3a.hlo_module.pb
+2026-10-26 03:03:10.000689:  1824722  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13711002355171007454+e30acd3a/model.neff
+2026-10-26 03:03:10.000689:  1824726  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13711002355171007454+e30acd3a/model.neff
+2026-10-26 03:03:10.000690:  1824729  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13711002355171007454+e30acd3a/model.neff
+2026-10-26 03:03:10.000691:  1824741  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13711002355171007454+e30acd3a/model.neff
+2026-10-26 03:03:10.000692:  1824733  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13711002355171007454+e30acd3a/model.neff
+2026-10-26 03:03:10.000693:  1824712  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13711002355171007454+e30acd3a/model.neff
+2026-10-26 03:03:10.000693:  1824738  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13711002355171007454+e30acd3a/model.neff
+2026-10-26 03:03:10.000695:  1824731  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13711002355171007454+e30acd3a/model.neff
+2026-10-26 03:03:10.000697:  1824716  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13711002355171007454+e30acd3a/model.neff
+2026-10-26 03:03:10.000698:  1824730  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13711002355171007454+e30acd3a/model.neff
+2026-10-26 03:03:10.000699:  1824743  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13711002355171007454+e30acd3a/model.neff
+2026-10-26 03:03:10.000701:  1824735  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13711002355171007454+e30acd3a/model.neff
+2026-10-26 03:03:10.000702:  1824713  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13711002355171007454+e30acd3a/model.neff
+2026-10-26 03:03:10.000703:  1824734  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13711002355171007454+e30acd3a/model.neff
+2026-10-26 03:03:10.000704:  1824720  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13711002355171007454+e30acd3a/model.neff
+2026-10-26 03:03:10.000705:  1824723  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13711002355171007454+e30acd3a/model.neff
+2026-10-26 03:03:10.000706:  1824742  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13711002355171007454+e30acd3a/model.neff
+2026-10-26 03:03:10.000707:  1824714  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13711002355171007454+e30acd3a/model.neff
+2026-10-26 03:03:10.000709:  1824739  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13711002355171007454+e30acd3a/model.neff
+2026-10-26 03:03:10.000711:  1824737  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13711002355171007454+e30acd3a/model.neff
+2026-10-26 03:03:10.000711:  1824717  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13711002355171007454+e30acd3a/model.neff
+2026-10-26 03:03:10.000712:  1824725  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13711002355171007454+e30acd3a/model.neff
+2026-10-26 03:03:10.000712:  1824736  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13711002355171007454+e30acd3a/model.neff
+2026-10-26 03:03:10.000714:  1824727  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13711002355171007454+e30acd3a/model.neff
+2026-10-26 03:03:10.000715:  1824719  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13711002355171007454+e30acd3a/model.neff
+2026-10-26 03:03:10.000716:  1824740  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13711002355171007454+e30acd3a/model.neff
+2026-10-26 03:03:10.000716:  1824721  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13711002355171007454+e30acd3a/model.neff
+2026-10-26 03:03:10.000716:  1824715  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13711002355171007454+e30acd3a/model.neff
+2026-10-26 03:03:10.000716:  1824724  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13711002355171007454+e30acd3a/model.neff
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+........................
+Compiler status PASS
+
+Compiler status PASS
+2026-10-26 03:03:12.000566:  1824741  [INFO]: Compilation Successfully Completed for model.MODULE_3664148699298714005+e30acd3a.hlo_module.pb
+2026-10-26 03:03:12.000584:  1824726  [INFO]: Compilation Successfully Completed for model.MODULE_3520743051789976212+e30acd3a.hlo_module.pb
+
+
+Compiler status PASS
+Compiler status PASS
+
+Compiler status PASS
+
+Compiler status PASS
+
+Compiler status PASS
+
+Compiler status PASS
+
+Compiler status PASS
+
+
+
+Compiler status PASS
+Compiler status PASS
+Compiler status PASS
+
+
+
+Compiler status PASS
+Compiler status PASS
+Compiler status PASS
+
+Compiler status PASS
+
+Compiler status PASS
+
+
+
+
+Compiler status PASS
+Compiler status PASS
+Compiler status PASS
+Compiler status PASS
+
+Compiler status PASS
+2026-10-26 03:03:12.000650:  1824712  [INFO]: Compilation Successfully Completed for model.MODULE_3603673135982837844+e30acd3a.hlo_module.pb
+
+Compiler status PASS
+2026-10-26 03:03:12.000653:  1824738  [INFO]: Compilation Successfully Completed for model.MODULE_8923979648989570508+e30acd3a.hlo_module.pb
+2026-10-26 03:03:12.000654:  1824716  [INFO]: Compilation Successfully Completed for model.MODULE_3903595296180820220+e30acd3a.hlo_module.pb
+2026-10-26 03:03:12.000664:  1824724  [INFO]: Compilation Successfully Completed for model.MODULE_15017037844503538534+e30acd3a.hlo_module.pb
+
+Compiler status PASS
+2026-10-26 03:03:12.000667:  1824714  [INFO]: Compilation Successfully Completed for model.MODULE_11911211322436909899+e30acd3a.hlo_module.pb
+2026-10-26 03:03:12.000672:  1824743  [INFO]: Compilation Successfully Completed for model.MODULE_1479745867752372442+e30acd3a.hlo_module.pb
+2026-10-26 03:03:12.000693:  1824720  [INFO]: Compilation Successfully Completed for model.MODULE_2723819057295263409+e30acd3a.hlo_module.pb
+2026-10-26 03:03:12.000694:  1824742  [INFO]: Compilation Successfully Completed for model.MODULE_6064165108718325916+e30acd3a.hlo_module.pb
+2026-10-26 03:03:12.000695:  1824739  [INFO]: Compilation Successfully Completed for model.MODULE_9325879432036281008+e30acd3a.hlo_module.pb
+2026-10-26 03:03:12.000699:  1824723  [INFO]: Compilation Successfully Completed for model.MODULE_17077693416233074525+e30acd3a.hlo_module.pb
+2026-10-26 03:03:12.000711:  1824732  [INFO]: Compilation Successfully Completed for model.MODULE_11473487080640669920+e30acd3a.hlo_module.pb
+2026-10-26 03:03:12.000712:  1824733  [INFO]: Compilation Successfully Completed for model.MODULE_16245371979160003581+e30acd3a.hlo_module.pb
+2026-10-26 03:03:12.000714:  1824727  [INFO]: Compilation Successfully Completed for model.MODULE_11816467849590897135+e30acd3a.hlo_module.pb
+2026-10-26 03:03:12.000716:  1824717  [INFO]: Compilation Successfully Completed for model.MODULE_6023990803018602280+e30acd3a.hlo_module.pb
+2026-10-26 03:03:12.000719:  1824721  [INFO]: Compilation Successfully Completed for model.MODULE_6727249373433755233+e30acd3a.hlo_module.pb
+2026-10-26 03:03:12.000722:  1824722  [INFO]: Compilation Successfully Completed for model.MODULE_4833176117292255246+e30acd3a.hlo_module.pb
+2026-10-26 03:03:12.000724:  1824731  [INFO]: Compilation Successfully Completed for model.MODULE_3543659070357727855+e30acd3a.hlo_module.pb
+2026-10-26 03:03:12.000730:  1824715  [INFO]: Compilation Successfully Completed for model.MODULE_1252786199845681806+e30acd3a.hlo_module.pb
+2026-10-26 03:03:12.000734:  1824740  [INFO]: Compilation Successfully Completed for model.MODULE_6808498412014708247+e30acd3a.hlo_module.pb
+2026-10-26 03:03:12.000734:  1824736  [INFO]: Compilation Successfully Completed for model.MODULE_12729673735585760277+e30acd3a.hlo_module.pb
+2026-10-26 03:03:12.000737:  1824719  [INFO]: Compilation Successfully Completed for model.MODULE_16666233155027143481+e30acd3a.hlo_module.pb
+2026-10-26 03:03:12.000741:  1824725  [INFO]: Compilation Successfully Completed for model.MODULE_10494809876870813789+e30acd3a.hlo_module.pb
+.
+Compiler status PASS
+2026-10-26 03:03:14.000046:  1824741  [INFO]: Compilation Successfully Completed for model.MODULE_15946528786530167929+e30acd3a.hlo_module.pb
+2026-10-26 03:03:15.000696:  1824718  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13711002355171007454+e30acd3a/model.neff
+.....
+
+
+Compiler status PASS
+
+Compiler status PASS
+Compiler status PASS
+Compiler status PASS
+
+Compiler status PASS
+2026-10-26 03:03:17.000289:  1824729  [INFO]: Compilation Successfully Completed for model.MODULE_14721531838027295854+e30acd3a.hlo_module.pb
+2026-10-26 03:03:17.000290:  1824737  [INFO]: Compilation Successfully Completed for model.MODULE_12616451432157571128+e30acd3a.hlo_module.pb
+2026-10-26 03:03:17.000291:  1824718  [INFO]: Compilation Successfully Completed for model.MODULE_10341695841152051843+e30acd3a.hlo_module.pb
+2026-10-26 03:03:17.000291:  1824730  [INFO]: Compilation Successfully Completed for model.MODULE_4232510604003920699+e30acd3a.hlo_module.pb
+2026-10-26 03:03:17.000291:  1824734  [INFO]: Compilation Successfully Completed for model.MODULE_559720843545670758+e30acd3a.hlo_module.pb
+2026-10-26 03:03:17.000309:  1824729  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_15946528786530167929+e30acd3a/model.neff
+2026-10-26 03:03:17.000309:  1824737  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_15946528786530167929+e30acd3a/model.neff
+2026-10-26 03:03:17.000310:  1824734  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_15946528786530167929+e30acd3a/model.neff
+2026-10-26 03:03:17.000319:  1824718  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_15946528786530167929+e30acd3a/model.neff
+2026-10-26 03:03:17.000320:  1824730  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_15946528786530167929+e30acd3a/model.neff
+2026-10-26 03:03:17.000608:  1824726  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_15946528786530167929+e30acd3a/model.neff
+2026-10-26 03:03:17.000672:  1824712  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_15946528786530167929+e30acd3a/model.neff
+2026-10-26 03:03:17.000675:  1824738  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_15946528786530167929+e30acd3a/model.neff
+2026-10-26 03:03:17.000687:  1824724  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_15946528786530167929+e30acd3a/model.neff
+2026-10-26 03:03:17.000698:  1824743  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_15946528786530167929+e30acd3a/model.neff
+2026-10-26 03:03:17.000700:  1824714  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_15946528786530167929+e30acd3a/model.neff
+2026-10-26 03:03:17.000714:  1824720  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_15946528786530167929+e30acd3a/model.neff
+2026-10-26 03:03:17.000718:  1824723  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_15946528786530167929+e30acd3a/model.neff
+2026-10-26 03:03:17.000719:  1824739  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_15946528786530167929+e30acd3a/model.neff
+2026-10-26 03:03:17.000723:  1824742  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_15946528786530167929+e30acd3a/model.neff
+2026-10-26 03:03:17.000731:  1824732  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_15946528786530167929+e30acd3a/model.neff
+2026-10-26 03:03:17.000733:  1824733  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_15946528786530167929+e30acd3a/model.neff
+2026-10-26 03:03:17.000735:  1824727  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_15946528786530167929+e30acd3a/model.neff
+2026-10-26 03:03:17.000738:  1824721  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_15946528786530167929+e30acd3a/model.neff
+2026-10-26 03:03:17.000742:  1824722  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_15946528786530167929+e30acd3a/model.neff
+2026-10-26 03:03:17.000745:  1824731  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_15946528786530167929+e30acd3a/model.neff
+2026-10-26 03:03:17.000746:  1824717  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_15946528786530167929+e30acd3a/model.neff
+2026-10-26 03:03:17.000754:  1824740  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_15946528786530167929+e30acd3a/model.neff
+2026-10-26 03:03:17.000755:  1824736  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_15946528786530167929+e30acd3a/model.neff
+2026-10-26 03:03:17.000760:  1824715  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_15946528786530167929+e30acd3a/model.neff
+2026-10-26 03:03:17.000761:  1824725  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_15946528786530167929+e30acd3a/model.neff
+2026-10-26 03:03:17.000766:  1824719  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_15946528786530167929+e30acd3a/model.neff
+2026-10-26 03:03:20.000697:  1824728  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13711002355171007454+e30acd3a/model.neff
+...
+Compiler status PASS
+
+Compiler status PASS
+
+Compiler status PASS
+2026-10-26 03:03:22.000246:  1824713  [INFO]: Compilation Successfully Completed for model.MODULE_10264045805255072176+e30acd3a.hlo_module.pb
+2026-10-26 03:03:22.000265:  1824713  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_15946528786530167929+e30acd3a/model.neff
+2026-10-26 03:03:22.000272:  1824735  [INFO]: Compilation Successfully Completed for model.MODULE_17797928307389562144+e30acd3a.hlo_module.pb
+2026-10-26 03:03:22.000274:  1824728  [INFO]: Compilation Successfully Completed for model.MODULE_18413561543900524357+e30acd3a.hlo_module.pb
+2026-10-26 03:03:22.000291:  1824735  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_15946528786530167929+e30acd3a/model.neff
+2026-10-26 03:03:22.000303:  1824728  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_15946528786530167929+e30acd3a/model.neff
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+2026-10-26 03:03:22.000675:  1824716  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_15946528786530167929+e30acd3a/model.neff
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+.
+Compiler status PASS
+2026-10-26 03:03:24.000164:  1824735  [INFO]: Compilation Successfully Completed for model.MODULE_13192702516345144040+e30acd3a.hlo_module.pb
+2026-10-26 03:03:27.000817:  1824722  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13192702516345144040+e30acd3a/model.neff
+2026-10-26 03:03:27.000818:  1824728  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13192702516345144040+e30acd3a/model.neff
+2026-10-26 03:03:27.000818:  1824729  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13192702516345144040+e30acd3a/model.neff
+2026-10-26 03:03:27.000820:  1824726  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13192702516345144040+e30acd3a/model.neff
+2026-10-26 03:03:27.000820:  1824721  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13192702516345144040+e30acd3a/model.neff
+2026-10-26 03:03:27.000821:  1824719  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13192702516345144040+e30acd3a/model.neff
+2026-10-26 03:03:27.000821:  1824713  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13192702516345144040+e30acd3a/model.neff
+2026-10-26 03:03:27.000822:  1824723  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13192702516345144040+e30acd3a/model.neff
+2026-10-26 03:03:27.000822:  1824740  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13192702516345144040+e30acd3a/model.neff
+2026-10-26 03:03:27.000823:  1824727  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13192702516345144040+e30acd3a/model.neff
+2026-10-26 03:03:27.000824:  1824741  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13192702516345144040+e30acd3a/model.neff
+2026-10-26 03:03:27.000825:  1824732  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13192702516345144040+e30acd3a/model.neff
+2026-10-26 03:03:27.000825:  1824715  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13192702516345144040+e30acd3a/model.neff
+2026-10-26 03:03:27.000826:  1824742  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13192702516345144040+e30acd3a/model.neff
+2026-10-26 03:03:27.000827:  1824730  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13192702516345144040+e30acd3a/model.neff
+2026-10-26 03:03:27.000828:  1824743  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13192702516345144040+e30acd3a/model.neff
+2026-10-26 03:03:27.000828:  1824731  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13192702516345144040+e30acd3a/model.neff
+2026-10-26 03:03:27.000830:  1824738  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13192702516345144040+e30acd3a/model.neff
+2026-10-26 03:03:27.000830:  1824737  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13192702516345144040+e30acd3a/model.neff
+2026-10-26 03:03:27.000830:  1824718  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13192702516345144040+e30acd3a/model.neff
+2026-10-26 03:03:27.000830:  1824725  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13192702516345144040+e30acd3a/model.neff
+2026-10-26 03:03:27.000831:  1824734  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13192702516345144040+e30acd3a/model.neff
+2026-10-26 03:03:27.000832:  1824736  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13192702516345144040+e30acd3a/model.neff
+2026-10-26 03:03:27.000833:  1824724  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13192702516345144040+e30acd3a/model.neff
+2026-10-26 03:03:27.000834:  1824739  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13192702516345144040+e30acd3a/model.neff
+2026-10-26 03:03:32.000819:  1824733  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13192702516345144040+e30acd3a/model.neff
+2026-10-26 03:03:32.000819:  1824714  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13192702516345144040+e30acd3a/model.neff
+2026-10-26 03:03:32.000820:  1824717  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13192702516345144040+e30acd3a/model.neff
+2026-10-26 03:03:37.000820:  1824720  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13192702516345144040+e30acd3a/model.neff
+2026-10-26 03:03:37.000820:  1824712  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13192702516345144040+e30acd3a/model.neff
+2026-10-26 03:03:42.000819:  1824716  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_13192702516345144040+e30acd3a/model.neff
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+.
+Compiler status PASS
+2026-10-26 03:03:44.000317:  1824723  [INFO]: Compilation Successfully Completed for model.MODULE_8605522281563779936+e30acd3a.hlo_module.pb
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+.
+Compiler status PASS
+2026-10-26 03:03:45.000744:  1824723  [INFO]: Compilation Successfully Completed for model.MODULE_9992895577107506366+e30acd3a.hlo_module.pb
+2026-10-26 03:03:47.000969:  1824731  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_8605522281563779936+e30acd3a/model.neff
+2026-10-26 03:03:47.000971:  1824739  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_8605522281563779936+e30acd3a/model.neff
+2026-10-26 03:03:47.000971:  1824719  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_8605522281563779936+e30acd3a/model.neff
+2026-10-26 03:03:47.000973:  1824715  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_8605522281563779936+e30acd3a/model.neff
+2026-10-26 03:03:47.000973:  1824713  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_8605522281563779936+e30acd3a/model.neff
+2026-10-26 03:03:47.000975:  1824740  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_8605522281563779936+e30acd3a/model.neff
+2026-10-26 03:03:47.000976:  1824714  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_8605522281563779936+e30acd3a/model.neff
+2026-10-26 03:03:47.000976:  1824733  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_8605522281563779936+e30acd3a/model.neff
+2026-10-26 03:03:47.000979:  1824736  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_8605522281563779936+e30acd3a/model.neff
+2026-10-26 03:03:47.000979:  1824725  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_8605522281563779936+e30acd3a/model.neff
+2026-10-26 03:03:47.000980:  1824720  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_8605522281563779936+e30acd3a/model.neff
+2026-10-26 03:03:47.000982:  1824726  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_8605522281563779936+e30acd3a/model.neff
+2026-10-26 03:03:47.000983:  1824730  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_8605522281563779936+e30acd3a/model.neff
+2026-10-26 03:03:47.000984:  1824738  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_8605522281563779936+e30acd3a/model.neff
+2026-10-26 03:03:47.000985:  1824741  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_8605522281563779936+e30acd3a/model.neff
+2026-10-26 03:03:47.000986:  1824718  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_8605522281563779936+e30acd3a/model.neff
+2026-10-26 03:03:47.000987:  1824742  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_8605522281563779936+e30acd3a/model.neff
+2026-10-26 03:03:47.000988:  1824722  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_8605522281563779936+e30acd3a/model.neff
+2026-10-26 03:03:47.000990:  1824717  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_8605522281563779936+e30acd3a/model.neff
+2026-10-26 03:03:47.000991:  1824724  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_8605522281563779936+e30acd3a/model.neff
+2026-10-26 03:03:47.000992:  1824735  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_8605522281563779936+e30acd3a/model.neff
+2026-10-26 03:03:47.000993:  1824716  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_8605522281563779936+e30acd3a/model.neff
+2026-10-26 03:03:47.000995:  1824721  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_8605522281563779936+e30acd3a/model.neff
+2026-10-26 03:03:47.000995:  1824729  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_8605522281563779936+e30acd3a/model.neff
+2026-10-26 03:03:47.000996:  1824737  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_8605522281563779936+e30acd3a/model.neff
+2026-10-26 03:03:47.000997:  1824732  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_8605522281563779936+e30acd3a/model.neff
+2026-10-26 03:03:48.000081:  1824713  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9992895577107506366+e30acd3a/model.neff
+2026-10-26 03:03:48.000089:  1824731  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9992895577107506366+e30acd3a/model.neff
+2026-10-26 03:03:48.000100:  1824739  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9992895577107506366+e30acd3a/model.neff
+2026-10-26 03:03:48.000102:  1824719  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9992895577107506366+e30acd3a/model.neff
+2026-10-26 03:03:48.000103:  1824733  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9992895577107506366+e30acd3a/model.neff
+2026-10-26 03:03:48.000104:  1824740  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9992895577107506366+e30acd3a/model.neff
+2026-10-26 03:03:48.000105:  1824715  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9992895577107506366+e30acd3a/model.neff
+2026-10-26 03:03:48.000107:  1824720  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9992895577107506366+e30acd3a/model.neff
+2026-10-26 03:03:48.000108:  1824726  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9992895577107506366+e30acd3a/model.neff
+2026-10-26 03:03:48.000111:  1824741  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9992895577107506366+e30acd3a/model.neff
+2026-10-26 03:03:48.000113:  1824742  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9992895577107506366+e30acd3a/model.neff
+2026-10-26 03:03:48.000114:  1824736  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9992895577107506366+e30acd3a/model.neff
+2026-10-26 03:03:48.000116:  1824722  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9992895577107506366+e30acd3a/model.neff
+2026-10-26 03:03:48.000119:  1824738  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9992895577107506366+e30acd3a/model.neff
+2026-10-26 03:03:48.000123:  1824717  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9992895577107506366+e30acd3a/model.neff
+2026-10-26 03:03:48.000124:  1824730  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9992895577107506366+e30acd3a/model.neff
+2026-10-26 03:03:48.000125:  1824716  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9992895577107506366+e30acd3a/model.neff
+2026-10-26 03:03:48.000126:  1824721  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9992895577107506366+e30acd3a/model.neff
+2026-10-26 03:03:48.000127:  1824737  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9992895577107506366+e30acd3a/model.neff
+2026-10-26 03:03:48.000129:  1824735  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9992895577107506366+e30acd3a/model.neff
+2026-10-26 03:03:48.000132:  1824729  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9992895577107506366+e30acd3a/model.neff
+2026-10-26 03:03:52.000972:  1824734  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_8605522281563779936+e30acd3a/model.neff
+2026-10-26 03:03:52.000972:  1824743  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_8605522281563779936+e30acd3a/model.neff
+2026-10-26 03:03:52.000989:  1824727  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_8605522281563779936+e30acd3a/model.neff
+2026-10-26 03:03:53.000082:  1824734  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9992895577107506366+e30acd3a/model.neff
+2026-10-26 03:03:53.000083:  1824743  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9992895577107506366+e30acd3a/model.neff
+2026-10-26 03:03:53.000091:  1824724  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9992895577107506366+e30acd3a/model.neff
+2026-10-26 03:03:53.000097:  1824727  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9992895577107506366+e30acd3a/model.neff
+2026-10-26 03:03:57.000971:  1824712  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_8605522281563779936+e30acd3a/model.neff
+2026-10-26 03:03:57.000972:  1824728  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_8605522281563779936+e30acd3a/model.neff
+2026-10-26 03:03:58.000081:  1824728  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9992895577107506366+e30acd3a/model.neff
+2026-10-26 03:03:58.000082:  1824718  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9992895577107506366+e30acd3a/model.neff
+2026-10-26 03:03:58.000083:  1824712  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9992895577107506366+e30acd3a/model.neff
+2026-10-26 03:04:03.000094:  1824732  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9992895577107506366+e30acd3a/model.neff
+2026-10-26 03:04:08.000079:  1824725  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9992895577107506366+e30acd3a/model.neff
+2026-10-26 03:04:13.000092:  1824714  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9992895577107506366+e30acd3a/model.neff
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+.
+Compiler status PASS
+2026-10-26 03:04:14.000575:  1824715  [INFO]: Compilation Successfully Completed for model.MODULE_215000733726949505+e30acd3a.hlo_module.pb
+2026-10-26 03:04:18.000226:  1824736  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_215000733726949505+e30acd3a/model.neff
+2026-10-26 03:04:18.000227:  1824714  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_215000733726949505+e30acd3a/model.neff
+2026-10-26 03:04:18.000230:  1824720  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_215000733726949505+e30acd3a/model.neff
+2026-10-26 03:04:18.000230:  1824729  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_215000733726949505+e30acd3a/model.neff
+2026-10-26 03:04:18.000231:  1824737  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_215000733726949505+e30acd3a/model.neff
+2026-10-26 03:04:18.000233:  1824712  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_215000733726949505+e30acd3a/model.neff
+2026-10-26 03:04:18.000234:  1824723  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_215000733726949505+e30acd3a/model.neff
+2026-10-26 03:04:18.000236:  1824726  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_215000733726949505+e30acd3a/model.neff
+2026-10-26 03:04:18.000238:  1824732  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_215000733726949505+e30acd3a/model.neff
+2026-10-26 03:04:18.000239:  1824735  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_215000733726949505+e30acd3a/model.neff
+2026-10-26 03:04:18.000240:  1824742  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_215000733726949505+e30acd3a/model.neff
+2026-10-26 03:04:18.000240:  1824716  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_215000733726949505+e30acd3a/model.neff
+2026-10-26 03:04:18.000240:  1824725  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_215000733726949505+e30acd3a/model.neff
+2026-10-26 03:04:18.000240:  1824743  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_215000733726949505+e30acd3a/model.neff
+2026-10-26 03:04:18.000242:  1824731  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_215000733726949505+e30acd3a/model.neff
+2026-10-26 03:04:18.000243:  1824739  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_215000733726949505+e30acd3a/model.neff
+2026-10-26 03:04:18.000244:  1824722  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_215000733726949505+e30acd3a/model.neff
+2026-10-26 03:04:18.000246:  1824721  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_215000733726949505+e30acd3a/model.neff
+2026-10-26 03:04:18.000248:  1824713  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_215000733726949505+e30acd3a/model.neff
+2026-10-26 03:04:18.000249:  1824718  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_215000733726949505+e30acd3a/model.neff
+2026-10-26 03:04:18.000250:  1824719  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_215000733726949505+e30acd3a/model.neff
+2026-10-26 03:04:18.000251:  1824727  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_215000733726949505+e30acd3a/model.neff
+2026-10-26 03:04:18.000253:  1824740  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_215000733726949505+e30acd3a/model.neff
+2026-10-26 03:04:18.000254:  1824730  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_215000733726949505+e30acd3a/model.neff
+2026-10-26 03:04:18.000254:  1824741  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_215000733726949505+e30acd3a/model.neff
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+.
+Compiler status PASS
+2026-10-26 03:04:19.000839:  1824712  [INFO]: Compilation Successfully Completed for model.MODULE_9559576015772537887+e30acd3a.hlo_module.pb
+2026-10-26 03:04:23.000229:  1824738  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_215000733726949505+e30acd3a/model.neff
+2026-10-26 03:04:23.000233:  1824733  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_215000733726949505+e30acd3a/model.neff
+2026-10-26 03:04:23.000236:  1824724  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_215000733726949505+e30acd3a/model.neff
+2026-10-26 03:04:23.000249:  1824734  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_215000733726949505+e30acd3a/model.neff
+2026-10-26 03:04:23.000331:  1824719  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9559576015772537887+e30acd3a/model.neff
+2026-10-26 03:04:23.000333:  1824716  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9559576015772537887+e30acd3a/model.neff
+2026-10-26 03:04:23.000346:  1824738  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9559576015772537887+e30acd3a/model.neff
+2026-10-26 03:04:23.000348:  1824733  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9559576015772537887+e30acd3a/model.neff
+2026-10-26 03:04:23.000356:  1824714  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9559576015772537887+e30acd3a/model.neff
+2026-10-26 03:04:23.000358:  1824724  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9559576015772537887+e30acd3a/model.neff
+2026-10-26 03:04:23.000359:  1824729  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9559576015772537887+e30acd3a/model.neff
+2026-10-26 03:04:23.000360:  1824715  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9559576015772537887+e30acd3a/model.neff
+2026-10-26 03:04:23.000361:  1824731  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9559576015772537887+e30acd3a/model.neff
+2026-10-26 03:04:23.000365:  1824720  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9559576015772537887+e30acd3a/model.neff
+2026-10-26 03:04:23.000367:  1824734  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9559576015772537887+e30acd3a/model.neff
+2026-10-26 03:04:23.000367:  1824730  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9559576015772537887+e30acd3a/model.neff
+2026-10-26 03:04:23.000370:  1824723  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9559576015772537887+e30acd3a/model.neff
+2026-10-26 03:04:23.000370:  1824742  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9559576015772537887+e30acd3a/model.neff
+2026-10-26 03:04:23.000372:  1824735  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9559576015772537887+e30acd3a/model.neff
+2026-10-26 03:04:23.000373:  1824740  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9559576015772537887+e30acd3a/model.neff
+2026-10-26 03:04:23.000375:  1824737  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9559576015772537887+e30acd3a/model.neff
+2026-10-26 03:04:23.000376:  1824725  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9559576015772537887+e30acd3a/model.neff
+2026-10-26 03:04:23.000376:  1824732  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9559576015772537887+e30acd3a/model.neff
+2026-10-26 03:04:23.000378:  1824726  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9559576015772537887+e30acd3a/model.neff
+2026-10-26 03:04:23.000379:  1824736  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9559576015772537887+e30acd3a/model.neff
+2026-10-26 03:04:23.000381:  1824739  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9559576015772537887+e30acd3a/model.neff
+2026-10-26 03:04:23.000381:  1824721  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9559576015772537887+e30acd3a/model.neff
+2026-10-26 03:04:23.000383:  1824718  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9559576015772537887+e30acd3a/model.neff
+2026-10-26 03:04:23.000385:  1824722  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9559576015772537887+e30acd3a/model.neff
+2026-10-26 03:04:23.000386:  1824727  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9559576015772537887+e30acd3a/model.neff
+2026-10-26 03:04:23.000388:  1824713  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9559576015772537887+e30acd3a/model.neff
+2026-10-26 03:04:28.000234:  1824717  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_215000733726949505+e30acd3a/model.neff
+2026-10-26 03:04:28.000250:  1824728  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_215000733726949505+e30acd3a/model.neff
+2026-10-26 03:04:28.000340:  1824743  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9559576015772537887+e30acd3a/model.neff
+2026-10-26 03:04:28.000348:  1824717  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9559576015772537887+e30acd3a/model.neff
+2026-10-26 03:04:28.000367:  1824728  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9559576015772537887+e30acd3a/model.neff
+2026-10-26 03:04:28.000389:  1824741  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_9559576015772537887+e30acd3a/model.neff
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+................................
+Compiler status PASS
+
+
+Compiler status PASS
+Compiler status PASS
+
+Compiler status PASS
+
+Compiler status PASS
+2026-10-26 03:04:30.000331:  1824726  [INFO]: Compilation Successfully Completed for model.MODULE_10568362702329585524+e30acd3a.hlo_module.pb
+2026-10-26 03:04:30.000344:  1824740  [INFO]: Compilation Successfully Completed for model.MODULE_6190291945336375372+e30acd3a.hlo_module.pb
+
+Compiler status PASS
+
+2026-10-26 03:04:30.000362:  1824730  [INFO]: Compilation Successfully Completed for model.MODULE_18252548527528217790+e30acd3a.hlo_module.pb
+
+Compiler status PASS
+Compiler status PASS
+
+
+Compiler status PASS
+Compiler status PASS
+2026-10-26 03:04:30.000366:  1824712  [INFO]: Compilation Successfully Completed for model.MODULE_16486823604694795730+e30acd3a.hlo_module.pb
+
+Compiler status PASS
+
+Compiler status PASS
+
+Compiler status PASS
+
+
+Compiler status PASS
+Compiler status PASS
+2026-10-26 03:04:30.000392:  1824718  [INFO]: Compilation Successfully Completed for model.MODULE_1107387802146165183+e30acd3a.hlo_module.pb
+
+Compiler status PASS
+
+
+Compiler status PASS
+Compiler status PASS
+
+
+
+Compiler status PASS
+Compiler status PASS
+2026-10-26 03:04:30.000413:  1824743  [INFO]: Compilation Successfully Completed for model.MODULE_5579695708328146260+e30acd3a.hlo_module.pb
+Compiler status PASS
+
+
+Compiler status PASS
+Compiler status PASS
+
+Compiler status PASS
+2026-10-26 03:04:30.000432:  1824717  [INFO]: Compilation Successfully Completed for model.MODULE_919481336598930235+e30acd3a.hlo_module.pb
+2026-10-26 03:04:30.000433:  1824722  [INFO]: Compilation Successfully Completed for model.MODULE_10323669732336385531+e30acd3a.hlo_module.pb
+
+Compiler status PASS
+2026-10-26 03:04:30.000438:  1824725  [INFO]: Compilation Successfully Completed for model.MODULE_17441648755828613057+e30acd3a.hlo_module.pb
+2026-10-26 03:04:30.000439:  1824732  [INFO]: Compilation Successfully Completed for model.MODULE_2856334922765531966+e30acd3a.hlo_module.pb
+2026-10-26 03:04:30.000445:  1824737  [INFO]: Compilation Successfully Completed for model.MODULE_3183409804423144964+e30acd3a.hlo_module.pb
+2026-10-26 03:04:30.000445:  1824736  [INFO]: Compilation Successfully Completed for model.MODULE_1943782319105896350+e30acd3a.hlo_module.pb
+2026-10-26 03:04:30.000462:  1824733  [INFO]: Compilation Successfully Completed for model.MODULE_9145013528748526424+e30acd3a.hlo_module.pb
+
+Compiler status PASS
+
+2026-10-26 03:04:30.000474:  1824720  [INFO]: Compilation Successfully Completed for model.MODULE_18398064329775832756+e30acd3a.hlo_module.pb
+Compiler status PASS
+2026-10-26 03:04:30.000479:  1824739  [INFO]: Compilation Successfully Completed for model.MODULE_13870267885497715300+e30acd3a.hlo_module.pb
+2026-10-26 03:04:30.000484:  1824735  [INFO]: Compilation Successfully Completed for model.MODULE_152150810488780124+e30acd3a.hlo_module.pb
+
+Compiler status PASS
+2026-10-26 03:04:30.000489:  1824731  [INFO]: Compilation Successfully Completed for model.MODULE_3722016444494560521+e30acd3a.hlo_module.pb
+2026-10-26 03:04:30.000489:  1824738  [INFO]: Compilation Successfully Completed for model.MODULE_12630140054451576110+e30acd3a.hlo_module.pb
+2026-10-26 03:04:30.000495:  1824727  [INFO]: Compilation Successfully Completed for model.MODULE_7023380852437106817+e30acd3a.hlo_module.pb
+2026-10-26 03:04:30.000496:  1824719  [INFO]: Compilation Successfully Completed for model.MODULE_14395771799326161218+e30acd3a.hlo_module.pb
+2026-10-26 03:04:30.000499:  1824723  [INFO]: Compilation Successfully Completed for model.MODULE_8763412300298930778+e30acd3a.hlo_module.pb
+
+Compiler status PASS
+2026-10-26 03:04:30.000512:  1824724  [INFO]: Compilation Successfully Completed for model.MODULE_2767952425416271844+e30acd3a.hlo_module.pb
+2026-10-26 03:04:30.000515:  1824713  [INFO]: Compilation Successfully Completed for model.MODULE_5093777068379627975+e30acd3a.hlo_module.pb
+
+Compiler status PASS
+
+Compiler status PASS
+2026-10-26 03:04:30.000530:  1824714  [INFO]: Compilation Successfully Completed for model.MODULE_11174219427820202182+e30acd3a.hlo_module.pb
+2026-10-26 03:04:30.000532:  1824729  [INFO]: Compilation Successfully Completed for model.MODULE_1328421196882630137+e30acd3a.hlo_module.pb
+2026-10-26 03:04:30.000539:  1824741  [INFO]: Compilation Successfully Completed for model.MODULE_2919339844060319105+e30acd3a.hlo_module.pb
+
+Compiler status PASS
+2026-10-26 03:04:30.000555:  1824734  [INFO]: Compilation Successfully Completed for model.MODULE_13571078783132133713+e30acd3a.hlo_module.pb
+2026-10-26 03:04:30.000559:  1824716  [INFO]: Compilation Successfully Completed for model.MODULE_825056037747889251+e30acd3a.hlo_module.pb
+2026-10-26 03:04:30.000562:  1824742  [INFO]: Compilation Successfully Completed for model.MODULE_25997857817860018+e30acd3a.hlo_module.pb
+2026-10-26 03:04:30.000589:  1824728  [INFO]: Compilation Successfully Completed for model.MODULE_15560747889189828752+e30acd3a.hlo_module.pb
+2026-10-26 03:04:30.000589:  1824721  [INFO]: Compilation Successfully Completed for model.MODULE_3628632862720352029+e30acd3a.hlo_module.pb
+2026-10-26 03:04:30.000594:  1824715  [INFO]: Compilation Successfully Completed for model.MODULE_3517645866731845825+e30acd3a.hlo_module.pb
+.
+Compiler status PASS
+2026-10-26 03:04:31.000822:  1824726  [INFO]: Compilation Successfully Completed for model.MODULE_101317573337472713+e30acd3a.hlo_module.pb
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+2026-10-26 03:04:35.000385:  1824740  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_101317573337472713+e30acd3a/model.neff
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+2026-10-26 03:04:35.000398:  1824712  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_101317573337472713+e30acd3a/model.neff
+2026-10-26 03:04:35.000402:  1824730  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_101317573337472713+e30acd3a/model.neff
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+2026-10-26 03:04:35.000420:  1824718  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_101317573337472713+e30acd3a/model.neff
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+2026-10-26 03:04:35.000447:  1824743  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_101317573337472713+e30acd3a/model.neff
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+2026-10-26 03:04:35.000459:  1824722  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_101317573337472713+e30acd3a/model.neff
+2026-10-26 03:04:35.000459:  1824717  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_101317573337472713+e30acd3a/model.neff
+2026-10-26 03:04:35.000465:  1824732  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_101317573337472713+e30acd3a/model.neff
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+2026-10-26 03:04:35.000469:  1824736  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_101317573337472713+e30acd3a/model.neff
+2026-10-26 03:04:35.000469:  1824725  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_101317573337472713+e30acd3a/model.neff
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+2026-10-26 03:04:35.000487:  1824737  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_101317573337472713+e30acd3a/model.neff
+2026-10-26 03:04:35.000490:  1824733  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_101317573337472713+e30acd3a/model.neff
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+2026-10-26 03:04:35.000497:  1824720  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_101317573337472713+e30acd3a/model.neff
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+2026-10-26 03:04:35.000506:  1824739  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_101317573337472713+e30acd3a/model.neff
+2026-10-26 03:04:35.000514:  1824735  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_101317573337472713+e30acd3a/model.neff
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+2026-10-26 03:04:35.000517:  1824738  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_101317573337472713+e30acd3a/model.neff
+2026-10-26 03:04:35.000518:  1824731  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_101317573337472713+e30acd3a/model.neff
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+2026-10-26 03:04:35.000524:  1824727  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_101317573337472713+e30acd3a/model.neff
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+2026-10-26 03:04:35.000528:  1824719  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_101317573337472713+e30acd3a/model.neff
+2026-10-26 03:04:35.000530:  1824723  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_101317573337472713+e30acd3a/model.neff
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+2026-10-26 03:04:35.000540:  1824724  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_101317573337472713+e30acd3a/model.neff
+2026-10-26 03:04:35.000541:  1824713  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_101317573337472713+e30acd3a/model.neff
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+2026-10-26 03:04:35.000556:  1824729  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_101317573337472713+e30acd3a/model.neff
+2026-10-26 03:04:35.000561:  1824741  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_101317573337472713+e30acd3a/model.neff
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+2026-10-26 03:04:35.000564:  1824714  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_101317573337472713+e30acd3a/model.neff
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+2026-10-26 03:04:35.000575:  1824734  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_101317573337472713+e30acd3a/model.neff
+2026-10-26 03:04:35.000582:  1824742  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_101317573337472713+e30acd3a/model.neff
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+2026-10-26 03:04:35.000589:  1824716  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_101317573337472713+e30acd3a/model.neff
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+2026-10-26 03:04:35.000610:  1824721  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_101317573337472713+e30acd3a/model.neff
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+2026-10-26 03:04:35.000620:  1824715  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_101317573337472713+e30acd3a/model.neff
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+2026-10-26 03:04:40.000610:  1824728  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_101317573337472713+e30acd3a/model.neff
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)
+.
+Compiler status PASS
+2026-10-26 03:04:42.000096:  1824730  [INFO]: Compilation Successfully Completed for model.MODULE_6737551188128529193+e30acd3a.hlo_module.pb
+2026-10-26 03:04:45.000753:  1824714  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_6737551188128529193+e30acd3a/model.neff
+2026-10-26 03:04:45.000756:  1824728  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_6737551188128529193+e30acd3a/model.neff
+2026-10-26 03:04:45.000756:  1824736  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_6737551188128529193+e30acd3a/model.neff
+2026-10-26 03:04:45.000759:  1824741  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_6737551188128529193+e30acd3a/model.neff
+2026-10-26 03:04:45.000759:  1824722  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_6737551188128529193+e30acd3a/model.neff
+2026-10-26 03:04:45.000761:  1824720  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_6737551188128529193+e30acd3a/model.neff
+2026-10-26 03:04:45.000762:  1824716  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_6737551188128529193+e30acd3a/model.neff
+2026-10-26 03:04:45.000763:  1824740  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_6737551188128529193+e30acd3a/model.neff
+2026-10-26 03:04:45.000764:  1824739  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_6737551188128529193+e30acd3a/model.neff
+2026-10-26 03:04:45.000766:  1824727  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_6737551188128529193+e30acd3a/model.neff
+2026-10-26 03:04:45.000767:  1824729  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_6737551188128529193+e30acd3a/model.neff
+2026-10-26 03:04:45.000768:  1824733  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_6737551188128529193+e30acd3a/model.neff
+2026-10-26 03:04:45.000770:  1824735  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_6737551188128529193+e30acd3a/model.neff
+2026-10-26 03:04:45.000771:  1824717  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_6737551188128529193+e30acd3a/model.neff
+2026-10-26 03:04:45.000772:  1824731  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_6737551188128529193+e30acd3a/model.neff
+2026-10-26 03:04:45.000774:  1824742  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_6737551188128529193+e30acd3a/model.neff
+2026-10-26 03:04:45.000775:  1824715  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_6737551188128529193+e30acd3a/model.neff
+2026-10-26 03:04:45.000776:  1824734  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_6737551188128529193+e30acd3a/model.neff
+2026-10-26 03:04:45.000778:  1824738  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_6737551188128529193+e30acd3a/model.neff
+2026-10-26 03:04:45.000779:  1824726  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_6737551188128529193+e30acd3a/model.neff
+2026-10-26 03:04:45.000780:  1824721  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_6737551188128529193+e30acd3a/model.neff
+2026-10-26 03:04:45.000781:  1824725  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_6737551188128529193+e30acd3a/model.neff
+2026-10-26 03:04:45.000782:  1824719  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_6737551188128529193+e30acd3a/model.neff
+2026-10-26 03:04:45.000783:  1824713  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_6737551188128529193+e30acd3a/model.neff
+2026-10-26 03:04:45.000783:  1824732  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_6737551188128529193+e30acd3a/model.neff
+2026-10-26 03:04:45.000786:  1824723  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_6737551188128529193+e30acd3a/model.neff
+2026-10-26 03:04:45.000786:  1824737  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_6737551188128529193+e30acd3a/model.neff
+2026-10-26 03:04:45.000788:  1824743  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_6737551188128529193+e30acd3a/model.neff
+2026-10-26 03:04:45.000788:  1824724  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_6737551188128529193+e30acd3a/model.neff
+2026-10-26 03:04:50.000756:  1824718  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_6737551188128529193+e30acd3a/model.neff
+2026-10-26 03:04:50.000786:  1824712  [INFO]: Using a cached neff at /tmp/neuron_cache/neuronxcc-2.24.8799.0+6f62ff7c/MODULE_6737551188128529193+e30acd3a/model.neff
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:15: DeprecationWarning: Use torch_xla.sync instead
+  for _ in range(3): y = fn(); xm.mark_step(); s = float(y.float().sum().item())
+/home/ubuntu/OverlayCCL/training/g_groups_test.py:18: DeprecationWarning: Use torch_xla.sync instead
+  xm.mark_step(); t0 = time.time(); y = fn(); xm.mark_step(); _ = y.float().sum().item(); ts.append((time.time() - t0) * 1e3)

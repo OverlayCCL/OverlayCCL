@@ -1,0 +1,23 @@
+[
+ {
+  "raw": [
+   "baseline:cast_flat_fp32",
+   "{'template': 'cast_flat_fp32', 'cost_score': 169.57725200000002, 'sim_time_us': 16957.7252, 'local_ops': 21, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'builtin_code': 'def evolved_layer_grads_mixed_dtype(grads, rank, world_size, num_devices, cores_per_device,"
+  ],
+  "name": "baseline:cast_flat_fp32"
+ },
+ {
+  "raw": [
+   "strat:refined-from-Pipelined per-ten",
+   "{'template': 'strategy_enumerate_final', 'cost_score': 202.1091182593238, 'sim_time_us': 20210.91182593238, 'local_ops': 23, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 2, '_params': {'evolved_code': 'def evolved_layer_grads_mixed_dtype(grads, rank, world_size, num_devices, c"
+  ],
+  "name": "strat:refined-from-Pipelined per-ten"
+ },
+ {
+  "raw": [
+   "baseline:per_tensor_ar",
+   "{'template': 'per_tensor_ar', 'cost_score': 211.15608603096072, 'sim_time_us': 21115.608603096072, 'local_ops': 6, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 6, '_params': {'builtin_code': 'def evolved_layer_grads_mixed_dtype(grads, rank, world_size, num_devices, cores_per_d"
+  ],
+  "name": "baseline:per_tensor_ar"
+ }
+]

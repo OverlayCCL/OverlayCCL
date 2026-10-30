@@ -1,0 +1,30 @@
+[
+ {
+  "raw": [
+   "baseline:bucketed_ar",
+   "{'template': 'bucketed_ar', 'cost_score': 5845.639419984084, 'sim_time_us': 584563.9419984084, 'local_ops': 162, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 6, '_params': {'builtin_code': '\\\\\\ndef evolved_hetero_grad_ar_many(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"in-order buckets of 8 tensors each (size-independent; a few dispatches, exact bytes)\"\"\"\\n    outs = []\\n    for b in range(0, len(grads), 8):\\n        chunk = grads[b:b + 8]; flat = torch.cat([t.reshape(-1) for t in chunk]); r = xm.all_reduce(xm.REDUCE_SUM, flat); off = 0\\n        for t in chunk: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:bucketed_ar"
+ },
+ {
+  "raw": [
+   "strat:Fixed in-order bucketing (6-8 ",
+   "{'template': 'strategy_enumerate_final', 'cost_score': 5845.639419984084, 'sim_time_us': 584563.9419984084, 'local_ops': 162, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 6, '_params': {'evolved_code': 'def evolved_hetero_grad_ar_many(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"Fixed in-order bucketing (6-8 buckets): partitions 48 tensors into 6-8 fixed-size buckets\\n    in original order, concatenates within each bucket, issues one all_reduce per bucket.\\n    Balances dispatch count against per-bucket payload while preserving order locality.\\n    \"\"\"\\n    # Choose bucket size to create 6-8 buckets for 48 tensors\\n    # 48/8 = 6 buckets, 48/6 = 8 buckets\\n    # Use 8 tensors per bucket -> 6 buckets total\\n    bucket_size = 8\\n    \\n    outs = []\\n    for b in range(0, len(grads), bucket_size):\\n        # Extract bucket of tensors in original order\\n        chunk = grads[b:b + bucket_size]\\n        \\n        # Concatenate all tensors in this bucket into a flat 1-D tensor\\n        flat = torch.cat([t.reshape(-1) for t in chunk])\\n        \\n        # Single all_reduce for the entire bucket\\n        reduced = xm.all_reduce(xm.REDUCE_SUM, flat)\\n        \\n        # Unpack the reduced tensor back into original shapes\\n        offset = 0\\n        for t in chunk:\\n            n = t.numel()\\n            outs.append(reduced[offset:offset + n].view(t.shape))\\n            offset += n\\n    \\n    return outs'}}"
+  ],
+  "name": "strat:Fixed in-order bucketing (6-8 "
+ },
+ {
+  "raw": [
+   "baseline:per_tensor_ar",
+   "{'template': 'per_tensor_ar', 'cost_score': 6825.241607979569, 'sim_time_us': 682524.160797957, 'local_ops': 48, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 48, '_params': {'builtin_code': 'def evolved_hetero_grad_ar_many(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"developer baseline: one all_reduce per gradient tensor (DDP hook per parameter)\"\"\"\\n    return [xm.all_reduce(xm.REDUCE_SUM, t) for t in grads]\\n'}}"
+  ],
+  "name": "baseline:per_tensor_ar"
+ },
+ {
+  "raw": [
+   "baseline:flat_cat_ar",
+   "{'template': 'flat_cat_ar', 'cost_score': 10427.710292000005, 'sim_time_us': 1042771.0292000006, 'local_ops': 147, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'builtin_code': 'def evolved_hetero_grad_ar_many(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    flat = torch.cat([t.reshape(-1) for t in grads]); r = xm.all_reduce(xm.REDUCE_SUM, flat)\\n    outs = []; off = 0\\n    for t in grads: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:flat_cat_ar"
+ }
+]

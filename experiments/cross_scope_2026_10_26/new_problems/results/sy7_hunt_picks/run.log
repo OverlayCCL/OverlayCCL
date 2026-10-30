@@ -1,0 +1,8 @@
+=== newprobs done 20:10:22 ===
+--- [20:47:07] train fsdp_ag_layout ag_pinned
+   median_ms 36.62 effective True
+--- [20:48:03] train fsdp_ag_layout ag_dim0_t_native
+   median_ms 24.87 effective True
+--- [20:48:51] train fsdp_ag_layout loop_1
+   NO RESULT
+=== newprobs done 20:49:28 ===

@@ -1,0 +1,32 @@
+{
+ "rs_masked": {
+  "max_abs_diff": 0.0009765625,
+  "ref_scale": 0.0322265625,
+  "ok": true,
+  "status": "ok"
+ },
+ "hier_ag": {
+  "max_abs_diff": 0.0009765625,
+  "ref_scale": 0.0322265625,
+  "ok": true,
+  "status": "ok"
+ },
+ "chunked_ag_2": {
+  "max_abs_diff": 0.0009765625,
+  "ref_scale": 0.0322265625,
+  "ok": true,
+  "status": "ok"
+ },
+ "chunked_ag_4": {
+  "max_abs_diff": 0.0009765625,
+  "ref_scale": 0.0322265625,
+  "ok": true,
+  "status": "ok"
+ },
+ "paper": {
+  "max_abs_diff": 0.0009765625,
+  "ref_scale": 0.0322265625,
+  "ok": true,
+  "status": "ok"
+ }
+}

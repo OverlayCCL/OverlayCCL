@@ -1,0 +1,234 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of 24 mixed-size 1-D tensors (mid sizes)
+======================================================================
+  per_tensor_ar: 465690.6 us, 24 local ops, 0 ag, 24 ar, 0 cp
+  flat_cat_ar: 467256.9 us, 75 local ops, 0 ag, 1 ar, 0 cp
+  bucketed_ar: 467256.9 us, 81 local ops, 0 ag, 3 ar, 0 cp
+  bucketed_ar_4: 467256.9 us, 89 local ops, 0 ag, 6 ar, 0 cp
+  bucketed_ar_16: 467256.9 us, 78 local ops, 0 ag, 2 ar, 0 cp
+
+  Best baseline: baseline:per_tensor_ar (465690.6 us)
+
+======================================================================
+[Phase 3 / Strategy-Enumerate] DP gradient all-reduce of 24 mixed-size 1-D tensors (mid sizes) [NO-SIM ABLATION]
+======================================================================
+  K=5 strategies, R=2 refinement rounds per top-2 (budget ~10 LLM calls)
+  Enumerated 5 strategies:
+    1. Single flat all-reduce: Concatenate all 24 tensors into one contiguous buffer and issue a single all_red...
+    2. In-order buckets of 6: Partition the 24 tensors into 4 sequential buckets of 6 consecutive tensors each...
+    3. Two-phase hierarchical reduction: First perform 24 individual all_reduce calls in parallel (or back-to-back for XL...
+    4. Reduce-scatter then all-gather decomposition: Concatenate all 24 tensors, perform reduce-scatter across world_size to distribu...
+    5. Split by size terciles: Divide the 24 tensors into 3 groups based on element count (smallest 8, middle 8...
+  Strategy 1 (Single flat all-reduce): sim=467256.9 us
+  Strategy 2 (In-order buckets of 6): sim=467256.9 us
+  Strategy 3 (Two-phase hierarchical reduction): sim=465721.6 us
+  Strategy 4 (Reduce-scatter then all-gather decomposition): sim=467256.9 us
+  Strategy 5 (Split by size terciles): sim=467256.9 us
+
+  [NO-SIM ITERATIVE] Refining all 5 correct candidates (sim_us not shown to LLM in refinement)
+[probe_het_24] local_us=932.1
+[probe_het_24] local_us=365.7
+[probe_het_24] local_us=378.8
+[probe_het_24] local_us=351.1
+[probe_het_24] local_us=260.1
+[probe_het_24] local_us=244.1
+[probe_het_24] local_us=208.3
+[probe_het_24] local_us=206.0
+[probe_het_24] local_us=191.5
+[probe_het_24] local_us=183.6
+[probe_het_24] local_us=236.7
+[probe_het_24] local_us=135.2
+[probe_het_24] local_us=131.9
+[probe_het_24] local_us=128.5
+[probe_het_24] local_us=129.5
+[probe_het_24] local_us=118.4
+[probe_het_24] local_us=160.5
+[probe_het_24] local_us=114.2
+[probe_het_24] local_us=108.5
+[probe_het_24] local_us=135.6
+[probe_het_24] local_us=93.8
+[probe_het_24] local_us=93.8
+[probe_het_24] local_us=94.6
+[probe_het_24] local_us=89.5
+[probe_het_24] local_us=90.0
+[probe_het_24] local_us=89.3
+[probe_het_24] local_us=81.7
+[probe_het_24] local_us=84.7
+[probe_het_24] local_us=74.3
+[probe_het_24] local_us=74.0
+[probe_het_24] local_us=74.0
+[probe_het_24] local_us=73.9
+[probe_het_24] local_us=73.5
+[probe_het_24] local_us=73.5
+[probe_het_24] local_us=73.8
+[probe_het_24] local_us=69.9
+[probe_het_24] local_us=201.5
+[evolved_probe] 1067.1 us
+[evolved_probe] 253.6 us
+[evolved_probe] 244.3 us
+[evolved_probe] 231.6 us
+[evolved_probe] 239.6 us
+[evolved_probe] 360.0 us
+[evolved_probe] 360.2 us
+[evolved_probe] 256.5 us
+[evolved_probe] 486.5 us
+[evolved_probe] 196.1 us
+[evolved_probe] 219.9 us
+[evolved_probe] 134.2 us
+[evolved_probe] 121.1 us
+[evolved_probe] 123.7 us
+[evolved_probe] 110.3 us
+[evolved_probe] 105.4 us
+[evolved_probe] 196.8 us
+[evolved_probe] 91.8 us
+[evolved_probe] 94.0 us
+[evolved_probe] 121.4 us
+[evolved_probe] 83.0 us
+[evolved_probe] 83.3 us
+[evolved_probe] 82.8 us
+[evolved_probe] 77.6 us
+[evolved_probe] 78.5 us
+[evolved_probe] 91.4 us
+[evolved_probe] 74.1 us
+[evolved_probe] 79.6 us
+[evolved_probe] 62.2 us
+[evolved_probe] 62.0 us
+[evolved_probe] 61.7 us
+[evolved_probe] 61.8 us
+[evolved_probe] 61.7 us
+[evolved_probe] 61.7 us
+[evolved_probe] 61.9 us
+[evolved_probe] 58.3 us
+[evolved_probe] 158.1 us
+    top 1 round 2: SIMPLER (collective Δ=0)
+    top 2 round 1: SIMPLER (collective Δ=3)
+[DP-AR] 730.7 us
+[DP-AR] 269.0 us
+[DP-AR] 237.0 us
+[DP-AR] 211.9 us
+[DP-AR] 357.3 us
+[DP-AR] 187.6 us
+[DP-AR] 154.0 us
+[DP-AR] 150.3 us
+[DP-AR] 135.4 us
+[DP-AR] 143.0 us
+[DP-AR] 196.0 us
+[DP-AR] 108.4 us
+[DP-AR] 94.9 us
+[DP-AR] 95.6 us
+[DP-AR] 91.4 us
+[DP-AR] 90.9 us
+[DP-AR] 196.0 us
+[DP-AR] 77.9 us
+[DP-AR] 78.6 us
+[DP-AR] 108.8 us
+[DP-AR] 68.0 us
+[DP-AR] 67.4 us
+[DP-AR] 67.4 us
+[DP-AR] 65.1 us
+[DP-AR] 64.5 us
+[DP-AR] 64.8 us
+[DP-AR] 61.7 us
+[DP-AR] 60.5 us
+[DP-AR] 52.2 us
+[DP-AR] 51.7 us
+[DP-AR] 51.7 us
+[DP-AR] 51.8 us
+[DP-AR] 52.0 us
+[DP-AR] 51.6 us
+[DP-AR] 51.7 us
+[DP-AR] 48.1 us
+[DP-AR] 101.0 us
+    top 2 round 2: SIMPLER (collective Δ=0)
+[evolved_probe_het_24_mid] pack+AR+unpack: 1127.0 us
+[evolved_probe_het_24_mid] pack+AR+unpack: 394.7 us
+[evolved_probe_het_24_mid] pack+AR+unpack: 321.1 us
+[evolved_probe_het_24_mid] pack+AR+unpack: 300.0 us
+[evolved_probe_het_24_mid] pack+AR+unpack: 266.5 us
+[evolved_probe_het_24_mid] pack+AR+unpack: 285.7 us
+[evolved_probe_het_24_mid] pack+AR+unpack: 255.9 us
+[evolved_probe_het_24_mid] pack+AR+unpack: 210.0 us
+[evolved_probe_het_24_mid] pack+AR+unpack: 185.5 us
+[evolved_probe_het_24_mid] pack+AR+unpack: 190.6 us
+[evolved_probe_het_24_mid] pack+AR+unpack: 219.4 us
+[evolved_probe_het_24_mid] pack+AR+unpack: 142.6 us
+[evolved_probe_het_24_mid] pack+AR+unpack: 140.5 us
+[evolved_probe_het_24_mid] pack+AR+unpack: 128.8 us
+[evolved_probe_het_24_mid] pack+AR+unpack: 122.7 us
+[evolved_probe_het_24_mid] pack+AR+unpack: 122.5 us
+[evolved_probe_het_24_mid] pack+AR+unpack: 110.2 us
+[evolved_probe_het_24_mid] pack+AR+unpack: 104.8 us
+[evolved_probe_het_24_mid] pack+AR+unpack: 110.9 us
+[evolved_probe_het_24_mid] pack+AR+unpack: 130.9 us
+[evolved_probe_het_24_mid] pack+AR+unpack: 94.7 us
+[evolved_probe_het_24_mid] pack+AR+unpack: 94.3 us
+[evolved_probe_het_24_mid] pack+AR+unpack: 89.9 us
+[evolved_probe_het_24_mid] pack+AR+unpack: 90.8 us
+[evolved_probe_het_24_mid] pack+AR+unpack: 90.6 us
+[evolved_probe_het_24_mid] pack+AR+unpack: 88.7 us
+[evolved_probe_het_24_mid] pack+AR+unpack: 86.3 us
+[evolved_probe_het_24_mid] pack+AR+unpack: 86.5 us
+[evolved_probe_het_24_mid] pack+AR+unpack: 73.8 us
+[evolved_probe_het_24_mid] pack+AR+unpack: 73.8 us
+[evolved_probe_het_24_mid] pack+AR+unpack: 73.1 us
+[evolved_probe_het_24_mid] pack+AR+unpack: 74.2 us
+[evolved_probe_het_24_mid] pack+AR+unpack: 73.6 us
+[evolved_probe_het_24_mid] pack+AR+unpack: 73.3 us
+[evolved_probe_het_24_mid] pack+AR+unpack: 74.1 us
+[evolved_probe_het_24_mid] pack+AR+unpack: 70.0 us
+[evolved_probe_het_24_mid] pack+AR+unpack: 121.4 us
+    top 3 round 1: SIMPLER (collective Δ=24)
+[evolved_probe_het_24_mid] compact AR: 912.1 us, ops~36
+[evolved_probe_het_24_mid] compact AR: 331.7 us, ops~36
+[evolved_probe_het_24_mid] compact AR: 322.1 us, ops~36
+[evolved_probe_het_24_mid] compact AR: 316.3 us, ops~36
+[evolved_probe_het_24_mid] compact AR: 302.3 us, ops~36
+[evolved_probe_het_24_mid] compact AR: 291.8 us, ops~36
+[evolved_probe_het_24_mid] compact AR: 269.7 us, ops~36
+[evolved_probe_het_24_mid] compact AR: 226.2 us, ops~36
+[evolved_probe_het_24_mid] compact AR: 207.4 us, ops~36
+[evolved_probe_het_24_mid] compact AR: 171.6 us, ops~36
+[evolved_probe_het_24_mid] compact AR: 247.1 us, ops~36
+[evolved_probe_het_24_mid] compact AR: 158.0 us, ops~36
+[evolved_probe_het_24_mid] compact AR: 150.8 us, ops~36
+[evolved_probe_het_24_mid] compact AR: 145.2 us, ops~36
+[evolved_probe_het_24_mid] compact AR: 135.2 us, ops~36
+[evolved_probe_het_24_mid] compact AR: 125.7 us, ops~36
+[evolved_probe_het_24_mid] compact AR: 125.5 us, ops~36
+[evolved_probe_het_24_mid] compact AR: 111.8 us, ops~36
+[evolved_probe_het_24_mid] compact AR: 113.7 us, ops~36
+[evolved_probe_het_24_mid] compact AR: 143.6 us, ops~36
+[evolved_probe_het_24_mid] compact AR: 101.5 us, ops~36
+[evolved_probe_het_24_mid] compact AR: 101.8 us, ops~36
+[evolved_probe_het_24_mid] compact AR: 101.4 us, ops~36
+[evolved_probe_het_24_mid] compact AR: 100.1 us, ops~36
+[evolved_probe_het_24_mid] compact AR: 99.8 us, ops~36
+[evolved_probe_het_24_mid] compact AR: 137.4 us, ops~36
+[evolved_probe_het_24_mid] compact AR: 91.1 us, ops~36
+[evolved_probe_het_24_mid] compact AR: 93.1 us, ops~36
+[evolved_probe_het_24_mid] compact AR: 82.3 us, ops~36
+[evolved_probe_het_24_mid] compact AR: 82.1 us, ops~36
+[evolved_probe_het_24_mid] compact AR: 82.0 us, ops~36
+[evolved_probe_het_24_mid] compact AR: 81.9 us, ops~36
+[evolved_probe_het_24_mid] compact AR: 81.9 us, ops~36
+[evolved_probe_het_24_mid] compact AR: 82.0 us, ops~36
+[evolved_probe_het_24_mid] compact AR: 82.1 us, ops~36
+[evolved_probe_het_24_mid] compact AR: 78.7 us, ops~36
+[evolved_probe_het_24_mid] compact AR: 165.3 us, ops~36
+    top 5 round 1: SIMPLER (collective Δ=2)
+    top 5 round 2: SIMPLER (collective Δ=0)
+
+  [NO-SIM] Winner = Single flat all-reduce (first valid, sim_us NOT used)
+
+  Strategy-Enumerate complete. 10 total candidates.
+  Best: Single flat all-reduce (sim=467256.9 us)
+
+=== Phase 3 result for probe_het_24_mid (wall 142s): 6 candidates, sim ranking ===
+           1e+18  baseline:per_tensor_ar  code=no
+           1e+18  baseline:bucketed_ar_4  code=no
+           1e+18  baseline:flat_cat_ar  code=no
+           1e+18  baseline:bucketed_ar  code=no
+           1e+18  baseline:bucketed_ar_16  code=no
+           1e+18  strat:Single flat all-reduce  code=no

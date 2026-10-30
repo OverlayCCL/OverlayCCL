@@ -1,0 +1,7 @@
+{
+ "fsdp_ag_layout__ag_pinned__train": null,
+ "fsdp_ag_layout__ag_native__train": null,
+ "fsdp_ag_layout__ag_dim0_t__train": null,
+ "fsdp_ag_layout__ag_dim0_t_native__train": null,
+ "fsdp_ag_layout__loop_1__train": 26240.6
+}

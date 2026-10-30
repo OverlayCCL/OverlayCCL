@@ -1,0 +1,38 @@
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of one transformer layer (6 heterogeneous tensors)
+======================================================================
+  per_tensor_ar: 38021.3 us, 6 local ops, 0 ag, 6 ar, 0 cp
+  flat_cat_ar: 16957.7 us, 21 local ops, 0 ag, 1 ar, 0 cp
+  bucketed_ar: 16957.7 us, 21 local ops, 0 ag, 1 ar, 0 cp
+
+  Best baseline: baseline:flat_cat_ar (16957.7 us)
+
+======================================================================
+[Phase 3 / Strategy-Enumerate] DP gradient all-reduce of one transformer layer (6 heterogeneous tensors)
+======================================================================
+  K=5 strategies, R=2 refinement rounds per top-2 (budget ~10 LLM calls)
+  Enumerated 5 strategies:
+    1. Per-tensor all-reduce baseline: Issues one all_reduce per gradient tensor (6 dispatches total). Minimal memory o...
+    2. Single flat concatenation all-reduce: Concatenates all 6 heterogeneous tensors into one flat buffer via reshape+cat, p...
+    3. Fixed-size bucketed all-reduce: Groups tensors into buckets that don't exceed a fixed element threshold (e.g., 1...
+    4. Hierarchical reduce-scatter then all-gather: First reduce-scatter the concatenated buffer so each rank owns 1/world_size of t...
+    5. Parallel independent all-reduce streams: Partitions the 6 tensors into groups (e.g., 2 groups of 3), concatenates within ...
+  Strategy 1 (Per-tensor all-reduce baseline): sim=38021.3 us
+  Strategy 2 (Single flat concatenation all-reduce): sim=16957.7 us
+  Strategy 3 (Fixed-size bucketed all-reduce): sim=16957.7 us
+  Strategy 4 (Hierarchical reduce-scatter then all-gather): sim=16957.7 us
+  Strategy 5 (Parallel independent all-reduce streams): sim=32328.1 us
+
+  Top after enumeration:
+    Single flat concatenation all-reduce: 16957.7 us
+    Fixed-size bucketed all-reduce: 16957.7 us
+
+  Strategy-Enumerate complete. 7 total candidates.
+  Best: Single flat concatenation all-reduce (sim=16957.7 us)
+
+=== Phase 3 result for layer_grads_hetero_ar (wall 85s): 4 candidates, sim ranking ===
+           1e+18  baseline:flat_cat_ar  code=no
+           1e+18  baseline:bucketed_ar  code=no
+           1e+18  strat:Single flat concatenation all-  code=no
+           1e+18  baseline:per_tensor_ar  code=no

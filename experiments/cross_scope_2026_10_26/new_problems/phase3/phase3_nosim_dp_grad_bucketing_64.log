@@ -1,0 +1,272 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of 64 mixed-size tensors (bucketing sweep instance)
+======================================================================
+  per_tensor_ar: 141039.6 us, 64 local ops, 0 ag, 64 ar, 0 cp
+  flat_cat_ar: 134015.8 us, 195 local ops, 0 ag, 1 ar, 0 cp
+  bucketed_ar: 77631.8 us, 216 local ops, 0 ag, 8 ar, 0 cp
+  bucketed_ar_4: 81604.5 us, 240 local ops, 0 ag, 16 ar, 0 cp
+  bucketed_ar_16: 76904.6 us, 204 local ops, 0 ag, 4 ar, 0 cp
+
+  Best baseline: baseline:bucketed_ar_16 (76904.6 us)
+
+======================================================================
+[Phase 3 / Strategy-Enumerate] DP gradient all-reduce of 64 mixed-size tensors (bucketing sweep instance) [NO-SIM ABLATION]
+======================================================================
+  K=5 strategies, R=2 refinement rounds per top-2 (budget ~10 LLM calls)
+  Enumerated 5 strategies:
+    1. Two-phase hierarchical bucketing: First phase concatenates and all-reduces large tensors (top 50% by size) individ...
+    2. Fixed quad-bucket in-order split: Partitions the 64 tensors into exactly 4 in-order buckets of 16 consecutive tens...
+    3. Reduce-scatter then all-gather decomposition: Concatenates all 64 tensors, performs reduce-scatter across world_size ranks to ...
+    4. Size-stratified three-tier bundling: Sorts tensors into three size classes (large/medium/small by total elements), cr...
+    5. Parallel dual-stream interleaved buckets: Splits 64 tensors into two interleaved streams (even/odd indices), processes eac...
+  Strategy 1 (Two-phase hierarchical bucketing): sim=88108.4 us
+  Strategy 2 (Fixed quad-bucket in-order split): sim=76904.6 us
+  Strategy 3 (Reduce-scatter then all-gather decomposition): sim=134015.8 us
+  Strategy 4 (Size-stratified three-tier bundling): sim=76741.0 us
+  Strategy 5 (Parallel dual-stream interleaved buckets): sim=76588.1 us
+
+  [NO-SIM ITERATIVE] Refining all 5 correct candidates (sim_us not shown to LLM in refinement)
+[DP-AR-64] Single-bucket: 442.0 us, 14080 elements, 1 collective
+[DP-AR-64] Single-bucket: 260.1 us, 14080 elements, 1 collective
+[DP-AR-64] Single-bucket: 253.9 us, 14080 elements, 1 collective
+[DP-AR-64] Single-bucket: 254.9 us, 14080 elements, 1 collective
+[DP-AR-64] Single-bucket: 258.0 us, 14080 elements, 1 collective
+[DP-AR-64] Single-bucket: 233.9 us, 14080 elements, 1 collective
+[DP-AR-64] Single-bucket: 234.1 us, 14080 elements, 1 collective
+[DP-AR-64] Single-bucket: 232.9 us, 14080 elements, 1 collective
+[DP-AR-64] Single-bucket: 232.0 us, 14080 elements, 1 collective
+[DP-AR-64] Single-bucket: 226.0 us, 14080 elements, 1 collective
+[DP-AR-64] Single-bucket: 217.2 us, 14080 elements, 1 collective
+[DP-AR-64] Single-bucket: 203.8 us, 14080 elements, 1 collective
+[DP-AR-64] Single-bucket: 203.8 us, 14080 elements, 1 collective
+[DP-AR-64] Single-bucket: 202.9 us, 14080 elements, 1 collective
+[DP-AR-64] Single-bucket: 191.9 us, 14080 elements, 1 collective
+[DP-AR-64] Single-bucket: 193.8 us, 14080 elements, 1 collective
+[DP-AR-64] Single-bucket: 193.1 us, 14080 elements, 1 collective
+[DP-AR-64] Single-bucket: 183.1 us, 14080 elements, 1 collective
+[DP-AR-64] Single-bucket: 182.2 us, 14080 elements, 1 collective
+[DP-AR-64] Single-bucket: 175.7 us, 14080 elements, 1 collective
+[DP-AR-64] Single-bucket: 173.1 us, 14080 elements, 1 collective
+[DP-AR-64] Single-bucket: 170.0 us, 14080 elements, 1 collective
+[DP-AR-64] Single-bucket: 171.2 us, 14080 elements, 1 collective
+[DP-AR-64] Single-bucket: 168.1 us, 14080 elements, 1 collective
+[DP-AR-64] Single-bucket: 165.0 us, 14080 elements, 1 collective
+[DP-AR-64] Single-bucket: 165.2 us, 14080 elements, 1 collective
+[DP-AR-64] Single-bucket: 162.1 us, 14080 elements, 1 collective
+[DP-AR-64] Single-bucket: 170.0 us, 14080 elements, 1 collective
+[DP-AR-64] Single-bucket: 164.3 us, 14080 elements, 1 collective
+[DP-AR-64] Single-bucket: 150.0 us, 14080 elements, 1 collective
+[DP-AR-64] Single-bucket: 160.0 us, 14080 elements, 1 collective
+[DP-AR-64] Single-bucket: 150.0 us, 14080 elements, 1 collective
+[DP-AR-64] Single-bucket: 150.0 us, 14080 elements, 1 collective
+[DP-AR-64] Single-bucket: 150.0 us, 14080 elements, 1 collective
+[DP-AR-64] Single-bucket: 150.2 us, 14080 elements, 1 collective
+[DP-AR-64] Single-bucket: 148.1 us, 14080 elements, 1 collective
+[DP-AR-64] Single-bucket: 262.0 us, 14080 elements, 1 collective
+    top 1 round 1: SIMPLER (collective Δ=35)
+[DP-AR-64] Single-bucket: 463.2 us, 14080 elem, 1 coll, split-unpack
+[DP-AR-64] Single-bucket: 238.7 us, 14080 elem, 1 coll, split-unpack
+[DP-AR-64] Single-bucket: 231.0 us, 14080 elem, 1 coll, split-unpack
+[DP-AR-64] Single-bucket: 233.2 us, 14080 elem, 1 coll, split-unpack
+[DP-AR-64] Single-bucket: 214.1 us, 14080 elem, 1 coll, split-unpack
+[DP-AR-64] Single-bucket: 216.0 us, 14080 elem, 1 coll, split-unpack
+[DP-AR-64] Single-bucket: 211.0 us, 14080 elem, 1 coll, split-unpack
+[DP-AR-64] Single-bucket: 204.1 us, 14080 elem, 1 coll, split-unpack
+[DP-AR-64] Single-bucket: 199.8 us, 14080 elem, 1 coll, split-unpack
+[DP-AR-64] Single-bucket: 200.0 us, 14080 elem, 1 coll, split-unpack
+[DP-AR-64] Single-bucket: 176.0 us, 14080 elem, 1 coll, split-unpack
+[DP-AR-64] Single-bucket: 173.8 us, 14080 elem, 1 coll, split-unpack
+[DP-AR-64] Single-bucket: 182.9 us, 14080 elem, 1 coll, split-unpack
+[DP-AR-64] Single-bucket: 164.7 us, 14080 elem, 1 coll, split-unpack
+[DP-AR-64] Single-bucket: 165.7 us, 14080 elem, 1 coll, split-unpack
+[DP-AR-64] Single-bucket: 165.0 us, 14080 elem, 1 coll, split-unpack
+[DP-AR-64] Single-bucket: 157.8 us, 14080 elem, 1 coll, split-unpack
+[DP-AR-64] Single-bucket: 156.2 us, 14080 elem, 1 coll, split-unpack
+[DP-AR-64] Single-bucket: 157.8 us, 14080 elem, 1 coll, split-unpack
+[DP-AR-64] Single-bucket: 147.8 us, 14080 elem, 1 coll, split-unpack
+[DP-AR-64] Single-bucket: 146.9 us, 14080 elem, 1 coll, split-unpack
+[DP-AR-64] Single-bucket: 148.1 us, 14080 elem, 1 coll, split-unpack
+[DP-AR-64] Single-bucket: 145.2 us, 14080 elem, 1 coll, split-unpack
+[DP-AR-64] Single-bucket: 144.2 us, 14080 elem, 1 coll, split-unpack
+[DP-AR-64] Single-bucket: 144.2 us, 14080 elem, 1 coll, split-unpack
+[DP-AR-64] Single-bucket: 141.1 us, 14080 elem, 1 coll, split-unpack
+[DP-AR-64] Single-bucket: 145.9 us, 14080 elem, 1 coll, split-unpack
+[DP-AR-64] Single-bucket: 144.0 us, 14080 elem, 1 coll, split-unpack
+[DP-AR-64] Single-bucket: 138.0 us, 14080 elem, 1 coll, split-unpack
+[DP-AR-64] Single-bucket: 127.1 us, 14080 elem, 1 coll, split-unpack
+[DP-AR-64] Single-bucket: 129.0 us, 14080 elem, 1 coll, split-unpack
+[DP-AR-64] Single-bucket: 136.9 us, 14080 elem, 1 coll, split-unpack
+[DP-AR-64] Single-bucket: 126.8 us, 14080 elem, 1 coll, split-unpack
+[DP-AR-64] Single-bucket: 128.0 us, 14080 elem, 1 coll, split-unpack
+[DP-AR-64] Single-bucket: 165.0 us, 14080 elem, 1 coll, split-unpack
+[DP-AR-64] Single-bucket: 127.1 us, 14080 elem, 1 coll, split-unpack
+[DP-AR-64] Single-bucket: 178.1 us, 14080 elem, 1 coll, split-unpack
+    top 1 round 2: SIMPLER (collective Δ=0)
+    top 2 round 1: SIMPLER (collective Δ=3)
+DP_AR_64: 1191.5 us
+DP_AR_64: 778.5 us
+DP_AR_64: 668.4 us
+DP_AR_64: 757.0 us
+DP_AR_64: 575.3 us
+DP_AR_64: 475.1 us
+DP_AR_64: 419.7 us
+DP_AR_64: 413.8 us
+DP_AR_64: 404.0 us
+DP_AR_64: 368.5 us
+DP_AR_64: 326.4 us
+DP_AR_64: 295.8 us
+DP_AR_64: 293.7 us
+DP_AR_64: 271.4 us
+DP_AR_64: 271.4 us
+DP_AR_64: 272.4 us
+DP_AR_64: 255.1 us
+DP_AR_64: 254.0 us
+DP_AR_64: 240.6 us
+DP_AR_64: 233.6 us
+DP_AR_64: 223.8 us
+DP_AR_64: 224.2 us
+DP_AR_64: 223.5 us
+DP_AR_64: 217.1 us
+DP_AR_64: 214.3 us
+DP_AR_64: 213.4 us
+DP_AR_64: 211.4 us
+DP_AR_64: 222.3 us
+DP_AR_64: 203.5 us
+DP_AR_64: 202.3 us
+DP_AR_64: 188.2 us
+DP_AR_64: 190.7 us
+DP_AR_64: 190.5 us
+DP_AR_64: 189.4 us
+DP_AR_64: 189.3 us
+DP_AR_64: 188.8 us
+DP_AR_64: 333.7 us
+[bucket_prof] pack=0.180ms AR=0.029ms unpack=0.243ms total=0.452ms
+[bucket_prof] pack=0.130ms AR=0.019ms unpack=0.157ms total=0.307ms
+[bucket_prof] pack=0.127ms AR=0.011ms unpack=0.156ms total=0.294ms
+[bucket_prof] pack=0.128ms AR=0.009ms unpack=0.153ms total=0.290ms
+[bucket_prof] pack=0.119ms AR=0.008ms unpack=0.138ms total=0.266ms
+[bucket_prof] pack=0.113ms AR=0.009ms unpack=0.141ms total=0.263ms
+[bucket_prof] pack=0.115ms AR=0.009ms unpack=0.139ms total=0.263ms
+[bucket_prof] pack=0.112ms AR=0.007ms unpack=0.137ms total=0.256ms
+[bucket_prof] pack=0.111ms AR=0.003ms unpack=0.129ms total=0.243ms
+[bucket_prof] pack=0.098ms AR=0.005ms unpack=0.120ms total=0.224ms
+[bucket_prof] pack=0.096ms AR=0.005ms unpack=0.116ms total=0.218ms
+[bucket_prof] pack=0.096ms AR=0.005ms unpack=0.118ms total=0.218ms
+[bucket_prof] pack=0.089ms AR=0.005ms unpack=0.109ms total=0.203ms
+[bucket_prof] pack=0.089ms AR=0.005ms unpack=0.110ms total=0.204ms
+[bucket_prof] pack=0.090ms AR=0.004ms unpack=0.104ms total=0.199ms
+[bucket_prof] pack=0.085ms AR=0.004ms unpack=0.105ms total=0.194ms
+[bucket_prof] pack=0.087ms AR=0.004ms unpack=0.104ms total=0.195ms
+[bucket_prof] pack=0.082ms AR=0.002ms unpack=0.099ms total=0.183ms
+[bucket_prof] pack=0.082ms AR=0.004ms unpack=0.098ms total=0.184ms
+[bucket_prof] pack=0.079ms AR=0.004ms unpack=0.096ms total=0.179ms
+[bucket_prof] pack=0.078ms AR=0.004ms unpack=0.099ms total=0.181ms
+[bucket_prof] pack=0.076ms AR=0.004ms unpack=0.092ms total=0.172ms
+[bucket_prof] pack=0.077ms AR=0.004ms unpack=0.094ms total=0.175ms
+[bucket_prof] pack=0.075ms AR=0.004ms unpack=0.091ms total=0.170ms
+[bucket_prof] pack=0.073ms AR=0.004ms unpack=0.091ms total=0.168ms
+[bucket_prof] pack=0.074ms AR=0.004ms unpack=0.090ms total=0.168ms
+[bucket_prof] pack=0.073ms AR=0.002ms unpack=0.090ms total=0.165ms
+[bucket_prof] pack=0.075ms AR=0.003ms unpack=0.090ms total=0.169ms
+[bucket_prof] pack=0.072ms AR=0.003ms unpack=0.088ms total=0.163ms
+[bucket_prof] pack=0.066ms AR=0.003ms unpack=0.081ms total=0.150ms
+[bucket_prof] pack=0.066ms AR=0.003ms unpack=0.081ms total=0.149ms
+[bucket_prof] pack=0.080ms AR=0.003ms unpack=0.084ms total=0.167ms
+[bucket_prof] pack=0.069ms AR=0.003ms unpack=0.084ms total=0.156ms
+[bucket_prof] pack=0.066ms AR=0.003ms unpack=0.081ms total=0.150ms
+[bucket_prof] pack=0.066ms AR=0.003ms unpack=0.081ms total=0.150ms
+[bucket_prof] pack=0.066ms AR=0.002ms unpack=0.081ms total=0.149ms
+[bucket_prof] pack=0.115ms AR=0.007ms unpack=0.162ms total=0.284ms
+    top 4 round 1: SIMPLER (collective Δ=2)
+[bucket_prof] pack=0.184ms AR=0.033ms unpack=0.160ms total=0.377ms
+[bucket_prof] pack=0.146ms AR=0.010ms unpack=0.132ms total=0.288ms
+[bucket_prof] pack=0.144ms AR=0.009ms unpack=0.128ms total=0.281ms
+[bucket_prof] pack=0.144ms AR=0.009ms unpack=0.130ms total=0.282ms
+[bucket_prof] pack=0.127ms AR=0.008ms unpack=0.115ms total=0.249ms
+[bucket_prof] pack=0.126ms AR=0.009ms unpack=0.113ms total=0.249ms
+[bucket_prof] pack=0.125ms AR=0.007ms unpack=0.113ms total=0.245ms
+[bucket_prof] pack=0.128ms AR=0.007ms unpack=0.114ms total=0.248ms
+[bucket_prof] pack=0.113ms AR=0.003ms unpack=0.103ms total=0.219ms
+[bucket_prof] pack=0.107ms AR=0.006ms unpack=0.097ms total=0.210ms
+[bucket_prof] pack=0.105ms AR=0.006ms unpack=0.092ms total=0.203ms
+[bucket_prof] pack=0.104ms AR=0.005ms unpack=0.092ms total=0.202ms
+[bucket_prof] pack=0.097ms AR=0.005ms unpack=0.086ms total=0.187ms
+[bucket_prof] pack=0.097ms AR=0.005ms unpack=0.086ms total=0.187ms
+[bucket_prof] pack=0.102ms AR=0.005ms unpack=0.086ms total=0.192ms
+[bucket_prof] pack=0.090ms AR=0.005ms unpack=0.080ms total=0.175ms
+[bucket_prof] pack=0.091ms AR=0.005ms unpack=0.080ms total=0.175ms
+[bucket_prof] pack=0.090ms AR=0.003ms unpack=0.081ms total=0.173ms
+[bucket_prof] pack=0.085ms AR=0.004ms unpack=0.075ms total=0.164ms
+[bucket_prof] pack=0.081ms AR=0.004ms unpack=0.072ms total=0.157ms
+[bucket_prof] pack=0.082ms AR=0.004ms unpack=0.072ms total=0.158ms
+[bucket_prof] pack=0.079ms AR=0.004ms unpack=0.069ms total=0.152ms
+[bucket_prof] pack=0.079ms AR=0.004ms unpack=0.069ms total=0.152ms
+[bucket_prof] pack=0.079ms AR=0.004ms unpack=0.069ms total=0.153ms
+[bucket_prof] pack=0.076ms AR=0.004ms unpack=0.067ms total=0.147ms
+[bucket_prof] pack=0.076ms AR=0.004ms unpack=0.067ms total=0.147ms
+[bucket_prof] pack=0.074ms AR=0.002ms unpack=0.067ms total=0.144ms
+[bucket_prof] pack=0.075ms AR=0.003ms unpack=0.067ms total=0.146ms
+[bucket_prof] pack=0.071ms AR=0.003ms unpack=0.063ms total=0.137ms
+[bucket_prof] pack=0.071ms AR=0.003ms unpack=0.063ms total=0.137ms
+[bucket_prof] pack=0.070ms AR=0.003ms unpack=0.063ms total=0.136ms
+[bucket_prof] pack=0.071ms AR=0.003ms unpack=0.063ms total=0.137ms
+[bucket_prof] pack=0.070ms AR=0.003ms unpack=0.063ms total=0.136ms
+[bucket_prof] pack=0.070ms AR=0.003ms unpack=0.063ms total=0.136ms
+[bucket_prof] pack=0.070ms AR=0.003ms unpack=0.063ms total=0.136ms
+[bucket_prof] pack=0.066ms AR=0.001ms unpack=0.058ms total=0.125ms
+[bucket_prof] pack=0.094ms AR=0.004ms unpack=0.082ms total=0.180ms
+    top 4 round 2: SIMPLER (collective Δ=0)
+[DP-AR64] 860.3 us, 1 dispatch
+[DP-AR64] 532.0 us, 1 dispatch
+[DP-AR64] 492.6 us, 1 dispatch
+[DP-AR64] 436.9 us, 1 dispatch
+[DP-AR64] 463.9 us, 1 dispatch
+[DP-AR64] 387.9 us, 1 dispatch
+[DP-AR64] 399.0 us, 1 dispatch
+[DP-AR64] 387.5 us, 1 dispatch
+[DP-AR64] 330.5 us, 1 dispatch
+[DP-AR64] 335.4 us, 1 dispatch
+[DP-AR64] 265.2 us, 1 dispatch
+[DP-AR64] 261.7 us, 1 dispatch
+[DP-AR64] 237.5 us, 1 dispatch
+[DP-AR64] 235.6 us, 1 dispatch
+[DP-AR64] 236.2 us, 1 dispatch
+[DP-AR64] 218.1 us, 1 dispatch
+[DP-AR64] 220.9 us, 1 dispatch
+[DP-AR64] 205.2 us, 1 dispatch
+[DP-AR64] 201.2 us, 1 dispatch
+[DP-AR64] 195.8 us, 1 dispatch
+[DP-AR64] 186.4 us, 1 dispatch
+[DP-AR64] 198.8 us, 1 dispatch
+[DP-AR64] 186.9 us, 1 dispatch
+[DP-AR64] 180.5 us, 1 dispatch
+[DP-AR64] 181.1 us, 1 dispatch
+[DP-AR64] 180.7 us, 1 dispatch
+[DP-AR64] 173.9 us, 1 dispatch
+[DP-AR64] 179.1 us, 1 dispatch
+[DP-AR64] 168.0 us, 1 dispatch
+[DP-AR64] 164.0 us, 1 dispatch
+[DP-AR64] 162.7 us, 1 dispatch
+[DP-AR64] 164.4 us, 1 dispatch
+[DP-AR64] 163.2 us, 1 dispatch
+[DP-AR64] 164.7 us, 1 dispatch
+[DP-AR64] 163.2 us, 1 dispatch
+[DP-AR64] 162.2 us, 1 dispatch
+[DP-AR64] 256.0 us, 1 dispatch
+    top 5 round 1: SIMPLER (collective Δ=1)
+    top 5 round 2: SIMPLER (collective Δ=0)
+
+  [NO-SIM] Winner = Two-phase hierarchical bucketing (first valid, sim_us NOT used)
+
+  Strategy-Enumerate complete. 10 total candidates.
+  Best: Two-phase hierarchical bucketing (sim=88108.4 us)
+
+=== Phase 3 result for dp_grad_bucketing_64 (wall 146s): 6 candidates, sim ranking ===
+           1e+18  baseline:bucketed_ar_16  code=no
+           1e+18  baseline:bucketed_ar  code=no
+           1e+18  baseline:bucketed_ar_4  code=no
+           1e+18  strat:Two-phase hierarchical bucketi  code=no
+           1e+18  baseline:flat_cat_ar  code=no
+           1e+18  baseline:per_tensor_ar  code=no

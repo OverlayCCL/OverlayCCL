@@ -1,0 +1,30 @@
+[
+ {
+  "raw": [
+   "strat:refined-from-Size-threshold ad",
+   "{'template': 'strategy_enumerate_final', 'cost_score': 1237.8984520000004, 'sim_time_us': 123789.84520000003, 'local_ops': 99, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'evolved_code': 'def evolved_hs_c_32mixed(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"Single-pass flattening with view-based extraction to minimize local ops.\"\"\"\\n    \\n    # Flatten all gradients into a single buffer (one cat operation)\\n    shapes = [g.shape for g in grads]\\n    sizes = [g.numel() for g in grads]\\n    flat = torch.cat([g.reshape(-1) for g in grads])\\n    \\n    # Single all_reduce on the entire flattened buffer\\n    reduced = xm.all_reduce(xm.REDUCE_SUM, flat)\\n    \\n    # Extract results using views (narrow/slice operations - metadata only)\\n    results = []\\n    offset = 0\\n    for i, (size, shape) in enumerate(zip(sizes, shapes)):\\n        # Use narrow (a view operation) instead of slicing when possible\\n        # narrow is more efficient as it\\'s guaranteed to be a view\\n        result = reduced.narrow(0, offset, size).view(shape)\\n        results.append(result)\\n        offset += size\\n    \\n    return results'}}"
+  ],
+  "name": "strat:refined-from-Size-threshold ad"
+ },
+ {
+  "raw": [
+   "baseline:flat_cat_ar",
+   "{'template': 'flat_cat_ar', 'cost_score': 1245.7512519999982, 'sim_time_us': 124575.12519999982, 'local_ops': 99, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'builtin_code': 'def evolved_hs_c_32mixed(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    flat = torch.cat([t.reshape(-1) for t in grads]); r = xm.all_reduce(xm.REDUCE_SUM, flat)\\n    outs = []; off = 0\\n    for t in grads: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:flat_cat_ar"
+ },
+ {
+  "raw": [
+   "baseline:bucketed_ar",
+   "{'template': 'bucketed_ar', 'cost_score': 1245.7512519999982, 'sim_time_us': 124575.12519999982, 'local_ops': 99, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'builtin_code': 'def evolved_hs_c_32mixed(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"fixed-size buckets in order (exact bytes, a few dispatches)\"\"\"\\n    outs = []; chunk = []; acc = 0; lim = 4 * 1024 * 1024\\n    def flush(chunk):\\n        flat = torch.cat([t.reshape(-1) for t in chunk]); r = xm.all_reduce(xm.REDUCE_SUM, flat); off = 0\\n        for t in chunk: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    for t in grads:\\n        chunk.append(t); acc += t.numel()\\n        if acc >= lim: flush(chunk); chunk = []; acc = 0\\n    if chunk: flush(chunk)\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:bucketed_ar"
+ },
+ {
+  "raw": [
+   "baseline:per_tensor_ar",
+   "{'template': 'per_tensor_ar', 'cost_score': 1341.028940594263, 'sim_time_us': 134102.8940594263, 'local_ops': 32, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 32, '_params': {'builtin_code': 'def evolved_hs_c_32mixed(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"developer baseline: one all_reduce per gradient tensor (DDP hook per parameter)\"\"\"\\n    return [xm.all_reduce(xm.REDUCE_SUM, t) for t in grads]\\n'}}"
+  ],
+  "name": "baseline:per_tensor_ar"
+ }
+]

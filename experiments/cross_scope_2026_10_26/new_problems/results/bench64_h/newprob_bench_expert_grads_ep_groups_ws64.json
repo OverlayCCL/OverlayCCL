@@ -1,0 +1,22 @@
+{
+ "problem": "expert_grads_ep_groups",
+ "ws": 64,
+ "results": {
+  "per_tensor_grouped": {
+   "status": "RuntimeError: Execute: error condition (((rt_status) != NRT_SUCCESS)):  [General]: [NRT_FAILURE] status_code=1. Operation failed due to an unspecified error condition in the runtime system. For more details check s",
+   "med_ms": null
+  },
+  "flat_grouped": {
+   "status": "RuntimeError: Execute: error condition (((rt_status) != NRT_SUCCESS)):  [General]: [NRT_FAILURE] status_code=1. Operation failed due to an unspecified error condition in the runtime system. For more details check s",
+   "med_ms": null
+  },
+  "per_layer_grouped": {
+   "status": "RuntimeError: Execute: error condition (((rt_status) != NRT_SUCCESS)):  [General]: [NRT_FAILURE] status_code=1. Operation failed due to an unspecified error condition in the runtime system. For more details check s",
+   "med_ms": null
+  },
+  "equal_stacks_grouped": {
+   "status": "RuntimeError: Execute: error condition (((rt_status) != NRT_SUCCESS)):  [General]: [NRT_FAILURE] status_code=1. Operation failed due to an unspecified error condition in the runtime system. For more details check s",
+   "med_ms": null
+  }
+ }
+}

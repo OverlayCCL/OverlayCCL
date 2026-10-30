@@ -1,0 +1,27 @@
+{
+ "problem": "hs_d_64x256k_equal",
+ "ws": 32,
+ "results": {
+  "per_tensor_ar": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 9.09268856048584,
+   "mean_ms": 9.804757436116537,
+   "status": "ok"
+  },
+  "flat_cat_ar": {
+   "max_abs_diff": 0.0048828125,
+   "ok": true,
+   "med_ms": 10.539412498474121,
+   "mean_ms": 11.578043301900228,
+   "status": "ok"
+  },
+  "stack_ar": {
+   "max_abs_diff": 0.0048828125,
+   "ok": true,
+   "med_ms": 11.041402816772461,
+   "mean_ms": 11.558882395426432,
+   "status": "ok"
+  }
+ }
+}

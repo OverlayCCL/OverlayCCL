@@ -1,0 +1,40 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of 48 mixed-size 1-D tensors (mid sizes)
+======================================================================
+  per_tensor_ar: 1074912.2 us, 48 local ops, 0 ag, 48 ar, 0 cp
+  flat_cat_ar: 1688284.2 us, 147 local ops, 0 ag, 1 ar, 0 cp
+  bucketed_ar: 1688284.2 us, 147 local ops, 0 ag, 1 ar, 0 cp
+
+  Best baseline: baseline:per_tensor_ar (1074912.2 us)
+
+======================================================================
+[Phase 3 / Strategy-Enumerate] DP gradient all-reduce of 48 mixed-size 1-D tensors (mid sizes)
+======================================================================
+  K=5 strategies, R=2 refinement rounds per top-2 (budget ~10 LLM calls)
+  Enumerated 5 strategies:
+    1. Per-tensor all-reduce baseline: Issues one all_reduce call per gradient tensor (48 dispatches total). Represents...
+    2. Single flat concatenation all-reduce: Concatenates all 48 mixed-size tensors into one flat buffer, performs a single a...
+    3. Fixed-byte bucketed all-reduce: Groups consecutive tensors into buckets up to a fixed byte threshold (e.g., 4MB)...
+    4. Size-binned parallel all-reduce: Bins the 48 tensors by size class (e.g., small/medium/large thresholds), concate...
+    5. Hierarchical two-phase reduction: First performs intra-node reduce_scatter of concatenated chunks across local ran...
+  Strategy 1 (Per-tensor all-reduce baseline): sim=1074912.2 us
+  Strategy 2 (Single flat concatenation all-reduce): sim=1688284.2 us
+  Strategy 3 (Fixed-byte bucketed all-reduce): sim=1688284.2 us
+  Strategy 4 (Size-binned parallel all-reduce): sim=1688284.2 us
+  Strategy 5 (Hierarchical two-phase reduction) INCORRECT: CRASH in collect pass 0: world=4 pattern=uniform rank=2: RuntimeError: shape '[8192]' is invalid for
+
+  Top after enumeration:
+    Per-tensor all-reduce baseline: 1074912.2 us
+    Single flat concatenation all-reduce: 1688284.2 us
+    top 2 round 2: NEW BEST 939398.0 us (44.4% improvement)
+
+  Strategy-Enumerate complete. 6 total candidates.
+  Best: refined-from-Single flat concatenation all-reduce (sim=939398.0 us)
+
+=== Phase 3 result for probe_het_48_mid (wall 78s): 4 candidates, sim ranking ===
+           1e+18  strat:refined-from-Single flat conca  code=no
+           1e+18  baseline:per_tensor_ar  code=no
+           1e+18  baseline:flat_cat_ar  code=no
+           1e+18  baseline:bucketed_ar  code=no

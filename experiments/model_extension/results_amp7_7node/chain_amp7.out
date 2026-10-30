@@ -1,0 +1,161 @@
+=== [02:12:33] amp7 start
+=== [02:12:36] s7_base_microbench
+wall_s=720
+[bench] per_mb steady_mean=600.02ms steady_median=594.96ms final_loss=13.863
+AMP7_SMOKE_DONE
+=== [02:24:57] a7_base_microbench
+wall_s=297
+[bench] per_mb steady_mean=603.93ms steady_median=600.06ms final_loss=13.863
+=== [02:30:13] a7_bund_pertensor_native
+wall_s=503
+[bench] bundled steady_mean=80.87ms steady_median=79.09ms final_loss=3.466
+=== [02:38:55] a7_bund_microbench
+wall_s=386
+[bench] bundled steady_mean=164.56ms steady_median=164.12ms final_loss=3.466
+AMP7_E2E_DONE
+=== [02:45:42] a5_base_microbench
+wall_s=869
+[bench] per_mb steady_mean=606.98ms steady_median=600.56ms final_loss=13.863
+=== [03:00:30] a5_bund_pertensor_native
+wall_s=506
+[bench] bundled steady_mean=71.78ms steady_median=70.31ms final_loss=3.466
+=== [03:09:16] a3_base_microbench
+wall_s=837
+[bench] per_mb steady_mean=598.57ms steady_median=598.96ms final_loss=13.863
+=== [03:23:33] a3_bund_pertensor_native
+wall_s=463
+[bench] bundled steady_mean=70.90ms steady_median=69.57ms final_loss=3.466
+AMP7_SUBSETS_DONE
+=== [03:31:38] k7_base_S_2048_N_MB_4_N_LAYERS_PER_STAGE_2
+wall_s=533
+[bench] per_mb steady_mean=648.81ms steady_median=644.39ms final_loss=13.863
+=== [03:40:50] k7_bund_k7_base_S_2048_N_MB_4_N_LAYERS_PER_STAGE_2
+swapped at 03:50:00; rest chains: 1
+=== [03:50:17] chain_rest start
+=== [03:50:17] k7_base_S1024_M8
+wall_s=499
+[bench] per_mb steady_mean=1187.22ms steady_median=1181.54ms final_loss=27.726
+=== [03:58:56] k7_bund_S1024_M8
+wall_s=725
+[bench] bundled steady_mean=107.79ms steady_median=106.92ms final_loss=3.466
+AMP7_KNOBS_DONE
+=== [04:11:24] cold_base_microbench
+wall_s=857
+[bench] per_mb steady_mean=600.90ms steady_median=595.39ms final_loss=13.863
+=== [04:26:01] cold_bund_pertensor_native
+wall_s=491
+[bench] bundled steady_mean=75.21ms steady_median=72.30ms final_loss=3.466
+AMP7_COLD_DONE
+=== [04:34:33] a7_base_microbench_s1
+wall_s=300
+[bench] per_mb steady_mean=607.19ms steady_median=605.64ms final_loss=13.863
+=== [04:39:52] a7_bund_pertensor_native_s1
+wall_s=92
+[bench] bundled steady_mean=71.30ms steady_median=70.41ms final_loss=3.466
+AMP7_SEED_DONE
+--- [04:41:46] train layer_grads_hetero_ar per_tensor_ar
+   median_ms 35.35 effective True
+--- [04:42:36] train layer_grads_hetero_ar flat_cat_ar
+   median_ms 36.3 effective True
+--- [04:43:27] train model_grads_4layers per_tensor_ar
+   median_ms 118.09 effective True
+--- [04:44:44] train model_grads_4layers flat_cat_ar
+   median_ms 118.66 effective True
+--- [04:46:02] train probe_het_24_mid per_tensor_ar
+   median_ms 51.34 effective True
+--- [04:46:54] train probe_het_24_mid bucket6
+   median_ms 58.18 effective True
+--- [04:48:13] train probe_het_48_mid per_tensor_ar
+   median_ms 93.96 effective True
+--- [04:49:25] train probe_het_48_mid bucket6
+   median_ms 115.85 effective True
+--- [04:51:04] train hetero_grad_ar_many per_tensor_ar
+   median_ms 130.23 effective True
+--- [04:52:31] train hetero_grad_ar_many p3_pick3
+   median_ms 122.24 effective True
+--- [04:54:01] train hs_c_32x256k_2m per_tensor_ar
+   median_ms 47.63 effective True
+--- [04:55:08] train hs_c_32x256k_2m bucket_4mb
+   median_ms 48.31 effective True
+--- [04:55:56] train layer_grads_mixed_dtype per_tensor_ar
+   median_ms 34.24 effective True
+--- [04:56:46] train layer_grads_mixed_dtype cast_flat_bf16
+   median_ms 36.22 effective True
+--- [04:57:37] train hs_a_64x64k_512k per_tensor_ar
+   median_ms 81.83 effective True
+--- [04:58:29] train hs_a_64x64k_512k bucket_4mb
+   median_ms 126.63 effective True
+--- [04:59:29] train probe_het_48_small per_tensor_ar
+   median_ms 61.62 effective True
+--- [05:00:17] train probe_het_48_small bucket6
+   median_ms 62.19 effective True
+=== newprobs done 05:01:04 ===
+--- [05:01:06] train fsdp_ag_layout ag_pinned
+   median_ms 102.1 effective True
+--- [05:02:01] train fsdp_ag_layout ag_dim0_t_native
+   median_ms 89.47 effective True
+=== newprobs done 05:02:55 ===
+ROUND_2_DONE
+--- [05:03:15] train layer_grads_hetero_ar per_tensor_ar
+   median_ms 34.76 effective True
+--- [05:04:21] train layer_grads_hetero_ar flat_cat_ar
+   median_ms 36.11 effective True
+--- [05:05:28] train model_grads_4layers per_tensor_ar
+   median_ms 118.21 effective True
+--- [05:06:59] train model_grads_4layers flat_cat_ar
+   median_ms 118.64 effective True
+--- [05:08:36] train probe_het_24_mid per_tensor_ar
+   median_ms 51.78 effective True
+--- [05:09:48] train probe_het_24_mid bucket6
+   median_ms 57.79 effective True
+--- [05:10:52] train probe_het_48_mid per_tensor_ar
+   median_ms 94.09 effective True
+--- [05:11:56] train probe_het_48_mid bucket6
+   median_ms 115.43 effective True
+--- [05:13:17] train hetero_grad_ar_many per_tensor_ar
+   median_ms 131.13 effective True
+--- [05:14:30] train hetero_grad_ar_many p3_pick3
+   median_ms 122.76 effective True
+--- [05:15:41] train hs_c_32x256k_2m per_tensor_ar
+   median_ms 46.21 effective True
+--- [05:16:29] train hs_c_32x256k_2m bucket_4mb
+   median_ms 48.99 effective True
+--- [05:17:18] train layer_grads_mixed_dtype per_tensor_ar
+   median_ms 35.38 effective True
+--- [05:18:07] train layer_grads_mixed_dtype cast_flat_bf16
+   median_ms 35.62 effective True
+--- [05:19:02] train hs_a_64x64k_512k per_tensor_ar
+   median_ms 82.53 effective True
+--- [05:20:20] train hs_a_64x64k_512k bucket_4mb
+   median_ms 125.43 effective True
+--- [05:21:41] train probe_het_48_small per_tensor_ar
+   median_ms 61.36 effective True
+--- [05:22:41] train probe_het_48_small bucket6
+   median_ms 61.42 effective True
+=== newprobs done 05:23:48 ===
+--- [05:23:49] train fsdp_ag_layout ag_pinned
+   median_ms 103.65 effective True
+--- [05:25:00] train fsdp_ag_layout ag_dim0_t_native
+   median_ms 89.67 effective True
+=== newprobs done 05:26:11 ===
+ROUND_3_DONE
+AMP7_ROUNDS_DONE
+--- [05:26:30] train layer_grads_hetero_ar per_tensor_ar
+   median_ms 34.01 effective True
+--- [05:27:19] train layer_grads_hetero_ar flat_cat_ar
+   median_ms 37.09 effective True
+--- [05:28:10] train layer_grads_hetero_ar nosim_1
+   median_ms 37.46 effective True
+--- [05:29:02] train model_grads_4layers per_tensor_ar
+   median_ms 119.23 effective True
+--- [05:30:20] train model_grads_4layers flat_cat_ar
+   median_ms 118.23 effective True
+--- [05:31:37] train model_grads_4layers nosim_1
+   median_ms 157.05 effective True
+--- [05:36:43] train probe_het_24_mid per_tensor_ar
+   median_ms 51.56 effective True
+--- [05:37:47] train probe_het_24_mid bucket6
+   median_ms 57.47 effective True
+--- [05:39:10] train probe_het_24_mid nosim_1
+   median_ms 66.99 effective True
+--- [05:40:26] train probe_het_48_mid per_tensor_ar

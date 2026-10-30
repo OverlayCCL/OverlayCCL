@@ -1,0 +1,48 @@
+{
+ "problem": "ulysses_seq_a2a",
+ "ws": 32,
+ "results": {
+  "ag_transpose_rs": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 7.301092147827148,
+   "mean_ms": 174.83054796854654,
+   "status": "ok"
+  },
+  "ag_slice": {
+   "max_abs_diff": 0.0009765625,
+   "ok": true,
+   "med_ms": 7.012486457824707,
+   "mean_ms": 7.111843427022298,
+   "status": "ok"
+  },
+  "ag_slice_native": {
+   "max_abs_diff": 0.0009765625,
+   "ok": true,
+   "med_ms": 5.965471267700195,
+   "mean_ms": 6.374923388163249,
+   "status": "ok"
+  },
+  "masked_rs": {
+   "max_abs_diff": 0.0009765625,
+   "ok": true,
+   "med_ms": 5.840301513671875,
+   "mean_ms": 6.123487154642741,
+   "status": "ok"
+  },
+  "ag_full_then_transpose": {
+   "max_abs_diff": 0.0009765625,
+   "ok": true,
+   "med_ms": 6.616115570068359,
+   "mean_ms": 6.713215510050456,
+   "status": "ok"
+  },
+  "ag_full_then_transpose_native": {
+   "max_abs_diff": 0.0009765625,
+   "ok": true,
+   "med_ms": 5.763411521911621,
+   "mean_ms": 5.791703859965007,
+   "status": "ok"
+  }
+ }
+}

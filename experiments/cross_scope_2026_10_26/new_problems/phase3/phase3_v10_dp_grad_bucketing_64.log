@@ -1,0 +1,40 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of 64 mixed-size tensors (bucketing sweep instance)
+======================================================================
+  per_tensor_ar: 141039.6 us, 64 local ops, 0 ag, 64 ar, 0 cp
+  flat_cat_ar: 134015.8 us, 195 local ops, 0 ag, 1 ar, 0 cp
+  bucketed_ar: 77631.8 us, 216 local ops, 0 ag, 8 ar, 0 cp
+
+  Best baseline: baseline:bucketed_ar (77631.8 us)
+
+======================================================================
+[Phase 3 / Strategy-Enumerate] DP gradient all-reduce of 64 mixed-size tensors (bucketing sweep instance)
+======================================================================
+  K=5 strategies, R=2 refinement rounds per top-2 (budget ~10 LLM calls)
+  Enumerated 5 strategies:
+    1. Single flat concatenation all-reduce: Concatenate all 64 tensors into one flat buffer and perform a single all_reduce,...
+    2. Fixed in-order bucketing (4-8 buckets): Partition the 64 tensors into 4-8 equal-count buckets in their original order, c...
+    3. Hierarchical two-level bucketing: Group tensors into intermediate bundles (e.g., 16 groups of 4), all-reduce each ...
+    4. Reduce-scatter followed by all-gather: Partition concatenated gradient buffer across ranks via reduce-scatter (each ran...
+    5. Size-stratified bucketing by tensor magnitude: Sort tensors into 3-5 buckets by relative size (smallest 20%, small-medium 20%, ...
+  Strategy 1 (Single flat concatenation all-reduce): sim=134015.8 us
+  Strategy 2 (Fixed in-order bucketing (4-8 buckets)): sim=77631.8 us
+  Strategy 3 (Hierarchical two-level bucketing): sim=81604.5 us
+  Strategy 4 (Reduce-scatter followed by all-gather): sim=76397.6 us
+  Strategy 5 (Size-stratified bucketing by tensor magnitude): sim=76904.6 us
+
+  Top after enumeration:
+    Reduce-scatter followed by all-gather: 76397.6 us
+    Size-stratified bucketing by tensor magnitude: 76904.6 us
+    top 1 round 2: NEW BEST 74773.5 us (2.1% improvement)
+
+  Strategy-Enumerate complete. 7 total candidates.
+  Best: refined-from-Reduce-scatter followed by all-gather (sim=74773.5 us)
+
+=== Phase 3 result for dp_grad_bucketing_64 (wall 91s): 4 candidates, sim ranking ===
+           1e+18  strat:refined-from-Reduce-scatter fo  code=no
+           1e+18  baseline:bucketed_ar  code=no
+           1e+18  baseline:flat_cat_ar  code=no
+           1e+18  baseline:per_tensor_ar  code=no

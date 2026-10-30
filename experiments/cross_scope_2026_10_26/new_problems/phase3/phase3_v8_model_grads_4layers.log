@@ -1,0 +1,42 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of a 4-layer transformer (24 heterogeneous tensors)
+======================================================================
+  per_tensor_ar: 100619.8 us, 24 local ops, 0 ag, 24 ar, 0 cp
+  flat_cat_ar: 64218.2 us, 75 local ops, 0 ag, 1 ar, 0 cp
+  bucketed_ar: 64218.2 us, 75 local ops, 0 ag, 1 ar, 0 cp
+  per_layer_bucket: 64218.2 us, 84 local ops, 0 ag, 4 ar, 0 cp
+
+  Best baseline: baseline:per_layer_bucket (64218.2 us)
+
+======================================================================
+[Phase 3 / Strategy-Enumerate] DP gradient all-reduce of a 4-layer transformer (24 heterogeneous tensors)
+======================================================================
+  K=5 strategies, R=2 refinement rounds per top-2 (budget ~10 LLM calls)
+  Enumerated 5 strategies:
+    1. Reverse-order single all-reduce: Concatenate all 24 tensors in reverse order (layer 3→0) into one flat buffer and...
+    2. Two-phase hierarchical all-reduce: First, all-reduce within each node using intra-node collectives (num_devices cor...
+    3. Parameter-type grouped buckets: Group the 24 tensors by parameter type (4 weight, 4 bias, 4 layernorm_weight, et...
+    4. Pipelined reduce-scatter plus all-gather: Split each tensor or bucket into world_size chunks, perform reduce-scatter to di...
+    5. Attention-MLP split with async dispatch: Partition 24 tensors into attention parameters (Q,K,V,O weights/biases, 16 tenso...
+  Strategy 1 (Reverse-order single all-reduce): sim=64218.2 us
+  Strategy 2 (Two-phase hierarchical all-reduce): sim=309896.3 us
+  Strategy 3 (Parameter-type grouped buckets): sim=69973.7 us
+  Strategy 4 (Pipelined reduce-scatter plus all-gather): sim=64475.2 us
+  Strategy 5 (Attention-MLP split with async dispatch): sim=67615.4 us
+
+  Top after enumeration:
+    Reverse-order single all-reduce: 64218.2 us
+    Pipelined reduce-scatter plus all-gather: 64475.2 us
+    top 2 round 2: NEW BEST 63395.2 us (1.7% improvement)
+
+  Strategy-Enumerate complete. 7 total candidates.
+  Best: refined-from-Pipelined reduce-scatter plus all-gather (sim=63395.2 us)
+
+=== Phase 3 result for model_grads_4layers (wall 108s): 5 candidates, sim ranking ===
+           1e+18  strat:refined-from-Pipelined reduce-  code=no
+           1e+18  baseline:per_layer_bucket  code=no
+           1e+18  baseline:flat_cat_ar  code=no
+           1e+18  baseline:bucketed_ar  code=no
+           1e+18  baseline:per_tensor_ar  code=no

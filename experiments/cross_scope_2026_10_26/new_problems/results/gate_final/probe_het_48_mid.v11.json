@@ -1,0 +1,39 @@
+{
+ "hw_problem": "probe_het_48_mid",
+ "search_problem": "probe_het_48_mid",
+ "phase3_tag": "v11",
+ "gate_candidates": [
+  [
+   "gate_1",
+   "strat:refined-from-Adaptive dual-buc",
+   932599.6051999986
+  ],
+  [
+   "gate_2",
+   "baseline:bucketed_ar",
+   945245.7254136351
+  ],
+  [
+   "gate_3",
+   "baseline:per_tensor_ar",
+   1094112.216439931
+  ]
+ ],
+ "measured_ms": {
+  "gate_1": 522.60422706604,
+  "per_tensor_ar": 596.3668823242188,
+  "bucket6": 507.22336769104004,
+  "gate_2": 587.7561569213867,
+  "gate_3": 595.3254699707031
+ },
+ "effective": {
+  "gate_1": true,
+  "per_tensor_ar": true,
+  "bucket6": true,
+  "gate_2": true,
+  "gate_3": true
+ },
+ "gate_choice": "gate_1",
+ "best_overall": "bucket6",
+ "independent_pieces": false
+}

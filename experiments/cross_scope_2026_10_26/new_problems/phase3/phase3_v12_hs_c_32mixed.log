@@ -1,0 +1,46 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of 32 mixed-size tensors (256K-2M elements on hardware)
+======================================================================
+  per_tensor_ar: 134102.9 us, 32 local ops, 0 ag, 32 ar, 0 cp
+  flat_cat_ar: 124575.1 us, 99 local ops, 0 ag, 1 ar, 0 cp
+  bucketed_ar: 125533.1 us, 108 local ops, 0 ag, 4 ar, 0 cp
+  bucketed_ar_4: 126776.0 us, 120 local ops, 0 ag, 8 ar, 0 cp
+  bucketed_ar_16: 124992.1 us, 102 local ops, 0 ag, 2 ar, 0 cp
+
+  Best baseline: baseline:flat_cat_ar (124575.1 us)
+
+======================================================================
+[Phase 3 / Strategy-Enumerate] DP gradient all-reduce of 32 mixed-size tensors (256K-2M elements on hardware)
+======================================================================
+  K=5 strategies, R=4 refinement rounds per top-2 (budget ~14 LLM calls)
+  Enumerated 5 strategies:
+    1. Adaptive Size-Based Two-Tier Bucketing: Split tensors by relative size (e.g., top 25% vs bottom 75% by element count) in...
+    2. Reduce-Scatter then All-Gather Decomposition: Concatenate all 32 tensors once, perform reduce-scatter across world_size to par...
+    3. Hierarchical Device-Node Two-Phase Reduction: First all-reduce within each node (intra-node groups using cores_per_device or n...
+    4. Pipelined Per-Tensor with Async Overlap: Issue all 32 individual all-reduce calls sequentially but rely on XLA's async co...
+    5. Equal-Count Interleaved Round-Robin Buckets: Partition the 32 tensors into 8 buckets of exactly 4 tensors each by round-robin...
+  Strategy 1 (Adaptive Size-Based Two-Tier Bucketing): sim=124992.1 us
+  Strategy 2 (Reduce-Scatter then All-Gather Decomposition): sim=124575.1 us
+  Strategy 3 (Hierarchical Device-Node Two-Phase Reduction) test/bench exception: RuntimeError: stack expects each tensor to be equal size, but got [5632] at entry 0 and [6144] at entry 1
+  Strategy 4 (Pipelined Per-Tensor with Async Overlap): sim=134102.9 us
+  Strategy 5 (Equal-Count Interleaved Round-Robin Buckets): sim=126776.0 us
+
+  Top after enumeration:
+    Reduce-Scatter then All-Gather Decomposition: 124575.1 us
+    Adaptive Size-Based Two-Tier Bucketing: 124992.1 us
+    top 1 round 4: NEW BEST 123477.8 us (0.9% improvement)
+    top 2 round 2: NEW BEST 123830.8 us (0.9% improvement)
+    top 2 round 3: NEW BEST 123655.3 us (0.1% improvement)
+
+  Strategy-Enumerate complete. 6 total candidates.
+  Best: refined-from-Reduce-Scatter then All-Gather Decomposition (sim=123477.8 us)
+
+=== Phase 3 result for hs_c_32mixed (wall 159s): 6 candidates, sim ranking ===
+           1e+18  strat:refined-from-Reduce-Scatter th  code=no
+           1e+18  baseline:flat_cat_ar  code=no
+           1e+18  baseline:bucketed_ar_16  code=no
+           1e+18  baseline:bucketed_ar  code=no
+           1e+18  baseline:bucketed_ar_4  code=no
+           1e+18  baseline:per_tensor_ar  code=no

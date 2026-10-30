@@ -1,0 +1,43 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of 24 mixed-size 1-D tensors (mid sizes)
+======================================================================
+  per_tensor_ar: 465690.6 us, 24 local ops, 0 ag, 24 ar, 0 cp
+  flat_cat_ar: 467256.9 us, 75 local ops, 0 ag, 1 ar, 0 cp
+  bucketed_ar: 467256.9 us, 81 local ops, 0 ag, 3 ar, 0 cp
+  bucketed_ar_4: 467256.9 us, 89 local ops, 0 ag, 6 ar, 0 cp
+  bucketed_ar_16: 467256.9 us, 78 local ops, 0 ag, 2 ar, 0 cp
+
+  Best baseline: baseline:per_tensor_ar (465690.6 us)
+
+======================================================================
+[Phase 3 / Strategy-Enumerate] DP gradient all-reduce of 24 mixed-size 1-D tensors (mid sizes)
+======================================================================
+  K=5 strategies, R=2 refinement rounds per top-2 (budget ~10 LLM calls)
+  Enumerated 5 strategies:
+    1. Single flat all-reduce: Concatenate all 24 tensors into one contiguous buffer and issue a single all_red...
+    2. In-order buckets of 6 tensors: Partition the 24 tensors into 4 sequential buckets of 6 consecutive tensors each...
+    3. In-order buckets of 12 tensors: Partition into 2 sequential buckets of 12 consecutive tensors each, concatenate ...
+    4. Per-tensor all-reduce (24 dispatches): Issue 24 separate all_reduce calls, one per gradient tensor, with no concatenati...
+    5. In-order buckets of 3 tensors: Partition into 8 sequential buckets of 3 consecutive tensors each, concatenate w...
+  Strategy 1 (Single flat all-reduce): sim=467256.9 us
+  Strategy 2 (In-order buckets of 6 tensors): sim=467256.9 us
+  Strategy 3 (In-order buckets of 12 tensors): sim=467256.9 us
+  Strategy 4 (Per-tensor all-reduce (24 dispatches)): sim=465690.6 us
+  Strategy 5 (In-order buckets of 3 tensors): sim=467256.9 us
+
+  Top after enumeration:
+    Per-tensor all-reduce (24 dispatches): 465690.6 us
+    In-order buckets of 12 tensors: 467256.9 us
+
+  Strategy-Enumerate complete. 7 total candidates.
+  Best: Per-tensor all-reduce (24 dispatches) (sim=465690.6 us)
+
+=== Phase 3 result for probe_het_24_mid (wall 56s): 6 candidates, sim ranking ===
+           1e+18  baseline:per_tensor_ar  code=no
+           1e+18  strat:Per-tensor all-reduce (24 disp  code=no
+           1e+18  baseline:bucketed_ar_4  code=no
+           1e+18  baseline:flat_cat_ar  code=no
+           1e+18  baseline:bucketed_ar  code=no
+           1e+18  baseline:bucketed_ar_16  code=no

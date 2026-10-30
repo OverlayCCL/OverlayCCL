@@ -1,0 +1,13 @@
+--- [09:35:34] train hs_a_64x64k_512k per_tensor_ar
+   median_ms 22.05 effective True
+--- [09:37:55] train hs_a_64x64k_512k gate_1
+   median_ms 24.05 effective True
+--- [09:40:43] train probe_het_48_small per_tensor_ar
+   median_ms 17.11 effective True
+--- [09:43:11] train probe_het_48_small gate_2
+   median_ms 18.42 effective True
+--- [09:45:58] train layer_grads_mixed_dtype per_tensor_ar
+   median_ms 13.77 effective True
+--- [09:49:11] train layer_grads_mixed_dtype gate_1
+   median_ms 14.91 effective True
+=== newprobs done 09:51:39 ===

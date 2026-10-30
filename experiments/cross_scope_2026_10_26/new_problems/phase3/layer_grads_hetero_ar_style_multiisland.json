@@ -1,0 +1,72 @@
+[
+ {
+  "raw": [
+   "evo:flat_cat_ar_1",
+   "{'template': 'evolved_flat_cat_ar', 'cost_score': 2.18, 'sim_time_us': 218.0, 'local_ops': 20, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'evolved_code': 'def evolved_layer_grads_hetero_ar(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    flat = torch.cat([t.reshape(-1) for t in grads]); r = xm.all_reduce(xm.REDUCE_SUM, flat)\\n    outs = []; off = 0\\n    for t in grads: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    return outs\\n'}}"
+  ],
+  "name": "evo:flat_cat_ar_1"
+ },
+ {
+  "raw": [
+   "evo:bucketed_ar_2",
+   "{'template': 'evolved_bucketed_ar', 'cost_score': 2.18, 'sim_time_us': 218.0, 'local_ops': 20, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'evolved_code': '\\\\\\ndef evolved_layer_grads_hetero_ar(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"in-order buckets of 8 tensors each (size-independent; a few dispatches, exact bytes)\"\"\"\\n    outs = []\\n    for b in range(0, len(grads), 8):\\n        chunk = grads[b:b + 8]; flat = torch.cat([t.reshape(-1) for t in chunk]); r = xm.all_reduce(xm.REDUCE_SUM, flat); off = 0\\n        for t in chunk: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    return outs\\n'}}"
+  ],
+  "name": "evo:bucketed_ar_2"
+ },
+ {
+  "raw": [
+   "evo:bucketed_ar_4_3",
+   "{'template': 'evolved_bucketed_ar_4', 'cost_score': 2.18, 'sim_time_us': 218.0, 'local_ops': 20, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'evolved_code': 'def evolved_layer_grads_hetero_ar(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"single all-reduce for all 6 layer gradients (minimal ops)\"\"\"\\n    flat = torch.cat([t.reshape(-1) for t in grads])\\n    r = xm.all_reduce(xm.REDUCE_SUM, flat)\\n    outs = []\\n    off = 0\\n    for t in grads:\\n        n = t.numel()\\n        outs.append(r[off:off + n].view(t.shape))\\n        off += n\\n    return outs'}}"
+  ],
+  "name": "evo:bucketed_ar_4_3"
+ },
+ {
+  "raw": [
+   "evo:bucketed_ar_16_4",
+   "{'template': 'evolved_bucketed_ar_16', 'cost_score': 2.18, 'sim_time_us': 218.0, 'local_ops': 20, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'evolved_code': '\\\\\\ndef evolved_layer_grads_hetero_ar(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"in-order buckets of 16 tensors each\"\"\"\\n    outs = []\\n    for b in range(0, len(grads), 16):\\n        chunk = grads[b:b + 16]; flat = torch.cat([t.reshape(-1) for t in chunk]); r = xm.all_reduce(xm.REDUCE_SUM, flat); off = 0\\n        for t in chunk: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    return outs\\n'}}"
+  ],
+  "name": "evo:bucketed_ar_16_4"
+ },
+ {
+  "raw": [
+   "evo:per_tensor_ar_0",
+   "{'template': 'evolved_per_tensor_ar', 'cost_score': 3.3999999999999995, 'sim_time_us': 339.99999999999994, 'local_ops': 6, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 6, '_params': {'evolved_code': 'def evolved_layer_grads_hetero_ar(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"developer baseline: one all_reduce per gradient tensor (DDP hook per parameter)\"\"\"\\n    return [xm.all_reduce(xm.REDUCE_SUM, t) for t in grads]\\n'}}"
+  ],
+  "name": "evo:per_tensor_ar_0"
+ },
+ {
+  "raw": [
+   "baseline:flat_cat_ar",
+   "{'template': 'flat_cat_ar', 'cost_score': 169.57725200000002, 'sim_time_us': 16957.7252, 'local_ops': 21, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'builtin_code': 'def evolved_layer_grads_hetero_ar(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    flat = torch.cat([t.reshape(-1) for t in grads]); r = xm.all_reduce(xm.REDUCE_SUM, flat)\\n    outs = []; off = 0\\n    for t in grads: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:flat_cat_ar"
+ },
+ {
+  "raw": [
+   "baseline:bucketed_ar",
+   "{'template': 'bucketed_ar', 'cost_score': 169.57725200000002, 'sim_time_us': 16957.7252, 'local_ops': 21, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'builtin_code': '\\\\\\ndef evolved_layer_grads_hetero_ar(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"in-order buckets of 8 tensors each (size-independent; a few dispatches, exact bytes)\"\"\"\\n    outs = []\\n    for b in range(0, len(grads), 8):\\n        chunk = grads[b:b + 8]; flat = torch.cat([t.reshape(-1) for t in chunk]); r = xm.all_reduce(xm.REDUCE_SUM, flat); off = 0\\n        for t in chunk: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:bucketed_ar"
+ },
+ {
+  "raw": [
+   "baseline:bucketed_ar_16",
+   "{'template': 'bucketed_ar_16', 'cost_score': 169.57725200000002, 'sim_time_us': 16957.7252, 'local_ops': 21, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'builtin_code': '\\\\\\ndef evolved_layer_grads_hetero_ar(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"in-order buckets of 16 tensors each\"\"\"\\n    outs = []\\n    for b in range(0, len(grads), 16):\\n        chunk = grads[b:b + 16]; flat = torch.cat([t.reshape(-1) for t in chunk]); r = xm.all_reduce(xm.REDUCE_SUM, flat); off = 0\\n        for t in chunk: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:bucketed_ar_16"
+ },
+ {
+  "raw": [
+   "baseline:per_tensor_ar",
+   "{'template': 'per_tensor_ar', 'cost_score': 184.78406119211434, 'sim_time_us': 18478.406119211435, 'local_ops': 6, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 6, '_params': {'builtin_code': 'def evolved_layer_grads_hetero_ar(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"developer baseline: one all_reduce per gradient tensor (DDP hook per parameter)\"\"\"\\n    return [xm.all_reduce(xm.REDUCE_SUM, t) for t in grads]\\n'}}"
+  ],
+  "name": "baseline:per_tensor_ar"
+ },
+ {
+  "raw": [
+   "baseline:bucketed_ar_4",
+   "{'template': 'bucketed_ar_4', 'cost_score': 207.3929893963163, 'sim_time_us': 20739.29893963163, 'local_ops': 23, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 2, '_params': {'builtin_code': '\\\\\\ndef evolved_layer_grads_hetero_ar(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"in-order buckets of 4 tensors each\"\"\"\\n    outs = []\\n    for b in range(0, len(grads), 4):\\n        chunk = grads[b:b + 4]; flat = torch.cat([t.reshape(-1) for t in chunk]); r = xm.all_reduce(xm.REDUCE_SUM, flat); off = 0\\n        for t in chunk: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:bucketed_ar_4"
+ }
+]

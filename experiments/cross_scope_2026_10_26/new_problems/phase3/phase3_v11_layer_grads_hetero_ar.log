@@ -1,0 +1,39 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of one transformer layer (6 heterogeneous tensors)
+======================================================================
+  per_tensor_ar: 18478.4 us, 6 local ops, 0 ag, 6 ar, 0 cp
+  flat_cat_ar: 16957.7 us, 21 local ops, 0 ag, 1 ar, 0 cp
+  bucketed_ar: 16957.7 us, 21 local ops, 0 ag, 1 ar, 0 cp
+
+  Best baseline: baseline:flat_cat_ar (16957.7 us)
+
+======================================================================
+[Phase 3 / Strategy-Enumerate] DP gradient all-reduce of one transformer layer (6 heterogeneous tensors)
+======================================================================
+  K=5 strategies, R=2 refinement rounds per top-2 (budget ~10 LLM calls)
+  Enumerated 5 strategies:
+    1. Per-tensor all-reduce (baseline): Issues one all_reduce call per gradient tensor (6 dispatches total). Represents ...
+    2. Single flat concatenation all-reduce: Concatenates all 6 heterogeneous tensors into one flat buffer, performs one all_...
+    3. Two-bucket in-order split: Splits the 6 tensors into 2 in-order buckets (e.g., first 3 tensors, last 3 tens...
+    4. Reduce-scatter then all-gather decomposition: Decomposes all-reduce into reduce-scatter (each rank gets 1/world_size shard of ...
+    5. Three-bucket size-stratified in-order: Divides the 6 tensors into 3 buckets preserving deployment order (e.g., tensors ...
+  Strategy 1 (Per-tensor all-reduce (baseline)): sim=18478.4 us
+  Strategy 2 (Single flat concatenation all-reduce): sim=16957.7 us
+  Strategy 3 (Two-bucket in-order split): sim=17010.5 us
+  Strategy 4 (Reduce-scatter then all-gather decomposition): sim=17023.0 us
+  Strategy 5 (Three-bucket size-stratified in-order): sim=21036.4 us
+
+  Top after enumeration:
+    Single flat concatenation all-reduce: 16957.7 us
+    Two-bucket in-order split: 17010.5 us
+
+  Strategy-Enumerate complete. 7 total candidates.
+  Best: Single flat concatenation all-reduce (sim=16957.7 us)
+
+=== Phase 3 result for layer_grads_hetero_ar (wall 90s): 4 candidates, sim ranking ===
+           1e+18  baseline:flat_cat_ar  code=no
+           1e+18  baseline:bucketed_ar  code=no
+           1e+18  strat:Single flat concatenation all-  code=no
+           1e+18  baseline:per_tensor_ar  code=no

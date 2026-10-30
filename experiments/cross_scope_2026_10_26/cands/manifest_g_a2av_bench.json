@@ -1,0 +1,25 @@
+[
+ {
+  "problem": "alltoallv",
+  "cand": "rs_masked",
+  "kind": "file",
+  "path": "/home/ubuntu/g2/cands_g/alltoallv__rs_masked_runtime.py"
+ },
+ {
+  "problem": "alltoallv",
+  "cand": "paper",
+  "kind": "file",
+  "path": "/home/ubuntu/g2/cands_g/alltoallv__paper_runtime.py"
+ },
+ {
+  "problem": "alltoallv",
+  "cand": "harness_baseline",
+  "kind": "baseline"
+ },
+ {
+  "problem": "alltoallv",
+  "cand": "ag_slice_pl0",
+  "kind": "file",
+  "path": "/home/ubuntu/g2/cands_g/alltoallv__ag_slice_pl0_runtime.py"
+ }
+]

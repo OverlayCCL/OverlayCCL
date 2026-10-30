@@ -1,0 +1,158 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of one transformer layer (6 heterogeneous tensors)
+======================================================================
+  per_tensor_ar: 16706.6 us, 6 local ops, 0 ag, 6 ar, 0 cp
+  flat_cat_ar: 16957.7 us, 21 local ops, 0 ag, 1 ar, 0 cp
+  bucketed_ar: 16957.7 us, 21 local ops, 0 ag, 1 ar, 0 cp
+  bucketed_ar_4: 20265.2 us, 23 local ops, 0 ag, 2 ar, 0 cp
+  bucketed_ar_16: 16957.7 us, 21 local ops, 0 ag, 1 ar, 0 cp
+
+  Best baseline: baseline:per_tensor_ar (16706.6 us)
+
+======================================================================
+[Phase 3 / Strategy-Enumerate] DP gradient all-reduce of one transformer layer (6 heterogeneous tensors) [NO-SIM ABLATION]
+======================================================================
+  K=5 strategies, R=2 refinement rounds per top-2 (budget ~10 LLM calls)
+  Enumerated 5 strategies:
+    1. Single flat all-reduce: Concatenate all 6 tensors into one flat buffer and perform a single all-reduce, ...
+    2. Per-tensor independent all-reduce: Launch 6 separate all-reduce operations, one per gradient tensor, without any bu...
+    3. Two-bucket split by size: Sort tensors by size, concatenate the 3 largest into one bucket and 3 smallest i...
+    4. Three paired-tensor buckets: Group the 6 tensors into 3 buckets of 2 consecutive tensors each (in original or...
+    5. Reduce-scatter then all-gather decomposition: Concatenate all 6 tensors, perform reduce-scatter to distribute summed chunks ac...
+  Strategy 1 (Single flat all-reduce): sim=16957.7 us
+  Strategy 2 (Per-tensor independent all-reduce): sim=16706.6 us
+  Strategy 3 (Two-bucket split by size): sim=18975.0 us
+  Strategy 4 (Three paired-tensor buckets): sim=20265.2 us
+  Strategy 5 (Reduce-scatter then all-gather decomposition): sim=16957.7 us
+
+  [NO-SIM ITERATIVE] Refining all 5 correct candidates (sim_us not shown to LLM in refinement)
+    top 1 round 1: SIMPLER (collective Δ=-5)
+[packed_AR] 446.5 us, 6 tensors, 48768 elems
+[packed_AR] 144.8 us, 6 tensors, 48768 elems
+[packed_AR] 133.2 us, 6 tensors, 48768 elems
+[packed_AR] 130.2 us, 6 tensors, 48768 elems
+[packed_AR] 112.5 us, 6 tensors, 48768 elems
+[packed_AR] 118.7 us, 6 tensors, 48768 elems
+[packed_AR] 114.2 us, 6 tensors, 48768 elems
+[packed_AR] 117.0 us, 6 tensors, 48768 elems
+[packed_AR] 97.5 us, 6 tensors, 48768 elems
+[packed_AR] 260.8 us, 6 tensors, 48768 elems
+[packed_AR] 111.5 us, 6 tensors, 48768 elems
+[packed_AR] 74.2 us, 6 tensors, 48768 elems
+[packed_AR] 74.2 us, 6 tensors, 48768 elems
+[packed_AR] 73.9 us, 6 tensors, 48768 elems
+[packed_AR] 64.1 us, 6 tensors, 48768 elems
+[packed_AR] 63.4 us, 6 tensors, 48768 elems
+[packed_AR] 63.5 us, 6 tensors, 48768 elems
+[packed_AR] 59.1 us, 6 tensors, 48768 elems
+[packed_AR] 83.8 us, 6 tensors, 48768 elems
+[packed_AR] 73.1 us, 6 tensors, 48768 elems
+[packed_AR] 58.4 us, 6 tensors, 48768 elems
+[packed_AR] 57.2 us, 6 tensors, 48768 elems
+[packed_AR] 58.2 us, 6 tensors, 48768 elems
+[packed_AR] 57.0 us, 6 tensors, 48768 elems
+[packed_AR] 51.7 us, 6 tensors, 48768 elems
+[packed_AR] 51.2 us, 6 tensors, 48768 elems
+[packed_AR] 48.4 us, 6 tensors, 48768 elems
+[packed_AR] 58.4 us, 6 tensors, 48768 elems
+[packed_AR] 41.4 us, 6 tensors, 48768 elems
+[packed_AR] 40.8 us, 6 tensors, 48768 elems
+[packed_AR] 40.9 us, 6 tensors, 48768 elems
+[packed_AR] 40.5 us, 6 tensors, 48768 elems
+[packed_AR] 40.1 us, 6 tensors, 48768 elems
+[packed_AR] 40.5 us, 6 tensors, 48768 elems
+[packed_AR] 37.1 us, 6 tensors, 48768 elems
+[packed_AR] 34.3 us, 6 tensors, 48768 elems
+[packed_AR] 94.5 us, 6 tensors, 48768 elems
+    top 2 round 1: SIMPLER (collective Δ=5)
+    top 3 round 1: SIMPLER (collective Δ=1)
+[AR-profile] single-bucket lat=161.1us
+[AR-profile] single-bucket lat=59.4us
+[AR-profile] single-bucket lat=55.1us
+[AR-profile] single-bucket lat=54.7us
+[AR-profile] single-bucket lat=55.3us
+[AR-profile] single-bucket lat=65.3us
+[AR-profile] single-bucket lat=54.7us
+[AR-profile] single-bucket lat=54.7us
+[AR-profile] single-bucket lat=47.3us
+[AR-profile] single-bucket lat=65.7us
+[AR-profile] single-bucket lat=57.2us
+[AR-profile] single-bucket lat=49.2us
+[AR-profile] single-bucket lat=49.0us
+[AR-profile] single-bucket lat=49.2us
+[AR-profile] single-bucket lat=49.1us
+[AR-profile] single-bucket lat=48.7us
+[AR-profile] single-bucket lat=48.9us
+[AR-profile] single-bucket lat=42.1us
+[AR-profile] single-bucket lat=44.7us
+[AR-profile] single-bucket lat=48.8us
+[AR-profile] single-bucket lat=40.8us
+[AR-profile] single-bucket lat=40.1us
+[AR-profile] single-bucket lat=40.1us
+[AR-profile] single-bucket lat=40.0us
+[AR-profile] single-bucket lat=39.8us
+[AR-profile] single-bucket lat=40.1us
+[AR-profile] single-bucket lat=34.2us
+[AR-profile] single-bucket lat=47.8us
+[AR-profile] single-bucket lat=31.7us
+[AR-profile] single-bucket lat=29.5us
+[AR-profile] single-bucket lat=29.2us
+[AR-profile] single-bucket lat=29.0us
+[AR-profile] single-bucket lat=29.2us
+[AR-profile] single-bucket lat=29.4us
+[AR-profile] single-bucket lat=29.0us
+[AR-profile] single-bucket lat=26.3us
+[AR-profile] single-bucket lat=70.9us
+    top 4 round 1: SIMPLER (collective Δ=2)
+[AR-profile] single-bucket lat=337.7us
+[AR-profile] single-bucket lat=132.8us
+[AR-profile] single-bucket lat=124.6us
+[AR-profile] single-bucket lat=97.8us
+[AR-profile] single-bucket lat=101.5us
+[AR-profile] single-bucket lat=96.2us
+[AR-profile] single-bucket lat=94.1us
+[AR-profile] single-bucket lat=93.7us
+[AR-profile] single-bucket lat=79.8us
+[AR-profile] single-bucket lat=242.2us
+[AR-profile] single-bucket lat=81.9us
+[AR-profile] single-bucket lat=65.2us
+[AR-profile] single-bucket lat=64.9us
+[AR-profile] single-bucket lat=63.5us
+[AR-profile] single-bucket lat=54.5us
+[AR-profile] single-bucket lat=55.6us
+[AR-profile] single-bucket lat=54.5us
+[AR-profile] single-bucket lat=51.2us
+[AR-profile] single-bucket lat=69.0us
+[AR-profile] single-bucket lat=49.9us
+[AR-profile] single-bucket lat=50.0us
+[AR-profile] single-bucket lat=50.5us
+[AR-profile] single-bucket lat=49.0us
+[AR-profile] single-bucket lat=49.0us
+[AR-profile] single-bucket lat=49.2us
+[AR-profile] single-bucket lat=43.6us
+[AR-profile] single-bucket lat=38.2us
+[AR-profile] single-bucket lat=50.3us
+[AR-profile] single-bucket lat=34.0us
+[AR-profile] single-bucket lat=33.3us
+[AR-profile] single-bucket lat=33.1us
+[AR-profile] single-bucket lat=33.3us
+[AR-profile] single-bucket lat=33.3us
+[AR-profile] single-bucket lat=33.3us
+[AR-profile] single-bucket lat=33.3us
+[AR-profile] single-bucket lat=30.0us
+[AR-profile] single-bucket lat=75.8us
+
+  [NO-SIM] Winner = Single flat all-reduce (first valid, sim_us NOT used)
+
+  Strategy-Enumerate complete. 10 total candidates.
+  Best: Single flat all-reduce (sim=16957.7 us)
+
+=== Phase 3 result for layer_grads_hetero_ar (wall 135s): 6 candidates, sim ranking ===
+           1e+18  baseline:per_tensor_ar  code=no
+           1e+18  baseline:flat_cat_ar  code=no
+           1e+18  baseline:bucketed_ar  code=no
+           1e+18  baseline:bucketed_ar_16  code=no
+           1e+18  strat:Single flat all-reduce  code=no
+           1e+18  baseline:bucketed_ar_4  code=no

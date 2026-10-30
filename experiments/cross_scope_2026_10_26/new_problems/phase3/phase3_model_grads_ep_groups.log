@@ -1,0 +1,40 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of a 4-layer transformer inside 4-rank DP groups (TP=world/4)
+======================================================================
+  per_tensor_grouped: 192441.9 us, 24 local ops, 0 ag, 24 ar, 0 cp
+  per_layer_grouped: 64218.2 us, 84 local ops, 0 ag, 4 ar, 0 cp
+  flat_grouped: 64218.2 us, 75 local ops, 0 ag, 1 ar, 0 cp
+
+  Best baseline: baseline:per_layer_grouped (64218.2 us)
+
+======================================================================
+[Phase 3 / Strategy-Enumerate] DP gradient all-reduce of a 4-layer transformer inside 4-rank DP groups (TP=world/4)
+======================================================================
+  K=5 strategies, R=2 refinement rounds per top-2 (budget ~10 LLM calls)
+  Enumerated 5 strategies:
+    1. Per-tensor grouped all-reduce: Issues 24 separate xm.all_reduce calls, one per gradient tensor, each with the g...
+    2. Per-layer grouped concatenation: Concatenates the 6 parameters within each of the 4 transformer layers into a sin...
+    3. Full-model single grouped all-reduce: Flattens all 24 gradient tensors into one contiguous buffer, performs a single g...
+    4. Homogeneous-size bucketing grouped: Groups gradient tensors by similar size (e.g., all attention heads together, all...
+    5. Pipelined two-stage reduce-scatter + all-gather: Splits each gradient tensor or layer-bucket into DP-group-size chunks (4 chunks)...
+  Strategy 1 (Per-tensor grouped all-reduce): sim=192441.9 us
+  Strategy 2 (Per-layer grouped concatenation): sim=64218.2 us
+  Strategy 3 (Full-model single grouped all-reduce): sim=64218.2 us
+  Strategy 4 (Homogeneous-size bucketing grouped): sim=142988.5 us
+  Strategy 5 (Pipelined two-stage reduce-scatter + all-gather) INCORRECT: CRASH in collect pass 0: world=8 pattern=uniform rank=4: RuntimeError: shape '[192, 64]' is invalid 
+
+  Top after enumeration:
+    Per-layer grouped concatenation: 64218.2 us
+    Full-model single grouped all-reduce: 64218.2 us
+
+  Strategy-Enumerate complete. 6 total candidates.
+  Best: Per-layer grouped concatenation (sim=64218.2 us)
+
+=== Phase 3 result for model_grads_ep_groups (wall 102s): 4 candidates, sim ranking ===
+           1e+18  baseline:per_layer_grouped  code=no
+           1e+18  strat:Per-layer grouped concatenatio  code=no
+           1e+18  baseline:flat_grouped  code=no
+           1e+18  baseline:per_tensor_grouped  code=no
+P3_BATCH2_DONE

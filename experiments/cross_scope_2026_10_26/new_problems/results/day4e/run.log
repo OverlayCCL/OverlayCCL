@@ -1,0 +1,71 @@
+--- [21:15:36] bench eq95_512k
+[bench2] eq95_512k per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 14.418363571166992, 'mean_ms': 342.61874357859296, 'status': 'ok'}
+[bench2] eq95_512k flat_cat_ar: {'max_abs_diff': 0.005859375, 'ok': True, 'med_ms': 15.230655670166016, 'mean_ms': 19.892676671346027, 'status': 'ok'}
+--- [21:17:01] bench eq111_1m
+[bench2] eq111_1m per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 24.42610263824463, 'mean_ms': 170.79875469207764, 'status': 'ok'}
+[bench2] eq111_1m flat_cat_ar: {'max_abs_diff': 0.005859375, 'ok': True, 'med_ms': 21.649837493896484, 'mean_ms': 35.19143263498942, 'status': 'ok'}
+--- [21:18:32] bench eq4_unequal_total
+[bench2] eq4_unequal_total per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 9.371280670166016, 'mean_ms': 442.40411917368573, 'status': 'ok'}
+[bench2] eq4_unequal_total flat_cat_ar: {'max_abs_diff': 0.0068359375, 'ok': True, 'med_ms': 26.312589645385742, 'mean_ms': 26.28935178120931, 'status': 'ok'}
+--- [21:20:22] bench path_no_norm_plus_1
+[bench2] path_no_norm_plus_1 per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 9.60838794708252, 'mean_ms': 237.78008619944254, 'status': 'ok'}
+[bench2] path_no_norm_plus_1 flat_cat_ar: {'max_abs_diff': 0.0068359375, 'ok': True, 'med_ms': 9.467124938964844, 'mean_ms': 15.953946113586426, 'status': 'ok'}
+--- [21:21:44] bench path_no_norm_plus_64
+[bench2] path_no_norm_plus_64 per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 9.46342945098877, 'mean_ms': 162.31125990549722, 'status': 'ok'}
+[bench2] path_no_norm_plus_64 flat_cat_ar: {'max_abs_diff': 0.0068359375, 'ok': True, 'med_ms': 17.40431785583496, 'mean_ms': 17.964665095011394, 'status': 'ok'}
+--- [21:23:14] bench path_no_norm_plus_1024
+[bench2] path_no_norm_plus_1024 per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 9.438276290893555, 'mean_ms': 842.5171772638956, 'status': 'ok'}
+[bench2] path_no_norm_plus_1024 flat_cat_ar: {'max_abs_diff': 0.0068359375, 'ok': True, 'med_ms': 10.292530059814453, 'mean_ms': 10.962065060933432, 'status': 'ok'}
+--- [21:24:50] bench path_no_norm_plus_65536
+[bench2] path_no_norm_plus_65536 per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 9.571433067321777, 'mean_ms': 9.464812278747559, 'status': 'ok'}
+[bench2] path_no_norm_plus_65536 flat_cat_ar: {'max_abs_diff': 0.0068359375, 'ok': True, 'med_ms': 11.795520782470703, 'mean_ms': 19.46384112040202, 'status': 'ok'}
+--- [21:25:50] bench path_many_tiny_first
+[bench2] path_many_tiny_first per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 20.551562309265137, 'mean_ms': 21.706700325012207, 'status': 'ok'}
+[bench2] path_many_tiny_first flat_cat_ar: {'max_abs_diff': 0.0068359375, 'ok': True, 'med_ms': 23.69678020477295, 'mean_ms': 23.875610033671062, 'status': 'ok'}
+--- [21:27:11] bench path_many_sorted
+[bench2] path_many_sorted per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 20.650863647460938, 'mean_ms': 174.63688055674234, 'status': 'ok'}
+[bench2] path_many_sorted flat_cat_ar: {'max_abs_diff': 0.0078125, 'ok': True, 'med_ms': 20.500659942626953, 'mean_ms': 24.22366937001546, 'status': 'ok'}
+--- [21:28:42] bench md_pick_vs_hand
+[bench2] md_pick_vs_hand two_dtype_groups: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 18.865346908569336, 'mean_ms': 19.70866521199544, 'status': 'ok'}
+[bench2] md_pick_vs_hand p3_pick: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 18.790721893310547, 'mean_ms': 20.81569830576579, 'status': 'ok'}
+--- [21:29:20] train eq95_512k per_tensor_ar
+   median_ms 51.98 effective True
+--- [21:31:06] train eq95_512k flat_cat_ar
+   median_ms 46.35 effective True
+--- [21:32:28] train eq111_1m per_tensor_ar
+   median_ms 82.64 effective True
+--- [21:34:18] train eq111_1m flat_cat_ar
+   median_ms 66.17 effective True
+--- [21:36:03] train eq4_unequal_total per_tensor_ar
+   median_ms 67.68 effective True
+--- [21:37:52] train eq4_unequal_total flat_cat_ar
+   median_ms 78.39 effective True
+--- [21:40:02] train path_no_norm_plus_1 per_tensor_ar
+   NO RESULT
+--- [21:55:02] train path_no_norm_plus_1 flat_cat_ar
+   INVALID (collective init failure in node logs)
+--- [22:10:04] train path_no_norm_plus_64 per_tensor_ar
+   median_ms 109.69 effective True
+--- [22:12:27] train path_no_norm_plus_64 flat_cat_ar
+   median_ms 61.49 effective True
+--- [22:14:08] train path_no_norm_plus_1024 per_tensor_ar
+   median_ms 60.68 effective True
+--- [22:16:14] train path_no_norm_plus_1024 flat_cat_ar
+   median_ms 36.53 effective True
+--- [22:17:21] train path_no_norm_plus_65536 per_tensor_ar
+   median_ms 41.26 effective True
+--- [22:18:44] train path_no_norm_plus_65536 flat_cat_ar
+   median_ms 54.27 effective True
+--- [22:20:14] train path_many_tiny_first per_tensor_ar
+   median_ms 91.94 effective True
+--- [22:22:19] train path_many_tiny_first flat_cat_ar
+   median_ms 74.29 effective True
+--- [22:23:54] train path_many_sorted per_tensor_ar
+   median_ms 75.32 effective True
+--- [22:25:41] train path_many_sorted flat_cat_ar
+   median_ms 482.4 effective True
+--- [22:33:02] train md_pick_vs_hand two_dtype_groups
+   median_ms 36.7 effective True
+--- [22:33:49] train md_pick_vs_hand p3_pick
+   median_ms 51.58 effective True
+=== newprobs done 22:34:46 ===

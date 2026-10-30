@@ -1,0 +1,54 @@
+problem              candidate                       bench ms  bench x  train ms  train x  note
+dp_grad_ar_buckets   bucket_32mb                        60.93     1.00    294.73     1.00  n=2/2 
+dp_grad_ar_buckets   bucket_128mb                       46.90     1.30    228.53     1.29  n=2/2 
+dp_grad_ar_buckets   flat_ar                            45.10     1.35    186.00     1.58  n=2/2 
+dp_grad_ar_buckets   per_tensor_ar                      47.28     1.29    203.88     1.45  n=2/2 
+dp_grad_ar_buckets   rs_ag_flat                         53.61     1.14    189.32     1.56  n=2/2 
+
+dp_grad_ar_groups    per_tensor_grouped_ar               5.04     1.00      5.02     1.00  n=2/2 
+dp_grad_ar_groups    bucketed_grouped_ar                 5.73     0.88      5.33     0.94  n=2/2 
+dp_grad_ar_groups    flat_grouped_ar                     5.27     0.96      5.32     0.94  n=2/2 
+dp_grad_ar_groups    grouped_rs_ag                       5.68     0.89      5.49     0.91  n=2/2 
+dp_grad_ar_groups    masked_world_ar                     9.63     0.52     49.36     0.10  n=2/2 
+
+ep_a2a_grouped       grouped_ag_slice                    4.89     1.00      5.05     1.00  n=2/2 
+ep_a2a_grouped       grouped_ag_slice_native             5.14     0.95      5.09     0.99  n=2/2 
+ep_a2a_grouped       grouped_masked_rs                   5.26     0.93      4.96     1.02  n=2/2 
+ep_a2a_grouped       world_ag_slice                      5.87     0.83     14.50     0.35  n=2/2 
+ep_a2a_grouped       world_masked_rs                     5.87     0.83     14.10     0.36  n=2/2 
+
+hetero_grad_ar       per_tensor_ar                      21.40     1.00     77.36     1.00  n=2/1 
+hetero_grad_ar       bucket_by_size_ar                  24.63     0.87    684.62     0.11  n=2/1 
+hetero_grad_ar       flat_cat_ar                        28.06     0.76    668.30     0.12  n=2/1 
+hetero_grad_ar       flat_cat_pad_16m                   29.45     0.73         —        —  n=1/0 
+hetero_grad_ar       flat_cat_pad_pow2                  35.81     0.60         —        —  n=1/0 
+hetero_grad_ar       flat_cat_split2                    26.50     0.81         —        —  n=1/0 
+hetero_grad_ar       pad_stack_ar                       85.21     0.25         —        —  n=2/0 
+
+hetero_grad_ar_many  per_tensor_ar                      20.47     1.00     68.00     1.00  n=1/1 
+hetero_grad_ar_many  bucket_16mb                        31.61     0.65    393.86     0.17  n=1/1 
+hetero_grad_ar_many  bucket_16mb_pad                    32.86     0.62    393.91     0.17  n=1/1 
+hetero_grad_ar_many  flat_cat_ar                        20.55     1.00    479.72     0.14  n=1/1 bench-tie, training loss
+hetero_grad_ar_many  flat_cat_pad_pow2                  22.60     0.91    473.73     0.14  n=1/1 
+hetero_grad_ar_many  flat_copy_into_buffer             351.67     0.06         —        —  n=1/0 
+hetero_grad_ar_many  pad_equal_cat                     155.30     0.13         —        —  n=1/0 
+
+ulysses_seq_a2a      ag_transpose_rs                     7.23     1.00     24.69     1.00  n=2/2 
+ulysses_seq_a2a      ag_full_then_transpose              6.67     1.08     20.86     1.18  n=2/2 
+ulysses_seq_a2a      ag_full_then_transpose_native       5.71     1.27     17.13     1.44  n=2/2 
+ulysses_seq_a2a      ag_slice                            7.03     1.03     22.38     1.10  n=2/2 bench-tie, training win
+ulysses_seq_a2a      ag_slice_native                     5.99     1.21     18.08     1.37  n=2/2 
+ulysses_seq_a2a      masked_rs                           5.82     1.24     15.41     1.60  n=2/2 
+
+zero1_param_ag       per_tensor_ag                       7.56     1.00     25.01     1.00  n=2/2 
+zero1_param_ag       bucketed_ag                         7.70     0.98     26.70     0.94  n=2/2 
+zero1_param_ag       flat_ag                             7.65     0.99     24.85     1.01  n=2/2 
+zero1_param_ag       flat_ag_native                      6.60     1.15     21.37     1.17  n=2/2 
+zero1_param_ag       per_tensor_ag_native                6.95     1.09     20.12     1.24  n=2/2 
+
+zero2_grad_rs        per_tensor_rs                       6.38     1.00     17.18     1.00  n=2/2 
+zero2_grad_rs        ar_then_slice                       7.73     0.83     20.33     0.85  n=2/2 
+zero2_grad_rs        bucketed_rs                         6.79     0.94     16.90     1.02  n=2/2 
+zero2_grad_rs        flat_ar_then_slice                  6.75     0.94     18.73     0.92  n=2/2 
+zero2_grad_rs        flat_rs                             6.00     1.06     14.82     1.16  n=2/2 
+

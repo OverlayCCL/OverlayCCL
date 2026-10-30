@@ -1,0 +1,11 @@
+problem                        per-tensor            gate choice      ms  gate x    best hand-written      ms  hand x  verdict
+hetero_grad_ar_many                  74.3                 gate_2    65.2    1.14             p3_pick3    65.2    1.14  at optimum
+hs_a_64x64k_512k                     98.9                 gate_1    73.0    1.35           bucket_4mb    71.7    1.38  at optimum
+hs_c_32x256k_2m                     104.6                 gate_3    90.4    1.16           bucket_4mb    88.5    1.18  win
+layer_grads_hetero_ar                61.1                 gate_2    36.6    1.67          flat_cat_ar    36.6    1.67  at optimum
+layer_grads_mixed_dtype (dtype)       61.0                 gate_1    36.5    1.67       cast_flat_bf16    36.6    1.66  at optimum
+model_grads_4layers                 431.4                 gate_3    96.8    4.46          flat_cat_ar    96.8    4.46  at optimum
+probe_het_24_mid                    304.0                 gate_2   267.4    1.14              bucket6   266.6    1.14  at optimum
+probe_het_48_mid                    596.4                 gate_4   492.4    1.21              bucket6   507.2    1.18  at optimum
+probe_het_48_small                   50.0                 gate_2    31.8    1.57              bucket6    31.9    1.57  at optimum
+zero2_hetero_rs                      24.1          per_tensor_rs    24.1    1.00       bucket_dim1_rs    26.3    0.92  at optimum

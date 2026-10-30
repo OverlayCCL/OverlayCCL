@@ -1,0 +1,37 @@
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of one layer with fp32 norm parameters (mixed dtypes)
+======================================================================
+  per_tensor_ar: 21115.6 us, 6 local ops, 0 ag, 6 ar, 0 cp
+  cast_flat_fp32: 16957.7 us, 21 local ops, 0 ag, 1 ar, 0 cp
+
+  Best baseline: baseline:cast_flat_fp32 (16957.7 us)
+
+======================================================================
+[Phase 3 / Strategy-Enumerate] DP gradient all-reduce of one layer with fp32 norm parameters (mixed dtypes)
+======================================================================
+  K=5 strategies, R=2 refinement rounds per top-2 (budget ~10 LLM calls)
+  Enumerated 5 strategies:
+    1. Separate bf16 and fp32 bundles: Concatenate the 4 bf16 tensors into one flat buffer and the 2 fp32 tensors into ...
+    2. Three-tier bucketing by size: Bucket the 6 tensors by numel into small/medium/large groups (ignoring dtype), f...
+    3. Pipelined per-tensor with async: Issue 6 separate all_reduce calls in rapid succession relying on XLA to pipeline...
+    4. Dual-path with bf16 downcast: Downcast the 2 fp32 norm tensors to bf16, concatenate all 6 tensors into one hom...
+    5. Hierarchical reduce-scatter then all-gather: Concatenate all 6 tensors (casting fp32→bf16), perform reduce-scatter to distrib...
+  Strategy 1 (Separate bf16 and fp32 bundles) INCORRECT: CRASH in collect pass 0: world=4 pattern=uniform rank=0: AttributeError: 'MockTorch' object has no a
+  Strategy 2 (Three-tier bucketing by size): sim=37578.1 us
+  Strategy 3 (Pipelined per-tensor with async): sim=21115.6 us
+  Strategy 4 (Dual-path with bf16 downcast) INCORRECT: CRASH in collect pass 0: world=4 pattern=uniform rank=0: AttributeError: 'MockTorch' object has no a
+  Strategy 5 (Hierarchical reduce-scatter then all-gather) INCORRECT: CRASH in collect pass 0: world=4 pattern=uniform rank=0: AttributeError: 'MockTorch' object has no a
+
+  Top after enumeration:
+    Pipelined per-tensor with async: 21115.6 us
+    Three-tier bucketing by size: 37578.1 us
+    top 1 round 1: NEW BEST 20210.9 us (4.3% improvement)
+
+  Strategy-Enumerate complete. 4 total candidates.
+  Best: refined-from-Pipelined per-tensor with async (sim=20210.9 us)
+
+=== Phase 3 result for layer_grads_mixed_dtype (wall 93s): 3 candidates, sim ranking ===
+           1e+18  baseline:cast_flat_fp32  code=no
+           1e+18  strat:refined-from-Pipelined per-ten  code=no
+           1e+18  baseline:per_tensor_ar  code=no

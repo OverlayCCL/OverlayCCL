@@ -1,0 +1,56 @@
+--- [20:04:45] bench layer_grads_mixed_dtype
+[bench2] layer_grads_mixed_dtype per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 9.69541072845459, 'mean_ms': 331.27801418304443, 'status': 'ok'}
+[bench2] layer_grads_mixed_dtype cast_flat_fp32: {'max_abs_diff': 0.0048828125, 'ok': True, 'med_ms': 13.950824737548828, 'mean_ms': 16.663940747578938, 'status': 'ok'}
+[bench2] layer_grads_mixed_dtype cast_flat_bf16: {'max_abs_diff': 0.0068359375, 'ok': True, 'med_ms': 10.402798652648926, 'mean_ms': 11.398673057556152, 'status': 'ok'}
+[bench2] layer_grads_mixed_dtype two_dtype_groups: {'max_abs_diff': 0.0068359375, 'ok': True, 'med_ms': 19.051432609558105, 'mean_ms': 22.713359196980793, 'status': 'ok'}
+[bench2] layer_grads_mixed_dtype p3_pick: {'max_abs_diff': 0.0068359375, 'ok': True, 'med_ms': 18.918871879577637, 'mean_ms': 22.156302134195965, 'status': 'ok'}
+--- [20:06:32] bench probe_het_24_mid
+[bench2] probe_het_24_mid per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 15.405654907226562, 'mean_ms': 15.732272466023764, 'status': 'ok'}
+[bench2] probe_het_24_mid bucket6: {'max_abs_diff': 0.0068359375, 'ok': True, 'med_ms': 19.26565170288086, 'mean_ms': 22.522981961568195, 'status': 'ok'}
+[bench2] probe_het_24_mid flat_cat_ar: {'max_abs_diff': 0.0068359375, 'ok': True, 'med_ms': 16.55590534210205, 'mean_ms': 37.74252732594808, 'status': 'ok'}
+[bench2] probe_het_24_mid p3_pick: {'max_abs_diff': 0.0068359375, 'ok': True, 'med_ms': 16.86382293701172, 'mean_ms': 30.07229169209798, 'status': 'ok'}
+--- [20:08:13] bench probe_het_48_mid
+[bench2] probe_het_48_mid per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 26.438117027282715, 'mean_ms': 38.399577140808105, 'status': 'ok'}
+[bench2] probe_het_48_mid bucket6: {'max_abs_diff': 0.0068359375, 'ok': True, 'med_ms': 35.4229211807251, 'mean_ms': 44.079009691874184, 'status': 'ok'}
+[bench2] probe_het_48_mid flat_cat_ar: {'max_abs_diff': 0.0078125, 'ok': True, 'med_ms': 76.1653184890747, 'mean_ms': 82.40783214569092, 'status': 'ok'}
+[bench2] probe_het_48_mid p3_pick: {'max_abs_diff': 0.0078125, 'ok': True, 'med_ms': 76.49016380310059, 'mean_ms': 83.66862932840984, 'status': 'ok'}
+--- [20:09:59] bench probe_het_48_small
+[bench2] probe_het_48_small per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 8.018851280212402, 'mean_ms': 597.400951385498, 'status': 'ok'}
+[bench2] probe_het_48_small bucket6: {'max_abs_diff': 0.0048828125, 'ok': True, 'med_ms': 10.371685028076172, 'mean_ms': 11.690441767374674, 'status': 'ok'}
+[bench2] probe_het_48_small flat_cat_ar: {'max_abs_diff': 0.0048828125, 'ok': True, 'med_ms': 10.100960731506348, 'mean_ms': 10.967938105265299, 'status': 'ok'}
+[bench2] probe_het_48_small p3_pick: {'max_abs_diff': 0.0048828125, 'ok': True, 'med_ms': 45.27091979980469, 'mean_ms': 46.75453503926595, 'status': 'ok'}
+--- [20:12:26] train layer_grads_mixed_dtype per_tensor_ar
+   median_ms 61.06 effective True
+--- [20:14:42] train layer_grads_mixed_dtype cast_flat_fp32
+   median_ms 41.32 effective True
+--- [20:15:55] train layer_grads_mixed_dtype cast_flat_bf16
+   median_ms 36.78 effective True
+--- [20:17:07] train layer_grads_mixed_dtype two_dtype_groups
+   median_ms 36.85 effective True
+--- [20:17:54] train layer_grads_mixed_dtype p3_pick
+   median_ms 51.43 effective True
+--- [20:19:21] train probe_het_24_mid per_tensor_ar
+   median_ms 304.28 effective True
+--- [20:23:33] train probe_het_24_mid bucket6
+   median_ms 271.82 effective True
+--- [20:30:35] train probe_het_24_mid flat_cat_ar
+   median_ms 271.65 effective True
+--- [20:36:13] train probe_het_24_mid p3_pick
+   median_ms 271.53 effective True
+--- [20:38:55] train probe_het_48_mid per_tensor_ar
+   median_ms 603.01 effective True
+--- [20:44:11] train probe_het_48_mid bucket6
+   median_ms 516.04 effective True
+--- [20:57:51] train probe_het_48_mid flat_cat_ar
+   median_ms 628.14 effective True
+--- [21:03:36] train probe_het_48_mid p3_pick
+   median_ms 628.62 effective True
+--- [21:09:11] train probe_het_48_small per_tensor_ar
+   median_ms 50.27 effective True
+--- [21:10:41] train probe_het_48_small bucket6
+   median_ms 32.12 effective True
+--- [21:12:23] train probe_het_48_small flat_cat_ar
+   median_ms 53.53 effective True
+--- [21:14:21] train probe_het_48_small p3_pick
+   NO RESULT
+=== newprobs done 21:15:19 ===

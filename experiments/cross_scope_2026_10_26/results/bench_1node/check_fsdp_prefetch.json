@@ -1,0 +1,10 @@
+{
+ "per_mb_pl0": {
+  "status": "ValueError: RunNeuronCCImpl: error condition error != 0: Failed compilation with ['neuronx-cc', 'compile', '--framework=XLA', '/tmp/ubuntu/neuroncc_compile_workdir/f35cf098-19a4-463c-bd05-bc4bc4ee8fdc/model.MODUL",
+  "ok": false
+ },
+ "ag_all_pl0": {
+  "status": "ValueError: RunNeuronCCImpl: error condition error != 0: Failed compilation with ['neuronx-cc', 'compile', '--framework=XLA', '/tmp/ubuntu/neuroncc_compile_workdir/50aa1410-d451-4f25-acd3-66ee2b5105f8/model.MODUL",
+  "ok": false
+ }
+}

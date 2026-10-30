@@ -1,0 +1,15 @@
+--- [08:47:54] bench hs_a_64x64k_512k
+[bench2] hs_a_64x64k_512k per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 6.808757781982422, 'mean_ms': 7.690143585205078, 'status': 'ok'}
+[bench2] hs_a_64x64k_512k gate_1: {'max_abs_diff': 0.0048828125, 'ok': True, 'med_ms': 9.027361869812012, 'mean_ms': 10.27057965596517, 'status': 'ok'}
+--- [08:48:23] bench probe_het_48_small
+[bench2] probe_het_48_small per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 6.198525428771973, 'mean_ms': 7.55306879679362, 'status': 'ok'}
+[bench2] probe_het_48_small gate_2: {'max_abs_diff': 0.0048828125, 'ok': True, 'med_ms': 8.349180221557617, 'mean_ms': 10.00837484995524, 'status': 'ok'}
+--- [08:48:52] train hs_a_64x64k_512k per_tensor_ar
+   median_ms 101.95 effective True
+--- [08:50:16] train hs_a_64x64k_512k gate_1
+   median_ms 71.12 effective True
+--- [08:51:23] train probe_het_48_small per_tensor_ar
+   median_ms 50.19 effective True
+--- [08:52:27] train probe_het_48_small gate_2
+   median_ms 30.87 effective True
+=== newprobs done 08:53:18 ===

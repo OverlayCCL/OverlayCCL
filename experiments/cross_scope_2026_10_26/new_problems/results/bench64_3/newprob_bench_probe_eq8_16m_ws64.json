@@ -1,0 +1,35 @@
+{
+ "problem": "probe_eq8_16m",
+ "ws": 64,
+ "results": {
+  "ar_each": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 27.407526969909668,
+   "mean_ms": 169.48384443918863,
+   "status": "ok"
+  },
+  "ar_stack": {
+   "max_abs_diff": 0.0078125,
+   "ok": true,
+   "med_ms": 20.17354965209961,
+   "mean_ms": 35.945963859558105,
+   "status": "ok"
+  },
+  "rs_each": {
+   "max_abs_diff": null,
+   "ok": false,
+   "med_ms": 14.524102210998535,
+   "mean_ms": 680.4924726486206,
+   "status": "ok"
+  },
+  "ag_each": {
+   "status": "ValueError: RunNeuronCCImpl: error condition error != 0: [ERROR] [NCC_EVRF009] Size of total input and output tensors exceeds HBM limit of Trainium1. Needed 17,448,304,644 bytes (16 GB) vs. available 17,179,869,1",
+   "med_ms": null
+  },
+  "ag_each_native": {
+   "status": "ValueError: RunNeuronCCImpl: error condition error != 0: [ERROR] [NCC_EVRF009] Size of total input and output tensors exceeds HBM limit of Trainium1. Needed 17,448,304,644 bytes (16 GB) vs. available 17,179,869,1",
+   "med_ms": null
+  }
+ }
+}

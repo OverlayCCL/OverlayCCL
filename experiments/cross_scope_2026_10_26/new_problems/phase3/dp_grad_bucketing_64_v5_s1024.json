@@ -1,0 +1,30 @@
+[
+ {
+  "raw": [
+   "baseline:per_tensor_ar",
+   "{'template': 'per_tensor_ar', 'cost_score': 858.3716520000003, 'sim_time_us': 85837.16520000003, 'local_ops': 64, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 64, '_params': {'builtin_code': 'def evolved_dp_grad_bucketing_64(grads, rank, world_size, num_devices, cores_per_devi"
+  ],
+  "name": "baseline:per_tensor_ar"
+ },
+ {
+  "raw": [
+   "strat:Per-tensor all-reduce baseline",
+   "{'template': 'strategy_enumerate_final', 'cost_score': 858.3716520000003, 'sim_time_us': 85837.16520000003, 'local_ops': 64, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 64, '_params': {'evolved_code': 'def evolved_dp_grad_bucketing_64(grads, rank, world_size, num_devices, cor"
+  ],
+  "name": "strat:Per-tensor all-reduce baseline"
+ },
+ {
+  "raw": [
+   "baseline:flat_cat_ar",
+   "{'template': 'flat_cat_ar', 'cost_score': 879.5624519999966, 'sim_time_us': 87956.24519999966, 'local_ops': 194, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'builtin_code': 'def evolved_dp_grad_bucketing_64(grads, rank, world_size, num_devices, cores_per_device"
+  ],
+  "name": "baseline:flat_cat_ar"
+ },
+ {
+  "raw": [
+   "baseline:bucketed_ar",
+   "{'template': 'bucketed_ar', 'cost_score': 879.5624519999966, 'sim_time_us': 87956.24519999966, 'local_ops': 194, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'builtin_code': 'def evolved_dp_grad_bucketing_64(grads, rank, world_size, num_devices, cores_per_device"
+  ],
+  "name": "baseline:bucketed_ar"
+ }
+]

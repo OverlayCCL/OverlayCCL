@@ -1,0 +1,13 @@
+problem                candidate                 bench32  b32 x  bench64  b64 x  train64  t64 x  note
+layer_grads_1d         per_tensor_ar                9.52   1.00        —      —    35.17   1.00  n=1/1 
+layer_grads_1d         flat_cat_ar                 10.40   0.92        —      —    31.70   1.11  n=1/1 
+
+layer_grads_no_norm    per_tensor_ar                9.49   1.00        —      —    36.82   1.00  n=1/1 
+layer_grads_no_norm    flat_cat_ar                 18.92   0.50        —      —    47.99   0.77  n=1/1 
+
+model_grads_1d         per_tensor_ar               24.99   1.00        —      —   101.57   1.00  n=1/1 
+model_grads_1d         per_layer_bucket            29.21   0.86        —      —    89.37   1.14  n=1/1 INVERSION(b32)
+
+model_grads_no_norm    per_tensor_ar               24.71   1.00        —      —   152.95   1.00  n=1/1 
+model_grads_no_norm    flat_cat_ar                 92.68   0.27        —      —   239.07   0.64  n=1/1 
+

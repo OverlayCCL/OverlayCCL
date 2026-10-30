@@ -1,0 +1,110 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of 24 mixed-size 1-D tensors (mid sizes)
+======================================================================
+  per_tensor_ar: 497190.5 us, 24 local ops, 0 ag, 24 ar, 0 cp
+  flat_cat_ar: 467256.9 us, 75 local ops, 0 ag, 1 ar, 0 cp
+  bucketed_ar: 469854.7 us, 81 local ops, 0 ag, 3 ar, 0 cp
+  bucketed_ar_4: 473225.0 us, 89 local ops, 0 ag, 6 ar, 0 cp
+  bucketed_ar_16: 468853.8 us, 78 local ops, 0 ag, 2 ar, 0 cp
+
+  Best baseline: baseline:flat_cat_ar (467256.9 us)
+
+======================================================================
+[Phase 3 / CC-ReAct] Single-trajectory: DP gradient all-reduce of 24 mixed-size 1-D tensors (mid sizes)
+======================================================================
+  CC-ReAct total turn budget: 20 (== multi-island 5 islands x 4 rounds)
+  Starting from baseline: per_tensor_ar
+  Starting template: per_tensor_ar (XLA)
+  Baseline: 444.0 us, 0 permutes, 0 gathers, 24 local ops
+
+  --- Evolution round 1 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 1272.0 us (0 permutes, 0 gathers, 84 local ops)
+
+  --- Evolution round 2 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 1272.0 us (0 permutes, 0 gathers, 84 local ops)
+
+  --- Evolution round 3 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 1072.0 us (0 permutes, 0 gathers, 82 local ops)
+
+  --- Evolution round 4 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 1422.0 us (0 permutes, 0 gathers, 66 local ops)
+
+  --- Evolution round 5 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 2472.0 us (0 permutes, 0 gathers, 96 local ops)
+
+  --- Evolution round 6 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 672.0 us (0 permutes, 0 gathers, 78 local ops)
+
+  --- Evolution round 7 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 872.0 us (0 permutes, 0 gathers, 80 local ops)
+
+  --- Evolution round 8 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 872.0 us (0 permutes, 0 gathers, 80 local ops)
+
+  --- Evolution round 9 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 872.0 us (0 permutes, 0 gathers, 80 local ops)
+
+  --- Evolution round 10 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 1272.0 us (0 permutes, 0 gathers, 84 local ops)
+
+  --- Evolution round 11 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 660.0 us (0 permutes, 0 gathers, 7 local ops)
+
+  --- Evolution round 12 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 872.0 us (0 permutes, 0 gathers, 80 local ops)
+
+  --- Evolution round 13 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 1672.0 us (0 permutes, 0 gathers, 88 local ops)
+
+  --- Evolution round 14 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 1272.0 us (0 permutes, 0 gathers, 84 local ops)
+
+  --- Evolution round 15 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 872.0 us (0 permutes, 0 gathers, 80 local ops)
+
+  --- Evolution round 16 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 1272.0 us (0 permutes, 0 gathers, 84 local ops)
+
+  --- Evolution round 17 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 964.0 us (0 permutes, 0 gathers, 60 local ops)
+
+  --- Evolution round 18 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 1272.0 us (0 permutes, 0 gathers, 84 local ops)
+
+  --- Evolution round 19 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 1272.0 us (0 permutes, 0 gathers, 84 local ops)
+
+  --- Evolution round 20 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 1272.0 us (0 permutes, 0 gathers, 84 local ops)
+
+  CC-ReAct complete. 6 total candidates.
+
+=== Phase 3 result for probe_het_24_mid (wall 379s): 6 candidates, sim ranking ===
+           1e+18  cc:final  code=no
+           1e+18  baseline:flat_cat_ar  code=no
+           1e+18  baseline:bucketed_ar_16  code=no
+           1e+18  baseline:bucketed_ar  code=no
+           1e+18  baseline:bucketed_ar_4  code=no
+           1e+18  baseline:per_tensor_ar  code=no

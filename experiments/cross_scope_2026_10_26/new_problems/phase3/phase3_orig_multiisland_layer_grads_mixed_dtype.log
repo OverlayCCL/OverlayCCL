@@ -1,0 +1,71 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of one layer with fp32 norm parameters (mixed dtypes)
+======================================================================
+  per_tensor_ar: 10458.3 us, 6 local ops, 0 ag, 6 ar, 0 cp
+  cast_flat_fp32: 17108.4 us, 29 local ops, 0 ag, 1 ar, 0 cp
+  cast_flat_bf16: 9280.8 us, 25 local ops, 0 ag, 1 ar, 0 cp
+  two_dtype_groups: 12604.4 us, 23 local ops, 0 ag, 2 ar, 0 cp
+
+  Best baseline: baseline:cast_flat_bf16 (9280.8 us)
+
+======================================================================
+[Phase 3] Multi-island Template Evolution: DP gradient all-reduce of one layer with fp32 norm parameters (mixed dtypes)
+======================================================================
+  Islands (4): ['per_tensor_ar', 'cast_flat_fp32', 'cast_flat_bf16', 'two_dtype_groups']
+
+  --- Island 1/4: per_tensor_ar ---
+  Starting template: per_tensor_ar (XLA)
+  Baseline: 340.0 us, 0 permutes, 0 gathers, 6 local ops
+
+  --- Evolution round 1 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 418.0 us (0 permutes, 0 gathers, 22 local ops)
+
+  --- Evolution round 2 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 340.0 us (0 permutes, 0 gathers, 6 local ops)
+
+  --- Evolution round 3 ---
+  INCORRECT: CRASH in collect pass 0: world=4 pattern=uniform rank=0: AttributeError: 'MockTorch' object has no attribute 'bfloat16'
+
+  --- Evolution round 4 ---
+  INCORRECT: CRASH in collect pass 0: world=4 pattern=uniform rank=0: AttributeError: 'MockTorch' object has no attribute 'bfloat16'
+
+  --- Island 2/4: cast_flat_fp32 ---
+  Starting template: cast_flat_fp32 (XLA)
+  Baseline: 218.0 us, 0 permutes, 0 gathers, 20 local ops
+
+  --- Evolution round 1 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 418.0 us (0 permutes, 0 gathers, 22 local ops)
+
+  --- Evolution round 2 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 218.0 us (0 permutes, 0 gathers, 20 local ops)
+
+  --- Evolution round 3 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 218.0 us (0 permutes, 0 gathers, 20 local ops)
+
+  --- Evolution round 4 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 241.0 us (0 permutes, 0 gathers, 15 local ops)
+
+  --- Island 3/4: cast_flat_bf16 ---
+  Island 3 (cast_flat_bf16) failed: Built-in template failed correctness: CRASH in collect pass 0: world=4 pattern=uniform rank=0: AttributeError: 'MockTorch' object has no attribute 'bfloat16'
+
+  --- Island 4/4: two_dtype_groups ---
+  Island 4 (two_dtype_groups) failed: Built-in template failed correctness: CRASH in collect pass 0: world=4 pattern=uniform rank=0: AttributeError: 'MockTorch' object has no attribute 'bfloat16'
+
+  Evolution complete. 6 total candidates.
+  Best: evo:cast_flat_fp32_1 (218.0 us, 20 local ops)
+
+=== Phase 3 result for layer_grads_mixed_dtype (wall 199s): 6 candidates, sim ranking ===
+           1e+18  evo:cast_flat_fp32_1  code=no
+           1e+18  evo:per_tensor_ar_0  code=no
+           1e+18  baseline:cast_flat_bf16  code=no
+           1e+18  baseline:per_tensor_ar  code=no
+           1e+18  baseline:two_dtype_groups  code=no
+           1e+18  baseline:cast_flat_fp32  code=no

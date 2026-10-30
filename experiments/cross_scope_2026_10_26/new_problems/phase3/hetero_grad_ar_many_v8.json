@@ -1,0 +1,30 @@
+[
+ {
+  "raw": [
+   "strat:Two-phase bucketed by shape-cl",
+   "{'template': 'strategy_enumerate_final', 'cost_score': 5799.8504695796755, 'sim_time_us': 579985.0469579676, 'local_ops': 10, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 5, '_params': {'evolved_code': 'def evolved_hetero_grad_ar_many(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"Two-phase bucketed by shape-class: groups tensors by column dimension into homogeneous classes\"\"\"\\n    \\n    if not grads:\\n        return []\\n    \\n    # Phase 1: Group tensors by column dimension (shape[1]) into shape classes\\n    shape_classes = {}  # column_dim -> list of (index, tensor)\\n    for idx, t in enumerate(grads):\\n        col_dim = t.shape[1] if len(t.shape) > 1 else t.shape[0]\\n        if col_dim not in shape_classes:\\n            shape_classes[col_dim] = []\\n        shape_classes[col_dim].append((idx, t))\\n    \\n    # Prepare output list (preserve order)\\n    outs = [None] * len(grads)\\n    \\n    # Phase 2: Process each shape class separately\\n    for col_dim, tensor_list in shape_classes.items():\\n        if len(tensor_list) == 1:\\n            # Singleton: handle individually with direct all_reduce\\n            idx, t = tensor_list[0]\\n            outs[idx] = xm.all_reduce(xm.REDUCE_SUM, t)\\n        else:\\n            # Multiple tensors with same column dimension: stack into 3-D\\n            # All tensors in this class have shape [rows, col_dim]\\n            indices = [idx for idx, _ in tensor_list]\\n            tensors = [t for _, t in tensor_list]\\n            \\n            # Stack tensors along a new dimension (dimension 0)\\n            # Result shape: [num_tensors, rows, col_dim]\\n            stacked = torch.stack(tensors, dim=0)\\n            \\n            # Single all_reduce on the stacked 3-D tensor\\n            reduced_stack = xm.all_reduce(xm.REDUCE_SUM, stacked)\\n            \\n            # Unstack back to individual tensors\\n            for i, idx in enumerate(indices):\\n                outs[idx] = reduced_stack[i]\\n    \\n    return outs'}}"
+  ],
+  "name": "strat:Two-phase bucketed by shape-cl"
+ },
+ {
+  "raw": [
+   "baseline:per_tensor_ar",
+   "{'template': 'per_tensor_ar', 'cost_score': 6825.241607979569, 'sim_time_us': 682524.160797957, 'local_ops': 48, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 48, '_params': {'builtin_code': 'def evolved_hetero_grad_ar_many(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"developer baseline: one all_reduce per gradient tensor (DDP hook per parameter)\"\"\"\\n    return [xm.all_reduce(xm.REDUCE_SUM, t) for t in grads]\\n'}}"
+  ],
+  "name": "baseline:per_tensor_ar"
+ },
+ {
+  "raw": [
+   "baseline:flat_cat_ar",
+   "{'template': 'flat_cat_ar', 'cost_score': 10427.710292000005, 'sim_time_us': 1042771.0292000006, 'local_ops': 147, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'builtin_code': 'def evolved_hetero_grad_ar_many(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    flat = torch.cat([t.reshape(-1) for t in grads]); r = xm.all_reduce(xm.REDUCE_SUM, flat)\\n    outs = []; off = 0\\n    for t in grads: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:flat_cat_ar"
+ },
+ {
+  "raw": [
+   "baseline:bucketed_ar",
+   "{'template': 'bucketed_ar', 'cost_score': 10427.710292000005, 'sim_time_us': 1042771.0292000006, 'local_ops': 147, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'builtin_code': 'def evolved_hetero_grad_ar_many(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"fixed-size buckets in order (exact bytes, a few dispatches)\"\"\"\\n    outs = []; chunk = []; acc = 0; lim = 4 * 1024 * 1024\\n    def flush(chunk):\\n        flat = torch.cat([t.reshape(-1) for t in chunk]); r = xm.all_reduce(xm.REDUCE_SUM, flat); off = 0\\n        for t in chunk: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    for t in grads:\\n        chunk.append(t); acc += t.numel()\\n        if acc >= lim: flush(chunk); chunk = []; acc = 0\\n    if chunk: flush(chunk)\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:bucketed_ar"
+ }
+]

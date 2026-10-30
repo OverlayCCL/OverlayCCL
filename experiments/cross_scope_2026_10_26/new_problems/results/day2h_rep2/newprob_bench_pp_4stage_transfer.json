@@ -1,0 +1,27 @@
+{
+ "problem": "pp_4stage_transfer",
+ "ws": 32,
+ "results": {
+  "per_transfer": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 15.18869400024414,
+   "mean_ms": 16.330869992574055,
+   "status": "ok"
+  },
+  "per_boundary_stack": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 12.615084648132324,
+   "mean_ms": 12.901735305786133,
+   "status": "ok"
+  },
+  "all_stack": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 16.56627655029297,
+   "mean_ms": 17.729369799296062,
+   "status": "ok"
+  }
+ }
+}

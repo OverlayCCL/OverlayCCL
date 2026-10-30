@@ -1,0 +1,29 @@
+--- [10:11:08] bench layer_grads_1d
+[bench2] layer_grads_1d per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 9.517908096313477, 'mean_ms': 1003.2971382141113, 'status': 'ok'}
+[bench2] layer_grads_1d flat_cat_ar: {'max_abs_diff': 0.0068359375, 'ok': True, 'med_ms': 10.396003723144531, 'mean_ms': 12.497186660766602, 'status': 'ok'}
+--- [10:12:34] bench layer_grads_no_norm
+[bench2] layer_grads_no_norm per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 9.487628936767578, 'mean_ms': 336.6321086883545, 'status': 'ok'}
+[bench2] layer_grads_no_norm flat_cat_ar: {'max_abs_diff': 0.0068359375, 'ok': True, 'med_ms': 18.91767978668213, 'mean_ms': 24.18358325958252, 'status': 'ok'}
+--- [10:14:05] bench model_grads_1d
+[bench2] model_grads_1d per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 24.9941349029541, 'mean_ms': 354.9720764160156, 'status': 'ok'}
+[bench2] model_grads_1d per_layer_bucket: {'max_abs_diff': 0.0068359375, 'ok': True, 'med_ms': 29.211878776550293, 'mean_ms': 72.08542029062907, 'status': 'ok'}
+--- [10:15:31] bench model_grads_no_norm
+[bench2] model_grads_no_norm per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 24.7114896774292, 'mean_ms': 186.15338802337646, 'status': 'ok'}
+[bench2] model_grads_no_norm flat_cat_ar: {'max_abs_diff': 0.0068359375, 'ok': True, 'med_ms': 92.68152713775635, 'mean_ms': 122.40574359893799, 'status': 'ok'}
+--- [10:17:28] train layer_grads_1d per_tensor_ar
+   median_ms 35.17
+--- [10:18:42] train layer_grads_1d flat_cat_ar
+   median_ms 31.7
+--- [10:19:54] train layer_grads_no_norm per_tensor_ar
+   median_ms 36.82
+--- [10:21:02] train layer_grads_no_norm flat_cat_ar
+   median_ms 47.99
+--- [10:23:05] train model_grads_1d per_tensor_ar
+   median_ms 101.57
+--- [10:24:57] train model_grads_1d per_layer_bucket
+   median_ms 89.37
+--- [10:26:40] train model_grads_no_norm per_tensor_ar
+   median_ms 152.95
+--- [10:29:12] train model_grads_no_norm flat_cat_ar
+   median_ms 239.07
+=== newprobs done 10:33:30 ===

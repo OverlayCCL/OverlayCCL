@@ -1,0 +1,27 @@
+{
+ "problem": "model_grads_4layers",
+ "ws": 32,
+ "results": {
+  "per_tensor_ar": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 23.898839950561523,
+   "mean_ms": 23.9688237508138,
+   "status": "ok"
+  },
+  "flat_cat_ar": {
+   "max_abs_diff": 0.0078125,
+   "ok": true,
+   "med_ms": 27.14991569519043,
+   "mean_ms": 56.89678986867269,
+   "status": "ok"
+  },
+  "gate_3": {
+   "max_abs_diff": 0.0078125,
+   "ok": true,
+   "med_ms": 27.02939510345459,
+   "mean_ms": 38.67963155110677,
+   "status": "ok"
+  }
+ }
+}

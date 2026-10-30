@@ -1,0 +1,7 @@
+{
+ "llama10b_dp_grads__per_tensor_ar__train": 774429.3,
+ "llama10b_dp_grads__bucket_32mb__train": 788967.5,
+ "llama10b_dp_grads__per_layer_bucket__train": 785629.8,
+ "llama10b_dp_grads__bucketed_ar_16__train": 785629.8,
+ "llama10b_dp_grads__bucket_128mb__train": 785629.8
+}

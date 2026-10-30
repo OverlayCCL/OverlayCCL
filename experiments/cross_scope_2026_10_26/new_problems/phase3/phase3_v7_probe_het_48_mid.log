@@ -1,0 +1,40 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of 48 mixed-size 1-D tensors (mid sizes)
+======================================================================
+  per_tensor_ar: 1094112.2 us, 48 local ops, 0 ag, 48 ar, 0 cp
+  flat_cat_ar: 1688284.2 us, 147 local ops, 0 ag, 1 ar, 0 cp
+  bucketed_ar: 1688284.2 us, 147 local ops, 0 ag, 1 ar, 0 cp
+
+  Best baseline: baseline:per_tensor_ar (1094112.2 us)
+
+======================================================================
+[Phase 3 / Strategy-Enumerate] DP gradient all-reduce of 48 mixed-size 1-D tensors (mid sizes)
+======================================================================
+  K=5 strategies, R=2 refinement rounds per top-2 (budget ~10 LLM calls)
+  Enumerated 5 strategies:
+    1. Per-tensor all-reduce baseline: Issues one all_reduce call per gradient tensor (48 dispatches total). Represents...
+    2. Single flat concatenation all-reduce: Concatenates all 48 heterogeneous tensors into one flat buffer, performs a singl...
+    3. Fixed-byte bucketed all-reduce: Groups tensors into buckets of ~4MB each in sequential order, concatenating with...
+    4. Size-binned bucketed all-reduce: Sorts tensors into bins by size similarity before concatenating and reducing eac...
+    5. Two-phase reduce-scatter then all-gather: Splits the 48 tensors across ranks via reduce-scatter (each rank reduces a disjo...
+  Strategy 1 (Per-tensor all-reduce baseline): sim=1094112.2 us
+  Strategy 2 (Single flat concatenation all-reduce): sim=1688284.2 us
+  Strategy 3 (Fixed-byte bucketed all-reduce): sim=1688284.2 us
+  Strategy 4 (Size-binned bucketed all-reduce): sim=950167.0 us
+  Strategy 5 (Two-phase reduce-scatter then all-gather): sim=1147291.6 us
+
+  Top after enumeration:
+    Size-binned bucketed all-reduce: 950167.0 us
+    Per-tensor all-reduce baseline: 1094112.2 us
+    top 1 round 1: NEW BEST 948989.1 us (0.1% improvement)
+
+  Strategy-Enumerate complete. 7 total candidates.
+  Best: refined-from-Size-binned bucketed all-reduce (sim=948989.1 us)
+
+=== Phase 3 result for probe_het_48_mid (wall 84s): 4 candidates, sim ranking ===
+           1e+18  strat:refined-from-Size-binned bucke  code=no
+           1e+18  baseline:per_tensor_ar  code=no
+           1e+18  baseline:flat_cat_ar  code=no
+           1e+18  baseline:bucketed_ar  code=no

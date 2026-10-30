@@ -1,0 +1,37 @@
+[
+ {
+  "raw": [
+   "strat:refined-from-Pipelined reduce-",
+   "{'template': 'strategy_enumerate_final', 'cost_score': 633.9520520000001, 'sim_time_us': 63395.20520000001, 'local_ops': 88, 'num_collective_permute': 0, 'num_all_gather': 4, 'num_all_reduce': 0, '_params': {'evolved_code': 'def evolved_model_grads_4layers(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"Reduce-scatter + all-gather with minimal local ops\"\"\"\\n    \\n    outs = [None] * len(grads)\\n    \\n    for layer_idx in range(4):\\n        start_idx = layer_idx * 6\\n        layer_grads = grads[start_idx:start_idx + 6]\\n        \\n        # Concatenate once (unavoidable for reduce-scatter input)\\n        flat = torch.cat([t.reshape(-1) for t in layer_grads])\\n        total_size = flat.numel()\\n        \\n        # Calculate chunk size with ceiling division\\n        chunk_size = (total_size + world_size - 1) // world_size\\n        padded_size = chunk_size * world_size\\n        \\n        # Only pad if necessary, reuse flat when possible\\n        if padded_size > total_size:\\n            # Minimize padding overhead\\n            flat_padded = torch.nn.functional.pad(flat, (0, padded_size - total_size))\\n        else:\\n            flat_padded = flat\\n        \\n        # Reduce-scatter\\n        reduced_chunk = xm.reduce_scatter(\\n            xm.REDUCE_SUM,\\n            flat_padded,\\n            scale=1.0,\\n            scatter_dim=0,\\n            shard_count=world_size,\\n            groups=None\\n        )\\n        \\n        # All-gather\\n        gathered = xm.all_gather(reduced_chunk, dim=0)\\n        \\n        # Use narrow instead of slicing to remove padding (metadata-only op)\\n        if padded_size > total_size:\\n            result = gathered.narrow(0, 0, total_size)\\n        else:\\n            result = gathered\\n        \\n        # Unpack using narrow/view (avoid indexing)\\n        offset = 0\\n        for i, t in enumerate(layer_grads):\\n            n = t.numel()\\n            # Use narrow (metadata-only) instead of slice\\n            chunk = result.narrow(0, offset, n)\\n            # Reshape is metadata-only when contiguous\\n            outs[start_idx + i] = chunk.reshape(t.shape)\\n            offset += n\\n    \\n    return outs'}}"
+  ],
+  "name": "strat:refined-from-Pipelined reduce-"
+ },
+ {
+  "raw": [
+   "baseline:per_layer_bucket",
+   "{'template': 'per_layer_bucket', 'cost_score': 642.1816520000001, 'sim_time_us': 64218.16520000001, 'local_ops': 84, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 4, '_params': {'builtin_code': 'def evolved_model_grads_4layers(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"one all_reduce per layer (6 tensors each), exact bytes\"\"\"\\n    outs = []\\n    for b in range(0, len(grads), 6):\\n        chunk = grads[b:b + 6]; flat = torch.cat([t.reshape(-1) for t in chunk]); r = xm.all_reduce(xm.REDUCE_SUM, flat); off = 0\\n        for t in chunk: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:per_layer_bucket"
+ },
+ {
+  "raw": [
+   "baseline:flat_cat_ar",
+   "{'template': 'flat_cat_ar', 'cost_score': 642.1816520000004, 'sim_time_us': 64218.16520000004, 'local_ops': 75, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'builtin_code': 'def evolved_model_grads_4layers(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    flat = torch.cat([t.reshape(-1) for t in grads]); r = xm.all_reduce(xm.REDUCE_SUM, flat)\\n    outs = []; off = 0\\n    for t in grads: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:flat_cat_ar"
+ },
+ {
+  "raw": [
+   "baseline:bucketed_ar",
+   "{'template': 'bucketed_ar', 'cost_score': 642.1816520000004, 'sim_time_us': 64218.16520000004, 'local_ops': 75, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'builtin_code': 'def evolved_model_grads_4layers(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"fixed-size buckets in order (exact bytes, a few dispatches)\"\"\"\\n    outs = []; chunk = []; acc = 0; lim = 4 * 1024 * 1024\\n    def flush(chunk):\\n        flat = torch.cat([t.reshape(-1) for t in chunk]); r = xm.all_reduce(xm.REDUCE_SUM, flat); off = 0\\n        for t in chunk: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    for t in grads:\\n        chunk.append(t); acc += t.numel()\\n        if acc >= lim: flush(chunk); chunk = []; acc = 0\\n    if chunk: flush(chunk)\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:bucketed_ar"
+ },
+ {
+  "raw": [
+   "baseline:per_tensor_ar",
+   "{'template': 'per_tensor_ar', 'cost_score': 1006.1980769034343, 'sim_time_us': 100619.80769034343, 'local_ops': 24, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 24, '_params': {'builtin_code': 'def evolved_model_grads_4layers(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"developer baseline: one all_reduce per gradient tensor (DDP hook per parameter)\"\"\"\\n    return [xm.all_reduce(xm.REDUCE_SUM, t) for t in grads]\\n'}}"
+  ],
+  "name": "baseline:per_tensor_ar"
+ }
+]

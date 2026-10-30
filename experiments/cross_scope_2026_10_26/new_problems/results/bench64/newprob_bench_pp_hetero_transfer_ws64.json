@@ -1,0 +1,34 @@
+{
+ "problem": "pp_hetero_transfer",
+ "ws": 64,
+ "results": {
+  "per_tensor": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 23.391366004943848,
+   "mean_ms": 356.16493225097656,
+   "status": "ok"
+  },
+  "per_mb_cat": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 23.16462993621826,
+   "mean_ms": 23.514604568481445,
+   "status": "ok"
+  },
+  "all_cat": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 18.23604106903076,
+   "mean_ms": 18.860514958699543,
+   "status": "ok"
+  },
+  "per_kind_stack": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 18.17333698272705,
+   "mean_ms": 18.288715680440266,
+   "status": "ok"
+  }
+ }
+}

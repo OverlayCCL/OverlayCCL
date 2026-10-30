@@ -1,0 +1,5 @@
+--- [05:23:49] train fsdp_ag_layout ag_pinned
+   median_ms 103.65 effective True
+--- [05:25:00] train fsdp_ag_layout ag_dim0_t_native
+   median_ms 89.67 effective True
+=== newprobs done 05:26:11 ===

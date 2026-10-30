@@ -1,0 +1,57 @@
+{
+ "model_grads_4layers": {
+  "random": {
+   "best_sim": 64218.16520000004,
+   "code": "def evolved_model_grads_4layers(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\n    flat = torch.cat([t.reshape(-1) for t in grads])\n    r = xm.all_reduce(xm.REDUCE_SUM, flat)\n    outs = []\n    off = 0\n    for t in grads:\n        n = t.numel()\n        outs.append(r[off:off + n].view(t.shape))\n        off += n\n    return outs",
+   "evals": 400,
+   "structure": {
+    "colls": {
+     "all_reduce": 1
+    },
+    "loops": 1
+   }
+  },
+  "ga": {
+   "best_sim": 64218.16520000004,
+   "code": "def evolved_model_grads_4layers(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\n    flat = torch.cat([t.reshape(-1) for t in grads])\n    r = xm.all_reduce(xm.REDUCE_SUM, flat)\n    outs = []\n    off = 0\n    for t in grads:\n        n = t.numel()\n        outs.append(r[off:off + n].view(t.shape))\n        off += n\n    return outs",
+   "evals": 400,
+   "structure": {
+    "colls": {
+     "all_reduce": 1
+    },
+    "loops": 1
+   }
+  },
+  "beam": {
+   "best_sim": 64218.16520000004,
+   "code": "def evolved_model_grads_4layers(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\n    flat = torch.cat([t.reshape(-1) for t in grads])\n    r = xm.all_reduce(xm.REDUCE_SUM, flat)\n    outs = []\n    off = 0\n    for t in grads:\n        n = t.numel()\n        outs.append(r[off:off + n].view(t.shape))\n        off += n\n    return outs",
+   "evals": 42,
+   "structure": {
+    "colls": {
+     "all_reduce": 1
+    },
+    "loops": 1
+   }
+  },
+  "rules": {
+   "best_sim": 64218.16520000004,
+   "code": "def evolved_model_grads_4layers(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\n    flat = torch.cat([t.reshape(-1) for t in grads])\n    r = xm.all_reduce(xm.REDUCE_SUM, flat)\n    outs = []\n    off = 0\n    for t in grads:\n        n = t.numel()\n        outs.append(r[off:off + n].view(t.shape))\n        off += n\n    return outs",
+   "passes": [],
+   "evals": 41,
+   "structure": {
+    "colls": {
+     "all_reduce": 1
+    },
+    "loops": 1
+   }
+  },
+  "start_sim": 64218.16520000004,
+  "start_structure": {
+   "colls": {
+    "all_reduce": 1
+   },
+   "loops": 1
+  },
+  "secs": 32.4
+ }
+}

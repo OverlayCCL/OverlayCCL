@@ -1,0 +1,50 @@
+HloModule SyncTensorsGraph.44, entry_computation_layout={(f32[], bf16[49809408]{0})->(bf16[49809408]{0}, bf16[12582912]{0}, bf16[6144,2048]{1,0}, bf16[4194304]{0}, bf16[2048,2048]{1,0}, /*index=5*/bf16[22020096]{0}, bf16[10752,2048]{1,0}, bf16[11010048]{0}, bf16[2048,5376]{1,0}, bf16[2048]{0}, /*index=10*/bf16[2048]{0})}, allow_spmd_sharding_propagation_to_parameters={}, replica_count=32
+
+%AddComputation.19 (x.20: bf16[], y.21: bf16[]) -> bf16[] {
+  %x.20 = bf16[] parameter(0)
+  %y.21 = bf16[] parameter(1)
+  ROOT %add.22 = bf16[] add(%x.20, %y.21)
+}
+
+ENTRY %SyncTensorsGraph.44 (p0.1: f32[], p1.2: bf16[49809408]) -> (bf16[49809408], bf16[12582912], bf16[6144,2048], bf16[4194304], bf16[2048,2048], /*index=5*/bf16[22020096], bf16[10752,2048], bf16[11010048], bf16[2048,5376], bf16[2048], /*index=10*/bf16[2048]) {
+  %p1.2 = bf16[49809408]{0} parameter(1)
+  %slice.13 = bf16[12582912]{0} slice(%p1.2), slice={[0:12582912]}
+  %reshape.14 = bf16[6144,2048]{1,0} reshape(%slice.13)
+  %reshape.15 = bf16[12582912]{0} reshape(%reshape.14)
+  %slice.10 = bf16[4194304]{0} slice(%p1.2), slice={[12582912:16777216]}
+  %reshape.11 = bf16[2048,2048]{1,0} reshape(%slice.10)
+  %reshape.12 = bf16[4194304]{0} reshape(%reshape.11)
+  %slice.7 = bf16[22020096]{0} slice(%p1.2), slice={[16777216:38797312]}
+  %reshape.8 = bf16[10752,2048]{1,0} reshape(%slice.7)
+  %reshape.9 = bf16[22020096]{0} reshape(%reshape.8)
+  %slice.4 = bf16[11010048]{0} slice(%p1.2), slice={[38797312:49807360]}
+  %reshape.5 = bf16[2048,5376]{1,0} reshape(%slice.4)
+  %reshape.6 = bf16[11010048]{0} reshape(%reshape.5)
+  %slice.3 = bf16[2048]{0} slice(%p1.2), slice={[49807360:49809408]}
+  %concatenate.16 = bf16[49809408]{0} concatenate(%reshape.15, %reshape.12, %reshape.9, %reshape.6, %slice.3), dimensions={0}
+  %p0.1 = f32[] parameter(0)
+  %convert.17 = bf16[] convert(%p0.1)
+  %tuple.18 = (bf16[49809408]{0}, bf16[]) tuple(%concatenate.16, %convert.17)
+  %get-tuple-element.23 = bf16[49809408]{0} get-tuple-element(%tuple.18), index=0
+  %get-tuple-element.24 = bf16[] get-tuple-element(%tuple.18), index=1
+  %all-reduce.25 = (bf16[49809408]{0}, bf16[]) all-reduce(%get-tuple-element.23, %get-tuple-element.24), replica_groups={}, constrain_layout=true, to_apply=%AddComputation.19
+  %get-tuple-element.27 = bf16[] get-tuple-element(%all-reduce.25), index=1
+  %convert.28 = f32[] convert(%get-tuple-element.27)
+  %get-tuple-element.26 = bf16[49809408]{0} get-tuple-element(%all-reduce.25), index=0
+  %slice.29 = bf16[12582912]{0} slice(%get-tuple-element.26), slice={[0:12582912]}
+  %slice.30 = bf16[12582912]{0} slice(%get-tuple-element.26), slice={[0:12582912]}
+  %reshape.31 = bf16[6144,2048]{1,0} reshape(%slice.30)
+  %slice.32 = bf16[4194304]{0} slice(%get-tuple-element.26), slice={[12582912:16777216]}
+  %slice.33 = bf16[4194304]{0} slice(%get-tuple-element.26), slice={[12582912:16777216]}
+  %reshape.34 = bf16[2048,2048]{1,0} reshape(%slice.33)
+  %slice.35 = bf16[22020096]{0} slice(%get-tuple-element.26), slice={[16777216:38797312]}
+  %slice.36 = bf16[22020096]{0} slice(%get-tuple-element.26), slice={[16777216:38797312]}
+  %reshape.37 = bf16[10752,2048]{1,0} reshape(%slice.36)
+  %slice.38 = bf16[11010048]{0} slice(%get-tuple-element.26), slice={[38797312:49807360]}
+  %slice.39 = bf16[11010048]{0} slice(%get-tuple-element.26), slice={[38797312:49807360]}
+  %reshape.40 = bf16[2048,5376]{1,0} reshape(%slice.39)
+  %slice.41 = bf16[2048]{0} slice(%get-tuple-element.26), slice={[49807360:49809408]}
+  %slice.42 = bf16[2048]{0} slice(%get-tuple-element.26), slice={[49807360:49809408]}
+  ROOT %tuple.43 = (bf16[49809408]{0}, bf16[12582912]{0}, bf16[6144,2048]{1,0}, bf16[4194304]{0}, bf16[2048,2048]{1,0}, /*index=5*/bf16[22020096]{0}, bf16[10752,2048]{1,0}, bf16[11010048]{0}, bf16[2048,5376]{1,0}, bf16[2048]{0}, /*index=10*/bf16[2048]{0}) tuple(%get-tuple-element.26, %slice.29, %reshape.31, %slice.32, %reshape.34, /*index=5*/%slice.35, %reshape.37, %slice.38, %reshape.40, %slice.41, /*index=10*/%slice.42)
+}
+

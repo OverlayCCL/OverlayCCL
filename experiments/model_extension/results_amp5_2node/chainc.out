@@ -1,0 +1,20 @@
+=== [22:29:06] gqa_base_per_tensor
+[bench] per_mb steady_mean=40.98ms steady_median=40.62ms final_loss=18.874
+=== [22:31:49] gqa_bund_per_tensor
+[bench] bundled steady_mean=15.02ms steady_median=14.96ms final_loss=4.719
+=== [22:33:40] gqa_bund_per_layer
+[bench] bundled steady_mean=72.65ms steady_median=72.61ms final_loss=4.719
+=== [22:38:00] gqa_bund_flat
+=== [22:38:56] gqa_bund_buckets_8
+[bench] bundled steady_mean=24.99ms steady_median=24.90ms final_loss=4.719
+=== [22:45:13] gqa_amp4_base_per_tensor
+[bench] per_mb steady_mean=40.16ms steady_median=39.64ms final_loss=18.874
+=== [22:46:08] gqa_amp4_bund_per_tensor
+[bench] bundled steady_mean=15.05ms steady_median=15.05ms final_loss=4.719
+=== [22:47:09] gqa_amp4_bund_flat
+=== [22:47:43] gqa_amp4_bund_per_layer
+[bench] bundled steady_mean=73.22ms steady_median=73.23ms final_loss=4.719
+=== [22:49:25] gqa_mixed_bund_per_tensor
+[bench] bundled steady_mean=15.21ms steady_median=15.12ms final_loss=4.719
+=== [22:51:10] gqa_mixed_bund_bf16_flat
+AMP5C_DONE

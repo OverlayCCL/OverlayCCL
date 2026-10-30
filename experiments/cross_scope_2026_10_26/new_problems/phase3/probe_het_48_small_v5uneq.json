@@ -1,0 +1,30 @@
+[
+ {
+  "raw": [
+   "strat:refined-from-Size-binned paral",
+   "{'template': 'strategy_enumerate_final', 'cost_score': 609.5122361668699, 'sim_time_us': 60951.22361668699, 'local_ops': 150, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 2, '_params': {'evolved_code': 'def evolved_probe_het_48_small(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"Optimized size-binned all-reduce with minimal local ops\"\"\"\\n    \\n    # Define size bins (in number of elements)\\n    SMALL_THRESHOLD = 256\\n    LARGE_THRESHOLD = 25600\\n    \\n    # Categorize tensors into bins with their original indices\\n    small_bin = []\\n    medium_bin = []\\n    large_bin = []\\n    \\n    for idx, t in enumerate(grads):\\n        numel = t.numel()\\n        if numel < SMALL_THRESHOLD:\\n            small_bin.append((idx, t))\\n        elif numel < LARGE_THRESHOLD:\\n            medium_bin.append((idx, t))\\n        else:\\n            large_bin.append((idx, t))\\n    \\n    # Result list to preserve order\\n    results = [None] * len(grads)\\n    \\n    # Process each bin with minimal local ops\\n    def process_bin(bin_list):\\n        if not bin_list:\\n            return\\n        \\n        if len(bin_list) == 1:\\n            # Single tensor: direct all-reduce, no concatenation needed\\n            idx, t = bin_list[0]\\n            flat = t.reshape(-1)\\n            reduced = xm.all_reduce(xm.REDUCE_SUM, flat)\\n            results[idx] = reduced.reshape(t.shape)\\n            return\\n        \\n        # Extract indices and tensors\\n        indices = [item[0] for item in bin_list]\\n        tensors = [item[1] for item in bin_list]\\n        \\n        # Pre-flatten tensors to avoid repeated reshape calls\\n        flats = [t.reshape(-1) for t in tensors]\\n        \\n        # Concatenate all tensors in this bin\\n        flat = torch.cat(flats)\\n        \\n        # All-reduce the concatenated tensor\\n        reduced = xm.all_reduce(xm.REDUCE_SUM, flat)\\n        \\n        # Split back using narrow (metadata-only) instead of slicing\\n        offset = 0\\n        for idx, t in zip(indices, tensors):\\n            n = t.numel()\\n            # Use narrow for zero-copy slice, then reshape\\n            results[idx] = reduced.narrow(0, offset, n).reshape(t.shape)\\n            offset += n\\n    \\n    # Process each bin\\n    process_bin(small_bin)\\n    process_bin(medium_bin)\\n    process_bin(large_bin)\\n    \\n    return results'}}"
+  ],
+  "name": "strat:refined-from-Size-binned paral"
+ },
+ {
+  "raw": [
+   "baseline:per_tensor_ar",
+   "{'template': 'per_tensor_ar', 'cost_score': 690.7831340249567, 'sim_time_us': 69078.31340249567, 'local_ops': 48, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 48, '_params': {'builtin_code': 'def evolved_probe_het_48_small(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"developer baseline: one all_reduce per gradient tensor (DDP hook per parameter)\"\"\"\\n    return [xm.all_reduce(xm.REDUCE_SUM, t) for t in grads]\\n'}}"
+  ],
+  "name": "baseline:per_tensor_ar"
+ },
+ {
+  "raw": [
+   "baseline:flat_cat_ar",
+   "{'template': 'flat_cat_ar', 'cost_score': 1095.8344519999973, 'sim_time_us': 109583.44519999974, 'local_ops': 147, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'builtin_code': 'def evolved_probe_het_48_small(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    flat = torch.cat([t.reshape(-1) for t in grads]); r = xm.all_reduce(xm.REDUCE_SUM, flat)\\n    outs = []; off = 0\\n    for t in grads: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:flat_cat_ar"
+ },
+ {
+  "raw": [
+   "baseline:bucketed_ar",
+   "{'template': 'bucketed_ar', 'cost_score': 1095.8344519999973, 'sim_time_us': 109583.44519999974, 'local_ops': 147, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'builtin_code': 'def evolved_probe_het_48_small(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"fixed-size buckets in order (exact bytes, a few dispatches)\"\"\"\\n    outs = []; chunk = []; acc = 0; lim = 4 * 1024 * 1024\\n    def flush(chunk):\\n        flat = torch.cat([t.reshape(-1) for t in chunk]); r = xm.all_reduce(xm.REDUCE_SUM, flat); off = 0\\n        for t in chunk: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    for t in grads:\\n        chunk.append(t); acc += t.numel()\\n        if acc >= lim: flush(chunk); chunk = []; acc = 0\\n    if chunk: flush(chunk)\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:bucketed_ar"
+ }
+]

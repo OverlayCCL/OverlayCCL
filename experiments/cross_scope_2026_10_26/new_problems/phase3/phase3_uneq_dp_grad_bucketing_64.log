@@ -1,0 +1,39 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of 64 mixed-size tensors (bucketing sweep instance)
+======================================================================
+  per_tensor_ar: 89839.6 us, 64 local ops, 0 ag, 64 ar, 0 cp
+  flat_cat_ar: 134015.8 us, 195 local ops, 0 ag, 1 ar, 0 cp
+  bucketed_ar: 134015.8 us, 195 local ops, 0 ag, 1 ar, 0 cp
+
+  Best baseline: baseline:per_tensor_ar (89839.6 us)
+
+======================================================================
+[Phase 3 / Strategy-Enumerate] DP gradient all-reduce of 64 mixed-size tensors (bucketing sweep instance)
+======================================================================
+  K=5 strategies, R=2 refinement rounds per top-2 (budget ~10 LLM calls)
+  Enumerated 5 strategies:
+    1. Per-tensor all-reduce baseline: Issues 64 separate all-reduce calls, one per gradient tensor. This maximizes dis...
+    2. Single flat concatenation all-reduce: Concatenates all 64 mixed-size tensors into one flat buffer, performs a single a...
+    3. Fixed-byte-threshold bucketing: Sequentially groups gradients into buckets until accumulated size exceeds a thre...
+    4. Size-sorted equal-count bucketing: Sorts the 64 gradients by size, then partitions into fixed-count buckets (e.g., ...
+    5. Hierarchical two-stage reduction: First stage reduces tensors within local device groups (intra-node or per-NIC do...
+  Strategy 1 (Per-tensor all-reduce baseline): sim=89839.6 us
+  Strategy 2 (Single flat concatenation all-reduce): sim=134015.8 us
+  Strategy 3 (Fixed-byte-threshold bucketing): sim=134015.8 us
+  Strategy 4 (Size-sorted equal-count bucketing): sim=79288.6 us
+  Strategy 5 (Hierarchical two-stage reduction) INCORRECT: CRASH in collect pass 0: world=4 pattern=uniform rank=0: AttributeError: 'list' object has no attrib
+
+  Top after enumeration:
+    Size-sorted equal-count bucketing: 79288.6 us
+    Per-tensor all-reduce baseline: 89839.6 us
+
+  Strategy-Enumerate complete. 6 total candidates.
+  Best: Size-sorted equal-count bucketing (sim=79288.6 us)
+
+=== Phase 3 result for dp_grad_bucketing_64 (wall 85s): 4 candidates, sim ranking ===
+           1e+18  strat:Size-sorted equal-count bucket  code=no
+           1e+18  baseline:per_tensor_ar  code=no
+           1e+18  baseline:flat_cat_ar  code=no
+           1e+18  baseline:bucketed_ar  code=no

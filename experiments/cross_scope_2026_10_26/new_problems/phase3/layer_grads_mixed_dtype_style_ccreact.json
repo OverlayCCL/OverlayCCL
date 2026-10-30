@@ -1,0 +1,37 @@
+[
+ {
+  "raw": [
+   "cc:final",
+   "{'template': 'cc_react_final', 'cost_score': 3.3999999999999995, 'sim_time_us': 339.99999999999994, 'local_ops': 6, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 6, '_params': {'evolved_code': 'def evolved_layer_grads_mixed_dtype(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"developer baseline: one all_reduce per tensor in its native dtype\"\"\"\\n    return [xm.all_reduce(xm.REDUCE_SUM, t) for t in grads]\\n'}}"
+  ],
+  "name": "cc:final"
+ },
+ {
+  "raw": [
+   "baseline:cast_flat_bf16",
+   "{'template': 'cast_flat_bf16', 'cost_score': 92.80765200000002, 'sim_time_us': 9280.765200000002, 'local_ops': 25, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'builtin_code': '\\\\\\ndef evolved_layer_grads_mixed_dtype(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    flat = torch.cat([t.reshape(-1).to(torch.bfloat16) for t in grads]); r = xm.all_reduce(xm.REDUCE_SUM, flat); outs = []; off = 0\\n    for t in grads: n = t.numel(); outs.append(r[off:off + n].view(t.shape).to(t.dtype)); off += n\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:cast_flat_bf16"
+ },
+ {
+  "raw": [
+   "baseline:per_tensor_ar",
+   "{'template': 'per_tensor_ar', 'cost_score': 113.44156259605717, 'sim_time_us': 11344.156259605717, 'local_ops': 6, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 6, '_params': {'builtin_code': 'def evolved_layer_grads_mixed_dtype(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"developer baseline: one all_reduce per tensor in its native dtype\"\"\"\\n    return [xm.all_reduce(xm.REDUCE_SUM, t) for t in grads]\\n'}}"
+  ],
+  "name": "baseline:per_tensor_ar"
+ },
+ {
+  "raw": [
+   "baseline:two_dtype_groups",
+   "{'template': 'two_dtype_groups', 'cost_score': 128.41452069815813, 'sim_time_us': 12841.452069815814, 'local_ops': 23, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 2, '_params': {'builtin_code': '\\\\\\ndef evolved_layer_grads_mixed_dtype(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    outs = [None] * len(grads)\\n    for dt in (torch.bfloat16, torch.float32):\\n        idx = [i for i, t in enumerate(grads) if t.dtype == dt]\\n        if not idx: continue\\n        flat = torch.cat([grads[i].reshape(-1) for i in idx]); r = xm.all_reduce(xm.REDUCE_SUM, flat); off = 0\\n        for i in idx: n = grads[i].numel(); outs[i] = r[off:off + n].view(grads[i].shape); off += n\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:two_dtype_groups"
+ },
+ {
+  "raw": [
+   "baseline:cast_flat_fp32",
+   "{'template': 'cast_flat_fp32', 'cost_score': 171.083522967742, 'sim_time_us': 17108.3522967742, 'local_ops': 29, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'builtin_code': 'def evolved_layer_grads_mixed_dtype(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    flat = torch.cat([t.reshape(-1).float() for t in grads]); r = xm.all_reduce(xm.REDUCE_SUM, flat); outs = []; off = 0\\n    for t in grads: n = t.numel(); outs.append(r[off:off + n].view(t.shape).to(t.dtype)); off += n\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:cast_flat_fp32"
+ }
+]

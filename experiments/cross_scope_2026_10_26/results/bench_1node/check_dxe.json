@@ -1,0 +1,6 @@
+{
+ "full_vocab_ag_pl0": {
+  "status": "ValueError: RunNeuronCCImpl: error condition error != 0: <class 'subprocess.CalledProcessError'>: Command '' died with <Signals.SIGHUP: 1>.",
+  "ok": false
+ }
+}

@@ -1,0 +1,57 @@
+{
+ "fsdp_ag_layout": {
+  "random": {
+   "best_sim": 1488793.5963678292,
+   "code": "def evolved_fsdp_ag_layout(shards, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\n    \"\"\"leading-dimension gathers with the native all-gather lowering (pin_layout=False), column shards transposed around it\"\"\"\n    outs = []\n    for s in shards:\n        if s.shape[0] == 2048:\n            outs.append(xm.all_gather(s.transpose(0, 1).contiguous(), dim=0, pin_layout=False).transpose(0, 1))\n        else:\n            outs.append(xm.all_gather(s, dim=0, pin_layout=False))\n    return outs",
+   "evals": 400,
+   "structure": {
+    "colls": {
+     "all_gather": 2
+    },
+    "loops": 1
+   }
+  },
+  "ga": {
+   "best_sim": 1488793.5963678292,
+   "code": "def evolved_fsdp_ag_layout(shards, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\n    \"\"\"leading-dimension gathers with the native all-gather lowering (pin_layout=False), column shards transposed around it\"\"\"\n    outs = []\n    for s in shards:\n        if s.shape[0] == 2048:\n            outs.append(xm.all_gather(s.transpose(0, 1).contiguous(), dim=0, pin_layout=False).transpose(0, 1))\n        else:\n            outs.append(xm.all_gather(s, dim=0, pin_layout=False))\n    return outs",
+   "evals": 400,
+   "structure": {
+    "colls": {
+     "all_gather": 2
+    },
+    "loops": 1
+   }
+  },
+  "beam": {
+   "best_sim": 1488793.5963678292,
+   "code": "def evolved_fsdp_ag_layout(shards, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\n    \"\"\"leading-dimension gathers with the native all-gather lowering (pin_layout=False), column shards transposed around it\"\"\"\n    outs = []\n    for s in shards:\n        if s.shape[0] == 2048:\n            outs.append(xm.all_gather(s.transpose(0, 1).contiguous(), dim=0, pin_layout=False).transpose(0, 1))\n        else:\n            outs.append(xm.all_gather(s, dim=0, pin_layout=False))\n    return outs",
+   "evals": 20,
+   "structure": {
+    "colls": {
+     "all_gather": 2
+    },
+    "loops": 1
+   }
+  },
+  "rules": {
+   "best_sim": 1488793.5963678292,
+   "code": "def evolved_fsdp_ag_layout(shards, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\n    \"\"\"leading-dimension gathers with the native all-gather lowering (pin_layout=False), column shards transposed around it\"\"\"\n    outs = []\n    for s in shards:\n        if s.shape[0] == 2048:\n            outs.append(xm.all_gather(s.transpose(0, 1).contiguous(), dim=0, pin_layout=False).transpose(0, 1))\n        else:\n            outs.append(xm.all_gather(s, dim=0, pin_layout=False))\n    return outs",
+   "passes": [],
+   "evals": 41,
+   "structure": {
+    "colls": {
+     "all_gather": 2
+    },
+    "loops": 1
+   }
+  },
+  "start_sim": 1488793.5963678292,
+  "start_structure": {
+   "colls": {
+    "all_gather": 2
+   },
+   "loops": 1
+  },
+  "secs": 43.8
+ }
+}

@@ -1,0 +1,26 @@
+{
+ "hier_ag": {
+  "max_abs_diff": 0.0621337890625,
+  "ref_scale": 0.033203125,
+  "ok": false,
+  "status": "ok"
+ },
+ "ar_masked": {
+  "max_abs_diff": 0.0621337890625,
+  "ref_scale": 0.033203125,
+  "ok": false,
+  "status": "ok"
+ },
+ "chunked_ag_4": {
+  "max_abs_diff": 0.0621337890625,
+  "ref_scale": 0.033203125,
+  "ok": false,
+  "status": "ok"
+ },
+ "paper": {
+  "max_abs_diff": 0.0621337890625,
+  "ref_scale": 0.033203125,
+  "ok": false,
+  "status": "ok"
+ }
+}

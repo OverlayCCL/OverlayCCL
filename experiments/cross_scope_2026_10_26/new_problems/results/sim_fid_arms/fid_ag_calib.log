@@ -1,0 +1,6 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+fsdp_ag_layout             ag_pinned                train sim_us=None name '_ag' is not defined
+fsdp_ag_layout             ag_native                train sim_us=None name '_ag' is not defined
+fsdp_ag_layout             ag_dim0_t                train sim_us=None name '_ag' is not defined
+fsdp_ag_layout             ag_dim0_t_native         train sim_us=None name '_ag' is not defined
+fsdp_ag_layout             loop_1                   train sim_us=26240.6 

@@ -1,0 +1,523 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of 48 heterogeneous 2-D gradients (flat concat pathology instance)
+======================================================================
+  per_tensor_ar: 574070.8 us, 48 local ops, 0 ag, 48 ar, 0 cp
+  flat_cat_ar: 577203.3 us, 147 local ops, 0 ag, 1 ar, 0 cp
+  bucketed_ar: 577203.3 us, 162 local ops, 0 ag, 6 ar, 0 cp
+  bucketed_ar_4: 577203.3 us, 180 local ops, 0 ag, 12 ar, 0 cp
+  bucketed_ar_16: 577203.3 us, 153 local ops, 0 ag, 3 ar, 0 cp
+
+  Best baseline: baseline:per_tensor_ar (574070.8 us)
+
+======================================================================
+[Phase 3 / Strategy-Enumerate] DP gradient all-reduce of 48 heterogeneous 2-D gradients (flat concat pathology instance) [NO-SIM ABLATION]
+======================================================================
+  K=5 strategies, R=2 refinement rounds per top-2 (budget ~10 LLM calls)
+  Enumerated 5 strategies:
+    1. Single flat all-reduce: Concatenate all 48 gradients into one flat buffer and perform a single all_reduc...
+    2. Fixed in-order buckets (k=6-8): Partition 48 tensors into 6-8 fixed-size buckets of consecutive gradients, flatt...
+    3. Reduce-scatter then all-gather decomposition: Flatten all gradients, partition the flat buffer into world_size chunks by eleme...
+    4. Per-tensor pipelined all-reduce stream: Issue all 48 all_reduce calls sequentially without intermediate synchronization,...
+    5. Hierarchical two-level bucketing: First bucket the 48 tensors into coarse groups (e.g., 4 groups of 12), then with...
+  Strategy 1 (Single flat all-reduce): sim=577203.3 us
+  Strategy 2 (Fixed in-order buckets (k=6-8)): sim=577203.3 us
+  Strategy 3 (Reduce-scatter then all-gather decomposition): sim=577256.8 us
+  Strategy 4 (Per-tensor pipelined all-reduce stream): sim=574070.8 us
+  Strategy 5 (Hierarchical two-level bucketing): sim=577203.3 us
+
+  [NO-SIM ITERATIVE] Refining all 5 correct candidates (sim_us not shown to LLM in refinement)
+[AR48] 1107.7 us
+[AR48] 539.0 us
+[AR48] 824.1 us
+[AR48] 427.0 us
+[AR48] 276.2 us
+[AR48] 267.1 us
+[AR48] 268.3 us
+[AR48] 355.4 us
+[AR48] 213.3 us
+[AR48] 203.9 us
+[AR48] 223.0 us
+[AR48] 153.8 us
+[AR48] 154.0 us
+[AR48] 143.5 us
+[AR48] 143.1 us
+[AR48] 136.5 us
+[AR48] 136.5 us
+[AR48] 126.0 us
+[AR48] 131.8 us
+[AR48] 159.2 us
+[AR48] 109.3 us
+[AR48] 107.3 us
+[AR48] 106.3 us
+[AR48] 106.8 us
+[AR48] 106.7 us
+[AR48] 149.1 us
+[AR48] 107.4 us
+[AR48] 171.9 us
+[AR48] 119.4 us
+[AR48] 95.4 us
+[AR48] 96.8 us
+[AR48] 98.4 us
+[AR48] 96.5 us
+[AR48] 97.1 us
+[AR48] 117.6 us
+[AR48] 93.2 us
+[AR48] 250.3 us
+    top 1 round 1: SIMPLER (collective Δ=0)
+[AR48] 776.5 us | coll=1 local=~50
+[AR48] 472.6 us | coll=1 local=~50
+[AR48] 390.8 us | coll=1 local=~50
+[AR48] 394.8 us | coll=1 local=~50
+[AR48] 392.1 us | coll=1 local=~50
+[AR48] 385.7 us | coll=1 local=~50
+[AR48] 538.2 us | coll=1 local=~50
+[AR48] 507.6 us | coll=1 local=~50
+[AR48] 365.7 us | coll=1 local=~50
+[AR48] 590.5 us | coll=1 local=~50
+[AR48] 332.7 us | coll=1 local=~50
+[AR48] 207.3 us | coll=1 local=~50
+[AR48] 171.9 us | coll=1 local=~50
+[AR48] 171.8 us | coll=1 local=~50
+[AR48] 159.8 us | coll=1 local=~50
+[AR48] 160.3 us | coll=1 local=~50
+[AR48] 152.2 us | coll=1 local=~50
+[AR48] 144.7 us | coll=1 local=~50
+[AR48] 139.5 us | coll=1 local=~50
+[AR48] 173.0 us | coll=1 local=~50
+[AR48] 119.6 us | coll=1 local=~50
+[AR48] 119.5 us | coll=1 local=~50
+[AR48] 120.7 us | coll=1 local=~50
+[AR48] 118.3 us | coll=1 local=~50
+[AR48] 119.7 us | coll=1 local=~50
+[AR48] 118.4 us | coll=1 local=~50
+[AR48] 117.3 us | coll=1 local=~50
+[AR48] 119.4 us | coll=1 local=~50
+[AR48] 131.5 us | coll=1 local=~50
+[AR48] 111.0 us | coll=1 local=~50
+[AR48] 123.9 us | coll=1 local=~50
+[AR48] 108.2 us | coll=1 local=~50
+[AR48] 108.5 us | coll=1 local=~50
+[AR48] 109.0 us | coll=1 local=~50
+[AR48] 128.7 us | coll=1 local=~50
+[AR48] 103.7 us | coll=1 local=~50
+[AR48] 225.8 us | coll=1 local=~50
+[Profile] pack=0.30ms, AR=0.19ms, unpack=0.30ms, total=0.80ms
+[Profile] pack=0.18ms, AR=0.17ms, unpack=0.22ms, total=0.57ms
+[Profile] pack=0.16ms, AR=0.21ms, unpack=0.25ms, total=0.62ms
+[Profile] pack=0.16ms, AR=0.19ms, unpack=0.21ms, total=0.56ms
+[Profile] pack=0.16ms, AR=0.22ms, unpack=0.23ms, total=0.61ms
+[Profile] pack=0.16ms, AR=0.11ms, unpack=0.20ms, total=0.46ms
+[Profile] pack=0.15ms, AR=0.09ms, unpack=0.20ms, total=0.43ms
+[Profile] pack=0.15ms, AR=0.09ms, unpack=0.20ms, total=0.44ms
+[Profile] pack=0.16ms, AR=0.12ms, unpack=0.20ms, total=0.48ms
+[Profile] pack=0.15ms, AR=0.10ms, unpack=0.20ms, total=0.45ms
+[Profile] pack=0.16ms, AR=0.10ms, unpack=0.21ms, total=0.47ms
+[Profile] pack=0.15ms, AR=0.09ms, unpack=0.20ms, total=0.44ms
+[Profile] pack=0.15ms, AR=0.11ms, unpack=0.21ms, total=0.48ms
+[Profile] pack=0.15ms, AR=0.09ms, unpack=0.20ms, total=0.44ms
+[Profile] pack=0.14ms, AR=0.10ms, unpack=0.20ms, total=0.44ms
+[Profile] pack=0.15ms, AR=0.08ms, unpack=0.20ms, total=0.43ms
+[Profile] pack=0.15ms, AR=0.11ms, unpack=0.20ms, total=0.47ms
+[Profile] pack=0.15ms, AR=0.12ms, unpack=0.20ms, total=0.47ms
+[Profile] pack=0.14ms, AR=0.10ms, unpack=0.20ms, total=0.43ms
+[Profile] pack=0.15ms, AR=0.10ms, unpack=0.20ms, total=0.45ms
+[Profile] pack=0.21ms, AR=0.29ms, unpack=0.22ms, total=0.73ms
+[Profile] pack=0.17ms, AR=0.18ms, unpack=0.21ms, total=0.56ms
+[Profile] pack=0.16ms, AR=0.17ms, unpack=0.20ms, total=0.53ms
+[Profile] pack=0.16ms, AR=0.16ms, unpack=0.20ms, total=0.52ms
+[Profile] pack=0.16ms, AR=0.14ms, unpack=0.19ms, total=0.48ms
+[Profile] pack=0.13ms, AR=0.05ms, unpack=0.17ms, total=0.35ms
+[Profile] pack=0.13ms, AR=0.05ms, unpack=0.17ms, total=0.34ms
+[Profile] pack=0.13ms, AR=0.04ms, unpack=0.17ms, total=0.34ms
+[Profile] pack=0.13ms, AR=0.04ms, unpack=0.17ms, total=0.34ms
+[Profile] pack=0.13ms, AR=0.04ms, unpack=0.17ms, total=0.34ms
+[Profile] pack=0.13ms, AR=0.04ms, unpack=0.17ms, total=0.34ms
+[Profile] pack=0.13ms, AR=0.04ms, unpack=0.17ms, total=0.34ms
+[Profile] pack=0.14ms, AR=0.02ms, unpack=0.17ms, total=0.32ms
+[Profile] pack=0.13ms, AR=0.02ms, unpack=0.17ms, total=0.32ms
+[Profile] pack=0.12ms, AR=0.02ms, unpack=0.16ms, total=0.31ms
+[Profile] pack=0.13ms, AR=0.02ms, unpack=0.16ms, total=0.31ms
+[Profile] pack=0.10ms, AR=0.03ms, unpack=0.12ms, total=0.25ms
+[Profile] pack=0.10ms, AR=0.17ms, unpack=0.12ms, total=0.38ms
+[Profile] pack=0.09ms, AR=0.10ms, unpack=0.11ms, total=0.31ms
+[Profile] pack=0.09ms, AR=0.10ms, unpack=0.11ms, total=0.31ms
+[Profile] pack=0.09ms, AR=0.10ms, unpack=0.11ms, total=0.31ms
+[Profile] pack=0.09ms, AR=0.10ms, unpack=0.11ms, total=0.30ms
+[Profile] pack=0.09ms, AR=0.09ms, unpack=0.11ms, total=0.30ms
+[Profile] pack=0.09ms, AR=0.10ms, unpack=0.11ms, total=0.30ms
+[Profile] pack=0.08ms, AR=0.09ms, unpack=0.10ms, total=0.28ms
+[Profile] pack=0.08ms, AR=0.03ms, unpack=0.10ms, total=0.22ms
+[Profile] pack=0.08ms, AR=0.03ms, unpack=0.10ms, total=0.22ms
+[Profile] pack=0.08ms, AR=0.03ms, unpack=0.10ms, total=0.22ms
+[Profile] pack=0.08ms, AR=0.03ms, unpack=0.10ms, total=0.22ms
+[Profile] pack=0.08ms, AR=0.04ms, unpack=0.10ms, total=0.22ms
+[Profile] pack=0.08ms, AR=0.04ms, unpack=0.10ms, total=0.22ms
+[Profile] pack=0.08ms, AR=0.03ms, unpack=0.10ms, total=0.22ms
+[Profile] pack=0.07ms, AR=0.02ms, unpack=0.10ms, total=0.19ms
+[Profile] pack=0.07ms, AR=0.02ms, unpack=0.09ms, total=0.19ms
+[Profile] pack=0.07ms, AR=0.02ms, unpack=0.10ms, total=0.19ms
+[Profile] pack=0.07ms, AR=0.03ms, unpack=0.09ms, total=0.19ms
+[Profile] pack=0.08ms, AR=0.03ms, unpack=0.10ms, total=0.20ms
+[Profile] pack=0.07ms, AR=0.03ms, unpack=0.09ms, total=0.20ms
+[Profile] pack=0.08ms, AR=0.03ms, unpack=0.09ms, total=0.20ms
+[Profile] pack=0.08ms, AR=0.03ms, unpack=0.09ms, total=0.20ms
+[Profile] pack=0.07ms, AR=0.03ms, unpack=0.10ms, total=0.20ms
+[Profile] pack=0.08ms, AR=0.03ms, unpack=0.10ms, total=0.20ms
+[Profile] pack=0.07ms, AR=0.03ms, unpack=0.10ms, total=0.20ms
+[Profile] pack=0.07ms, AR=0.03ms, unpack=0.09ms, total=0.19ms
+[Profile] pack=0.07ms, AR=0.02ms, unpack=0.09ms, total=0.18ms
+[Profile] pack=0.07ms, AR=0.02ms, unpack=0.09ms, total=0.18ms
+[Profile] pack=0.07ms, AR=0.02ms, unpack=0.09ms, total=0.18ms
+[Profile] pack=0.07ms, AR=0.02ms, unpack=0.09ms, total=0.18ms
+[Profile] pack=0.07ms, AR=0.02ms, unpack=0.09ms, total=0.18ms
+[Profile] pack=0.07ms, AR=0.02ms, unpack=0.09ms, total=0.18ms
+[Profile] pack=0.07ms, AR=0.02ms, unpack=0.09ms, total=0.18ms
+[Profile] pack=0.07ms, AR=0.02ms, unpack=0.09ms, total=0.18ms
+[Profile] pack=0.07ms, AR=0.02ms, unpack=0.09ms, total=0.18ms
+[Profile] pack=0.07ms, AR=0.02ms, unpack=0.09ms, total=0.18ms
+[Profile] pack=0.07ms, AR=0.02ms, unpack=0.09ms, total=0.18ms
+[Profile] pack=0.07ms, AR=0.02ms, unpack=0.09ms, total=0.18ms
+[Profile] pack=0.07ms, AR=0.02ms, unpack=0.09ms, total=0.18ms
+[Profile] pack=0.07ms, AR=0.02ms, unpack=0.08ms, total=0.17ms
+[Profile] pack=0.07ms, AR=0.02ms, unpack=0.09ms, total=0.17ms
+[Profile] pack=0.07ms, AR=0.02ms, unpack=0.08ms, total=0.17ms
+[Profile] pack=0.07ms, AR=0.02ms, unpack=0.08ms, total=0.17ms
+[Profile] pack=0.06ms, AR=0.02ms, unpack=0.08ms, total=0.17ms
+[Profile] pack=0.07ms, AR=0.02ms, unpack=0.08ms, total=0.17ms
+[Profile] pack=0.07ms, AR=0.02ms, unpack=0.08ms, total=0.17ms
+[Profile] pack=0.07ms, AR=0.02ms, unpack=0.09ms, total=0.17ms
+[Profile] pack=0.07ms, AR=0.02ms, unpack=0.08ms, total=0.17ms
+[Profile] pack=0.07ms, AR=0.09ms, unpack=0.09ms, total=0.24ms
+[Profile] pack=0.06ms, AR=0.02ms, unpack=0.09ms, total=0.17ms
+[Profile] pack=0.07ms, AR=0.02ms, unpack=0.09ms, total=0.17ms
+[Profile] pack=0.07ms, AR=0.02ms, unpack=0.08ms, total=0.17ms
+[Profile] pack=0.07ms, AR=0.02ms, unpack=0.09ms, total=0.17ms
+[Profile] pack=0.07ms, AR=0.02ms, unpack=0.08ms, total=0.17ms
+[Profile] pack=0.06ms, AR=0.02ms, unpack=0.08ms, total=0.16ms
+[Profile] pack=0.06ms, AR=0.02ms, unpack=0.08ms, total=0.16ms
+[Profile] pack=0.06ms, AR=0.02ms, unpack=0.08ms, total=0.16ms
+[Profile] pack=0.06ms, AR=0.05ms, unpack=0.08ms, total=0.20ms
+[Profile] pack=0.06ms, AR=0.06ms, unpack=0.08ms, total=0.21ms
+[Profile] pack=0.06ms, AR=0.02ms, unpack=0.08ms, total=0.16ms
+[Profile] pack=0.06ms, AR=0.02ms, unpack=0.08ms, total=0.16ms
+[Profile] pack=0.06ms, AR=0.02ms, unpack=0.08ms, total=0.16ms
+[Profile] pack=0.07ms, AR=0.01ms, unpack=0.08ms, total=0.16ms
+[Profile] pack=0.07ms, AR=0.01ms, unpack=0.08ms, total=0.16ms
+[Profile] pack=0.06ms, AR=0.01ms, unpack=0.08ms, total=0.15ms
+[Profile] pack=0.06ms, AR=0.04ms, unpack=0.08ms, total=0.18ms
+[Profile] pack=0.06ms, AR=0.01ms, unpack=0.08ms, total=0.15ms
+[Profile] pack=0.06ms, AR=0.05ms, unpack=0.08ms, total=0.20ms
+[Profile] pack=0.06ms, AR=0.09ms, unpack=0.08ms, total=0.24ms
+[Profile] pack=0.06ms, AR=0.07ms, unpack=0.08ms, total=0.21ms
+[Profile] pack=0.06ms, AR=0.06ms, unpack=0.08ms, total=0.20ms
+[Profile] pack=0.06ms, AR=0.10ms, unpack=0.07ms, total=0.23ms
+[Profile] pack=0.06ms, AR=0.06ms, unpack=0.07ms, total=0.19ms
+[Profile] pack=0.06ms, AR=0.06ms, unpack=0.07ms, total=0.18ms
+[Profile] pack=0.05ms, AR=0.05ms, unpack=0.07ms, total=0.17ms
+[Profile] pack=0.05ms, AR=0.06ms, unpack=0.07ms, total=0.18ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.13ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.13ms
+[Profile] pack=0.05ms, AR=0.05ms, unpack=0.07ms, total=0.17ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.14ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.14ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.14ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.14ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.14ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.14ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.14ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.14ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.13ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.14ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.14ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.08ms, total=0.15ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.14ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.14ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.14ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.13ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.14ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.13ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.13ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.13ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.13ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.14ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.14ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.13ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.13ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.13ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.13ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.13ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.13ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.13ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.13ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.13ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.13ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.13ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.13ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.13ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.13ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.13ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.13ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.13ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.13ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.13ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.13ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.13ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.13ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.13ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.13ms
+[Profile] pack=0.05ms, AR=0.05ms, unpack=0.07ms, total=0.17ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.13ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.13ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.13ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.13ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.13ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.13ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.13ms
+[Profile] pack=0.06ms, AR=0.01ms, unpack=0.07ms, total=0.13ms
+[Profile] pack=0.06ms, AR=0.01ms, unpack=0.07ms, total=0.13ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.13ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.13ms
+[Profile] pack=0.05ms, AR=0.04ms, unpack=0.07ms, total=0.15ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.13ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.13ms
+[Profile] pack=0.07ms, AR=0.05ms, unpack=0.07ms, total=0.19ms
+[Profile] pack=0.05ms, AR=0.03ms, unpack=0.07ms, total=0.14ms
+[Profile] pack=0.05ms, AR=0.03ms, unpack=0.07ms, total=0.14ms
+[Profile] pack=0.05ms, AR=0.03ms, unpack=0.07ms, total=0.14ms
+[Profile] pack=0.05ms, AR=0.03ms, unpack=0.07ms, total=0.14ms
+[Profile] pack=0.05ms, AR=0.03ms, unpack=0.07ms, total=0.14ms
+[Profile] pack=0.05ms, AR=0.03ms, unpack=0.07ms, total=0.14ms
+[Profile] pack=0.05ms, AR=0.03ms, unpack=0.07ms, total=0.14ms
+[Profile] pack=0.05ms, AR=0.03ms, unpack=0.07ms, total=0.14ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.08ms, total=0.14ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.03ms, unpack=0.07ms, total=0.14ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.01ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.00ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.14ms
+[Profile] pack=0.05ms, AR=0.00ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.00ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.00ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.00ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.00ms, unpack=0.07ms, total=0.12ms
+[Profile] pack=0.05ms, AR=0.02ms, unpack=0.07ms, total=0.14ms
+[Profile] pack=0.09ms, AR=0.05ms, unpack=0.12ms, total=0.27ms
+    top 2 round 1: SIMPLER (collective Δ=7)
+[evolved_hetero] concat-AR-split: 1154.8 us
+[evolved_hetero] concat-AR-split: 717.2 us
+[evolved_hetero] concat-AR-split: 584.3 us
+[evolved_hetero] concat-AR-split: 634.6 us
+[evolved_hetero] concat-AR-split: 518.8 us
+[evolved_hetero] concat-AR-split: 362.0 us
+[evolved_hetero] concat-AR-split: 360.7 us
+[evolved_hetero] concat-AR-split: 311.4 us
+[evolved_hetero] concat-AR-split: 294.1 us
+[evolved_hetero] concat-AR-split: 260.7 us
+[evolved_hetero] concat-AR-split: 247.9 us
+[evolved_hetero] concat-AR-split: 221.4 us
+[evolved_hetero] concat-AR-split: 206.8 us
+[evolved_hetero] concat-AR-split: 194.0 us
+[evolved_hetero] concat-AR-split: 192.9 us
+[evolved_hetero] concat-AR-split: 183.2 us
+[evolved_hetero] concat-AR-split: 184.0 us
+[evolved_hetero] concat-AR-split: 173.3 us
+[evolved_hetero] concat-AR-split: 155.5 us
+[evolved_hetero] concat-AR-split: 166.0 us
+[evolved_hetero] concat-AR-split: 145.3 us
+[evolved_hetero] concat-AR-split: 143.3 us
+[evolved_hetero] concat-AR-split: 144.1 us
+[evolved_hetero] concat-AR-split: 144.0 us
+[evolved_hetero] concat-AR-split: 143.9 us
+[evolved_hetero] concat-AR-split: 164.3 us
+[evolved_hetero] concat-AR-split: 143.9 us
+[evolved_hetero] concat-AR-split: 156.8 us
+[evolved_hetero] concat-AR-split: 143.3 us
+[evolved_hetero] concat-AR-split: 135.7 us
+[evolved_hetero] concat-AR-split: 133.5 us
+[evolved_hetero] concat-AR-split: 134.1 us
+[evolved_hetero] concat-AR-split: 132.3 us
+[evolved_hetero] concat-AR-split: 133.2 us
+[evolved_hetero] concat-AR-split: 141.7 us
+[evolved_hetero] concat-AR-split: 129.4 us
+[evolved_hetero] concat-AR-split: 255.0 us
+    top 4 round 1: SIMPLER (collective Δ=47)
+[evolved_hetero] concat-AR-split: 1244.1 us, buf_size=113664
+[evolved_hetero] concat-AR-split: 648.7 us, buf_size=113664
+[evolved_hetero] concat-AR-split: 555.7 us, buf_size=113664
+[evolved_hetero] concat-AR-split: 831.9 us, buf_size=113664
+[evolved_hetero] concat-AR-split: 524.7 us, buf_size=113664
+[evolved_hetero] concat-AR-split: 383.2 us, buf_size=113664
+[evolved_hetero] concat-AR-split: 380.4 us, buf_size=113664
+[evolved_hetero] concat-AR-split: 327.7 us, buf_size=113664
+[evolved_hetero] concat-AR-split: 436.6 us, buf_size=113664
+[evolved_hetero] concat-AR-split: 529.7 us, buf_size=113664
+[evolved_hetero] concat-AR-split: 292.0 us, buf_size=113664
+[evolved_hetero] concat-AR-split: 214.4 us, buf_size=113664
+[evolved_hetero] concat-AR-split: 200.6 us, buf_size=113664
+[evolved_hetero] concat-AR-split: 201.5 us, buf_size=113664
+[evolved_hetero] concat-AR-split: 190.1 us, buf_size=113664
+[evolved_hetero] concat-AR-split: 183.5 us, buf_size=113664
+[evolved_hetero] concat-AR-split: 182.8 us, buf_size=113664
+[evolved_hetero] concat-AR-split: 173.0 us, buf_size=113664
+[evolved_hetero] concat-AR-split: 162.8 us, buf_size=113664
+[evolved_hetero] concat-AR-split: 192.1 us, buf_size=113664
+[evolved_hetero] concat-AR-split: 150.0 us, buf_size=113664
+[evolved_hetero] concat-AR-split: 147.9 us, buf_size=113664
+[evolved_hetero] concat-AR-split: 147.7 us, buf_size=113664
+[evolved_hetero] concat-AR-split: 147.9 us, buf_size=113664
+[evolved_hetero] concat-AR-split: 148.5 us, buf_size=113664
+[evolved_hetero] concat-AR-split: 176.3 us, buf_size=113664
+[evolved_hetero] concat-AR-split: 148.5 us, buf_size=113664
+[evolved_hetero] concat-AR-split: 215.3 us, buf_size=113664
+[evolved_hetero] concat-AR-split: 157.8 us, buf_size=113664
+[evolved_hetero] concat-AR-split: 136.7 us, buf_size=113664
+[evolved_hetero] concat-AR-split: 137.0 us, buf_size=113664
+[evolved_hetero] concat-AR-split: 137.7 us, buf_size=113664
+[evolved_hetero] concat-AR-split: 137.2 us, buf_size=113664
+[evolved_hetero] concat-AR-split: 136.3 us, buf_size=113664
+[evolved_hetero] concat-AR-split: 158.7 us, buf_size=113664
+[evolved_hetero] concat-AR-split: 133.2 us, buf_size=113664
+[evolved_hetero] concat-AR-split: 292.3 us, buf_size=113664
+[AR48] cat=0.28ms ar=0.27ms unpack=0.35ms total=0.91ms
+[AR48] cat=0.16ms ar=0.22ms unpack=0.21ms total=0.58ms
+[AR48] cat=0.20ms ar=0.33ms unpack=0.22ms total=0.75ms
+[AR48] cat=0.14ms ar=0.15ms unpack=0.17ms total=0.45ms
+[AR48] cat=0.13ms ar=0.04ms unpack=0.17ms total=0.34ms
+[AR48] cat=0.13ms ar=0.04ms unpack=0.17ms total=0.34ms
+[AR48] cat=0.13ms ar=0.04ms unpack=0.17ms total=0.34ms
+[AR48] cat=0.11ms ar=0.14ms unpack=0.14ms total=0.40ms
+[AR48] cat=0.10ms ar=0.01ms unpack=0.13ms total=0.24ms
+[AR48] cat=0.09ms ar=0.03ms unpack=0.11ms total=0.22ms
+[AR48] cat=0.07ms ar=0.07ms unpack=0.10ms total=0.24ms
+[AR48] cat=0.07ms ar=0.02ms unpack=0.09ms total=0.18ms
+[AR48] cat=0.07ms ar=0.02ms unpack=0.09ms total=0.18ms
+[AR48] cat=0.07ms ar=0.02ms unpack=0.09ms total=0.17ms
+[AR48] cat=0.07ms ar=0.02ms unpack=0.09ms total=0.17ms
+[AR48] cat=0.06ms ar=0.02ms unpack=0.08ms total=0.16ms
+[AR48] cat=0.06ms ar=0.02ms unpack=0.08ms total=0.16ms
+[AR48] cat=0.07ms ar=0.01ms unpack=0.08ms total=0.15ms
+[AR48] cat=0.06ms ar=0.02ms unpack=0.07ms total=0.15ms
+[AR48] cat=0.05ms ar=0.06ms unpack=0.07ms total=0.18ms
+[AR48] cat=0.05ms ar=0.02ms unpack=0.07ms total=0.14ms
+[AR48] cat=0.05ms ar=0.02ms unpack=0.07ms total=0.13ms
+[AR48] cat=0.05ms ar=0.02ms unpack=0.07ms total=0.13ms
+[AR48] cat=0.05ms ar=0.02ms unpack=0.07ms total=0.13ms
+[AR48] cat=0.05ms ar=0.02ms unpack=0.07ms total=0.13ms
+[AR48] cat=0.05ms ar=0.06ms unpack=0.07ms total=0.18ms
+[AR48] cat=0.06ms ar=0.01ms unpack=0.07ms total=0.13ms
+[AR48] cat=0.05ms ar=0.04ms unpack=0.07ms total=0.16ms
+[AR48] cat=0.05ms ar=0.03ms unpack=0.07ms total=0.15ms
+[AR48] cat=0.05ms ar=0.01ms unpack=0.07ms total=0.12ms
+[AR48] cat=0.05ms ar=0.01ms unpack=0.07ms total=0.12ms
+[AR48] cat=0.05ms ar=0.01ms unpack=0.07ms total=0.12ms
+[AR48] cat=0.05ms ar=0.01ms unpack=0.07ms total=0.12ms
+[AR48] cat=0.05ms ar=0.01ms unpack=0.07ms total=0.12ms
+[AR48] cat=0.05ms ar=0.03ms unpack=0.07ms total=0.15ms
+[AR48] cat=0.05ms ar=0.00ms unpack=0.07ms total=0.12ms
+[AR48] cat=0.09ms ar=0.01ms unpack=0.13ms total=0.23ms
+    top 5 round 1: SIMPLER (collective Δ=11)
+[AR48] cat=0.26ms ar=0.25ms unpack=0.34ms total=0.85ms
+[AR48] cat=0.16ms ar=0.24ms unpack=0.20ms total=0.60ms
+[AR48] cat=0.13ms ar=0.11ms unpack=0.16ms total=0.39ms
+[AR48] cat=0.14ms ar=0.12ms unpack=0.16ms total=0.41ms
+[AR48] cat=0.12ms ar=0.27ms unpack=0.15ms total=0.55ms
+[AR48] cat=0.10ms ar=0.04ms unpack=0.13ms total=0.27ms
+[AR48] cat=0.10ms ar=0.04ms unpack=0.13ms total=0.27ms
+[AR48] cat=0.10ms ar=0.04ms unpack=0.12ms total=0.26ms
+[AR48] cat=0.10ms ar=0.02ms unpack=0.12ms total=0.24ms
+[AR48] cat=0.07ms ar=0.03ms unpack=0.08ms total=0.19ms
+[AR48] cat=0.06ms ar=0.10ms unpack=0.08ms total=0.24ms
+[AR48] cat=0.06ms ar=0.03ms unpack=0.07ms total=0.16ms
+[AR48] cat=0.05ms ar=0.02ms unpack=0.07ms total=0.14ms
+[AR48] cat=0.05ms ar=0.02ms unpack=0.07ms total=0.14ms
+[AR48] cat=0.05ms ar=0.02ms unpack=0.06ms total=0.13ms
+[AR48] cat=0.05ms ar=0.02ms unpack=0.06ms total=0.13ms
+[AR48] cat=0.05ms ar=0.02ms unpack=0.06ms total=0.13ms
+[AR48] cat=0.05ms ar=0.01ms unpack=0.06ms total=0.12ms
+[AR48] cat=0.05ms ar=0.02ms unpack=0.06ms total=0.12ms
+[AR48] cat=0.04ms ar=0.06ms unpack=0.05ms total=0.15ms
+[AR48] cat=0.04ms ar=0.02ms unpack=0.05ms total=0.11ms
+[AR48] cat=0.04ms ar=0.02ms unpack=0.05ms total=0.10ms
+[AR48] cat=0.04ms ar=0.02ms unpack=0.05ms total=0.10ms
+[AR48] cat=0.04ms ar=0.02ms unpack=0.05ms total=0.10ms
+[AR48] cat=0.04ms ar=0.02ms unpack=0.05ms total=0.10ms
+[AR48] cat=0.04ms ar=0.06ms unpack=0.05ms total=0.14ms
+[AR48] cat=0.05ms ar=0.01ms unpack=0.05ms total=0.10ms
+[AR48] cat=0.06ms ar=0.06ms unpack=0.05ms total=0.17ms
+[AR48] cat=0.04ms ar=0.03ms unpack=0.05ms total=0.12ms
+[AR48] cat=0.04ms ar=0.01ms unpack=0.05ms total=0.09ms
+[AR48] cat=0.04ms ar=0.01ms unpack=0.05ms total=0.09ms
+[AR48] cat=0.04ms ar=0.01ms unpack=0.05ms total=0.09ms
+[AR48] cat=0.04ms ar=0.01ms unpack=0.05ms total=0.09ms
+[AR48] cat=0.04ms ar=0.01ms unpack=0.05ms total=0.09ms
+[AR48] cat=0.04ms ar=0.03ms unpack=0.05ms total=0.12ms
+[AR48] cat=0.04ms ar=0.00ms unpack=0.05ms total=0.09ms
+[AR48] cat=0.08ms ar=0.03ms unpack=0.08ms total=0.19ms
+    top 5 round 2: SIMPLER (collective Δ=0)
+
+  [NO-SIM] Winner = Single flat all-reduce (first valid, sim_us NOT used)
+
+  Strategy-Enumerate complete. 10 total candidates.
+  Best: Single flat all-reduce (sim=577203.3 us)
+
+=== Phase 3 result for hetero_grad_ar_many (wall 149s): 6 candidates, sim ranking ===
+           1e+18  baseline:per_tensor_ar  code=no
+           1e+18  baseline:bucketed_ar  code=no
+           1e+18  baseline:bucketed_ar_4  code=no
+           1e+18  baseline:bucketed_ar_16  code=no
+           1e+18  baseline:flat_cat_ar  code=no
+           1e+18  strat:Single flat all-reduce  code=no

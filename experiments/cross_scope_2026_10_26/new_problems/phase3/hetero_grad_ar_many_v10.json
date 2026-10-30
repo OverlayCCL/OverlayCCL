@@ -1,0 +1,30 @@
+[
+ {
+  "raw": [
+   "strat:refined-from-Hierarchical two-",
+   "{'template': 'strategy_enumerate_final', 'cost_score': 118.99403502418768, 'sim_time_us': 11899.403502418769, 'local_ops': 170, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 12, '_params': {'evolved_code': 'def evolved_hetero_grad_ar_many(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"\\n    Optimized hierarchical bucketing using pre-concatenation and view slicing:\\n    - Pre-concatenate all 48 tensors once into a single flat buffer\\n    - Use slices/views to select sub-buckets for all_reduce (no copy)\\n    - Use slices/views to unpack results (no copy)\\n    - 12 all_reduce dispatches (4 coarse groups \u00d7 3 sub-buckets)\\n    \"\"\"\\n    # Pre-concatenate all gradients once\\n    all_flat = torch.cat([t.reshape(-1) for t in grads])\\n    \\n    # Compute offsets for each gradient in the flat buffer\\n    offsets = [0]\\n    for t in grads:\\n        offsets.append(offsets[-1] + t.numel())\\n    \\n    # Prepare output buffer (same size as input)\\n    out_flat = torch.zeros_like(all_flat)\\n    \\n    # Process in hierarchical buckets\\n    coarse_group_size = 12\\n    num_coarse_groups = 4\\n    sub_bucket_size = 4\\n    num_sub_buckets = 3\\n    \\n    for coarse_idx in range(num_coarse_groups):\\n        coarse_start_idx = coarse_idx * coarse_group_size\\n        \\n        for sub_idx in range(num_sub_buckets):\\n            # Calculate which tensors belong to this sub-bucket\\n            sub_start_idx = coarse_start_idx + sub_idx * sub_bucket_size\\n            sub_end_idx = sub_start_idx + sub_bucket_size\\n            \\n            # Get byte offsets for this sub-bucket\\n            byte_start = offsets[sub_start_idx]\\n            byte_end = offsets[sub_end_idx]\\n            \\n            # Extract slice view (no copy)\\n            bucket_slice = all_flat[byte_start:byte_end]\\n            \\n            # Perform all_reduce\\n            reduced = xm.all_reduce(xm.REDUCE_SUM, bucket_slice)\\n            \\n            # Write back to output buffer (slice assignment)\\n            out_flat[byte_start:byte_end] = reduced\\n    \\n    # Unpack output buffer into original shapes using views\\n    outs = []\\n    for i, t in enumerate(grads):\\n        start = offsets[i]\\n        end = offsets[i + 1]\\n        outs.append(out_flat[start:end].view(t.shape))\\n    \\n    return outs'}}"
+  ],
+  "name": "strat:refined-from-Hierarchical two-"
+ },
+ {
+  "raw": [
+   "baseline:bucketed_ar",
+   "{'template': 'bucketed_ar', 'cost_score': 5845.639419984084, 'sim_time_us': 584563.9419984084, 'local_ops': 162, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 6, '_params': {'builtin_code': '\\\\\\ndef evolved_hetero_grad_ar_many(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"in-order buckets of 8 tensors each (size-independent; a few dispatches, exact bytes)\"\"\"\\n    outs = []\\n    for b in range(0, len(grads), 8):\\n        chunk = grads[b:b + 8]; flat = torch.cat([t.reshape(-1) for t in chunk]); r = xm.all_reduce(xm.REDUCE_SUM, flat); off = 0\\n        for t in chunk: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:bucketed_ar"
+ },
+ {
+  "raw": [
+   "baseline:per_tensor_ar",
+   "{'template': 'per_tensor_ar', 'cost_score': 6825.241607979569, 'sim_time_us': 682524.160797957, 'local_ops': 48, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 48, '_params': {'builtin_code': 'def evolved_hetero_grad_ar_many(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"developer baseline: one all_reduce per gradient tensor (DDP hook per parameter)\"\"\"\\n    return [xm.all_reduce(xm.REDUCE_SUM, t) for t in grads]\\n'}}"
+  ],
+  "name": "baseline:per_tensor_ar"
+ },
+ {
+  "raw": [
+   "baseline:flat_cat_ar",
+   "{'template': 'flat_cat_ar', 'cost_score': 10427.710292000005, 'sim_time_us': 1042771.0292000006, 'local_ops': 147, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'builtin_code': 'def evolved_hetero_grad_ar_many(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    flat = torch.cat([t.reshape(-1) for t in grads]); r = xm.all_reduce(xm.REDUCE_SUM, flat)\\n    outs = []; off = 0\\n    for t in grads: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:flat_cat_ar"
+ }
+]

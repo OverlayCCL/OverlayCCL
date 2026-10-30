@@ -1,0 +1,41 @@
+{
+ "problem": "dp_grad_ar_buckets",
+ "ws": 32,
+ "results": {
+  "bucket_32mb": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 60.87028980255127,
+   "mean_ms": 62.8077507019043,
+   "status": "ok"
+  },
+  "per_tensor_ar": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 47.168850898742676,
+   "mean_ms": 64.26924864451091,
+   "status": "ok"
+  },
+  "flat_ar": {
+   "max_abs_diff": 0.0078125,
+   "ok": true,
+   "med_ms": 45.30143737792969,
+   "mean_ms": 109.994641939799,
+   "status": "ok"
+  },
+  "bucket_128mb": {
+   "max_abs_diff": 0.0078125,
+   "ok": true,
+   "med_ms": 46.96500301361084,
+   "mean_ms": 76.1285384496053,
+   "status": "ok"
+  },
+  "rs_ag_flat": {
+   "max_abs_diff": 0.009765625,
+   "ok": true,
+   "med_ms": 53.68828773498535,
+   "mean_ms": 89.59963321685791,
+   "status": "ok"
+  }
+ }
+}

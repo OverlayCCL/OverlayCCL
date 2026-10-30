@@ -1,0 +1,20 @@
+{
+ "problem": "layer_grads_no_norm",
+ "ws": 32,
+ "results": {
+  "per_tensor_ar": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 9.487628936767578,
+   "mean_ms": 336.6321086883545,
+   "status": "ok"
+  },
+  "flat_cat_ar": {
+   "max_abs_diff": 0.0068359375,
+   "ok": true,
+   "med_ms": 18.91767978668213,
+   "mean_ms": 24.18358325958252,
+   "status": "ok"
+  }
+ }
+}

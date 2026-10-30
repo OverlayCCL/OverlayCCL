@@ -1,0 +1,41 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of 48 mixed-size 1-D tensors (small sizes)
+======================================================================
+  per_tensor_ar: 88278.3 us, 48 local ops, 0 ag, 48 ar, 0 cp
+  flat_cat_ar: 109583.4 us, 147 local ops, 0 ag, 1 ar, 0 cp
+  bucketed_ar: 109583.4 us, 147 local ops, 0 ag, 1 ar, 0 cp
+
+  Best baseline: baseline:per_tensor_ar (88278.3 us)
+
+======================================================================
+[Phase 3 / Strategy-Enumerate] DP gradient all-reduce of 48 mixed-size 1-D tensors (small sizes)
+======================================================================
+  K=5 strategies, R=2 refinement rounds per top-2 (budget ~10 LLM calls)
+  Enumerated 5 strategies:
+    1. Per-tensor all-reduce baseline: Issue one all_reduce call per gradient tensor (48 dispatches total). Maximizes d...
+    2. Single flat concatenation all-reduce: Concatenate all 48 tensors into one flat buffer, perform one all_reduce, then sl...
+    3. Fixed-count in-order bucketing: Partition the 48 tensors into K fixed buckets (e.g., 4, 6, or 8 buckets) by trav...
+    4. Size-threshold adaptive bucketing: Accumulate consecutive tensors until total element count reaches a fraction of t...
+    5. Interleaved reduce-scatter then all-gather: Decompose all-reduce into reduce-scatter (each rank gets 1/64th slice of summed ...
+  Strategy 1 (Per-tensor all-reduce baseline): sim=88278.3 us
+  Strategy 2 (Single flat concatenation all-reduce): sim=109583.4 us
+  Strategy 3 (Fixed-count in-order bucketing): sim=63143.5 us
+  Strategy 4 (Size-threshold adaptive bucketing): sim=63143.5 us
+  Strategy 5 (Interleaved reduce-scatter then all-gather): sim=63003.6 us
+
+  Top after enumeration:
+    Interleaved reduce-scatter then all-gather: 63003.6 us
+    Fixed-count in-order bucketing: 63143.5 us
+    top 1 round 1: NEW BEST 61219.6 us (2.8% improvement)
+    top 2 round 1: NEW BEST 60249.1 us (4.6% improvement)
+
+  Strategy-Enumerate complete. 7 total candidates.
+  Best: refined-from-Fixed-count in-order bucketing (sim=60249.1 us)
+
+=== Phase 3 result for probe_het_48_small (wall 87s): 4 candidates, sim ranking ===
+           1e+18  strat:refined-from-Fixed-count in-or  code=no
+           1e+18  baseline:per_tensor_ar  code=no
+           1e+18  baseline:flat_cat_ar  code=no
+           1e+18  baseline:bucketed_ar  code=no

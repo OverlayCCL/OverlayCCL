@@ -1,0 +1,98 @@
+--- [16:34:00] bench fsdp_ag_layout
+[bench2] fsdp_ag_layout ag_pinned: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 4.636049270629883, 'mean_ms': 169.30154959360758, 'status': 'ok'}
+[bench2] fsdp_ag_layout ag_native: {'status': "ValueError: RunNeuronCCImpl: error condition error != 0: <class 'subprocess.CalledProcessError'>: Command '' died with <Signals.SIGHUP: 1>.", 'med_ms': N
+[bench2] fsdp_ag_layout ag_dim0_t: {'status': "ValueError: RunNeuronCCImpl: error condition error != 0: Failed compilation with ['neuronx-cc', 'compile', '--framework=XLA', '/tmp/ubuntu/neuroncc_compi
+[bench2] fsdp_ag_layout ag_dim0_t_native: {'status': "ValueError: RunNeuronCCImpl: error condition error != 0: Failed compilation with ['neuronx-cc', 'compile', '--framework=XLA', '/tmp/ubuntu/neuronc
+--- [16:35:17] bench tp_ar_decomp
+[bench2] tp_ar_decomp ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 3.5310983657836914, 'mean_ms': 669.2302068074545, 'status': 'ok'}
+[bench2] tp_ar_decomp ar_native: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 3.331780433654785, 'mean_ms': 3.9869467417399087, 'status': 'ok'}
+[bench2] tp_ar_decomp rs_ag: {'max_abs_diff': 0.005859375, 'ok': True, 'med_ms': 3.8573741912841797, 'mean_ms': 4.384597142537435, 'status': 'ok'}
+[bench2] tp_ar_decomp rs_ag_native: {'max_abs_diff': 0.005859375, 'ok': True, 'med_ms': 3.2306909561157227, 'mean_ms': 4.4786373774210615, 'status': 'ok'}
+--- [16:37:03] train fsdp_ag_layout ag_pinned
+   median_ms 37.35 effective True
+--- [16:38:55] train fsdp_ag_layout ag_native
+   NO RESULT
+--- [16:39:57] train fsdp_ag_layout ag_dim0_t
+   median_ms 40.35 effective True
+--- [16:41:11] train fsdp_ag_layout ag_dim0_t_native
+   median_ms 24.84 effective True
+--- [16:42:37] train tp_ar_decomp ar
+   median_ms 66.01 effective True
+--- [16:49:36] train tp_ar_decomp ar_native
+   median_ms 65.77 effective True
+--- [16:51:21] train tp_ar_decomp rs_ag
+   NO RESULT
+--- [16:51:57] train tp_ar_decomp rs_ag_native
+   NO RESULT
+=== newprobs done 16:52:43 ===
+--- [16:53:26] bench tp_seq_parallel
+[bench2] tp_seq_parallel ar_norm: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 3.466963768005371, 'mean_ms': 169.82523600260416, 'status': 'ok'}
+[bench2] tp_seq_parallel rs_norm_ag: {'max_abs_diff': 0.109375, 'ok': False, 'med_ms': 3.7839412689208984, 'mean_ms': 4.928421974182129, 'status': 'ok'}
+[bench2] tp_seq_parallel rs_ag_norm: {'max_abs_diff': 0.109375, 'ok': False, 'med_ms': 3.911733627319336, 'mean_ms': 5.387997627258301, 'status': 'ok'}
+[bench2] tp_seq_parallel ar_chunk4_norm: {'max_abs_diff': 0.09375, 'ok': True, 'med_ms': 3.8149356842041016, 'mean_ms': 4.835859934488933, 'status': 'ok'}
+--- [16:54:50] bench hier_ar
+[bench2] hier_ar flat_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 5.214810371398926, 'mean_ms': 504.2607069015503, 'status': 'ok'}
+[bench2] hier_ar rs_ar_ag: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 5.110383033752441, 'mean_ms': 5.542397499084473, 'status': 'ok'}
+[bench2] hier_ar ar_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 5.025506019592285, 'mean_ms': 5.129504203796387, 'status': 'ok'}
+[bench2] hier_ar chunk2_ar: {'max_abs_diff': 0.005859375, 'ok': True, 'med_ms': 6.096482276916504, 'mean_ms': 6.4729054768880205, 'status': 'ok'}
+--- [16:56:15] bench pp_transfer_rs
+[bench2] pp_transfer_rs masked_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 0.596165657043457, 'mean_ms': 0.7130225499471029, 'status': 'ok'}
+[bench2] pp_transfer_rs rs: {'status': 'RuntimeError: Execute: error condition NRT_INVALID == rt_status: invalid execution input, such as incorrect number of inputs or invalid send/recv targets model_
+[bench2] pp_transfer_rs rs_native: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 4.753708839416504, 'mean_ms': 5.980221430460612, 'status': 'ok'}
+--- [16:57:37] bench fsdp_prefetch_order
+[bench2] fsdp_prefetch_order sequential: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 4.843235015869141, 'mean_ms': 670.8320458730062, 'status': 'ok'}
+[bench2] fsdp_prefetch_order prefetch_next: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 4.987239837646484, 'mean_ms': 5.351376533508301, 'status': 'ok'}
+[bench2] fsdp_prefetch_order all_first: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 5.005002021789551, 'mean_ms': 5.469743410746257, 'status': 'ok'}
+--- [16:58:36] bench dxe_ag_stats
+[bench2] dxe_ag_stats two_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 2.1380186080932617, 'mean_ms': 1001.6317367553711, 'status': 'ok'}
+[bench2] dxe_ag_stats one_ag: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 2.9622316360473633, 'mean_ms': 3.066380818684896, 'status': 'ok'}
+[bench2] dxe_ag_stats one_ag_native: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 2.1333694458007812, 'mean_ms': 2.389653523763021, 'status': 'ok'}
+--- [17:00:21] train tp_seq_parallel ar_norm
+   median_ms 56.34 effective True
+--- [17:06:03] train tp_seq_parallel rs_norm_ag
+   median_ms 57.5 effective True
+--- [17:07:12] train tp_seq_parallel rs_ag_norm
+   median_ms 58.4 effective True
+--- [17:08:33] train tp_seq_parallel ar_chunk4_norm
+   median_ms 57.2 effective True
+--- [17:10:16] train hier_ar flat_ar
+   NO RESULT
+--- [17:25:20] train hier_ar rs_ar_ag
+   NO RESULT
+--- [17:40:23] train hier_ar ar_ar
+   NO RESULT
+--- [17:55:26] train hier_ar chunk2_ar
+   NO RESULT
+--- [18:10:31] train pp_transfer_rs masked_ar
+   INVALID (collective init failure in node logs)
+--- [18:12:18] train pp_transfer_rs rs
+   median_ms 70.53 effective True
+--- [18:14:27] train pp_transfer_rs rs_native
+   median_ms 70.4 effective True
+--- [18:15:54] train fsdp_prefetch_order sequential
+   median_ms 58.02 effective True
+--- [18:22:44] train fsdp_prefetch_order prefetch_next
+   median_ms 57.28 effective True
+--- [18:24:18] train fsdp_prefetch_order all_first
+   median_ms 57.05 effective True
+--- [18:25:58] train dxe_ag_stats two_ar
+   median_ms 6.54 effective True
+--- [18:27:29] train dxe_ag_stats one_ag
+   median_ms 8.94 effective True
+--- [18:28:21] train dxe_ag_stats one_ag_native
+   median_ms 8.83 effective True
+=== newprobs done 18:29:45 ===
+--- [20:00:28] bench tp_ar_decomp
+[bench2] tp_ar_decomp ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 3.1812191009521484, 'mean_ms': 4.312872886657715, 'status': 'ok'}
+[bench2] tp_ar_decomp ar_native: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 3.0797719955444336, 'mean_ms': 4.440625508626302, 'status': 'ok'}
+[bench2] tp_ar_decomp rs_ag: {'max_abs_diff': 0.005859375, 'ok': True, 'med_ms': 3.5676956176757812, 'mean_ms': 4.480989774068196, 'status': 'ok'}
+[bench2] tp_ar_decomp rs_ag_native: {'max_abs_diff': 0.005859375, 'ok': True, 'med_ms': 3.0400753021240234, 'mean_ms': 3.919553756713867, 'status': 'ok'}
+--- [20:01:44] train tp_ar_decomp ar
+   median_ms 55.71 effective True
+--- [20:03:21] train tp_ar_decomp ar_native
+   median_ms 55.63 effective True
+--- [20:04:42] train tp_ar_decomp rs_ag
+   median_ms 58.05 effective True
+--- [20:05:46] train tp_ar_decomp rs_ag_native
+   median_ms 56.1 effective True
+=== newprobs done 20:07:21 ===

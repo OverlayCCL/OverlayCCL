@@ -1,0 +1,27 @@
+{
+ "problem": "path_many_clone",
+ "ws": 32,
+ "results": {
+  "per_tensor_ar": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 20.701885223388672,
+   "mean_ms": 173.73597621917725,
+   "status": "ok"
+  },
+  "flat_cat_ar": {
+   "max_abs_diff": 0.0068359375,
+   "ok": true,
+   "med_ms": 20.55644989013672,
+   "mean_ms": 38.18132082621256,
+   "status": "ok"
+  },
+  "flat_cat_clone": {
+   "max_abs_diff": 0.0068359375,
+   "ok": true,
+   "med_ms": 20.594000816345215,
+   "mean_ms": 34.113804499308266,
+   "status": "ok"
+  }
+ }
+}

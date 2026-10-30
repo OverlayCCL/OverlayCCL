@@ -1,0 +1,33 @@
+HloModule SyncTensorsGraph.47, entry_computation_layout={(f32[], bf16[49811456]{0})->(bf16[49811456]{0}, bf16[12582912]{0}, bf16[6144,2048]{1,0}, bf16[4194304]{0}, bf16[2048,2048]{1,0}, /*index=5*/bf16[22020096]{0}, bf16[10752,2048]{1,0}, bf16[11010048]{0}, bf16[2048,5376]{1,0}, bf16[2048]{0}, /*index=10*/bf16[2048]{0}, bf16[2048]{0}, bf16[2048]{0})}, allow_spmd_sharding_propagation_to_parameters={}, replica_count=32, frontend_attributes={DELETE_PERMUTE="",ENABLE_HLO_RANK_REWRITE="",NEURON_ALL_REDUCE_UPCASTER="",NEURON_ANALYZE_MODEL="",NEURON_COLLECTIVE_MATMUL="",NEURON_COLLECTIVE_MATMUL_NXD="",NEURON_COLLECTIVE_MATMUL_SB_TO_SB_THRESHOLD_IN_MB="",NEURON_COLLECTIVE_PERMUTE_AGGRESSIVE="",NEURON_DEVICE_INIT="",NEURON_DISABLE_BOUNDARY_MARKER="",NEURON_ENABLE_INT_MATMUL_DOWNCAST="",NEURON_FSDP="",NEURON_FSDP_CC_MULTISTREAM="",NEURON_FSDP_COALESCE_AGGRESSIVELY="",NEURON_FSDP_NUM_LAYER_COALESCE="",NEURON_FSDP_NUM_LAYER_EARLY_AG_SHIFT="",NEURON_FSDP_NUM_LAYER_LATE_RS_SHIFT="",NEURON_FSDP_REPEATED_CC_PIPELINING="",NEURON_HIERARCHICAL_INNER_SIZE="",NEURON_HLO_ANALYZER="",NEURON_HLO_COST_ANALYSIS_DIRECTORY_PATH="",NEURON_INTERNAL_ALL_GATHER_COMBINER_THRESHOLD_IN_BYTES="",NEURON_INTERNAL_CPU_NUM_THREADS="",NEURON_INTERNAL_PASSES="",NEURON_INTERNAL_REWRITE_COLLECTIVE_PERMUTE="",NEURON_LIVENESS_DEBUG="",NEURON_LOGICAL_NC_CONFIG="",NEURON_PJRT_ASYNC_RUNTIME="",NEURON_PJRT_ENTER_EXIT_VLOG_LEVEL="",NEURON_PJRT_EXEC_QUEUE_DEPTH="",NEURON_PJRT_EXPERIMENTAL_FREELIST_ALLOCATOR="",NEURON_PJRT_PINNED_HOST_HUGETLB="",NEURON_PJRT_PROCESSES_NUM_DEVICES="",NEURON_PJRT_WORLD_SIZE="32",NEURON_PROMOTE_TP_REDUCE="",NEURON_PT_MPMD_MODE="1",NEURON_REMAT_LARGE_ALLGATHER="",NEURON_REMAT_LARGE_BROADCAST_MIN_SIZE_IN_MB="",NEURON_REMAT_LARGE_TP_ALLGATHER_CP_LAYER="",NEURON_REPEATED_TRANSFORMER="",NEURON_RT_ASYNC_EXEC_MAX_INFLIGHT_REQUESTS="",NEURON_SKIP_PROMOTE_DP_REDUCE="",NEURON_USE_CONTROL_DEPENDENCIES="",NEURON_VERBOSE_MEMORY_USAGE="",NEURON_WHILE_LOOP_UNROLL="",UNSAFE_SCATTER_PASS=""}
+
+%AddComputation.20 (x.21: bf16[], y.22: bf16[]) -> bf16[] {
+  %x.21 = bf16[] parameter(0)
+  %y.22 = bf16[] parameter(1)
+  ROOT %add.23 = bf16[] add(%x.21, %y.22)
+}
+
+ENTRY %SyncTensorsGraph.47 (p0.1: f32[], p1.2: bf16[49811456]) -> (bf16[49811456], bf16[12582912], bf16[6144,2048], bf16[4194304], bf16[2048,2048], /*index=5*/bf16[22020096], bf16[10752,2048], bf16[11010048], bf16[2048,5376], bf16[2048], /*index=10*/bf16[2048], bf16[2048], bf16[2048]) {
+  %p1.2 = bf16[49811456]{0} parameter(1)
+  %p0.1 = f32[] parameter(0)
+  %convert.18 = bf16[] convert(%p0.1)
+  %all-reduce.26 = (bf16[49811456]{0}, bf16[]) all-reduce(%p1.2, %convert.18), replica_groups={}, constrain_layout=true, to_apply=%AddComputation.20
+  %get-tuple-element.27 = bf16[49811456]{0} get-tuple-element(%all-reduce.26), index=0
+  %slice.30 = bf16[12582912]{0} slice(%get-tuple-element.27), slice={[0:12582912]}
+  %slice.31 = bf16[12582912]{0} slice(%get-tuple-element.27), slice={[0:12582912]}
+  %reshape.32 = bf16[6144,2048]{1,0} reshape(%slice.31)
+  %slice.33 = bf16[4194304]{0} slice(%get-tuple-element.27), slice={[12582912:16777216]}
+  %slice.34 = bf16[4194304]{0} slice(%get-tuple-element.27), slice={[12582912:16777216]}
+  %reshape.35 = bf16[2048,2048]{1,0} reshape(%slice.34)
+  %slice.36 = bf16[22020096]{0} slice(%get-tuple-element.27), slice={[16777216:38797312]}
+  %slice.37 = bf16[22020096]{0} slice(%get-tuple-element.27), slice={[16777216:38797312]}
+  %reshape.38 = bf16[10752,2048]{1,0} reshape(%slice.37)
+  %slice.39 = bf16[11010048]{0} slice(%get-tuple-element.27), slice={[38797312:49807360]}
+  %slice.40 = bf16[11010048]{0} slice(%get-tuple-element.27), slice={[38797312:49807360]}
+  %reshape.41 = bf16[2048,5376]{1,0} reshape(%slice.40)
+  %slice.42 = bf16[2048]{0} slice(%get-tuple-element.27), slice={[49807360:49809408]}
+  %slice.43 = bf16[2048]{0} slice(%get-tuple-element.27), slice={[49807360:49809408]}
+  %slice.44 = bf16[2048]{0} slice(%get-tuple-element.27), slice={[49809408:49811456]}
+  %slice.45 = bf16[2048]{0} slice(%get-tuple-element.27), slice={[49809408:49811456]}
+  ROOT %tuple.46 = (bf16[49811456]{0}, bf16[12582912]{0}, bf16[6144,2048]{1,0}, bf16[4194304]{0}, bf16[2048,2048]{1,0}, /*index=5*/bf16[22020096]{0}, bf16[10752,2048]{1,0}, bf16[11010048]{0}, bf16[2048,5376]{1,0}, bf16[2048]{0}, /*index=10*/bf16[2048]{0}, bf16[2048]{0}, bf16[2048]{0}) tuple(%get-tuple-element.27, %slice.30, %reshape.32, %slice.33, %reshape.35, /*index=5*/%slice.36, %reshape.38, %slice.39, %reshape.41, %slice.42, /*index=10*/%slice.43, %slice.44, %slice.45)
+}
+

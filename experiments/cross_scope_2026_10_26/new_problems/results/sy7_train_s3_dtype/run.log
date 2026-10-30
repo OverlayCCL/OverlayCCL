@@ -1,0 +1,8 @@
+--- [08:44:27] bench layer_grads_mixed_dtype
+[bench2] layer_grads_mixed_dtype per_tensor_ar: {'max_abs_diff': 0.0, 'ok': True, 'med_ms': 8.290886878967285, 'mean_ms': 9.596490859985352, 'status': 'ok'}
+[bench2] layer_grads_mixed_dtype gate_1: {'max_abs_diff': 0.0078125, 'ok': True, 'med_ms': 10.13171672821045, 'mean_ms': 15.273642539978027, 'status': 'ok'}
+--- [08:45:11] train layer_grads_mixed_dtype per_tensor_ar
+   median_ms 58.81 effective True
+--- [08:46:41] train layer_grads_mixed_dtype gate_1
+   median_ms 37.78 effective True
+=== newprobs done 08:47:54 ===

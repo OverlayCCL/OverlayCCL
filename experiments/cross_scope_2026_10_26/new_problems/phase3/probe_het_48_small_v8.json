@@ -1,0 +1,30 @@
+[
+ {
+  "raw": [
+   "strat:refined-from-Recursive halving",
+   "{'template': 'strategy_enumerate_final', 'cost_score': 607.5160520000005, 'sim_time_us': 60751.60520000005, 'local_ops': 148, 'num_collective_permute': 0, 'num_all_gather': 1, 'num_all_reduce': 0, '_params': {'evolved_code': 'def evolved_probe_het_48_small(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"\\n    Optimized reduce-scatter + all-gather with minimal local ops\\n    Reduces local operations by avoiding unnecessary copies and concatenations\\n    \"\"\"\\n    if world_size == 1:\\n        return grads\\n    \\n    # Concatenate all gradients into a single flat buffer (unavoidable for collective)\\n    flat = torch.cat([t.flatten() for t in grads])\\n    total_size = flat.numel()\\n    \\n    # Pad to make size divisible by world_size for even chunking\\n    padded_size = ((total_size + world_size - 1) // world_size) * world_size\\n    if padded_size > total_size:\\n        # Pad in-place by resizing instead of creating new tensor\\n        pad_amount = padded_size - total_size\\n        flat = torch.nn.functional.pad(flat, (0, pad_amount))\\n    \\n    # Phase 1: Reduce-scatter using collective primitive\\n    # This reduces and scatters in one operation\\n    scatter_output = xm.reduce_scatter(\\n        xm.REDUCE_SUM,\\n        flat,\\n        scale=1.0,\\n        scatter_dim=0,\\n        shard_count=world_size,\\n        groups=None\\n    )\\n    \\n    # Phase 2: All-gather to collect all reduced chunks on all ranks\\n    gathered = xm.all_gather(scatter_output, dim=0)\\n    \\n    # Split back into original gradient shapes using views where possible\\n    outs = []\\n    offset = 0\\n    for t in grads:\\n        n = t.numel()\\n        # Use narrow (a view operation) instead of slicing when possible\\n        if offset + n <= total_size:\\n            chunk = gathered.narrow(0, offset, n).reshape(t.shape)\\n        else:\\n            # Only slice if we need to handle padding edge case\\n            chunk = gathered[offset:offset + n].reshape(t.shape)\\n        outs.append(chunk)\\n        offset += n\\n    \\n    return outs'}}"
+  ],
+  "name": "strat:refined-from-Recursive halving"
+ },
+ {
+  "raw": [
+   "baseline:per_tensor_ar",
+   "{'template': 'per_tensor_ar', 'cost_score': 882.7831340249566, 'sim_time_us': 88278.31340249565, 'local_ops': 48, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 48, '_params': {'builtin_code': 'def evolved_probe_het_48_small(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"developer baseline: one all_reduce per gradient tensor (DDP hook per parameter)\"\"\"\\n    return [xm.all_reduce(xm.REDUCE_SUM, t) for t in grads]\\n'}}"
+  ],
+  "name": "baseline:per_tensor_ar"
+ },
+ {
+  "raw": [
+   "baseline:flat_cat_ar",
+   "{'template': 'flat_cat_ar', 'cost_score': 1095.8344519999973, 'sim_time_us': 109583.44519999974, 'local_ops': 147, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'builtin_code': 'def evolved_probe_het_48_small(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    flat = torch.cat([t.reshape(-1) for t in grads]); r = xm.all_reduce(xm.REDUCE_SUM, flat)\\n    outs = []; off = 0\\n    for t in grads: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:flat_cat_ar"
+ },
+ {
+  "raw": [
+   "baseline:bucketed_ar",
+   "{'template': 'bucketed_ar', 'cost_score': 1095.8344519999973, 'sim_time_us': 109583.44519999974, 'local_ops': 147, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'builtin_code': 'def evolved_probe_het_48_small(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"fixed-size buckets in order (exact bytes, a few dispatches)\"\"\"\\n    outs = []; chunk = []; acc = 0; lim = 4 * 1024 * 1024\\n    def flush(chunk):\\n        flat = torch.cat([t.reshape(-1) for t in chunk]); r = xm.all_reduce(xm.REDUCE_SUM, flat); off = 0\\n        for t in chunk: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    for t in grads:\\n        chunk.append(t); acc += t.numel()\\n        if acc >= lim: flush(chunk); chunk = []; acc = 0\\n    if chunk: flush(chunk)\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:bucketed_ar"
+ }
+]

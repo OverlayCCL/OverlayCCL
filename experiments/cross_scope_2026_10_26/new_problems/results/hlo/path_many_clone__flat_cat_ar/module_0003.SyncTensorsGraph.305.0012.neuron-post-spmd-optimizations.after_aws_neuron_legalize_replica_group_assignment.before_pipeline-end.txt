@@ -1,0 +1,161 @@
+HloModule SyncTensorsGraph.305, entry_computation_layout={(f32[], bf16[116391936]{0})->(bf16[116391936]{0}, bf16[1048576]{0}, bf16[1024,1024]{1,0}, bf16[3145728]{0}, bf16[1024,3072]{1,0}, /*index=5*/bf16[1048576]{0}, bf16[1024,1024]{1,0}, bf16[5242880]{0}, bf16[1024,5120]{1,0}, bf16[1048576]{0}, /*index=10*/bf16[1024,1024]{1,0}, bf16[7340032]{0}, bf16[1024,7168]{1,0}, bf16[3145728]{0}, bf16[1024,3072]{1,0}, /*index=15*/bf16[1048576]{0}, bf16[1024,1024]{1,0}, bf16[1048576]{0}, bf16[1024,1024]{1,0}, bf16[2097152]{0}, /*index=20*/bf16[1024,2048]{1,0}, bf16[1048576]{0}, bf16[1024,1024]{1,0}, bf16[3145728]{0}, bf16[1024,3072]{1,0}, /*index=25*/bf16[1048576]{0}, bf16[1024,1024]{1,0}, bf16[1048576]{0}, bf16[1024,1024]{1,0}, bf16[5242880]{0}, /*index=30*/bf16[1024,5120]{1,0}, bf16[1048576]{0}, bf16[1024,1024]{1,0}, bf16[1048576]{0}, bf16[1024,1024]{1,0}, /*index=35*/bf16[3145728]{0}, bf16[1024,3072]{1,0}, bf16[1048576]{0}, bf16[1024,1024]{1,0}, bf16[5242880]{0}, /*index=40*/bf16[1024,5120]{1,0}, bf16[1048576]{0}, bf16[1024,1024]{1,0}, bf16[7340032]{0}, bf16[1024,7168]{1,0}, /*index=45*/bf16[3145728]{0}, bf16[1024,3072]{1,0}, bf16[1048576]{0}, bf16[1024,1024]{1,0}, bf16[1048576]{0}, /*index=50*/bf16[1024,1024]{1,0}, bf16[2097152]{0}, bf16[1024,2048]{1,0}, bf16[1048576]{0}, bf16[1024,1024]{1,0}, /*index=55*/bf16[3145728]{0}, bf16[1024,3072]{1,0}, bf16[1048576]{0}, bf16[1024,1024]{1,0}, bf16[1048576]{0}, /*index=60*/bf16[1024,1024]{1,0}, bf16[5242880]{0}, bf16[1024,5120]{1,0}, bf16[1048576]{0}, bf16[1024,1024]{1,0}, /*index=65*/bf16[1048576]{0}, bf16[1024,1024]{1,0}, bf16[3145728]{0}, bf16[1024,3072]{1,0}, bf16[1048576]{0}, /*index=70*/bf16[1024,1024]{1,0}, bf16[5242880]{0}, bf16[1024,5120]{1,0}, bf16[1048576]{0}, bf16[1024,1024]{1,0}, /*index=75*/bf16[7340032]{0}, bf16[1024,7168]{1,0}, bf16[3145728]{0}, bf16[1024,3072]{1,0}, bf16[1048576]{0}, /*index=80*/bf16[1024,1024]{1,0}, bf16[1048576]{0}, bf16[1024,1024]{1,0}, bf16[2097152]{0}, bf16[1024,2048]{1,0}, /*index=85*/bf16[1048576]{0}, bf16[1024,1024]{1,0}, bf16[3145728]{0}, bf16[1024,3072]{1,0}, bf16[1048576]{0}, /*index=90*/bf16[1024,1024]{1,0}, bf16[1048576]{0}, bf16[1024,1024]{1,0}, bf16[5242880]{0}, bf16[1024,5120]{1,0}, /*index=95*/bf16[1048576]{0}, bf16[1024,1024]{1,0})}, allow_spmd_sharding_propagation_to_parameters={}, replica_count=32, frontend_attributes={DELETE_PERMUTE="",ENABLE_HLO_RANK_REWRITE="",NEURON_ALL_REDUCE_UPCASTER="",NEURON_ANALYZE_MODEL="",NEURON_COLLECTIVE_MATMUL="",NEURON_COLLECTIVE_MATMUL_NXD="",NEURON_COLLECTIVE_MATMUL_SB_TO_SB_THRESHOLD_IN_MB="",NEURON_COLLECTIVE_PERMUTE_AGGRESSIVE="",NEURON_DEVICE_INIT="",NEURON_DISABLE_BOUNDARY_MARKER="",NEURON_ENABLE_INT_MATMUL_DOWNCAST="",NEURON_FSDP="",NEURON_FSDP_CC_MULTISTREAM="",NEURON_FSDP_COALESCE_AGGRESSIVELY="",NEURON_FSDP_NUM_LAYER_COALESCE="",NEURON_FSDP_NUM_LAYER_EARLY_AG_SHIFT="",NEURON_FSDP_NUM_LAYER_LATE_RS_SHIFT="",NEURON_FSDP_REPEATED_CC_PIPELINING="",NEURON_HIERARCHICAL_INNER_SIZE="",NEURON_HLO_ANALYZER="",NEURON_HLO_COST_ANALYSIS_DIRECTORY_PATH="",NEURON_INTERNAL_ALL_GATHER_COMBINER_THRESHOLD_IN_BYTES="",NEURON_INTERNAL_CPU_NUM_THREADS="",NEURON_INTERNAL_PASSES="",NEURON_INTERNAL_REWRITE_COLLECTIVE_PERMUTE="",NEURON_LIVENESS_DEBUG="",NEURON_LOGICAL_NC_CONFIG="",NEURON_PJRT_ASYNC_RUNTIME="",NEURON_PJRT_ENTER_EXIT_VLOG_LEVEL="",NEURON_PJRT_EXEC_QUEUE_DEPTH="",NEURON_PJRT_EXPERIMENTAL_FREELIST_ALLOCATOR="",NEURON_PJRT_PINNED_HOST_HUGETLB="",NEURON_PJRT_PROCESSES_NUM_DEVICES="",NEURON_PJRT_WORLD_SIZE="32",NEURON_PROMOTE_TP_REDUCE="",NEURON_PT_MPMD_MODE="1",NEURON_REMAT_LARGE_ALLGATHER="",NEURON_REMAT_LARGE_BROADCAST_MIN_SIZE_IN_MB="",NEURON_REMAT_LARGE_TP_ALLGATHER_CP_LAYER="",NEURON_REPEATED_TRANSFORMER="",NEURON_RT_ASYNC_EXEC_MAX_INFLIGHT_REQUESTS="",NEURON_SKIP_PROMOTE_DP_REDUCE="",NEURON_USE_CONTROL_DEPENDENCIES="",NEURON_VERBOSE_MEMORY_USAGE="",NEURON_WHILE_LOOP_UNROLL="",UNSAFE_SCATTER_PASS=""}
+
+%AddComputation.150 (x.151: bf16[], y.152: bf16[]) -> bf16[] {
+  %x.151 = bf16[] parameter(0)
+  %y.152 = bf16[] parameter(1)
+  ROOT %add.153 = bf16[] add(%x.151, %y.152)
+}
+
+ENTRY %SyncTensorsGraph.305 (p0.1: f32[], p1.2: bf16[116391936]) -> (bf16[116391936], bf16[1048576], bf16[1024,1024], bf16[3145728], bf16[1024,3072], /*index=5*/bf16[1048576], bf16[1024,1024], bf16[5242880], bf16[1024,5120], bf16[1048576], /*index=10*/bf16[1024,1024], bf16[7340032], bf16[1024,7168], bf16[3145728], bf16[1024,3072], /*index=15*/bf16[1048576], bf16[1024,1024], bf16[1048576], bf16[1024,1024], bf16[2097152], /*index=20*/bf16[1024,2048], bf16[1048576], bf16[1024,1024], bf16[3145728], bf16[1024,3072], /*index=25*/bf16[1048576], bf16[1024,1024], bf16[1048576], bf16[1024,1024], bf16[5242880], /*index=30*/bf16[1024,5120], bf16[1048576], bf16[1024,1024], bf16[1048576], bf16[1024,1024], /*index=35*/bf16[3145728], bf16[1024,3072], bf16[1048576], bf16[1024,1024], bf16[5242880], /*index=40*/bf16[1024,5120], bf16[1048576], bf16[1024,1024], bf16[7340032], bf16[1024,7168], /*index=45*/bf16[3145728], bf16[1024,3072], bf16[1048576], bf16[1024,1024], bf16[1048576], /*index=50*/bf16[1024,1024], bf16[2097152], bf16[1024,2048], bf16[1048576], bf16[1024,1024], /*index=55*/bf16[3145728], bf16[1024,3072], bf16[1048576], bf16[1024,1024], bf16[1048576], /*index=60*/bf16[1024,1024], bf16[5242880], bf16[1024,5120], bf16[1048576], bf16[1024,1024], /*index=65*/bf16[1048576], bf16[1024,1024], bf16[3145728], bf16[1024,3072], bf16[1048576], /*index=70*/bf16[1024,1024], bf16[5242880], bf16[1024,5120], bf16[1048576], bf16[1024,1024], /*index=75*/bf16[7340032], bf16[1024,7168], bf16[3145728], bf16[1024,3072], bf16[1048576], /*index=80*/bf16[1024,1024], bf16[1048576], bf16[1024,1024], bf16[2097152], bf16[1024,2048], /*index=85*/bf16[1048576], bf16[1024,1024], bf16[3145728], bf16[1024,3072], bf16[1048576], /*index=90*/bf16[1024,1024], bf16[1048576], bf16[1024,1024], bf16[5242880], bf16[1024,5120], /*index=95*/bf16[1048576], bf16[1024,1024]) {
+  %p1.2 = bf16[116391936]{0} parameter(1)
+  %p0.1 = f32[] parameter(0)
+  %convert.148 = bf16[] convert(%p0.1)
+  %all-reduce.156 = (bf16[116391936]{0}, bf16[]) all-reduce(%p1.2, %convert.148), replica_groups={}, to_apply=%AddComputation.150, frontend_attributes={has_token="1"}
+  %get-tuple-element.157 = bf16[116391936]{0} get-tuple-element(%all-reduce.156), index=0
+  %slice.160 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[0:1048576]}
+  %slice.161 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[0:1048576]}
+  %reshape.162 = bf16[1024,1024]{1,0} reshape(%slice.161)
+  %slice.163 = bf16[3145728]{0} slice(%get-tuple-element.157), slice={[1048576:4194304]}
+  %slice.164 = bf16[3145728]{0} slice(%get-tuple-element.157), slice={[1048576:4194304]}
+  %reshape.165 = bf16[1024,3072]{1,0} reshape(%slice.164)
+  %slice.166 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[4194304:5242880]}
+  %slice.167 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[4194304:5242880]}
+  %reshape.168 = bf16[1024,1024]{1,0} reshape(%slice.167)
+  %slice.169 = bf16[5242880]{0} slice(%get-tuple-element.157), slice={[5242880:10485760]}
+  %slice.170 = bf16[5242880]{0} slice(%get-tuple-element.157), slice={[5242880:10485760]}
+  %reshape.171 = bf16[1024,5120]{1,0} reshape(%slice.170)
+  %slice.172 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[10485760:11534336]}
+  %slice.173 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[10485760:11534336]}
+  %reshape.174 = bf16[1024,1024]{1,0} reshape(%slice.173)
+  %slice.175 = bf16[7340032]{0} slice(%get-tuple-element.157), slice={[11534336:18874368]}
+  %slice.176 = bf16[7340032]{0} slice(%get-tuple-element.157), slice={[11534336:18874368]}
+  %reshape.177 = bf16[1024,7168]{1,0} reshape(%slice.176)
+  %slice.178 = bf16[3145728]{0} slice(%get-tuple-element.157), slice={[18874368:22020096]}
+  %slice.179 = bf16[3145728]{0} slice(%get-tuple-element.157), slice={[18874368:22020096]}
+  %reshape.180 = bf16[1024,3072]{1,0} reshape(%slice.179)
+  %slice.181 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[22020096:23068672]}
+  %slice.182 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[22020096:23068672]}
+  %reshape.183 = bf16[1024,1024]{1,0} reshape(%slice.182)
+  %slice.184 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[23068672:24117248]}
+  %slice.185 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[23068672:24117248]}
+  %reshape.186 = bf16[1024,1024]{1,0} reshape(%slice.185)
+  %slice.187 = bf16[2097152]{0} slice(%get-tuple-element.157), slice={[24117248:26214400]}
+  %slice.188 = bf16[2097152]{0} slice(%get-tuple-element.157), slice={[24117248:26214400]}
+  %reshape.189 = bf16[1024,2048]{1,0} reshape(%slice.188)
+  %slice.190 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[26214400:27262976]}
+  %slice.191 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[26214400:27262976]}
+  %reshape.192 = bf16[1024,1024]{1,0} reshape(%slice.191)
+  %slice.193 = bf16[3145728]{0} slice(%get-tuple-element.157), slice={[27262976:30408704]}
+  %slice.194 = bf16[3145728]{0} slice(%get-tuple-element.157), slice={[27262976:30408704]}
+  %reshape.195 = bf16[1024,3072]{1,0} reshape(%slice.194)
+  %slice.196 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[30408704:31457280]}
+  %slice.197 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[30408704:31457280]}
+  %reshape.198 = bf16[1024,1024]{1,0} reshape(%slice.197)
+  %slice.199 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[31457280:32505856]}
+  %slice.200 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[31457280:32505856]}
+  %reshape.201 = bf16[1024,1024]{1,0} reshape(%slice.200)
+  %slice.202 = bf16[5242880]{0} slice(%get-tuple-element.157), slice={[32505856:37748736]}
+  %slice.203 = bf16[5242880]{0} slice(%get-tuple-element.157), slice={[32505856:37748736]}
+  %reshape.204 = bf16[1024,5120]{1,0} reshape(%slice.203)
+  %slice.205 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[37748736:38797312]}
+  %slice.206 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[37748736:38797312]}
+  %reshape.207 = bf16[1024,1024]{1,0} reshape(%slice.206)
+  %slice.208 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[38797312:39845888]}
+  %slice.209 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[38797312:39845888]}
+  %reshape.210 = bf16[1024,1024]{1,0} reshape(%slice.209)
+  %slice.211 = bf16[3145728]{0} slice(%get-tuple-element.157), slice={[39845888:42991616]}
+  %slice.212 = bf16[3145728]{0} slice(%get-tuple-element.157), slice={[39845888:42991616]}
+  %reshape.213 = bf16[1024,3072]{1,0} reshape(%slice.212)
+  %slice.214 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[42991616:44040192]}
+  %slice.215 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[42991616:44040192]}
+  %reshape.216 = bf16[1024,1024]{1,0} reshape(%slice.215)
+  %slice.217 = bf16[5242880]{0} slice(%get-tuple-element.157), slice={[44040192:49283072]}
+  %slice.218 = bf16[5242880]{0} slice(%get-tuple-element.157), slice={[44040192:49283072]}
+  %reshape.219 = bf16[1024,5120]{1,0} reshape(%slice.218)
+  %slice.220 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[49283072:50331648]}
+  %slice.221 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[49283072:50331648]}
+  %reshape.222 = bf16[1024,1024]{1,0} reshape(%slice.221)
+  %slice.223 = bf16[7340032]{0} slice(%get-tuple-element.157), slice={[50331648:57671680]}
+  %slice.224 = bf16[7340032]{0} slice(%get-tuple-element.157), slice={[50331648:57671680]}
+  %reshape.225 = bf16[1024,7168]{1,0} reshape(%slice.224)
+  %slice.226 = bf16[3145728]{0} slice(%get-tuple-element.157), slice={[57671680:60817408]}
+  %slice.227 = bf16[3145728]{0} slice(%get-tuple-element.157), slice={[57671680:60817408]}
+  %reshape.228 = bf16[1024,3072]{1,0} reshape(%slice.227)
+  %slice.229 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[60817408:61865984]}
+  %slice.230 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[60817408:61865984]}
+  %reshape.231 = bf16[1024,1024]{1,0} reshape(%slice.230)
+  %slice.232 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[61865984:62914560]}
+  %slice.233 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[61865984:62914560]}
+  %reshape.234 = bf16[1024,1024]{1,0} reshape(%slice.233)
+  %slice.235 = bf16[2097152]{0} slice(%get-tuple-element.157), slice={[62914560:65011712]}
+  %slice.236 = bf16[2097152]{0} slice(%get-tuple-element.157), slice={[62914560:65011712]}
+  %reshape.237 = bf16[1024,2048]{1,0} reshape(%slice.236)
+  %slice.238 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[65011712:66060288]}
+  %slice.239 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[65011712:66060288]}
+  %reshape.240 = bf16[1024,1024]{1,0} reshape(%slice.239)
+  %slice.241 = bf16[3145728]{0} slice(%get-tuple-element.157), slice={[66060288:69206016]}
+  %slice.242 = bf16[3145728]{0} slice(%get-tuple-element.157), slice={[66060288:69206016]}
+  %reshape.243 = bf16[1024,3072]{1,0} reshape(%slice.242)
+  %slice.244 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[69206016:70254592]}
+  %slice.245 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[69206016:70254592]}
+  %reshape.246 = bf16[1024,1024]{1,0} reshape(%slice.245)
+  %slice.247 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[70254592:71303168]}
+  %slice.248 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[70254592:71303168]}
+  %reshape.249 = bf16[1024,1024]{1,0} reshape(%slice.248)
+  %slice.250 = bf16[5242880]{0} slice(%get-tuple-element.157), slice={[71303168:76546048]}
+  %slice.251 = bf16[5242880]{0} slice(%get-tuple-element.157), slice={[71303168:76546048]}
+  %reshape.252 = bf16[1024,5120]{1,0} reshape(%slice.251)
+  %slice.253 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[76546048:77594624]}
+  %slice.254 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[76546048:77594624]}
+  %reshape.255 = bf16[1024,1024]{1,0} reshape(%slice.254)
+  %slice.256 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[77594624:78643200]}
+  %slice.257 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[77594624:78643200]}
+  %reshape.258 = bf16[1024,1024]{1,0} reshape(%slice.257)
+  %slice.259 = bf16[3145728]{0} slice(%get-tuple-element.157), slice={[78643200:81788928]}
+  %slice.260 = bf16[3145728]{0} slice(%get-tuple-element.157), slice={[78643200:81788928]}
+  %reshape.261 = bf16[1024,3072]{1,0} reshape(%slice.260)
+  %slice.262 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[81788928:82837504]}
+  %slice.263 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[81788928:82837504]}
+  %reshape.264 = bf16[1024,1024]{1,0} reshape(%slice.263)
+  %slice.265 = bf16[5242880]{0} slice(%get-tuple-element.157), slice={[82837504:88080384]}
+  %slice.266 = bf16[5242880]{0} slice(%get-tuple-element.157), slice={[82837504:88080384]}
+  %reshape.267 = bf16[1024,5120]{1,0} reshape(%slice.266)
+  %slice.268 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[88080384:89128960]}
+  %slice.269 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[88080384:89128960]}
+  %reshape.270 = bf16[1024,1024]{1,0} reshape(%slice.269)
+  %slice.271 = bf16[7340032]{0} slice(%get-tuple-element.157), slice={[89128960:96468992]}
+  %slice.272 = bf16[7340032]{0} slice(%get-tuple-element.157), slice={[89128960:96468992]}
+  %reshape.273 = bf16[1024,7168]{1,0} reshape(%slice.272)
+  %slice.274 = bf16[3145728]{0} slice(%get-tuple-element.157), slice={[96468992:99614720]}
+  %slice.275 = bf16[3145728]{0} slice(%get-tuple-element.157), slice={[96468992:99614720]}
+  %reshape.276 = bf16[1024,3072]{1,0} reshape(%slice.275)
+  %slice.277 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[99614720:100663296]}
+  %slice.278 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[99614720:100663296]}
+  %reshape.279 = bf16[1024,1024]{1,0} reshape(%slice.278)
+  %slice.280 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[100663296:101711872]}
+  %slice.281 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[100663296:101711872]}
+  %reshape.282 = bf16[1024,1024]{1,0} reshape(%slice.281)
+  %slice.283 = bf16[2097152]{0} slice(%get-tuple-element.157), slice={[101711872:103809024]}
+  %slice.284 = bf16[2097152]{0} slice(%get-tuple-element.157), slice={[101711872:103809024]}
+  %reshape.285 = bf16[1024,2048]{1,0} reshape(%slice.284)
+  %slice.286 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[103809024:104857600]}
+  %slice.287 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[103809024:104857600]}
+  %reshape.288 = bf16[1024,1024]{1,0} reshape(%slice.287)
+  %slice.289 = bf16[3145728]{0} slice(%get-tuple-element.157), slice={[104857600:108003328]}
+  %slice.290 = bf16[3145728]{0} slice(%get-tuple-element.157), slice={[104857600:108003328]}
+  %reshape.291 = bf16[1024,3072]{1,0} reshape(%slice.290)
+  %slice.292 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[108003328:109051904]}
+  %slice.293 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[108003328:109051904]}
+  %reshape.294 = bf16[1024,1024]{1,0} reshape(%slice.293)
+  %slice.295 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[109051904:110100480]}
+  %slice.296 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[109051904:110100480]}
+  %reshape.297 = bf16[1024,1024]{1,0} reshape(%slice.296)
+  %slice.298 = bf16[5242880]{0} slice(%get-tuple-element.157), slice={[110100480:115343360]}
+  %slice.299 = bf16[5242880]{0} slice(%get-tuple-element.157), slice={[110100480:115343360]}
+  %reshape.300 = bf16[1024,5120]{1,0} reshape(%slice.299)
+  %slice.301 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[115343360:116391936]}
+  %slice.302 = bf16[1048576]{0} slice(%get-tuple-element.157), slice={[115343360:116391936]}
+  %reshape.303 = bf16[1024,1024]{1,0} reshape(%slice.302)
+  ROOT %tuple.304 = (bf16[116391936]{0}, bf16[1048576]{0}, bf16[1024,1024]{1,0}, bf16[3145728]{0}, bf16[1024,3072]{1,0}, /*index=5*/bf16[1048576]{0}, bf16[1024,1024]{1,0}, bf16[5242880]{0}, bf16[1024,5120]{1,0}, bf16[1048576]{0}, /*index=10*/bf16[1024,1024]{1,0}, bf16[7340032]{0}, bf16[1024,7168]{1,0}, bf16[3145728]{0}, bf16[1024,3072]{1,0}, /*index=15*/bf16[1048576]{0}, bf16[1024,1024]{1,0}, bf16[1048576]{0}, bf16[1024,1024]{1,0}, bf16[2097152]{0}, /*index=20*/bf16[1024,2048]{1,0}, bf16[1048576]{0}, bf16[1024,1024]{1,0}, bf16[3145728]{0}, bf16[1024,3072]{1,0}, /*index=25*/bf16[1048576]{0}, bf16[1024,1024]{1,0}, bf16[1048576]{0}, bf16[1024,1024]{1,0}, bf16[5242880]{0}, /*index=30*/bf16[1024,5120]{1,0}, bf16[1048576]{0}, bf16[1024,1024]{1,0}, bf16[1048576]{0}, bf16[1024,1024]{1,0}, /*index=35*/bf16[3145728]{0}, bf16[1024,3072]{1,0}, bf16[1048576]{0}, bf16[1024,1024]{1,0}, bf16[5242880]{0}, /*index=40*/bf16[1024,5120]{1,0}, bf16[1048576]{0}, bf16[1024,1024]{1,0}, bf16[7340032]{0}, bf16[1024,7168]{1,0}, /*index=45*/bf16[3145728]{0}, bf16[1024,3072]{1,0}, bf16[1048576]{0}, bf16[1024,1024]{1,0}, bf16[1048576]{0}, /*index=50*/bf16[1024,1024]{1,0}, bf16[2097152]{0}, bf16[1024,2048]{1,0}, bf16[1048576]{0}, bf16[1024,1024]{1,0}, /*index=55*/bf16[3145728]{0}, bf16[1024,3072]{1,0}, bf16[1048576]{0}, bf16[1024,1024]{1,0}, bf16[1048576]{0}, /*index=60*/bf16[1024,1024]{1,0}, bf16[5242880]{0}, bf16[1024,5120]{1,0}, bf16[1048576]{0}, bf16[1024,1024]{1,0}, /*index=65*/bf16[1048576]{0}, bf16[1024,1024]{1,0}, bf16[3145728]{0}, bf16[1024,3072]{1,0}, bf16[1048576]{0}, /*index=70*/bf16[1024,1024]{1,0}, bf16[5242880]{0}, bf16[1024,5120]{1,0}, bf16[1048576]{0}, bf16[1024,1024]{1,0}, /*index=75*/bf16[7340032]{0}, bf16[1024,7168]{1,0}, bf16[3145728]{0}, bf16[1024,3072]{1,0}, bf16[1048576]{0}, /*index=80*/bf16[1024,1024]{1,0}, bf16[1048576]{0}, bf16[1024,1024]{1,0}, bf16[2097152]{0}, bf16[1024,2048]{1,0}, /*index=85*/bf16[1048576]{0}, bf16[1024,1024]{1,0}, bf16[3145728]{0}, bf16[1024,3072]{1,0}, bf16[1048576]{0}, /*index=90*/bf16[1024,1024]{1,0}, bf16[1048576]{0}, bf16[1024,1024]{1,0}, bf16[5242880]{0}, bf16[1024,5120]{1,0}, /*index=95*/bf16[1048576]{0}, bf16[1024,1024]{1,0}) tuple(%get-tuple-element.157, %slice.160, %reshape.162, %slice.163, %reshape.165, /*index=5*/%slice.166, %reshape.168, %slice.169, %reshape.171, %slice.172, /*index=10*/%reshape.174, %slice.175, %reshape.177, %slice.178, %reshape.180, /*index=15*/%slice.181, %reshape.183, %slice.184, %reshape.186, %slice.187, /*index=20*/%reshape.189, %slice.190, %reshape.192, %slice.193, %reshape.195, /*index=25*/%slice.196, %reshape.198, %slice.199, %reshape.201, %slice.202, /*index=30*/%reshape.204, %slice.205, %reshape.207, %slice.208, %reshape.210, /*index=35*/%slice.211, %reshape.213, %slice.214, %reshape.216, %slice.217, /*index=40*/%reshape.219, %slice.220, %reshape.222, %slice.223, %reshape.225, /*index=45*/%slice.226, %reshape.228, %slice.229, %reshape.231, %slice.232, /*index=50*/%reshape.234, %slice.235, %reshape.237, %slice.238, %reshape.240, /*index=55*/%slice.241, %reshape.243, %slice.244, %reshape.246, %slice.247, /*index=60*/%reshape.249, %slice.250, %reshape.252, %slice.253, %reshape.255, /*index=65*/%slice.256, %reshape.258, %slice.259, %reshape.261, %slice.262, /*index=70*/%reshape.264, %slice.265, %reshape.267, %slice.268, %reshape.270, /*index=75*/%slice.271, %reshape.273, %slice.274, %reshape.276, %slice.277, /*index=80*/%reshape.279, %slice.280, %reshape.282, %slice.283, %reshape.285, /*index=85*/%slice.286, %reshape.288, %slice.289, %reshape.291, %slice.292, /*index=90*/%reshape.294, %slice.295, %reshape.297, %slice.298, %reshape.300, /*index=95*/%slice.301, %reshape.303)
+}
+

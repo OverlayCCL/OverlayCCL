@@ -1,0 +1,16 @@
+=== [16:14:23] diag3 start
+=== [16:14:23] h_sites
+[bench] bundled steady_mean=43.14ms steady_median=43.07ms final_loss=3.466
+=== [16:15:45] h_pt
+[bench] bundled steady_mean=22.11ms steady_median=21.47ms final_loss=3.466
+=== [16:16:51] d_sites_b_only
+[bench] bundled steady_mean=22.56ms steady_median=22.03ms final_loss=3.466
+=== [16:18:28] d_sites_a_only
+[bench] bundled steady_mean=42.51ms steady_median=42.50ms final_loss=3.466
+=== [16:22:33] d_sites_a_cast_pt
+[bench] bundled steady_mean=25.26ms steady_median=24.51ms final_loss=3.466
+=== [16:24:31] d_iso2_sites
+[bench] bundled steady_mean=62.16ms steady_median=61.74ms final_loss=3.466
+=== [16:28:28] d_iso2_pt
+[bench] bundled steady_mean=25.09ms steady_median=24.48ms final_loss=3.466
+DIAG3_DONE

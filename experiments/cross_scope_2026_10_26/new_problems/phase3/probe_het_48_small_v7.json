@@ -1,0 +1,30 @@
+[
+ {
+  "raw": [
+   "strat:refined-from-Padded-stack hier",
+   "{'template': 'strategy_enumerate_final', 'cost_score': 628.1165950665425, 'sim_time_us': 62811.65950665425, 'local_ops': 204, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 4, '_params': {'evolved_code': 'def evolved_probe_het_48_small(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"Optimized padded all-reduce: minimize local ops by using pre-allocated buffers and in-place operations.\"\"\"\\n    \\n    def next_power_of_2(n):\\n        if n <= 0:\\n            return 1\\n        power = 1\\n        while power < n:\\n            power *= 2\\n        return power\\n    \\n    # Group tensors by their padded size\\n    size_groups = {}\\n    \\n    for idx, t in enumerate(grads):\\n        original_size = t.numel()\\n        padded_size = next_power_of_2(original_size)\\n        \\n        if padded_size not in size_groups:\\n            size_groups[padded_size] = []\\n        size_groups[padded_size].append((idx, t, original_size))\\n    \\n    results = [None] * len(grads)\\n    \\n    for padded_size, group in size_groups.items():\\n        num_tensors = len(group)\\n        \\n        # Pre-allocate a single contiguous buffer (zero-initialized)\\n        buffer = torch.zeros(num_tensors * padded_size, dtype=grads[0].dtype, device=grads[0].device)\\n        \\n        # Copy each tensor into its slot in the buffer (in-place, no cat/stack)\\n        for i, (idx, t, original_size) in enumerate(group):\\n            offset = i * padded_size\\n            # Flatten and copy into buffer slice\\n            buffer[offset:offset + original_size] = t.reshape(-1)\\n            # Remaining positions already zero from buffer initialization\\n        \\n        # Reshape buffer to 2D for all-reduce (view, not copy)\\n        stacked = buffer.view(num_tensors, padded_size)\\n        \\n        # All-reduce\\n        reduced = xm.all_reduce(xm.REDUCE_SUM, stacked)\\n        \\n        # Extract results using slicing (views, not copies where possible)\\n        for i, (idx, t, original_size) in enumerate(group):\\n            # Slice out the relevant portion and reshape\\n            results[idx] = reduced[i, :original_size].reshape(t.shape)\\n    \\n    return results'}}"
+  ],
+  "name": "strat:refined-from-Padded-stack hier"
+ },
+ {
+  "raw": [
+   "baseline:per_tensor_ar",
+   "{'template': 'per_tensor_ar', 'cost_score': 882.7831340249566, 'sim_time_us': 88278.31340249565, 'local_ops': 48, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 48, '_params': {'builtin_code': 'def evolved_probe_het_48_small(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"developer baseline: one all_reduce per gradient tensor (DDP hook per parameter)\"\"\"\\n    return [xm.all_reduce(xm.REDUCE_SUM, t) for t in grads]\\n'}}"
+  ],
+  "name": "baseline:per_tensor_ar"
+ },
+ {
+  "raw": [
+   "baseline:flat_cat_ar",
+   "{'template': 'flat_cat_ar', 'cost_score': 1095.8344519999973, 'sim_time_us': 109583.44519999974, 'local_ops': 147, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'builtin_code': 'def evolved_probe_het_48_small(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    flat = torch.cat([t.reshape(-1) for t in grads]); r = xm.all_reduce(xm.REDUCE_SUM, flat)\\n    outs = []; off = 0\\n    for t in grads: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:flat_cat_ar"
+ },
+ {
+  "raw": [
+   "baseline:bucketed_ar",
+   "{'template': 'bucketed_ar', 'cost_score': 1095.8344519999973, 'sim_time_us': 109583.44519999974, 'local_ops': 147, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'builtin_code': 'def evolved_probe_het_48_small(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"fixed-size buckets in order (exact bytes, a few dispatches)\"\"\"\\n    outs = []; chunk = []; acc = 0; lim = 4 * 1024 * 1024\\n    def flush(chunk):\\n        flat = torch.cat([t.reshape(-1) for t in chunk]); r = xm.all_reduce(xm.REDUCE_SUM, flat); off = 0\\n        for t in chunk: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    for t in grads:\\n        chunk.append(t); acc += t.numel()\\n        if acc >= lim: flush(chunk); chunk = []; acc = 0\\n    if chunk: flush(chunk)\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:bucketed_ar"
+ }
+]

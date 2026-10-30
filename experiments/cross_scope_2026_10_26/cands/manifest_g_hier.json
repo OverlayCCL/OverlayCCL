@@ -1,0 +1,38 @@
+[
+ {
+  "problem": "uniform_a2a",
+  "cand": "hier_ag",
+  "kind": "code",
+  "code": "/home/ubuntu/g2/cands_g/uniform_a2a__hier_ag.py"
+ },
+ {
+  "problem": "ring_kv",
+  "cand": "hier_ag",
+  "kind": "code",
+  "code": "/home/ubuntu/g2/cands_g/ring_kv__hier_ag.py"
+ },
+ {
+  "problem": "dxe",
+  "cand": "hier_ar_stacked",
+  "kind": "code",
+  "code": "/home/ubuntu/g2/cands_g/dxe__hier_ar_stacked.py"
+ },
+ {
+  "problem": "tp_mlp",
+  "cand": "hier_ar_bundled",
+  "kind": "code",
+  "code": "/home/ubuntu/g2/cands_g/tp_mlp__hier_ar_bundled.py"
+ },
+ {
+  "problem": "fsdp_prefetch",
+  "cand": "hier_ag_per_mb",
+  "kind": "code",
+  "code": "/home/ubuntu/g2/cands_g/fsdp_prefetch__hier_ag_per_mb.py"
+ },
+ {
+  "problem": "llama_block_ar",
+  "cand": "hier_ar_stack",
+  "kind": "code",
+  "code": "/home/ubuntu/g2/cands_g/llama_block_ar__hier_ar_stack.py"
+ }
+]

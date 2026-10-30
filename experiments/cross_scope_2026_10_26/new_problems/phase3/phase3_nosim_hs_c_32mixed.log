@@ -1,0 +1,268 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of 32 mixed-size tensors (256K-2M elements on hardware)
+======================================================================
+  per_tensor_ar: 122486.8 us, 32 local ops, 0 ag, 32 ar, 0 cp
+  flat_cat_ar: 124575.1 us, 99 local ops, 0 ag, 1 ar, 0 cp
+  bucketed_ar: 124575.1 us, 108 local ops, 0 ag, 4 ar, 0 cp
+  bucketed_ar_4: 124575.1 us, 120 local ops, 0 ag, 8 ar, 0 cp
+  bucketed_ar_16: 124575.1 us, 102 local ops, 0 ag, 2 ar, 0 cp
+
+  Best baseline: baseline:per_tensor_ar (122486.8 us)
+
+======================================================================
+[Phase 3 / Strategy-Enumerate] DP gradient all-reduce of 32 mixed-size tensors (256K-2M elements on hardware) [NO-SIM ABLATION]
+======================================================================
+  K=5 strategies, R=2 refinement rounds per top-2 (budget ~10 LLM calls)
+  Enumerated 5 strategies:
+    1. Single flat all-reduce: Concatenate all 32 tensors into one flat buffer and issue a single all_reduce, t...
+    2. Fixed in-order bucketing (8 buckets): Partition the 32 tensors into 4 fixed-size buckets of 8 consecutive tensors each...
+    3. Hierarchical two-stage bucketing: First reduce within local device groups (e.g., cores_per_device or per-node subg...
+    4. Reduce-scatter then all-gather decomposition: Split concatenated gradient buffer into world_size chunks, reduce-scatter to dis...
+    5. Adaptive bucketing by relative size: Group tensors into buckets targeting equal total element counts per bucket (e.g....
+  Strategy 1 (Single flat all-reduce): sim=124575.1 us
+  Strategy 2 (Fixed in-order bucketing (8 buckets)): sim=124575.1 us
+  Strategy 3 (Hierarchical two-stage bucketing) INCORRECT: CRASH in collect pass 0: world=4 pattern=uniform rank=0: RuntimeError: The size of tensor a (3840) m
+  Strategy 4 (Reduce-scatter then all-gather decomposition): sim=124629.6 us
+  Strategy 5 (Adaptive bucketing by relative size): sim=124575.1 us
+
+  [NO-SIM ITERATIVE] Refining all 4 correct candidates (sim_us not shown to LLM in refinement)
+[AllReduce32] 568.5 us
+[AllReduce32] 342.7 us
+[AllReduce32] 320.8 us
+[AllReduce32] 310.6 us
+[AllReduce32] 323.0 us
+[AllReduce32] 308.8 us
+[AllReduce32] 299.3 us
+[AllReduce32] 301.9 us
+[AllReduce32] 295.3 us
+[AllReduce32] 479.8 us
+[AllReduce32] 304.0 us
+[AllReduce32] 294.0 us
+[AllReduce32] 241.6 us
+[AllReduce32] 241.0 us
+[AllReduce32] 207.0 us
+[AllReduce32] 208.3 us
+[AllReduce32] 208.3 us
+[AllReduce32] 201.9 us
+[AllReduce32] 188.8 us
+[AllReduce32] 165.9 us
+[AllReduce32] 165.5 us
+[AllReduce32] 164.1 us
+[AllReduce32] 149.8 us
+[AllReduce32] 150.0 us
+[AllReduce32] 151.7 us
+[AllReduce32] 139.2 us
+[AllReduce32] 138.1 us
+[AllReduce32] 150.1 us
+[AllReduce32] 122.0 us
+[AllReduce32] 120.5 us
+[AllReduce32] 121.3 us
+[AllReduce32] 116.0 us
+[AllReduce32] 117.0 us
+[AllReduce32] 116.0 us
+[AllReduce32] 115.8 us
+[AllReduce32] 109.2 us
+[AllReduce32] 172.4 us
+[DP-AR] Single-concat: 989.9 us
+[DP-AR] Single-concat: 614.2 us
+[DP-AR] Single-concat: 429.6 us
+[DP-AR] Single-concat: 433.2 us
+[DP-AR] Single-concat: 356.2 us
+[DP-AR] Single-concat: 348.1 us
+[DP-AR] Single-concat: 298.0 us
+[DP-AR] Single-concat: 294.2 us
+[DP-AR] Single-concat: 286.8 us
+[DP-AR] Single-concat: 331.2 us
+[DP-AR] Single-concat: 206.2 us
+[DP-AR] Single-concat: 204.1 us
+[DP-AR] Single-concat: 199.8 us
+[DP-AR] Single-concat: 173.1 us
+[DP-AR] Single-concat: 172.1 us
+[DP-AR] Single-concat: 171.2 us
+[DP-AR] Single-concat: 153.1 us
+[DP-AR] Single-concat: 149.0 us
+[DP-AR] Single-concat: 145.0 us
+[DP-AR] Single-concat: 136.1 us
+[DP-AR] Single-concat: 124.0 us
+[DP-AR] Single-concat: 122.8 us
+[DP-AR] Single-concat: 123.3 us
+[DP-AR] Single-concat: 114.2 us
+[DP-AR] Single-concat: 112.8 us
+[DP-AR] Single-concat: 114.0 us
+[DP-AR] Single-concat: 114.9 us
+[DP-AR] Single-concat: 113.0 us
+[DP-AR] Single-concat: 105.9 us
+[DP-AR] Single-concat: 105.9 us
+[DP-AR] Single-concat: 98.2 us
+[DP-AR] Single-concat: 96.1 us
+[DP-AR] Single-concat: 96.1 us
+[DP-AR] Single-concat: 97.0 us
+[DP-AR] Single-concat: 96.1 us
+[DP-AR] Single-concat: 91.1 us
+[DP-AR] Single-concat: 136.1 us
+    top 2 round 1: SIMPLER (collective Δ=3)
+[DP-AR] Single-concat: 948.0 us, flat_size=24064
+[DP-AR] Single-concat: 409.1 us, flat_size=24064
+[DP-AR] Single-concat: 379.1 us, flat_size=24064
+[DP-AR] Single-concat: 255.1 us, flat_size=24064
+[DP-AR] Single-concat: 248.0 us, flat_size=24064
+[DP-AR] Single-concat: 244.1 us, flat_size=24064
+[DP-AR] Single-concat: 213.1 us, flat_size=24064
+[DP-AR] Single-concat: 215.1 us, flat_size=24064
+[DP-AR] Single-concat: 207.2 us, flat_size=24064
+[DP-AR] Single-concat: 284.2 us, flat_size=24064
+[DP-AR] Single-concat: 173.1 us, flat_size=24064
+[DP-AR] Single-concat: 173.1 us, flat_size=24064
+[DP-AR] Single-concat: 147.8 us, flat_size=24064
+[DP-AR] Single-concat: 146.9 us, flat_size=24064
+[DP-AR] Single-concat: 146.9 us, flat_size=24064
+[DP-AR] Single-concat: 146.9 us, flat_size=24064
+[DP-AR] Single-concat: 145.9 us, flat_size=24064
+[DP-AR] Single-concat: 125.9 us, flat_size=24064
+[DP-AR] Single-concat: 131.1 us, flat_size=24064
+[DP-AR] Single-concat: 119.2 us, flat_size=24064
+[DP-AR] Single-concat: 119.0 us, flat_size=24064
+[DP-AR] Single-concat: 107.0 us, flat_size=24064
+[DP-AR] Single-concat: 106.8 us, flat_size=24064
+[DP-AR] Single-concat: 107.0 us, flat_size=24064
+[DP-AR] Single-concat: 107.0 us, flat_size=24064
+[DP-AR] Single-concat: 101.3 us, flat_size=24064
+[DP-AR] Single-concat: 97.0 us, flat_size=24064
+[DP-AR] Single-concat: 98.0 us, flat_size=24064
+[DP-AR] Single-concat: 86.1 us, flat_size=24064
+[DP-AR] Single-concat: 86.1 us, flat_size=24064
+[DP-AR] Single-concat: 85.4 us, flat_size=24064
+[DP-AR] Single-concat: 85.1 us, flat_size=24064
+[DP-AR] Single-concat: 83.9 us, flat_size=24064
+[DP-AR] Single-concat: 81.1 us, flat_size=24064
+[DP-AR] Single-concat: 81.1 us, flat_size=24064
+[DP-AR] Single-concat: 80.1 us, flat_size=24064
+[DP-AR] Single-concat: 98.9 us, flat_size=24064
+    top 2 round 2: SIMPLER (collective Δ=0)
+[PROF] hs_c_32mixed: 849.3 us
+[PROF] hs_c_32mixed: 519.0 us
+[PROF] hs_c_32mixed: 364.8 us
+[PROF] hs_c_32mixed: 306.9 us
+[PROF] hs_c_32mixed: 316.0 us
+[PROF] hs_c_32mixed: 313.9 us
+[PROF] hs_c_32mixed: 270.3 us
+[PROF] hs_c_32mixed: 269.1 us
+[PROF] hs_c_32mixed: 252.2 us
+[PROF] hs_c_32mixed: 366.2 us
+[PROF] hs_c_32mixed: 205.6 us
+[PROF] hs_c_32mixed: 175.5 us
+[PROF] hs_c_32mixed: 175.2 us
+[PROF] hs_c_32mixed: 158.3 us
+[PROF] hs_c_32mixed: 155.2 us
+[PROF] hs_c_32mixed: 154.4 us
+[PROF] hs_c_32mixed: 153.3 us
+[PROF] hs_c_32mixed: 152.0 us
+[PROF] hs_c_32mixed: 143.8 us
+[PROF] hs_c_32mixed: 127.8 us
+[PROF] hs_c_32mixed: 126.3 us
+[PROF] hs_c_32mixed: 116.3 us
+[PROF] hs_c_32mixed: 119.6 us
+[PROF] hs_c_32mixed: 117.1 us
+[PROF] hs_c_32mixed: 109.3 us
+[PROF] hs_c_32mixed: 110.0 us
+[PROF] hs_c_32mixed: 106.2 us
+[PROF] hs_c_32mixed: 117.2 us
+[PROF] hs_c_32mixed: 98.5 us
+[PROF] hs_c_32mixed: 96.6 us
+[PROF] hs_c_32mixed: 97.5 us
+[PROF] hs_c_32mixed: 96.5 us
+[PROF] hs_c_32mixed: 93.9 us
+[PROF] hs_c_32mixed: 92.7 us
+[PROF] hs_c_32mixed: 93.4 us
+[PROF] hs_c_32mixed: 91.3 us
+[PROF] hs_c_32mixed: 149.5 us
+[AR32] single-bucket: 409.6 us
+[AR32] single-bucket: 235.6 us
+[AR32] single-bucket: 223.2 us
+[AR32] single-bucket: 222.0 us
+[AR32] single-bucket: 214.2 us
+[AR32] single-bucket: 218.4 us
+[AR32] single-bucket: 220.4 us
+[AR32] single-bucket: 220.6 us
+[AR32] single-bucket: 215.1 us
+[AR32] single-bucket: 295.1 us
+[AR32] single-bucket: 352.2 us
+[AR32] single-bucket: 229.2 us
+[AR32] single-bucket: 188.4 us
+[AR32] single-bucket: 187.8 us
+[AR32] single-bucket: 188.7 us
+[AR32] single-bucket: 161.3 us
+[AR32] single-bucket: 161.3 us
+[AR32] single-bucket: 157.1 us
+[AR32] single-bucket: 181.7 us
+[AR32] single-bucket: 131.2 us
+[AR32] single-bucket: 129.7 us
+[AR32] single-bucket: 128.9 us
+[AR32] single-bucket: 117.9 us
+[AR32] single-bucket: 117.8 us
+[AR32] single-bucket: 117.6 us
+[AR32] single-bucket: 117.5 us
+[AR32] single-bucket: 114.7 us
+[AR32] single-bucket: 111.5 us
+[AR32] single-bucket: 100.3 us
+[AR32] single-bucket: 98.7 us
+[AR32] single-bucket: 98.3 us
+[AR32] single-bucket: 98.3 us
+[AR32] single-bucket: 93.0 us
+[AR32] single-bucket: 93.9 us
+[AR32] single-bucket: 93.6 us
+[AR32] single-bucket: 92.3 us
+[AR32] single-bucket: 143.2 us
+    top 4 round 1: SIMPLER (collective Δ=7)
+[AR32] 842.8 us
+[AR32] 721.2 us
+[AR32] 544.8 us
+[AR32] 451.1 us
+[AR32] 354.3 us
+[AR32] 344.7 us
+[AR32] 343.2 us
+[AR32] 295.0 us
+[AR32] 291.2 us
+[AR32] 325.6 us
+[AR32] 197.2 us
+[AR32] 195.3 us
+[AR32] 195.0 us
+[AR32] 168.4 us
+[AR32] 168.7 us
+[AR32] 168.2 us
+[AR32] 149.4 us
+[AR32] 144.8 us
+[AR32] 144.4 us
+[AR32] 137.5 us
+[AR32] 124.6 us
+[AR32] 123.5 us
+[AR32] 124.2 us
+[AR32] 123.7 us
+[AR32] 115.0 us
+[AR32] 114.7 us
+[AR32] 112.6 us
+[AR32] 103.1 us
+[AR32] 98.5 us
+[AR32] 97.9 us
+[AR32] 97.3 us
+[AR32] 93.4 us
+[AR32] 93.2 us
+[AR32] 93.1 us
+[AR32] 92.9 us
+[AR32] 91.3 us
+[AR32] 135.8 us
+
+  [NO-SIM] Winner = Single flat all-reduce (first valid, sim_us NOT used)
+
+  Strategy-Enumerate complete. 8 total candidates.
+  Best: Single flat all-reduce (sim=124575.1 us)
+
+=== Phase 3 result for hs_c_32mixed (wall 149s): 6 candidates, sim ranking ===
+           1e+18  baseline:per_tensor_ar  code=no
+           1e+18  baseline:flat_cat_ar  code=no
+           1e+18  strat:Single flat all-reduce  code=no
+           1e+18  baseline:bucketed_ar  code=no
+           1e+18  baseline:bucketed_ar_4  code=no
+           1e+18  baseline:bucketed_ar_16  code=no

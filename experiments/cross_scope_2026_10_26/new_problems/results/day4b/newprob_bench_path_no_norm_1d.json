@@ -1,0 +1,20 @@
+{
+ "problem": "path_no_norm_1d",
+ "ws": 32,
+ "results": {
+  "per_tensor_ar": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 9.601235389709473,
+   "mean_ms": 167.30965773264566,
+   "status": "ok"
+  },
+  "flat_cat_ar": {
+   "max_abs_diff": 0.0078125,
+   "ok": true,
+   "med_ms": 18.75138282775879,
+   "mean_ms": 19.52356497446696,
+   "status": "ok"
+  }
+ }
+}

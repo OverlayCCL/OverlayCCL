@@ -1,0 +1,41 @@
+{
+ "problem": "ep_a2a_grouped",
+ "ws": 32,
+ "results": {
+  "grouped_ag_slice": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 4.719853401184082,
+   "mean_ms": 4.728611310323079,
+   "status": "ok"
+  },
+  "grouped_ag_slice_native": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 5.340695381164551,
+   "mean_ms": 5.293409029642741,
+   "status": "ok"
+  },
+  "grouped_masked_rs": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 5.351424217224121,
+   "mean_ms": 5.230991045633952,
+   "status": "ok"
+  },
+  "world_masked_rs": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 5.920529365539551,
+   "mean_ms": 6.23637040456136,
+   "status": "ok"
+  },
+  "world_ag_slice": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 5.756974220275879,
+   "mean_ms": 5.794040362040202,
+   "status": "ok"
+  }
+ }
+}

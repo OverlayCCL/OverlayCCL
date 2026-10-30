@@ -1,0 +1,57 @@
+{
+ "hetero_grad_ar_many": {
+  "random": {
+   "best_sim": 682524.160797957,
+   "code": "def evolved_hetero_grad_ar_many(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\n    \"\"\"developer baseline: one all_reduce per gradient tensor (DDP hook per parameter)\"\"\"\n    return [xm.all_reduce(xm.REDUCE_SUM, t) for t in grads]",
+   "evals": 400,
+   "structure": {
+    "colls": {
+     "all_reduce": 1
+    },
+    "loops": 0
+   }
+  },
+  "ga": {
+   "best_sim": 682524.160797957,
+   "code": "def evolved_hetero_grad_ar_many(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\n    \"\"\"developer baseline: one all_reduce per gradient tensor (DDP hook per parameter)\"\"\"\n    return [xm.all_reduce(xm.REDUCE_SUM, t) for t in grads]",
+   "evals": 400,
+   "structure": {
+    "colls": {
+     "all_reduce": 1
+    },
+    "loops": 0
+   }
+  },
+  "beam": {
+   "best_sim": 682524.160797957,
+   "code": "def evolved_hetero_grad_ar_many(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\n    \"\"\"developer baseline: one all_reduce per gradient tensor (DDP hook per parameter)\"\"\"\n    return [xm.all_reduce(xm.REDUCE_SUM, t) for t in grads]",
+   "evals": 80,
+   "structure": {
+    "colls": {
+     "all_reduce": 1
+    },
+    "loops": 0
+   }
+  },
+  "rules": {
+   "best_sim": 682524.160797957,
+   "code": "def evolved_hetero_grad_ar_many(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\n    \"\"\"developer baseline: one all_reduce per gradient tensor (DDP hook per parameter)\"\"\"\n    return [xm.all_reduce(xm.REDUCE_SUM, t) for t in grads]",
+   "passes": [],
+   "evals": 41,
+   "structure": {
+    "colls": {
+     "all_reduce": 1
+    },
+    "loops": 0
+   }
+  },
+  "start_sim": 682524.160797957,
+  "start_structure": {
+   "colls": {
+    "all_reduce": 1
+   },
+   "loops": 0
+  },
+  "secs": 11.4
+ }
+}

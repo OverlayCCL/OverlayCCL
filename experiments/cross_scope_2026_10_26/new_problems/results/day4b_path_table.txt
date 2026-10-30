@@ -1,0 +1,24 @@
+problem                candidate                 bench32  b32 x  bench64  b64 x  train64  t64 x  note
+path_many_1d           per_tensor_ar               20.48   1.00        —      —   513.68   1.00  n=1/1 
+path_many_1d           flat_cat_ar                 20.35   1.01        —      —   485.34   1.06  n=1/1 
+
+path_many_clone        per_tensor_ar               20.70   1.00        —      —    74.83   1.00  n=1/1 
+path_many_clone        flat_cat_ar                 20.56   1.01        —      —   485.61   0.15  n=1/1 bench-tie, training loss
+path_many_clone        flat_cat_clone              20.59   1.01        —      —   486.23   0.15  n=1/1 bench-tie, training loss
+
+path_many_half         per_tensor_ar               12.85   1.00        —      —    48.19   1.00  n=1/1 
+path_many_half         flat_cat_ar                 13.60   0.94        —      —   260.67   0.18  n=1/1 
+
+path_many_plus_tiny    per_tensor_ar               20.60   1.00        —      —    83.97   1.00  n=1/1 
+path_many_plus_tiny    flat_cat_ar                 20.26   1.02        —      —    63.80   1.32  n=1/1 bench-tie, training win
+
+path_no_norm_1d        per_tensor_ar                9.60   1.00        —      —    57.65   1.00  n=1/1 
+path_no_norm_1d        flat_cat_ar                 18.75   0.51        —      —    60.83   0.95  n=1/1 
+
+path_no_norm_clone     per_tensor_ar                9.60   1.00        —      —    49.91   1.00  n=1/1 
+path_no_norm_clone     flat_cat_ar                 18.70   0.51        —      —    60.97   0.82  n=1/1 
+path_no_norm_clone     flat_cat_clone              18.84   0.51        —      —    61.17   0.82  n=1/1 
+
+path_no_norm_plus_tiny per_tensor_ar                9.60   1.00        —      —    60.54   1.00  n=1/1 
+path_no_norm_plus_tiny flat_cat_ar                 10.45   0.92        —      —    36.29   1.67  n=1/1 
+

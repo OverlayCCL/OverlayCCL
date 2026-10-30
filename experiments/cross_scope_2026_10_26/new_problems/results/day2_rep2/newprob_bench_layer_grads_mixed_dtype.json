@@ -1,0 +1,34 @@
+{
+ "problem": "layer_grads_mixed_dtype",
+ "ws": 32,
+ "results": {
+  "per_tensor_ar": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 9.479761123657227,
+   "mean_ms": 10.092933972676596,
+   "status": "ok"
+  },
+  "cast_flat_fp32": {
+   "max_abs_diff": 0.005859375,
+   "ok": true,
+   "med_ms": 13.755440711975098,
+   "mean_ms": 14.74303404490153,
+   "status": "ok"
+  },
+  "cast_flat_bf16": {
+   "max_abs_diff": 0.0068359375,
+   "ok": true,
+   "med_ms": 10.233283042907715,
+   "mean_ms": 15.248370170593262,
+   "status": "ok"
+  },
+  "two_dtype_groups": {
+   "max_abs_diff": 0.0068359375,
+   "ok": true,
+   "med_ms": 18.891215324401855,
+   "mean_ms": 21.41912778218587,
+   "status": "ok"
+  }
+ }
+}

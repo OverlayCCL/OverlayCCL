@@ -1,0 +1,41 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of 48 mixed-size 1-D tensors (mid sizes)
+======================================================================
+  per_tensor_ar: 1094112.2 us, 48 local ops, 0 ag, 48 ar, 0 cp
+  flat_cat_ar: 1688284.2 us, 147 local ops, 0 ag, 1 ar, 0 cp
+  bucketed_ar: 1688284.2 us, 147 local ops, 0 ag, 1 ar, 0 cp
+
+  Best baseline: baseline:per_tensor_ar (1094112.2 us)
+
+======================================================================
+[Phase 3 / Strategy-Enumerate] DP gradient all-reduce of 48 mixed-size 1-D tensors (mid sizes)
+======================================================================
+  K=5 strategies, R=2 refinement rounds per top-2 (budget ~10 LLM calls)
+  Enumerated 5 strategies:
+    1. Per-tensor all-reduce baseline: Issues 48 separate all_reduce calls, one per gradient tensor in original order. ...
+    2. Single flat concatenation all-reduce: Concatenates all 48 tensors into one flat buffer, issues single all_reduce, then...
+    3. Fixed-count in-order bucketing: Partitions the 48 tensors into K fixed buckets (e.g., 4-8 buckets of 6-12 consec...
+    4. Reduce-scatter followed by all-gather: Decomposes all-reduce into reduce-scatter (produces sharded sum) then all-gather...
+    5. Two-phase size-stratified bucketing: Partitions tensors into 2-3 size classes (small/medium/large by element count pe...
+  Strategy 1 (Per-tensor all-reduce baseline): sim=1094112.2 us
+  Strategy 2 (Single flat concatenation all-reduce): sim=1688284.2 us
+  Strategy 3 (Fixed-count in-order bucketing): sim=945245.7 us
+  Strategy 4 (Reduce-scatter followed by all-gather): sim=2617310.6 us
+  Strategy 5 (Two-phase size-stratified bucketing): sim=955343.1 us
+
+  Top after enumeration:
+    Fixed-count in-order bucketing: 945245.7 us
+    Two-phase size-stratified bucketing: 955343.1 us
+    top 1 round 2: NEW BEST 943503.8 us (0.2% improvement)
+    top 2 round 2: NEW BEST 834822.7 us (12.6% improvement)
+
+  Strategy-Enumerate complete. 7 total candidates.
+  Best: refined-from-Two-phase size-stratified bucketing (sim=834822.7 us)
+
+=== Phase 3 result for probe_het_48_mid (wall 113s): 4 candidates, sim ranking ===
+           1e+18  strat:refined-from-Two-phase size-st  code=no
+           1e+18  baseline:per_tensor_ar  code=no
+           1e+18  baseline:flat_cat_ar  code=no
+           1e+18  baseline:bucketed_ar  code=no

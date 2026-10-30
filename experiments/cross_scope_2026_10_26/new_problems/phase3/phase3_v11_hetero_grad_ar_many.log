@@ -1,0 +1,39 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of 48 heterogeneous 2-D gradients (flat concat pathology instance)
+======================================================================
+  per_tensor_ar: 682524.2 us, 48 local ops, 0 ag, 48 ar, 0 cp
+  flat_cat_ar: 1042771.0 us, 147 local ops, 0 ag, 1 ar, 0 cp
+  bucketed_ar: 584563.9 us, 162 local ops, 0 ag, 6 ar, 0 cp
+
+  Best baseline: baseline:bucketed_ar (584563.9 us)
+
+======================================================================
+[Phase 3 / Strategy-Enumerate] DP gradient all-reduce of 48 heterogeneous 2-D gradients (flat concat pathology instance)
+======================================================================
+  K=5 strategies, R=2 refinement rounds per top-2 (budget ~10 LLM calls)
+  Enumerated 5 strategies:
+    1. Per-tensor all-reduce (baseline): Issues one all_reduce call per gradient tensor (48 dispatches total). Represents...
+    2. Single flat concatenation all-reduce: Concatenates all 48 heterogeneous tensors into one flat 1-D buffer, performs one...
+    3. Fixed in-order bucketing (6-8 buckets): Partitions the 48 tensors into 6-8 fixed-size buckets in their original order (e...
+    4. Reduce-scatter + all-gather decomposition: Splits concatenated gradient data across ranks via reduce-scatter (producing ran...
+    5. Hierarchical two-level bucketing: First groups tensors into coarse super-buckets (e.g., 4 groups of 12), then with...
+  Strategy 1 (Per-tensor all-reduce (baseline)): sim=682524.2 us
+  Strategy 2 (Single flat concatenation all-reduce): sim=1042771.0 us
+  Strategy 3 (Fixed in-order bucketing (6-8 buckets)): sim=584563.9 us
+  Strategy 4 (Reduce-scatter + all-gather decomposition): sim=1042771.0 us
+  Strategy 5 (Hierarchical two-level bucketing): sim=594113.6 us
+
+  Top after enumeration:
+    Fixed in-order bucketing (6-8 buckets): 584563.9 us
+    Hierarchical two-level bucketing: 594113.6 us
+
+  Strategy-Enumerate complete. 7 total candidates.
+  Best: Fixed in-order bucketing (6-8 buckets) (sim=584563.9 us)
+
+=== Phase 3 result for hetero_grad_ar_many (wall 93s): 4 candidates, sim ranking ===
+           1e+18  baseline:bucketed_ar  code=no
+           1e+18  strat:Fixed in-order bucketing (6-8   code=no
+           1e+18  baseline:per_tensor_ar  code=no
+           1e+18  baseline:flat_cat_ar  code=no

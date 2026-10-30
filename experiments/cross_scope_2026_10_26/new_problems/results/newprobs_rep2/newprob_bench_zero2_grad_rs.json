@@ -1,0 +1,41 @@
+{
+ "problem": "zero2_grad_rs",
+ "ws": 32,
+ "results": {
+  "per_tensor_rs": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 6.391167640686035,
+   "mean_ms": 7.491048177083333,
+   "status": "ok"
+  },
+  "flat_rs": {
+   "max_abs_diff": 0.00390625,
+   "ok": true,
+   "med_ms": 6.011009216308594,
+   "mean_ms": 6.026705106099446,
+   "status": "ok"
+  },
+  "bucketed_rs": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 6.773471832275391,
+   "mean_ms": 6.8136294682820635,
+   "status": "ok"
+  },
+  "ar_then_slice": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 7.636666297912598,
+   "mean_ms": 7.8836361567179365,
+   "status": "ok"
+  },
+  "flat_ar_then_slice": {
+   "max_abs_diff": 0.00390625,
+   "ok": true,
+   "med_ms": 6.739020347595215,
+   "mean_ms": 6.811054547627767,
+   "status": "ok"
+  }
+ }
+}

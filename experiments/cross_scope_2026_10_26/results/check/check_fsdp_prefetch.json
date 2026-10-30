@@ -1,0 +1,32 @@
+{
+ "ag_dim0_permute_per_mb": {
+  "max_abs_diff": 0.0,
+  "ref_scale": 0.033203125,
+  "ok": true,
+  "status": "ok"
+ },
+ "hier_ag_per_mb": {
+  "max_abs_diff": 0.0,
+  "ref_scale": 0.033203125,
+  "ok": true,
+  "status": "ok"
+ },
+ "chunked_ag_2_per_mb": {
+  "max_abs_diff": 0.0,
+  "ref_scale": 0.033203125,
+  "ok": true,
+  "status": "ok"
+ },
+ "paper": {
+  "max_abs_diff": 0.0,
+  "ref_scale": 0.033203125,
+  "ok": true,
+  "status": "ok"
+ },
+ "ag_all": {
+  "max_abs_diff": 0.0,
+  "ref_scale": 0.033203125,
+  "ok": true,
+  "status": "ok"
+ }
+}

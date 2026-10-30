@@ -1,0 +1,30 @@
+[
+ {
+  "raw": [
+   "baseline:per_tensor_rs",
+   "{'template': 'per_tensor_rs', 'cost_score': 1240.996052, 'sim_time_us': 124099.6052, 'local_ops': 6, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 0, '_params': {'builtin_code': 'def evolved_zero2_hetero_rs(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"developer baseline: one reduce_scatter per gradient tensor\"\"\"\\n    return [xm.reduce_scatter(xm.REDUCE_SUM, t, scale=1.0, scatter_dim=0, shard_count=world_size) for t in grads]\\n'}}"
+  ],
+  "name": "baseline:per_tensor_rs"
+ },
+ {
+  "raw": [
+   "strat:Per-tensor reduce-scatter base",
+   "{'template': 'strategy_enumerate_final', 'cost_score': 1240.996052, 'sim_time_us': 124099.6052, 'local_ops': 6, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 0, '_params': {'evolved_code': 'def evolved_zero2_hetero_rs(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"Per-tensor reduce-scatter baseline: one reduce_scatter per gradient tensor\"\"\"\\n    results = []\\n    for t in grads:\\n        # Issue one reduce_scatter operation per tensor\\n        # This reduces (sums) across all ranks and scatters the result\\n        # Each rank gets its own shard of size numel // world_size\\n        shard = xm.reduce_scatter(\\n            xm.REDUCE_SUM,\\n            t,\\n            scale=1.0,\\n            scatter_dim=0,\\n            shard_count=world_size\\n        )\\n        results.append(shard)\\n    return results'}}"
+  ],
+  "name": "strat:Per-tensor reduce-scatter base"
+ },
+ {
+  "raw": [
+   "baseline:cat_dim1_rs",
+   "{'template': 'cat_dim1_rs', 'cost_score': 1244.2766519999996, 'sim_time_us': 124427.66519999996, 'local_ops': 16, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 0, '_params': {'builtin_code': 'def evolved_zero2_hetero_rs(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"one reduce_scatter over the dim-1 concatenation of the (world_size, -1) views\"\"\"\\n    per = [t.numel() // world_size for t in grads]\\n    view = torch.cat([t.reshape(world_size, -1) for t in grads], dim=1).reshape(-1)\\n    r = xm.reduce_scatter(xm.REDUCE_SUM, view, scale=1.0, scatter_dim=0, shard_count=world_size); outs = []; off = 0\\n    for n in per: outs.append(r[off:off + n]); off += n\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:cat_dim1_rs"
+ },
+ {
+  "raw": [
+   "baseline:flat_ar_then_slice",
+   "{'template': 'flat_ar_then_slice', 'cost_score': 2473.2202520000005, 'sim_time_us': 247322.02520000003, 'local_ops': 15, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'builtin_code': 'def evolved_zero2_hetero_rs(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    flat = torch.cat([t.reshape(-1) for t in grads]); r = xm.all_reduce(xm.REDUCE_SUM, flat); outs = []; off = 0\\n    for t in grads: n = t.numel() // world_size; outs.append(r[off + rank * n: off + (rank + 1) * n]); off += t.numel()\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:flat_ar_then_slice"
+ }
+]

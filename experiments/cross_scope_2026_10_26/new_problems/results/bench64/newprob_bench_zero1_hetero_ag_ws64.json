@@ -1,0 +1,41 @@
+{
+ "problem": "zero1_hetero_ag",
+ "ws": 64,
+ "results": {
+  "per_tensor_ag": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 14.012575149536133,
+   "mean_ms": 341.07649326324463,
+   "status": "ok"
+  },
+  "flat_cat_ag": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 12.92574405670166,
+   "mean_ms": 19.84127362569173,
+   "status": "ok"
+  },
+  "pad_equal_stack_ag": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 26.378750801086426,
+   "mean_ms": 32.96341101328532,
+   "status": "ok"
+  },
+  "per_tensor_ag_native": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 9.606003761291504,
+   "mean_ms": 15.004388491312662,
+   "status": "ok"
+  },
+  "flat_cat_ag_native": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 10.756850242614746,
+   "mean_ms": 22.498393058776855,
+   "status": "ok"
+  }
+ }
+}

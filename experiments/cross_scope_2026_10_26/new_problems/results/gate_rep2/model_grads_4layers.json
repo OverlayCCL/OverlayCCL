@@ -1,0 +1,41 @@
+{
+ "hw_problem": "model_grads_4layers",
+ "search_problem": "model_grads_4layers",
+ "phase3_tag": "v11",
+ "gate_candidates": [
+  [
+   "gate_1",
+   "strat:Two-bucket layer-pair bundling",
+   64218.165199999996
+  ],
+  [
+   "gate_2",
+   "baseline:per_layer_bucket",
+   64218.16520000001
+  ],
+  [
+   "gate_3",
+   "baseline:flat_cat_ar",
+   64218.16520000004
+  ]
+ ],
+ "measured_ms": {
+  "per_tensor_ar": 431.4088821411133,
+  "gate_3": 96.94147109985352,
+  "gate_2": 100.9678840637207,
+  "gate_1": 97.23329544067383,
+  "per_layer_bucket": 100.9666919708252,
+  "flat_cat_ar": 96.78816795349121
+ },
+ "effective": {
+  "per_tensor_ar": true,
+  "gate_3": true,
+  "gate_2": true,
+  "gate_1": true,
+  "per_layer_bucket": true,
+  "flat_cat_ar": true
+ },
+ "gate_choice": "gate_3",
+ "best_overall": "flat_cat_ar",
+ "independent_pieces": false
+}

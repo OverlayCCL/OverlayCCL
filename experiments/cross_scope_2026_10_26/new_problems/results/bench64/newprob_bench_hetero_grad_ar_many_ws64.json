@@ -1,0 +1,55 @@
+{
+ "problem": "hetero_grad_ar_many",
+ "ws": 64,
+ "results": {
+  "per_tensor_ar": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 29.378533363342285,
+   "mean_ms": 36.1140251159668,
+   "status": "ok"
+  },
+  "flat_cat_ar": {
+   "max_abs_diff": 0.0078125,
+   "ok": true,
+   "med_ms": 25.311589241027832,
+   "mean_ms": 31.895772616068523,
+   "status": "ok"
+  },
+  "flat_cat_pad_pow2": {
+   "max_abs_diff": 0.00732421875,
+   "ok": true,
+   "med_ms": 28.561115264892578,
+   "mean_ms": 55.42647838592529,
+   "status": "ok"
+  },
+  "bucket_16mb": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 40.78507423400879,
+   "mean_ms": 61.8247906366984,
+   "status": "ok"
+  },
+  "bucket_16mb_pad": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 44.65508460998535,
+   "mean_ms": 55.0064484278361,
+   "status": "ok"
+  },
+  "flat_copy_into_buffer": {
+   "max_abs_diff": 0.0078125,
+   "ok": true,
+   "med_ms": 353.2804250717163,
+   "mean_ms": 359.86541906992596,
+   "status": "ok"
+  },
+  "pad_equal_cat": {
+   "max_abs_diff": 0.0078125,
+   "ok": true,
+   "med_ms": 163.41352462768555,
+   "mean_ms": 164.3585205078125,
+   "status": "ok"
+  }
+ }
+}

@@ -1,0 +1,30 @@
+[
+ {
+  "raw": [
+   "strat:refined-from-Single flat conca",
+   "{'template': 'strategy_enumerate_final', 'cost_score': 729.5122519999999, 'sim_time_us': 72951.22519999999, 'local_ops': 132, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'evolved_code': 'def evolved_dp_grad_bucketing_64(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"Optimized using native torch.cat/split for minimal local ops.\"\"\"\\n    # Pre-compute metadata once\\n    shapes = [t.shape for t in grads]\\n    numels = [t.numel() for t in grads]\\n    \\n    # Single native concatenation (more efficient than manual loop)\\n    flat = torch.cat([t.view(-1) for t in grads])\\n    \\n    # Perform single all-reduce operation\\n    reduced = xm.all_reduce(xm.REDUCE_SUM, flat)\\n    \\n    # Split back using native torch.split (more efficient than manual slicing loop)\\n    flat_outs = torch.split(reduced, numels)\\n    \\n    # Reshape to original shapes (only metadata operation, no copies)\\n    outs = [flat_outs[i].reshape(shapes[i]) for i in range(len(grads))]\\n    \\n    return outs'}}"
+  ],
+  "name": "strat:refined-from-Single flat conca"
+ },
+ {
+  "raw": [
+   "baseline:flat_cat_ar",
+   "{'template': 'flat_cat_ar', 'cost_score': 763.4408519999965, 'sim_time_us': 76344.08519999965, 'local_ops': 195, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'builtin_code': 'def evolved_dp_grad_bucketing_64(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    flat = torch.cat([t.reshape(-1) for t in grads]); r = xm.all_reduce(xm.REDUCE_SUM, flat)\\n    outs = []; off = 0\\n    for t in grads: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:flat_cat_ar"
+ },
+ {
+  "raw": [
+   "baseline:bucketed_ar",
+   "{'template': 'bucketed_ar', 'cost_score': 763.4408519999965, 'sim_time_us': 76344.08519999965, 'local_ops': 195, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'builtin_code': 'def evolved_dp_grad_bucketing_64(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"fixed-size buckets in order (exact bytes, a few dispatches)\"\"\"\\n    outs = []; chunk = []; acc = 0; lim = 4 * 1024 * 1024\\n    def flush(chunk):\\n        flat = torch.cat([t.reshape(-1) for t in chunk]); r = xm.all_reduce(xm.REDUCE_SUM, flat); off = 0\\n        for t in chunk: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    for t in grads:\\n        chunk.append(t); acc += t.numel()\\n        if acc >= lim: flush(chunk); chunk = []; acc = 0\\n    if chunk: flush(chunk)\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:bucketed_ar"
+ },
+ {
+  "raw": [
+   "baseline:per_tensor_ar",
+   "{'template': 'per_tensor_ar', 'cost_score': 898.3960134973885, 'sim_time_us': 89839.60134973885, 'local_ops': 64, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 64, '_params': {'builtin_code': 'def evolved_dp_grad_bucketing_64(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"developer baseline: one all_reduce per gradient tensor (DDP hook per parameter)\"\"\"\\n    return [xm.all_reduce(xm.REDUCE_SUM, t) for t in grads]\\n'}}"
+  ],
+  "name": "baseline:per_tensor_ar"
+ }
+]

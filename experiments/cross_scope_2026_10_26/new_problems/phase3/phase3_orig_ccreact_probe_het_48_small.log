@@ -1,0 +1,115 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of 48 mixed-size 1-D tensors (small sizes)
+======================================================================
+  per_tensor_ar: 60032.4 us, 48 local ops, 0 ag, 48 ar, 0 cp
+  flat_cat_ar: 62397.5 us, 147 local ops, 0 ag, 1 ar, 0 cp
+  bucketed_ar: 62397.5 us, 162 local ops, 0 ag, 6 ar, 0 cp
+  bucketed_ar_4: 64455.1 us, 179 local ops, 0 ag, 12 ar, 0 cp
+  bucketed_ar_16: 62397.5 us, 153 local ops, 0 ag, 3 ar, 0 cp
+
+  Best baseline: baseline:per_tensor_ar (60032.4 us)
+
+======================================================================
+[Phase 3 / CC-ReAct] Single-trajectory: DP gradient all-reduce of 48 mixed-size 1-D tensors (small sizes)
+======================================================================
+  CC-ReAct total turn budget: 20 (== multi-island 5 islands x 4 rounds)
+  Starting from baseline: per_tensor_ar
+  Starting template: per_tensor_ar (XLA)
+  Baseline: 540.0 us, 0 permutes, 0 gathers, 48 local ops
+
+  --- Evolution round 1 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 1344.0 us (0 permutes, 0 gathers, 156 local ops)
+
+  --- Evolution round 2 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 1470.0 us (0 permutes, 0 gathers, 114 local ops)
+
+  --- Evolution round 3 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 1344.0 us (0 permutes, 0 gathers, 156 local ops)
+
+  --- Evolution round 4 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 406.0 us (0 permutes, 1 gathers, 149 local ops)
+  NEW BEST: 406.0 us (24.8% improvement)
+
+  --- Evolution round 5 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 944.0 us (0 permutes, 0 gathers, 152 local ops)
+
+  --- Evolution round 6 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 387.0 us (0 permutes, 1 gathers, 102 local ops)
+  NEW BEST: 387.0 us (4.7% improvement)
+
+  --- Evolution round 7 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 344.0 us (0 permutes, 0 gathers, 146 local ops)
+  NEW BEST: 344.0 us (11.1% improvement)
+
+  --- Evolution round 8 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 325.0 us (0 permutes, 0 gathers, 99 local ops)
+  NEW BEST: 325.0 us (5.5% improvement)
+
+  --- Evolution round 9 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 229.0 us (0 permutes, 0 gathers, 3 local ops)
+  NEW BEST: 229.0 us (29.5% improvement)
+
+  --- Evolution round 10 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 229.0 us (0 permutes, 0 gathers, 3 local ops)
+
+  --- Evolution round 11 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 229.0 us (0 permutes, 0 gathers, 3 local ops)
+
+  --- Evolution round 12 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 229.0 us (0 permutes, 0 gathers, 3 local ops)
+
+  --- Evolution round 13 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 229.0 us (0 permutes, 0 gathers, 3 local ops)
+
+  --- Evolution round 14 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 248.0 us (0 permutes, 0 gathers, 50 local ops)
+
+  --- Evolution round 15 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 1374.0 us (0 permutes, 0 gathers, 18 local ops)
+
+  --- Evolution round 16 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 916.0 us (0 permutes, 0 gathers, 12 local ops)
+
+  --- Evolution round 17 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 1374.0 us (0 permutes, 0 gathers, 18 local ops)
+
+  --- Evolution round 18 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 248.0 us (0 permutes, 0 gathers, 50 local ops)
+
+  --- Evolution round 19 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 1374.0 us (0 permutes, 0 gathers, 18 local ops)
+
+  --- Evolution round 20 ---
+  Correctness: PASS (including bf16)
+  Benchmark: 458.0 us (0 permutes, 0 gathers, 6 local ops)
+
+  CC-ReAct complete. 6 total candidates.
+
+=== Phase 3 result for probe_het_48_small (wall 460s): 6 candidates, sim ranking ===
+           1e+18  cc:final  code=no
+           1e+18  baseline:per_tensor_ar  code=no
+           1e+18  baseline:bucketed_ar  code=no
+           1e+18  baseline:bucketed_ar_16  code=no
+           1e+18  baseline:flat_cat_ar  code=no
+           1e+18  baseline:bucketed_ar_4  code=no

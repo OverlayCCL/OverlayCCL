@@ -1,0 +1,41 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of 24 mixed-size 1-D tensors (mid sizes)
+======================================================================
+  per_tensor_ar: 497190.5 us, 24 local ops, 0 ag, 24 ar, 0 cp
+  flat_cat_ar: 467256.9 us, 75 local ops, 0 ag, 1 ar, 0 cp
+  bucketed_ar: 469854.7 us, 81 local ops, 0 ag, 3 ar, 0 cp
+
+  Best baseline: baseline:flat_cat_ar (467256.9 us)
+
+======================================================================
+[Phase 3 / Strategy-Enumerate] DP gradient all-reduce of 24 mixed-size 1-D tensors (mid sizes)
+======================================================================
+  K=5 strategies, R=2 refinement rounds per top-2 (budget ~10 LLM calls)
+  Enumerated 5 strategies:
+    1. Single flat concatenation all-reduce: Concatenate all 24 tensors into one flat buffer and issue a single all_reduce, t...
+    2. In-order bucketing by tensor count: Partition the 24 tensors into K fixed-count buckets (e.g., 3 buckets of 8, or 4 ...
+    3. Two-phase size-stratified buckets: Split tensors into two groups by relative size (e.g., above/below median element...
+    4. Pipelined per-tensor all-reduce stream: Issue all 24 all_reduce calls individually but with explicit mark_step or other ...
+    5. Reduce-scatter then all-gather decomposition: Concatenate all tensors, perform reduce-scatter across world_size chunks (each r...
+  Strategy 1 (Single flat concatenation all-reduce): sim=467256.9 us
+  Strategy 2 (In-order bucketing by tensor count): sim=470925.7 us
+  Strategy 3 (Two-phase size-stratified buckets): sim=474437.7 us
+  Strategy 4 (Pipelined per-tensor all-reduce stream) INCORRECT: CRASH in collect pass 0: world=4 pattern=uniform rank=0: AttributeError: 'MockXM' object has no attr
+  Strategy 5 (Reduce-scatter then all-gather decomposition): sim=467331.9 us
+
+  Top after enumeration:
+    Single flat concatenation all-reduce: 467256.9 us
+    Reduce-scatter then all-gather decomposition: 467331.9 us
+    top 1 round 2: NEW BEST 466925.9 us (0.1% improvement)
+    top 2 round 2: NEW BEST 466667.9 us (0.1% improvement)
+
+  Strategy-Enumerate complete. 6 total candidates.
+  Best: refined-from-Reduce-scatter then all-gather decomposition (sim=466667.9 us)
+
+=== Phase 3 result for probe_het_24_mid (wall 91s): 4 candidates, sim ranking ===
+           1e+18  strat:refined-from-Reduce-scatter th  code=no
+           1e+18  baseline:flat_cat_ar  code=no
+           1e+18  baseline:bucketed_ar  code=no
+           1e+18  baseline:per_tensor_ar  code=no

@@ -1,0 +1,14 @@
+{
+ "ag_slice_pl0": {
+  "max_abs_diff": 0.0009765625,
+  "ref_scale": 0.0322265625,
+  "ok": true,
+  "status": "ok"
+ },
+ "ag_t_rs_pl0": {
+  "max_abs_diff": 0.0,
+  "ref_scale": 0.0322265625,
+  "ok": true,
+  "status": "ok"
+ }
+}

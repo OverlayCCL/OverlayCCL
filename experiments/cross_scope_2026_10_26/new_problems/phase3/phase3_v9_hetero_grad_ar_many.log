@@ -1,0 +1,38 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of 48 heterogeneous 2-D gradients (flat concat pathology instance)
+======================================================================
+  per_tensor_ar: 682524.2 us, 48 local ops, 0 ag, 48 ar, 0 cp
+  flat_cat_ar: 1042771.0 us, 147 local ops, 0 ag, 1 ar, 0 cp
+  bucketed_ar: 1042771.0 us, 147 local ops, 0 ag, 1 ar, 0 cp
+
+  Best baseline: baseline:per_tensor_ar (682524.2 us)
+
+======================================================================
+[Phase 3 / Strategy-Enumerate] DP gradient all-reduce of 48 heterogeneous 2-D gradients (flat concat pathology instance)
+======================================================================
+  K=5 strategies, R=2 refinement rounds per top-2 (budget ~10 LLM calls)
+  Enumerated 5 strategies:
+    1. Per-tensor all-reduce baseline: Issues 48 separate xm.all_reduce calls, one per gradient tensor, preserving orig...
+    2. Single flat concatenation all-reduce: Concatenates all 48 gradients into one 1-D vector, performs a single all-reduce,...
+    3. Fixed-count in-order buckets: Partitions the 48 gradients into K fixed buckets (e.g., 6 or 8) by dividing the ...
+    4. Row-dimension homogeneous grouping buckets: Groups the 48 2-D tensors by their row dimension (since rows are equal across te...
+    5. Reduce-scatter then all-gather decomposition: Splits each gradient along its row dimension into world_size chunks, performs re...
+  Strategy 1 (Per-tensor all-reduce baseline): sim=682524.2 us
+  Strategy 2 (Single flat concatenation all-reduce): sim=1042771.0 us
+  Strategy 3 (Fixed-count in-order buckets): sim=584563.9 us
+  Strategy 4 (Row-dimension homogeneous grouping buckets): sim=579985.0 us
+
+  Top after enumeration:
+    Row-dimension homogeneous grouping buckets: 579985.0 us
+    Fixed-count in-order buckets: 584563.9 us
+
+  Strategy-Enumerate complete. 6 total candidates.
+  Best: Row-dimension homogeneous grouping buckets (sim=579985.0 us)
+
+=== Phase 3 result for hetero_grad_ar_many (wall 97s): 4 candidates, sim ranking ===
+           1e+18  strat:Row-dimension homogeneous grou  code=no
+           1e+18  baseline:per_tensor_ar  code=no
+           1e+18  baseline:flat_cat_ar  code=no
+           1e+18  baseline:bucketed_ar  code=no

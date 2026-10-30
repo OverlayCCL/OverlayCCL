@@ -1,0 +1,37 @@
+[
+ {
+  "raw": [
+   "strat:refined-from-Reverse-order gra",
+   "{'template': 'strategy_enumerate_final', 'cost_score': 633.9520520000001, 'sim_time_us': 63395.20520000001, 'local_ops': 84, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 4, '_params': {'evolved_code': 'def evolved_model_grads_4layers(grads, rank, world_size, num_devices, cores"
+  ],
+  "name": "strat:refined-from-Reverse-order gra"
+ },
+ {
+  "raw": [
+   "baseline:per_layer_bucket",
+   "{'template': 'per_layer_bucket', 'cost_score': 642.1816520000001, 'sim_time_us': 64218.16520000001, 'local_ops': 84, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 4, '_params': {'builtin_code': 'def evolved_model_grads_4layers(grads, rank, world_size, num_devices, cores_per_dev"
+  ],
+  "name": "baseline:per_layer_bucket"
+ },
+ {
+  "raw": [
+   "baseline:flat_cat_ar",
+   "{'template': 'flat_cat_ar', 'cost_score': 642.1816520000004, 'sim_time_us': 64218.16520000004, 'local_ops': 75, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'builtin_code': 'def evolved_model_grads_4layers(grads, rank, world_size, num_devices, cores_per_device, "
+  ],
+  "name": "baseline:flat_cat_ar"
+ },
+ {
+  "raw": [
+   "baseline:bucketed_ar",
+   "{'template': 'bucketed_ar', 'cost_score': 642.1816520000004, 'sim_time_us': 64218.16520000004, 'local_ops': 75, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'builtin_code': 'def evolved_model_grads_4layers(grads, rank, world_size, num_devices, cores_per_device, "
+  ],
+  "name": "baseline:bucketed_ar"
+ },
+ {
+  "raw": [
+   "baseline:per_tensor_ar",
+   "{'template': 'per_tensor_ar', 'cost_score': 1924.4185105762517, 'sim_time_us': 192441.85105762517, 'local_ops': 24, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 24, '_params': {'builtin_code': 'def evolved_model_grads_4layers(grads, rank, world_size, num_devices, cores_per_dev"
+  ],
+  "name": "baseline:per_tensor_ar"
+ }
+]

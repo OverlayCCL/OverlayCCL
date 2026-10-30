@@ -1,0 +1,52 @@
+{
+ "hs_a_64x64k_512k": {
+  "per_tensor_ar": 14.001011848449707,
+  "bucket_4mb": 58.26711654663086,
+  "gate_1": 12.570500373840332
+ },
+ "probe_het_48_small": {
+  "per_tensor_ar": 12.134313583374023,
+  "bucket6": 11.893272399902344,
+  "gate_2": 11.37089729309082
+ },
+ "layer_grads_hetero_ar": {
+  "per_tensor_ar": 12.877345085144043,
+  "flat_cat_ar": 14.374494552612305,
+  "gate_3": 14.4805908203125
+ },
+ "probe_het_24_mid": {
+  "per_tensor_ar": 23.70476722717285,
+  "bucket6": 26.809096336364746,
+  "gate_2": 26.276826858520508
+ },
+ "hs_c_32x256k_2m": {
+  "per_tensor_ar": 12.628912925720215,
+  "bucket_4mb": 13.681530952453613,
+  "gate_3": 12.096762657165527
+ },
+ "hetero_grad_ar_many": {
+  "per_tensor_ar": 31.528711318969727,
+  "p3_pick3": 27.05967426300049,
+  "gate_2": 26.869893074035645
+ },
+ "model_grads_4layers": {
+  "per_tensor_ar": 40.692806243896484,
+  "flat_cat_ar": 43.20406913757324,
+  "gate_3": 43.52736473083496
+ },
+ "probe_het_48_mid": {
+  "per_tensor_ar": 42.93513298034668,
+  "bucket6": 50.603628158569336,
+  "gate_4": 55.4656982421875
+ },
+ "zero2_hetero_rs": {
+  "per_tensor_rs": null,
+  "bucket_dim1_rs": null,
+  "gate_1": null
+ },
+ "layer_grads_mixed_dtype": {
+  "per_tensor_ar": 13.01419734954834,
+  "cast_flat_bf16": 14.92166519165039,
+  "gate_1": 14.485836029052734
+ }
+}

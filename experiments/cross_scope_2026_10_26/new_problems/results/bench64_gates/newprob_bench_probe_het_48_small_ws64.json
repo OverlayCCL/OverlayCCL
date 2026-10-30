@@ -1,0 +1,48 @@
+{
+ "problem": "probe_het_48_small",
+ "ws": 64,
+ "results": {
+  "per_tensor_ar": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 11.510729789733887,
+   "mean_ms": 344.26526228586835,
+   "status": "ok"
+  },
+  "bucket6": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 12.799382209777832,
+   "mean_ms": 14.064725240071615,
+   "status": "ok"
+  },
+  "flat_cat_ar": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 11.916160583496094,
+   "mean_ms": 12.386830647786459,
+   "status": "ok"
+  },
+  "gate_1": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 30.766010284423828,
+   "mean_ms": 31.823499997456867,
+   "status": "ok"
+  },
+  "gate_2": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 13.167262077331543,
+   "mean_ms": 14.018146197001139,
+   "status": "ok"
+  },
+  "gate_3": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 12.214422225952148,
+   "mean_ms": 13.259991010030111,
+   "status": "ok"
+  }
+ }
+}

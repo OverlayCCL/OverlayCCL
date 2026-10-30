@@ -1,0 +1,44 @@
+[
+ {
+  "raw": [
+   "strat:refined-from-Two-phase size-st",
+   "{'template': 'strategy_enumerate_final', 'cost_score': 9365.034198669922, 'sim_time_us': 936503.4198669923, 'local_ops': 149, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 2, '_params': {'evolved_code': 'def evolved_probe_het_48_mid(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"Optimized two-phase stratification with minimal concatenations.\\n    Reduce local ops by doing one concat per stratum instead of multiple buckets.\"\"\"\\n    \\n    # Compute sizes and find median\\n    sizes = [t.numel() for t in grads]\\n    sorted_sizes = sorted(sizes)\\n    median_size = sorted_sizes[len(sorted_sizes) // 2]\\n    \\n    # Stratify tensors into large and small groups (preserving order)\\n    large_indices = [i for i, s in enumerate(sizes) if s >= median_size]\\n    small_indices = [i for i, s in enumerate(sizes) if s < median_size]\\n    \\n    # Result container\\n    outs = [None] * len(grads)\\n    \\n    # Process large tensors - single bucket to minimize concat ops\\n    if large_indices:\\n        large_grads = [grads[i] for i in large_indices]\\n        flat = torch.cat([t.reshape(-1) for t in large_grads])\\n        r = xm.all_reduce(xm.REDUCE_SUM, flat)\\n        \\n        off = 0\\n        for idx, t in zip(large_indices, large_grads):\\n            n = t.numel()\\n            outs[idx] = r[off:off + n].view(t.shape)\\n            off += n\\n    \\n    # Process small tensors - single bucket to minimize concat ops\\n    if small_indices:\\n        small_grads = [grads[i] for i in small_indices]\\n        flat = torch.cat([t.reshape(-1) for t in small_grads])\\n        r = xm.all_reduce(xm.REDUCE_SUM, flat)\\n        \\n        off = 0\\n        for idx, t in zip(small_indices, small_grads):\\n            n = t.numel()\\n            outs[idx] = r[off:off + n].view(t.shape)\\n            off += n\\n    \\n    return outs'}}"
+  ],
+  "name": "strat:refined-from-Two-phase size-st"
+ },
+ {
+  "raw": [
+   "baseline:bucketed_ar_16",
+   "{'template': 'bucketed_ar_16', 'cost_score': 9385.05058109798, 'sim_time_us': 938505.0581097979, 'local_ops': 153, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 3, '_params': {'builtin_code': '\\\\\\ndef evolved_probe_het_48_mid(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"in-order buckets of 16 tensors each\"\"\"\\n    outs = []\\n    for b in range(0, len(grads), 16):\\n        chunk = grads[b:b + 16]; flat = torch.cat([t.reshape(-1) for t in chunk]); r = xm.all_reduce(xm.REDUCE_SUM, flat); off = 0\\n        for t in chunk: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:bucketed_ar_16"
+ },
+ {
+  "raw": [
+   "baseline:bucketed_ar",
+   "{'template': 'bucketed_ar', 'cost_score': 9452.457254136352, 'sim_time_us': 945245.7254136351, 'local_ops': 162, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 6, '_params': {'builtin_code': '\\\\\\ndef evolved_probe_het_48_mid(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"in-order buckets of 8 tensors each (size-independent; a few dispatches, exact bytes)\"\"\"\\n    outs = []\\n    for b in range(0, len(grads), 8):\\n        chunk = grads[b:b + 8]; flat = torch.cat([t.reshape(-1) for t in chunk]); r = xm.all_reduce(xm.REDUCE_SUM, flat); off = 0\\n        for t in chunk: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:bucketed_ar"
+ },
+ {
+  "raw": [
+   "baseline:bucketed_ar_4",
+   "{'template': 'bucketed_ar_4', 'cost_score': 9607.317123006358, 'sim_time_us': 960731.7123006359, 'local_ops': 179, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 12, '_params': {'builtin_code': '\\\\\\ndef evolved_probe_het_48_mid(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"in-order buckets of 4 tensors each\"\"\"\\n    outs = []\\n    for b in range(0, len(grads), 4):\\n        chunk = grads[b:b + 4]; flat = torch.cat([t.reshape(-1) for t in chunk]); r = xm.all_reduce(xm.REDUCE_SUM, flat); off = 0\\n        for t in chunk: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:bucketed_ar_4"
+ },
+ {
+  "raw": [
+   "baseline:per_tensor_ar",
+   "{'template': 'per_tensor_ar', 'cost_score': 10941.12216439931, 'sim_time_us': 1094112.216439931, 'local_ops': 48, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 48, '_params': {'builtin_code': 'def evolved_probe_het_48_mid(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"developer baseline: one all_reduce per gradient tensor (DDP hook per parameter)\"\"\"\\n    return [xm.all_reduce(xm.REDUCE_SUM, t) for t in grads]\\n'}}"
+  ],
+  "name": "baseline:per_tensor_ar"
+ },
+ {
+  "raw": [
+   "baseline:flat_cat_ar",
+   "{'template': 'flat_cat_ar', 'cost_score': 16882.842452000004, 'sim_time_us': 1688284.2452000005, 'local_ops': 147, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'builtin_code': 'def evolved_probe_het_48_mid(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    flat = torch.cat([t.reshape(-1) for t in grads]); r = xm.all_reduce(xm.REDUCE_SUM, flat)\\n    outs = []; off = 0\\n    for t in grads: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:flat_cat_ar"
+ }
+]

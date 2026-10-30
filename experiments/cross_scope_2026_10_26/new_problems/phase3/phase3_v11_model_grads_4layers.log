@@ -1,0 +1,41 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of a 4-layer transformer (24 heterogeneous tensors)
+======================================================================
+  per_tensor_ar: 100619.8 us, 24 local ops, 0 ag, 24 ar, 0 cp
+  flat_cat_ar: 64218.2 us, 75 local ops, 0 ag, 1 ar, 0 cp
+  bucketed_ar: 64561.8 us, 81 local ops, 0 ag, 3 ar, 0 cp
+  per_layer_bucket: 64218.2 us, 84 local ops, 0 ag, 4 ar, 0 cp
+
+  Best baseline: baseline:per_layer_bucket (64218.2 us)
+
+======================================================================
+[Phase 3 / Strategy-Enumerate] DP gradient all-reduce of a 4-layer transformer (24 heterogeneous tensors)
+======================================================================
+  K=5 strategies, R=2 refinement rounds per top-2 (budget ~10 LLM calls)
+  Enumerated 5 strategies:
+    1. Two-bucket layer-pair bundling: Group 4 layers into 2 buckets of 12 tensors each (layers 0-1, layers 2-3), flatt...
+    2. Hierarchical three-tier bucketing: First bucket: first 6 tensors (layer 0); second bucket: next 12 tensors (layers ...
+    3. Reduce-scatter then all-gather decomposition: Flatten all 24 tensors into one buffer, perform reduce-scatter to distribute sum...
+    4. Interleaved parameter-type buckets: Group tensors by parameter type across all layers (e.g., all attention weights t...
+    5. Single tensor with sentinel padding: Concatenate all 24 tensors with zero-padding to align each tensor start to a pow...
+  Strategy 1 (Two-bucket layer-pair bundling): sim=64218.2 us
+  Strategy 2 (Hierarchical three-tier bucketing): sim=64561.8 us
+  Strategy 3 (Reduce-scatter then all-gather decomposition): sim=64218.2 us
+  Strategy 4 (Interleaved parameter-type buckets): sim=71539.9 us
+  Strategy 5 (Single tensor with sentinel padding): sim=89336.7 us
+
+  Top after enumeration:
+    Two-bucket layer-pair bundling: 64218.2 us
+    Reduce-scatter then all-gather decomposition: 64218.2 us
+
+  Strategy-Enumerate complete. 7 total candidates.
+  Best: Two-bucket layer-pair bundling (sim=64218.2 us)
+
+=== Phase 3 result for model_grads_4layers (wall 92s): 5 candidates, sim ranking ===
+           1e+18  strat:Two-bucket layer-pair bundling  code=no
+           1e+18  baseline:per_layer_bucket  code=no
+           1e+18  baseline:flat_cat_ar  code=no
+           1e+18  baseline:bucketed_ar  code=no
+           1e+18  baseline:per_tensor_ar  code=no

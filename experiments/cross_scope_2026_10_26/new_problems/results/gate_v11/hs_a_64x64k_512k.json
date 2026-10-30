@@ -1,0 +1,41 @@
+{
+ "hw_problem": "hs_a_64x64k_512k",
+ "search_problem": "dp_grad_bucketing_64",
+ "phase3_tag": "v11",
+ "gate_candidates": [
+  [
+   "gate_1",
+   "strat:refined-from-Alternating bucke",
+   73226.98326483966
+  ],
+  [
+   "gate_2",
+   "baseline:bucketed_ar",
+   77631.80914644402
+  ],
+  [
+   "gate_3",
+   "baseline:flat_cat_ar",
+   134015.76520000026
+  ]
+ ],
+ "measured_ms": {
+  "per_tensor_ar": 98.91939163208008,
+  "gate_1": 73.02641868591309,
+  "gate_3": 111.00053787231445,
+  "gate_2": 74.34368133544922,
+  "bucket_4mb": 71.66051864624023,
+  "flat_cat_ar": 110.82768440246582
+ },
+ "effective": {
+  "per_tensor_ar": true,
+  "gate_1": true,
+  "gate_3": true,
+  "gate_2": true,
+  "bucket_4mb": true,
+  "flat_cat_ar": true
+ },
+ "gate_choice": "gate_1",
+ "best_overall": "bucket_4mb",
+ "independent_pieces": false
+}

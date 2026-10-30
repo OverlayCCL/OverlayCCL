@@ -1,0 +1,27 @@
+{
+ "problem": "probe_het_48_small",
+ "ws": 32,
+ "results": {
+  "per_tensor_ar": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 6.159305572509766,
+   "mean_ms": 504.84533309936523,
+   "status": "ok"
+  },
+  "bucket6": {
+   "max_abs_diff": 0.0048828125,
+   "ok": true,
+   "med_ms": 8.576512336730957,
+   "mean_ms": 8.66551399230957,
+   "status": "ok"
+  },
+  "gate_2": {
+   "max_abs_diff": 0.005859375,
+   "ok": true,
+   "med_ms": 8.72337818145752,
+   "mean_ms": 9.968217213948568,
+   "status": "ok"
+  }
+ }
+}

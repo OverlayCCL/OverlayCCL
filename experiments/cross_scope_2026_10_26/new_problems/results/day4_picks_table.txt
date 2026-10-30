@@ -1,0 +1,77 @@
+problem                candidate                 bench32  b32 x  bench64  b64 x  train64  t64 x  note
+hetero_grad_ar_many    per_tensor_ar               20.70   1.00        —      —    74.55   1.00  n=2/2 
+hetero_grad_ar_many    bucket_16mb                 31.56   0.66        —      —   401.80   0.19  n=2/2 
+hetero_grad_ar_many    bucket_16mb_pad             32.45   0.64        —      —   401.33   0.19  n=2/2 
+hetero_grad_ar_many    flat_cat_ar                 20.72   1.00        —      —   485.95   0.15  n=2/2 bench-tie, training loss
+hetero_grad_ar_many    flat_cat_pad_pow2           22.55   0.92        —      —   480.00   0.16  n=2/2 
+hetero_grad_ar_many    flat_copy_into_buffer      351.71   0.06        —      —        —      —  n=2/0 
+hetero_grad_ar_many    p3_pick2                   119.62   0.17        —      —   745.42   0.10  n=2/2 
+hetero_grad_ar_many    p3_pick3                    18.95   1.09        —      —    65.15   1.14  n=1/1 
+hetero_grad_ar_many    pad_equal_cat              155.29   0.13        —      —  1022.72   0.07  n=2/2 
+
+hs_a_64x64k_512k       per_tensor_ar                8.91   1.00        —      —    99.63   1.00  n=2/2 
+hs_a_64x64k_512k       bucket_4mb                  12.21   0.73        —      —    71.93   1.39  n=2/2 INVERSION(b32)
+hs_a_64x64k_512k       equal_group_stacks          11.72   0.76        —      —   144.35   0.69  n=2/2 
+hs_a_64x64k_512k       flat_cat_2d                 17.60   0.51        —      —   234.01   0.43  n=2/2 
+hs_a_64x64k_512k       flat_cat_ar                 15.84   0.56        —      —   111.16   0.90  n=2/2 
+hs_a_64x64k_512k       flat_cat_clone              16.73   0.53        —      —   112.19   0.89  n=2/2 
+hs_a_64x64k_512k       p3_pick                     16.40   0.54        —      —   111.39   0.89  n=2/2 
+hs_a_64x64k_512k       p3_pick2                    12.17   0.73        —      —   174.72   0.57  n=2/2 
+hs_a_64x64k_512k       p3_pick3                    12.23   0.73        —      —    71.60   1.39  n=1/1 INVERSION(b32)
+hs_a_64x64k_512k       pad_equal_stack             17.31   0.51        —      —   191.70   0.52  n=2/2 
+
+hs_c_32x256k_2m        per_tensor_ar                8.97   1.00        —      —   105.02   1.00  n=1/2 
+hs_c_32x256k_2m        bucket_4mb                  11.59   0.77        —      —    90.17   1.16  n=1/2 INVERSION(b32)
+hs_c_32x256k_2m        equal_group_stacks          10.15   0.88        —      —   102.61   1.02  n=1/2 
+hs_c_32x256k_2m        flat_cat_ar                  9.51   0.94        —      —    99.61   1.05  n=1/2 
+hs_c_32x256k_2m        p3_pick2                     9.89   0.91        —      —    99.75   1.05  n=1/2 
+hs_c_32x256k_2m        pad_equal_stack             17.25   0.52        —      —   141.64   0.74  n=1/2 
+
+layer_grads_hetero_ar  per_tensor_ar                9.70   1.00        —      —    61.52   1.00  n=1/1 
+layer_grads_hetero_ar  bucket_32mb                 11.14   0.87        —      —    44.03   1.40  n=1/1 INVERSION(b32)
+layer_grads_hetero_ar  equal_group_stacks          11.32   0.86        —      —    44.00   1.40  n=1/1 INVERSION(b32)
+layer_grads_hetero_ar  flat_cat_2d                 11.03   0.88        —      —    39.82   1.54  n=1/1 INVERSION(b32)
+layer_grads_hetero_ar  flat_cat_ar                 10.43   0.93        —      —    36.62   1.68  n=1/1 
+layer_grads_hetero_ar  flat_cat_clone              10.47   0.93        —      —    36.95   1.67  n=1/1 
+layer_grads_hetero_ar  p3_pick                     10.35   0.94        —      —    36.76   1.67  n=1/1 
+layer_grads_hetero_ar  p3_pick3                    10.48   0.93        —      —    36.83   1.67  n=1/1 
+layer_grads_hetero_ar  per_tensor_marked           24.64   0.39        —      —    82.64   0.74  n=1/1 
+
+layer_grads_mixed_dtype per_tensor_ar                9.58   1.00        —      —    61.23   1.00  n=3/3 
+layer_grads_mixed_dtype cast_flat_bf16              10.45   0.92        —      —    36.70   1.67  n=3/3 
+layer_grads_mixed_dtype cast_flat_fp32              13.81   0.69        —      —    43.22   1.42  n=3/3 INVERSION(b32)
+layer_grads_mixed_dtype p3_pick                     18.93   0.51        —      —    51.55   1.19  n=3/3 INVERSION(b32)
+layer_grads_mixed_dtype p3_pick3                    18.89   0.51        —      —    51.51   1.19  n=1/1 INVERSION(b32)
+layer_grads_mixed_dtype two_dtype_groups            19.01   0.50        —      —    46.63   1.31  n=3/3 INVERSION(b32)
+
+model_grads_4layers    per_tensor_ar               24.98   1.00        —      —   433.12   1.00  n=1/1 
+model_grads_4layers    bucket_32mb                 35.93   0.70        —      —   169.44   2.56  n=1/1 INVERSION(b32)
+model_grads_4layers    flat_cat_ar                 28.50   0.88        —      —    96.84   4.47  n=1/1 INVERSION(b32)
+model_grads_4layers    p3_pick                     29.70   0.84        —      —   100.66   4.30  n=1/1 INVERSION(b32)
+model_grads_4layers    p3_pick3                    35.76   0.70        —      —   123.89   3.50  n=1/1 INVERSION(b32)
+model_grads_4layers    per_layer_bucket            29.38   0.85        —      —   100.99   4.29  n=1/1 INVERSION(b32)
+model_grads_4layers    per_tensor_marked           92.28   0.27        —      —   308.31   1.40  n=1/1 INVERSION(b32)
+
+model_grads_fp32       per_tensor_ar               37.07   1.00        —      —   472.37   1.00  n=1/1 
+model_grads_fp32       flat_cat_ar                 48.51   0.76        —      —   140.06   3.37  n=1/1 INVERSION(b32)
+model_grads_fp32       per_layer_bucket            48.51   0.76        —      —   140.45   3.36  n=1/1 INVERSION(b32)
+
+probe_het_24_mid       per_tensor_ar               15.41   1.00        —      —   304.28   1.00  n=1/1 
+probe_het_24_mid       bucket6                     19.27   0.80        —      —   271.82   1.12  n=1/1 INVERSION(b32)
+probe_het_24_mid       flat_cat_ar                 16.56   0.93        —      —   271.65   1.12  n=1/1 
+probe_het_24_mid       p3_pick                     16.86   0.91        —      —   271.53   1.12  n=1/1 
+
+probe_het_48_mid       per_tensor_ar               26.49   1.00        —      —   602.86   1.00  n=3/3 
+probe_het_48_mid       bucket6                     35.47   0.75        —      —   516.42   1.17  n=3/3 INVERSION(b32)
+probe_het_48_mid       flat_cat_ar                 76.00   0.35        —      —   628.30   0.96  n=3/3 
+probe_het_48_mid       p3_pick                     76.39   0.35        —      —   628.87   0.96  n=3/3 
+probe_het_48_mid       p3_pick2                   628.80   0.04        —      —        —      —  n=2/0 
+probe_het_48_mid       p3_pick3                    34.81   0.76        —      —   806.33   0.75  n=1/1 
+
+probe_het_48_small     per_tensor_ar                7.99   1.00        —      —    50.05   1.00  n=3/3 
+probe_het_48_small     bucket6                     10.49   0.76        —      —    32.13   1.56  n=3/3 INVERSION(b32)
+probe_het_48_small     flat_cat_ar                 10.33   0.77        —      —    53.80   0.93  n=3/3 
+probe_het_48_small     p3_pick                     45.23   0.18        —      —        —      —  n=3/0 
+probe_het_48_small     p3_pick2                    10.68   0.75        —      —    54.18   0.92  n=2/2 
+probe_het_48_small     p3_pick3                    10.56   0.76        —      —    54.61   0.92  n=1/1 
+

@@ -1,0 +1,30 @@
+[
+ {
+  "raw": [
+   "strat:refined-from-Reduce-scatter fo",
+   "{'template': 'strategy_enumerate_final', 'cost_score': 747.7352520000006, 'sim_time_us': 74773.52520000006, 'local_ops': 196, 'num_collective_permute': 0, 'num_all_gather': 1, 'num_all_reduce': 0, '_params': {'evolved_code': 'def evolved_dp_grad_bucketing_64(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"Reduce-scatter followed by all-gather decomposition of all-reduce\"\"\"\\n    # Concatenate all gradients into a single flat buffer\\n    flat = torch.cat([t.reshape(-1) for t in grads])\\n    \\n    # Reduce-scatter: each rank gets 1/world_size of the summed data\\n    local_reduced = xm.reduce_scatter(\\n        xm.REDUCE_SUM,\\n        flat,\\n        scale=1.0,\\n        scatter_dim=0,\\n        shard_count=world_size,\\n        groups=None\\n    )\\n    \\n    # All-gather: reconstruct the full reduced buffer on all ranks\\n    reduced_flat = xm.all_gather(local_reduced, dim=0)\\n    \\n    # Trim to original size if needed (use narrow instead of slice for metadata-only op)\\n    total_size = flat.numel()\\n    if reduced_flat.numel() > total_size:\\n        reduced_flat = reduced_flat.narrow(0, 0, total_size)\\n    \\n    # Unpack back into individual gradient tensors using narrow/view (metadata-only ops)\\n    outs = []\\n    off = 0\\n    for t in grads:\\n        n = t.numel()\\n        # Use narrow (metadata-only) instead of slicing, then view to reshape\\n        outs.append(reduced_flat.narrow(0, off, n).view(t.shape))\\n        off += n\\n    \\n    return outs'}}"
+  ],
+  "name": "strat:refined-from-Reduce-scatter fo"
+ },
+ {
+  "raw": [
+   "baseline:bucketed_ar",
+   "{'template': 'bucketed_ar', 'cost_score': 776.3180914644403, 'sim_time_us': 77631.80914644402, 'local_ops': 216, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 8, '_params': {'builtin_code': '\\\\\\ndef evolved_dp_grad_bucketing_64(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"in-order buckets of 8 tensors each (size-independent; a few dispatches, exact bytes)\"\"\"\\n    outs = []\\n    for b in range(0, len(grads), 8):\\n        chunk = grads[b:b + 8]; flat = torch.cat([t.reshape(-1) for t in chunk]); r = xm.all_reduce(xm.REDUCE_SUM, flat); off = 0\\n        for t in chunk: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:bucketed_ar"
+ },
+ {
+  "raw": [
+   "baseline:flat_cat_ar",
+   "{'template': 'flat_cat_ar', 'cost_score': 1340.1576520000026, 'sim_time_us': 134015.76520000026, 'local_ops': 195, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 1, '_params': {'builtin_code': 'def evolved_dp_grad_bucketing_64(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    flat = torch.cat([t.reshape(-1) for t in grads]); r = xm.all_reduce(xm.REDUCE_SUM, flat)\\n    outs = []; off = 0\\n    for t in grads: n = t.numel(); outs.append(r[off:off + n].view(t.shape)); off += n\\n    return outs\\n'}}"
+  ],
+  "name": "baseline:flat_cat_ar"
+ },
+ {
+  "raw": [
+   "baseline:per_tensor_ar",
+   "{'template': 'per_tensor_ar', 'cost_score': 1410.3960134973888, 'sim_time_us': 141039.6013497389, 'local_ops': 64, 'num_collective_permute': 0, 'num_all_gather': 0, 'num_all_reduce': 64, '_params': {'builtin_code': 'def evolved_dp_grad_bucketing_64(grads, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\\n    \"\"\"developer baseline: one all_reduce per gradient tensor (DDP hook per parameter)\"\"\"\\n    return [xm.all_reduce(xm.REDUCE_SUM, t) for t in grads]\\n'}}"
+  ],
+  "name": "baseline:per_tensor_ar"
+ }
+]

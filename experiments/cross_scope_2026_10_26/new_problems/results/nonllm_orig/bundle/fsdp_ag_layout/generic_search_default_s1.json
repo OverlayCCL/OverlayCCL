@@ -1,0 +1,57 @@
+{
+ "fsdp_ag_layout": {
+  "random": {
+   "best_sim": 2973917.2052,
+   "code": "def evolved_fsdp_ag_layout(shards, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\n    \"\"\"developer baseline: all_gather along the shard dimension with the default (pinned) layout\"\"\"\n    return [xm.all_gather(s, dim=1 if s.shape[0] == 2048 else 0) for s in shards]",
+   "evals": 400,
+   "structure": {
+    "colls": {
+     "all_gather": 1
+    },
+    "loops": 0
+   }
+  },
+  "ga": {
+   "best_sim": 2973917.2052,
+   "code": "def evolved_fsdp_ag_layout(shards, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\n    \"\"\"developer baseline: all_gather along the shard dimension with the default (pinned) layout\"\"\"\n    return [xm.all_gather(s, dim=1 if s.shape[0] == 2048 else 0) for s in shards]",
+   "evals": 400,
+   "structure": {
+    "colls": {
+     "all_gather": 1
+    },
+    "loops": 0
+   }
+  },
+  "beam": {
+   "best_sim": 2973917.2052,
+   "code": "def evolved_fsdp_ag_layout(shards, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\n    \"\"\"developer baseline: all_gather along the shard dimension with the default (pinned) layout\"\"\"\n    return [xm.all_gather(s, dim=1 if s.shape[0] == 2048 else 0) for s in shards]",
+   "evals": 24,
+   "structure": {
+    "colls": {
+     "all_gather": 1
+    },
+    "loops": 0
+   }
+  },
+  "rules": {
+   "best_sim": 2973917.2052,
+   "code": "def evolved_fsdp_ag_layout(shards, rank, world_size, num_devices, cores_per_device, xm, torch, num_nodes=1):\n    \"\"\"developer baseline: all_gather along the shard dimension with the default (pinned) layout\"\"\"\n    return [xm.all_gather(s, dim=1 if s.shape[0] == 2048 else 0) for s in shards]",
+   "passes": [],
+   "evals": 41,
+   "structure": {
+    "colls": {
+     "all_gather": 1
+    },
+    "loops": 0
+   }
+  },
+  "start_sim": 2973917.2052,
+  "start_structure": {
+   "colls": {
+    "all_gather": 1
+   },
+   "loops": 0
+  },
+  "secs": 31.8
+ }
+}

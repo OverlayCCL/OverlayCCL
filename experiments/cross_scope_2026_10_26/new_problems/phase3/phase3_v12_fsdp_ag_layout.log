@@ -1,0 +1,40 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: FSDP parameter prefetch: six all-gathers per two layers (layout of the gather)
+======================================================================
+  ag_pinned: 52358.3 us, 6 local ops, 6 ag, 0 ar, 0 cp
+  ag_dim0_t: 52856.0 us, 18 local ops, 6 ag, 0 ar, 0 cp
+  ag_dim0_t_native: 30552.3 us, 18 local ops, 6 ag, 0 ar, 0 cp
+
+  Best baseline: baseline:ag_dim0_t_native (30552.3 us)
+
+======================================================================
+[Phase 3 / Strategy-Enumerate] FSDP parameter prefetch: six all-gathers per two layers (layout of the gather)
+======================================================================
+  K=5 strategies, R=2 refinement rounds per top-2 (budget ~10 LLM calls)
+  Enumerated 5 strategies:
+    1. Sequential per-shard pinned all-gather: Six independent xm.all_gather calls with pin_layout=True, each gathering along t...
+    2. Transpose-normalize to dim-0 native gather: Transpose all column shards to make them row-major, then use pin_layout=False al...
+    3. Concatenate-gather-split per layer pair: For each layer, concatenate its three shards (two column + one row) along a comm...
+    4. Pipelined interleaved gather with async: Issue all six all-gather operations asynchronously (xm.all_gather returns immedi...
+    5. Hierarchical gather with intra-layer batching: Batch the two column shards per layer into a single 3D tensor (stack along new d...
+  Strategy 1 (Sequential per-shard pinned all-gather): sim=52358.3 us
+  Strategy 2 (Transpose-normalize to dim-0 native gather): sim=30552.3 us
+  Strategy 3 (Concatenate-gather-split per layer pair): sim=52112.8 us
+  Strategy 4 (Pipelined interleaved gather with async): sim=52358.3 us
+  Strategy 5 (Hierarchical gather with intra-layer batching): sim=30309.3 us
+
+  Top after enumeration:
+    Hierarchical gather with intra-layer batching: 30309.3 us
+    Transpose-normalize to dim-0 native gather: 30552.3 us
+    top 2 round 1: NEW BEST 30054.6 us (1.6% improvement)
+
+  Strategy-Enumerate complete. 7 total candidates.
+  Best: refined-from-Transpose-normalize to dim-0 native gather (sim=30054.6 us)
+
+=== Phase 3 result for fsdp_ag_layout (wall 108s): 4 candidates, sim ranking ===
+           1e+18  strat:refined-from-Transpose-normali  code=no
+           1e+18  baseline:ag_dim0_t_native  code=no
+           1e+18  baseline:ag_pinned  code=no
+           1e+18  baseline:ag_dim0_t  code=no

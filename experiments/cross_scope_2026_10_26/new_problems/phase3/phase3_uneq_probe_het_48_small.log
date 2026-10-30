@@ -1,0 +1,40 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of 48 mixed-size 1-D tensors (small sizes)
+======================================================================
+  per_tensor_ar: 69078.3 us, 48 local ops, 0 ag, 48 ar, 0 cp
+  flat_cat_ar: 109583.4 us, 147 local ops, 0 ag, 1 ar, 0 cp
+  bucketed_ar: 109583.4 us, 147 local ops, 0 ag, 1 ar, 0 cp
+
+  Best baseline: baseline:per_tensor_ar (69078.3 us)
+
+======================================================================
+[Phase 3 / Strategy-Enumerate] DP gradient all-reduce of 48 mixed-size 1-D tensors (small sizes)
+======================================================================
+  K=5 strategies, R=2 refinement rounds per top-2 (budget ~10 LLM calls)
+  Enumerated 5 strategies:
+    1. Per-tensor all-reduce baseline: Dispatches 48 separate all-reduce calls, one per gradient tensor, in original or...
+    2. Single flat concatenation all-reduce: Concatenates all 48 tensors into one flat 1-D buffer, performs one all-reduce, t...
+    3. Fixed-byte bucketed all-reduce: Groups consecutive tensors into buckets up to a fixed byte threshold (e.g., 4MB)...
+    4. Size-binned parallel all-reduce: Partitions the 48 tensors into size bins (e.g., small <1KB, medium 1-100KB, larg...
+    5. Two-phase reduce-scatter + all-gather: Splits the 48-tensor workload across ranks via reduce-scatter on disjoint subset...
+  Strategy 1 (Per-tensor all-reduce baseline): sim=69078.3 us
+  Strategy 2 (Single flat concatenation all-reduce): sim=109583.4 us
+  Strategy 3 (Fixed-byte bucketed all-reduce): sim=109583.4 us
+  Strategy 4 (Size-binned parallel all-reduce): sim=62597.1 us
+  Strategy 5 (Two-phase reduce-scatter + all-gather) INCORRECT: CRASH in collect pass 0: world=4 pattern=uniform rank=1: RuntimeError: shape '[256]' is invalid for 
+
+  Top after enumeration:
+    Size-binned parallel all-reduce: 62597.1 us
+    Per-tensor all-reduce baseline: 69078.3 us
+    top 1 round 1: NEW BEST 60951.2 us (2.6% improvement)
+
+  Strategy-Enumerate complete. 6 total candidates.
+  Best: refined-from-Size-binned parallel all-reduce (sim=60951.2 us)
+
+=== Phase 3 result for probe_het_48_small (wall 85s): 4 candidates, sim ranking ===
+           1e+18  strat:refined-from-Size-binned paral  code=no
+           1e+18  baseline:per_tensor_ar  code=no
+           1e+18  baseline:flat_cat_ar  code=no
+           1e+18  baseline:bucketed_ar  code=no

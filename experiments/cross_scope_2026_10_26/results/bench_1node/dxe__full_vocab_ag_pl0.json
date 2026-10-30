@@ -1,0 +1,10 @@
+{
+ "problem": "dxe",
+ "cand": "full_vocab_ag_pl0",
+ "ws": 32,
+ "desc": "T=256 vl=1008",
+ "status": "ValueError: RunNeuronCCImpl: error condition error != 0: <class 'subprocess.CalledProcessError'>: Command '' died with <Signals.SIGHUP: 1>.",
+ "med_ms": null,
+ "mean_ms": null,
+ "all": []
+}

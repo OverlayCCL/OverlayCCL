@@ -1,0 +1,48 @@
+{
+ "problem": "hs_c_32x256k_2m",
+ "ws": 32,
+ "results": {
+  "per_tensor_ar": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 8.973240852355957,
+   "mean_ms": 9.559965133666992,
+   "status": "ok"
+  },
+  "flat_cat_ar": {
+   "max_abs_diff": 0.0048828125,
+   "ok": true,
+   "med_ms": 9.511828422546387,
+   "mean_ms": 9.677950541178385,
+   "status": "ok"
+  },
+  "bucket_4mb": {
+   "max_abs_diff": 0.0048828125,
+   "ok": true,
+   "med_ms": 11.59203052520752,
+   "mean_ms": 12.43286927541097,
+   "status": "ok"
+  },
+  "pad_equal_stack": {
+   "max_abs_diff": 0.0048828125,
+   "ok": true,
+   "med_ms": 17.247319221496582,
+   "mean_ms": 20.359182357788086,
+   "status": "ok"
+  },
+  "equal_group_stacks": {
+   "max_abs_diff": 0.005859375,
+   "ok": true,
+   "med_ms": 10.153532028198242,
+   "mean_ms": 12.372175852457682,
+   "status": "ok"
+  },
+  "p3_pick2": {
+   "max_abs_diff": 0.0048828125,
+   "ok": true,
+   "med_ms": 9.892463684082031,
+   "mean_ms": 11.45327091217041,
+   "status": "ok"
+  }
+ }
+}

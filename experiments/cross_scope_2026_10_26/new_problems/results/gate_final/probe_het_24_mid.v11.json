@@ -1,0 +1,41 @@
+{
+ "hw_problem": "probe_het_24_mid",
+ "search_problem": "probe_het_24_mid",
+ "phase3_tag": "v11",
+ "gate_candidates": [
+  [
+   "gate_1",
+   "strat:refined-from-Reduce-scatter th",
+   466667.92519999936
+  ],
+  [
+   "gate_2",
+   "baseline:flat_cat_ar",
+   467256.88520000025
+  ],
+  [
+   "gate_3",
+   "baseline:bucketed_ar",
+   469854.65165489906
+  ]
+ ],
+ "measured_ms": {
+  "per_tensor_ar": 304.0280342102051,
+  "bucket6": 266.63661003112793,
+  "gate_2": 267.3523426055908,
+  "gate_3": 304.80146408081055,
+  "gate_1": 275.0236988067627,
+  "flat_cat_ar": 267.35496520996094
+ },
+ "effective": {
+  "per_tensor_ar": true,
+  "bucket6": true,
+  "gate_2": true,
+  "gate_3": true,
+  "gate_1": true,
+  "flat_cat_ar": true
+ },
+ "gate_choice": "gate_2",
+ "best_overall": "bucket6",
+ "independent_pieces": false
+}

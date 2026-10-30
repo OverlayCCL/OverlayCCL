@@ -1,0 +1,41 @@
+{
+ "problem": "model_grads_4layers",
+ "ws": 32,
+ "results": {
+  "per_tensor_ar": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 24.95110034942627,
+   "mean_ms": 156.0137907663981,
+   "status": "ok"
+  },
+  "per_layer_bucket": {
+   "max_abs_diff": 0.0078125,
+   "ok": true,
+   "med_ms": 29.282331466674805,
+   "mean_ms": 33.693973223368324,
+   "status": "ok"
+  },
+  "bucket_32mb": {
+   "max_abs_diff": 0.0068359375,
+   "ok": true,
+   "med_ms": 35.90655326843262,
+   "mean_ms": 69.82182661692302,
+   "status": "ok"
+  },
+  "flat_cat_ar": {
+   "max_abs_diff": 0.0078125,
+   "ok": true,
+   "med_ms": 28.179645538330078,
+   "mean_ms": 58.98700555165609,
+   "status": "ok"
+  },
+  "per_tensor_marked": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 91.26651287078857,
+   "mean_ms": 95.45050462086995,
+   "status": "ok"
+  }
+ }
+}

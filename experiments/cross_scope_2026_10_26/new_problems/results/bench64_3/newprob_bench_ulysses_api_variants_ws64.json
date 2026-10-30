@@ -1,0 +1,31 @@
+{
+ "problem": "ulysses_api_variants",
+ "ws": 64,
+ "results": {
+  "ag_transpose_rs": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 11.889100074768066,
+   "mean_ms": 178.64709695180258,
+   "status": "ok"
+  },
+  "masked_rs": {
+   "max_abs_diff": 0.0009765625,
+   "ok": true,
+   "med_ms": 7.432222366333008,
+   "mean_ms": 7.445089022318522,
+   "status": "ok"
+  },
+  "ag_slice_native": {
+   "max_abs_diff": 0.0009765625,
+   "ok": true,
+   "med_ms": 8.862018585205078,
+   "mean_ms": 8.857425053914389,
+   "status": "ok"
+  },
+  "all_to_all_api": {
+   "status": "ValueError: RunNeuronCCImpl: error condition error != 0: <class 'subprocess.CalledProcessError'>: Command '' died with <Signals.SIGHUP: 1>.",
+   "med_ms": null
+  }
+ }
+}

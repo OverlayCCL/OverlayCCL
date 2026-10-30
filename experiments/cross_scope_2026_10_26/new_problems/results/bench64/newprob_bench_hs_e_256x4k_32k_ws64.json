@@ -1,0 +1,41 @@
+{
+ "problem": "hs_e_256x4k_32k",
+ "ws": 64,
+ "results": {
+  "per_tensor_ar": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 28.574109077453613,
+   "mean_ms": 195.13049920399985,
+   "status": "ok"
+  },
+  "flat_cat_ar": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 32.782793045043945,
+   "mean_ms": 32.5696070988973,
+   "status": "ok"
+  },
+  "bucket_4mb": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 32.53495693206787,
+   "mean_ms": 32.40079879760742,
+   "status": "ok"
+  },
+  "pad_equal_stack": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 47.99306392669678,
+   "mean_ms": 46.97641531626383,
+   "status": "ok"
+  },
+  "equal_group_stacks": {
+   "max_abs_diff": 0.0,
+   "ok": true,
+   "med_ms": 35.47084331512451,
+   "mean_ms": 35.2881113688151,
+   "status": "ok"
+  }
+ }
+}

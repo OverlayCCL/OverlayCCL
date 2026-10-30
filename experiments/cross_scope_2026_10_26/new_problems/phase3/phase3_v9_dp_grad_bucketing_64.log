@@ -1,0 +1,41 @@
+[_sso_creds] no live SSO at import; AWS calls will fail if attempted (Command '['aws', 'configure', 'export-credentials', '--profile', 'default', '--format', 'process']' returned non-zero exit status 255.)
+
+======================================================================
+[Phase 2] Baseline Evaluation: DP gradient all-reduce of 64 mixed-size tensors (bucketing sweep instance)
+======================================================================
+  per_tensor_ar: 141039.6 us, 64 local ops, 0 ag, 64 ar, 0 cp
+  flat_cat_ar: 134015.8 us, 195 local ops, 0 ag, 1 ar, 0 cp
+  bucketed_ar: 134015.8 us, 195 local ops, 0 ag, 1 ar, 0 cp
+
+  Best baseline: baseline:flat_cat_ar (134015.8 us)
+
+======================================================================
+[Phase 3 / Strategy-Enumerate] DP gradient all-reduce of 64 mixed-size tensors (bucketing sweep instance)
+======================================================================
+  K=5 strategies, R=2 refinement rounds per top-2 (budget ~10 LLM calls)
+  Enumerated 5 strategies:
+    1. Single flat concatenation all-reduce: Concatenate all 64 tensors into one flat buffer and dispatch a single all_reduce...
+    2. Fixed-count in-order buckets: Partition the 64 tensors into K fixed buckets (e.g., 4-8 buckets of 8-16 consecu...
+    3. Size-stratified two-phase bucketing: Split tensors into "large" and "small" groups by median or quantile size thresho...
+    4. Reduce-scatter then all-gather decomposition: Concatenate all 64 tensors, apply reduce-scatter to distribute chunks across ran...
+    5. Hierarchical per-device then cross-device: If multiple cores per device, first perform intra-device reduction (local sum or...
+  Strategy 1 (Single flat concatenation all-reduce): sim=134015.8 us
+  Strategy 2 (Fixed-count in-order buckets): sim=77631.8 us
+  Strategy 3 (Size-stratified two-phase bucketing): sim=113708.7 us
+  Strategy 4 (Reduce-scatter then all-gather decomposition) INCORRECT: CRASH in collect pass 0: world=4 pattern=uniform rank=0: RuntimeError: shape '[256]' is invalid for 
+  Strategy 5 (Hierarchical per-device then cross-device) INCORRECT: world=4 pattern=uniform rank=0[0]: max_diff=0.035800
+
+  Top after enumeration:
+    Fixed-count in-order buckets: 77631.8 us
+    Size-stratified two-phase bucketing: 113708.7 us
+    top 1 round 2: NEW BEST 75861.1 us (2.3% improvement)
+    top 2 round 1: NEW BEST 77441.2 us (31.9% improvement)
+
+  Strategy-Enumerate complete. 5 total candidates.
+  Best: refined-from-Fixed-count in-order buckets (sim=75861.1 us)
+
+=== Phase 3 result for dp_grad_bucketing_64 (wall 114s): 4 candidates, sim ranking ===
+           1e+18  strat:refined-from-Fixed-count in-or  code=no
+           1e+18  baseline:flat_cat_ar  code=no
+           1e+18  baseline:bucketed_ar  code=no
+           1e+18  baseline:per_tensor_ar  code=no
